@@ -12,7 +12,8 @@ namespace CoreInvestmentTracker.Controllers
     [GlobalLogging]
     public class GroupController : EntityManagedController<InvestmentGroup>
     {
-        public GroupController(IEntityApplicationDbContext<InvestmentGroup> entityApplicationDbContext) : base(entityApplicationDbContext)
+        public GroupController(IEntityApplicationDbContext<InvestmentGroup> db, IMyLogger logger) :
+            base(db, logger)
         {
         }
     }

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreInvestmentTracker", "CoreInvestmentTracker.csproj", "{94047A12-F788-4213-B3B8-D1066ED9EDAD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{94047A12-F788-4213-B3B8-D1066ED9EDAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94047A12-F788-4213-B3B8-D1066ED9EDAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94047A12-F788-4213-B3B8-D1066ED9EDAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94047A12-F788-4213-B3B8-D1066ED9EDAD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4EFA205B-8E94-4D71-BA71-E7DA9655D9ED}
+	EndGlobalSection
+EndGlobal

@@ -2,26 +2,31 @@
 using System.Linq;
 using CoreInvestmentTracker.Common;
 using CoreInvestmentTracker.Models;
-using CoreInvestmentTracker.Models.BOLO;
 using CoreInvestmentTracker.Models.DAL.Interfaces;
 using CoreInvestmentTracker.Models.DEL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using WinInvestmentTracker.Models.BOLO;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace CoreInvestmentTracker.Controllers
 {
     [GlobalLogging]
     public class InvestmentController : EntityManagedController<Investment>
     {
-        public InvestmentController(IEntityApplicationDbContext<Investment> entityApplicationDbContext) : base(entityApplicationDbContext)
+        public InvestmentController(IEntityApplicationDbContext<Investment> db, IMyLogger logger) 
+            : base(db, logger)
         {
         }
 
-        //public IActionResult GenerateRisksGraph(int ID)
-        //{
-        //    var investment = EntityRepository.Entities.Find(ID);
-        //    return GenerateGraph(ID, investment.Risks);
-        //}
+        public IActionResult GenerateRisksGraph(int ID)
+        {
+            var investment = EntityRepository.Entities
+                .Include(e => e.Risks)
+                .ThenInclude(e => e.InvestmentRisk).Single(o=>o.ID == ID);
+
+            return GenerateGraph<InvestmentRisk, InvestmentRisk_Investment>(ID, investment.Risks.Select(r=>r.InvestmentRisk));
+        }
 
         /// <summary>
         /// Easily Generate investment graphs of entities that implement IDbInvestmentEntity, IDbInvestmentEntityHasInvestments
@@ -30,7 +35,9 @@ namespace CoreInvestmentTracker.Controllers
         /// <param name="investmentId"></param>
         /// <param name="aspects"></param>
         /// <returns></returns>
-        private IActionResult GenerateGraph<T>(int investmentId, IEnumerable<T> aspects) where T : IDbInvestmentEntity, IDbInvestmentEntityHasInvestments<InvestmentInfluenceFactor_Investment>
+        private IActionResult GenerateGraph<T,T1>(int investmentId, IEnumerable<T> aspects) 
+            where T : IDbInvestmentEntity, 
+                      IDbInvestmentEntityHasInvestments<T1>
         {
             /*
                var data = {
@@ -72,23 +79,29 @@ namespace CoreInvestmentTracker.Controllers
 
 
 
-        //public IActionResult GenerateFactorsGraph(int ID)
-        //{
-        //    var investment = EntityRepository.Entities.Find(ID);
-        //    return GenerateGraph(ID, investment.Factors);
-        //}
+        public IActionResult GenerateFactorsGraph(int ID)
+        {
+            var investment = EntityRepository.Entities
+                .Include(e => e.Factors)
+                .ThenInclude(e => e.InvestmentInfluenceFactor).Single(o => o.ID == ID);
+            return GenerateGraph<InvestmentInfluenceFactor,InvestmentInfluenceFactor_Investment>(ID, investment.Factors.Select(o=>o.InvestmentInfluenceFactor));
+        }
 
-        //public IActionResult GenerateGroupsGraph(int ID)
-        //{
-        //    var investment = EntityRepository.Entities.Find(ID);
-        //    return GenerateGraph(ID, investment.Groups);
-        //}
+        public IActionResult GenerateGroupsGraph(int ID)
+        {
+            var investment = EntityRepository.Entities
+                .Include(e => e.Groups)
+                .ThenInclude(e => e.InvestmentGroup).Single(o => o.ID == ID);
+            return GenerateGraph<InvestmentGroup, InvestmentGroup_Investment>(ID, investment.Groups.Select(o=>o.InvestmentGroup));
+        }
 
-        //public IActionResult GenerateRegionsGraph(int ID)
-        //{
-        //    var investment = EntityRepository.Entities.Find(ID);
-        //    return GenerateGraph(ID, investment.Regions);
-        //}
+        public IActionResult GenerateRegionsGraph(int ID)
+        {
+            var investment = EntityRepository.Entities
+                .Include(e => e.Regions)
+                .ThenInclude(e => e.Region).Single(o => o.ID == ID);
+            return GenerateGraph<Region, Region_Investment>(ID, investment.Regions.Select(r=>r.Region));
+        }
 
         public IActionResult SelectFactors()
         {
@@ -150,21 +163,21 @@ namespace CoreInvestmentTracker.Controllers
             return RedirectToAction("SelectRisks");
         }
 
-        //public IActionResult SelectRisks()
-        //{
-        //    var checkModels = EntityRepository.
-        //       GetEntityByType<InvestmentRisk>().
-        //       Select(o => new CheckModel
-        //       {
-        //           ID = o.ID,
-        //           Name = o.Name,
-        //           Checked = false
-        //       }
-        //   ).ToList();
-            
-        //    AddCustomCreateAndCustomCreateRedirect( checkItemsViewTitle: "Risks",  createActionControllerName: "Risk", createActionName: "Create", redirectToControllerName: "Investment", redirectToAction: "SelectRisks");
-        //    return View("SelectItems",checkModels);
-        //}
+        public IActionResult SelectRisks()
+        {
+            var checkModels = EntityRepository.
+               GetEntityByType<InvestmentRisk>().
+               Select(o => new CheckModel
+               {
+                   ID = o.ID,
+                   Name = o.Name,
+                   Checked = false
+               }
+           ).ToList();
+
+            AddCustomCreateAndCustomCreateRedirect(checkItemsViewTitle: "Risks", createActionControllerName: "Risk", createActionName: "Create", redirectToControllerName: "Investment", redirectToAction: "SelectRisks");
+            return View("SelectItems", checkModels);
+        }
 
         [HttpPost]
         [ClearCustomRedirects]
@@ -174,20 +187,20 @@ namespace CoreInvestmentTracker.Controllers
             return RedirectToAction("SelectRegions");
         }
 
-        //public IActionResult SelectRegions()
-        //{
-        //    var checkModels = EntityRepository.
-        //      GetEntityByType<Region>().
-        //      Select(o => new CheckModel
-        //      {
-        //          ID = o.ID,
-        //          Name = o.Name,
-        //          Checked = false
-        //      }
-        //  ).ToList();
-        //    AddCustomCreateAndCustomCreateRedirect(checkItemsViewTitle: "Regions", createActionControllerName: "Region", createActionName: "Create", redirectToControllerName: "Investment", redirectToAction: "SelectRegions");            
-        //    return View("SelectItems", checkModels);
-        //}
+        public IActionResult SelectRegions()
+        {
+            var checkModels = EntityRepository.
+              GetEntityByType<Region>().
+              Select(o => new CheckModel
+              {
+                  ID = o.ID,
+                  Name = o.Name,
+                  Checked = false
+              }
+          ).ToList();
+            AddCustomCreateAndCustomCreateRedirect(checkItemsViewTitle: "Regions", createActionControllerName: "Region", createActionName: "Create", redirectToControllerName: "Investment", redirectToAction: "SelectRegions");
+            return View("SelectItems", checkModels);
+        }
 
         [HttpPost]
         [ClearCustomRedirects]
@@ -197,24 +210,24 @@ namespace CoreInvestmentTracker.Controllers
             return RedirectToAction("SelectGroups");
         }
 
-        //public IActionResult SelectGroups()
-        //{
-        //    var checkModels = EntityRepository.
-        //      GetEntityByType<InvestmentGroup>().
-        //      Select(o => new CheckModel
-        //      {
-        //          ID = o.ID,
-        //          Name = o.Name,
-        //          Checked = false,
-        //          Fields = new List<CustomField<string, string>> {
-        //              new CustomField<string, string> { Name = nameof(o.Type), Value = o.Type },
-        //              new CustomField<string, string> { Name = nameof(o.ID), Value = o.ID.ToString() },
-        //          }
-        //      }
-        //  ).ToList();
-        //    AddCustomCreateAndCustomCreateRedirect(checkItemsViewTitle: "Groups", createActionControllerName: "Group", createActionName: "Create", redirectToControllerName: "Investment", redirectToAction: "SelectGroups");
-        //    return View("SelectItems", checkModels);
-        //}
+        public IActionResult SelectGroups()
+        {
+            var checkModels = EntityRepository.
+              GetEntityByType<InvestmentGroup>().
+              Select(o => new CheckModel
+              {
+                  ID = o.ID,
+                  Name = o.Name,
+                  Checked = false,
+                  Fields = new List<CustomField<string, string>> {
+                      new CustomField<string, string> { Name = nameof(o.Type), Value = o.Type },
+                      new CustomField<string, string> { Name = nameof(o.ID), Value = o.ID.ToString() },
+                  }
+              }
+          ).ToList();
+            AddCustomCreateAndCustomCreateRedirect(checkItemsViewTitle: "Groups", createActionControllerName: "Group", createActionName: "Create", redirectToControllerName: "Investment", redirectToAction: "SelectGroups");
+            return View("SelectItems", checkModels);
+        }
 
         [HttpPost]
         [ClearCustomRedirects]
@@ -230,35 +243,51 @@ namespace CoreInvestmentTracker.Controllers
             return View(investment);
         }
 
-        //[HttpPost]
-        //public IActionResult Summary(string outcome)
-        //{
-        //    if (outcome.Equals("Cancel"))
-        //        return RedirectToAction("Index");
-        //    var investment = (Investment)TempData["investment"];
+        [HttpPost]
+        public IActionResult Summary(string outcome)
+        {
+            if (outcome.Equals("Cancel"))
+                return RedirectToAction("Index");
+            var investment = (Investment)TempData["investment"];
 
-        //    var factorIDs = (int[])TempData["factorIDs"];
-        //    var factors = factorIDs.Select(f => EntityRepository.GetEntityByType<InvestmentInfluenceFactor>().Find(f));
-        //    investment.Factors = factors.ToList();
+            var factorIDs = (int[])TempData["factorIDs"];
+            var factors = factorIDs.Select(f => EntityRepository.GetEntityByType<InvestmentInfluenceFactor>().Find(f));
+            investment.Factors = factors.Select(f => new InvestmentInfluenceFactor_Investment
+            {
+                InvestmentInfluenceFactor = f,
+                Investment = investment
+            }).ToList();
 
-        //    var risksIDs = (int[])TempData["riskIDs"];
-        //    var risks = risksIDs.Select(r => EntityRepository.GetEntityByType<InvestmentRisk>().Find(r));
-        //    investment.Risks = risks.ToList();
+            var risksIDs = (int[])TempData["riskIDs"];
+            var risks = risksIDs.Select(r => EntityRepository.GetEntityByType<InvestmentRisk>().Find(r));
+            investment.Risks = risks.Select(r => new InvestmentRisk_Investment
+            {
+                InvestmentRisk = r,
+                Investment = investment
+            }).ToList();
 
-        //    var groupIDs = (int[])TempData["groupIDs"];
-        //    var groups = groupIDs.Select(g => EntityRepository.GetEntityByType<InvestmentGroup>().Find(g));
-        //    investment.Groups = groups.ToList();
+            var groupIDs = (int[])TempData["groupIDs"];
+            var groups = groupIDs.Select(g => EntityRepository.GetEntityByType<InvestmentGroup>().Find(g));
+            investment.Groups = groups.Select(g=> new InvestmentGroup_Investment
+            {
+                InvestmentGroup = g,
+                Investment = investment
+            }).ToList();
 
-        //    var regionIDs = (int[])TempData["regionIDs"];
-        //    var regions = regionIDs.Select(g=> EntityRepository.GetEntityByType<Region>().Find(g));
-        //    investment.Regions = regions.ToList();
+            var regionIDs = (int[])TempData["regionIDs"];
+            var regions = regionIDs.Select(g => EntityRepository.GetEntityByType<Region>().Find(g));
+            investment.Regions = regions.Select(r => new Region_Investment
+            {
+                Region = r,
+                Investment = investment
+            }).ToList();
 
-        //    EntityRepository.Entities.Add(investment);
-        //    EntityRepository.SaveChanges();
+            EntityRepository.Entities.Add(investment);
+            EntityRepository.SaveChanges();
 
 
-        //    return RedirectToAction("Details", investment);
-        //}
+            return RedirectToAction("Details", investment);
+        }
 
         [HttpPost]
         public override IActionResult Create(Investment entity)
@@ -275,240 +304,213 @@ namespace CoreInvestmentTracker.Controllers
         }
 
 
-        //public IActionResult InvestmentByRisk(int id)
-        //{
-        //    var risk = EntityRepository.GetEntityByType<InvestmentRisk>().SingleOrDefault(r => r.ID == id);
-        //    var risks = risk.Investments;
-        //    ViewBag.ExtraTitle = $"By Investment Risk: {risk.Name}";
-        //    return View("Index", risks);
+        public IActionResult InvestmentByRisk(int id)
+        {
+            var risk = EntityRepository.GetEntityByType<InvestmentRisk>().SingleOrDefault(r => r.ID == id);
+            var risks = risk.Investments;
+            ViewBag.ExtraTitle = $"By Investment Risk: {risk.Name}";
+            return View("Index", risks);
 
-            
-        //}
+
+        }
 
         public IActionResult InvestmentByFactor(int id)
         {
             return View("Index", EntityRepository.GetEntityByType<InvestmentInfluenceFactor>().SingleOrDefault(x => x.ID == id).Investments);
         }
 
-        //public IActionResult InvestmentByGroup(int id)
-        //{
-        //    return View("Index", EntityRepository.GetEntityByType<InvestmentGroup>().SingleOrDefault(x => x.ID == id).Investments);
-        //}
+        public IActionResult InvestmentByGroup(int id)
+        {
+            return View("Index", EntityRepository.GetEntityByType<InvestmentGroup>().SingleOrDefault(x => x.ID == id).Investments);
+        }
 
-        //public IActionResult InvestmentByRegion(int id)
-        //{
-        //    return View("Index", EntityRepository.GetEntityByType<Region>().SingleOrDefault(x => x.ID == id).Investments);
-        //}
+        public IActionResult InvestmentByRegion(int id)
+        {
+            return View("Index", EntityRepository.GetEntityByType<Region>().SingleOrDefault(x => x.ID == id).Investments);
+        }
 
-        //public IActionResult DissassociateRisk(int riskID, int investmentID)
-        //{
-        //    var risk = EntityRepository.GetEntityByType<InvestmentRisk>().Find(riskID);
-        //    var investment = EntityRepository.Entities.Find(investmentID);
-        //    investment.Risks.Remove(risk);
-        //    risk.Investments.Remove(investment);
-        //    EntityRepository.SaveChanges();
+        public IActionResult DissassociateRisk(int riskID, int investmentID)
+        {
+            var investment = EntityRepository.Entities.Find(investmentID);
+            var risk = investment.Risks.First(r => r.InvestmentRiskID == riskID);
+            investment.Risks.Remove(risk);
+            EntityRepository.SaveChanges();
 
-        //    return RedirectToAction("Details", investment);
-        //}
+            return RedirectToAction("Details", investment);
+        }
 
-        //public IActionResult DissassociateFactor(int factorID, int investmentID)
-        //{
-        //    var factor = EntityRepository.GetEntityByType<InvestmentInfluenceFactor>().Find(factorID);
-        //    var investment = EntityRepository.Entities.Find(investmentID);
-        //    investment.Factors.Remove(factor);
-        //    factor.Investments.Remove(investment);
-        //    EntityRepository.SaveChanges();
+        public IActionResult DissassociateFactor(int factorID, int investmentID)
+        {
+            var investment = EntityRepository.Entities.Find(investmentID);
+            var factor = investment.Factors.First(f => f.InvestmentInfluenceFactorID == factorID);
+            investment.Factors.Remove(factor);
+            EntityRepository.SaveChanges();
 
-        //    return RedirectToAction("Details", investment);
-        //}
+            return RedirectToAction("Details", investment);
+        }
 
-        //public IActionResult DissassociateGroup(int groupID, int investmentID)
-        //{
-        //    var group = EntityRepository.GetEntityByType<InvestmentGroup>().Find(groupID);
-        //    var investment = EntityRepository.Entities.Find(investmentID);
-        //    investment.Groups.Remove(group);
-        //    group.Investments.Remove(investment);
-        //    EntityRepository.SaveChanges();
+        public IActionResult DissassociateGroup(int groupID, int investmentID)
+        {
+            var investment = EntityRepository.Entities.Find(investmentID);
+            var group = investment.Groups.First(g => g.InvestmentGroupID == groupID);
+            investment.Groups.Remove(group);
+            EntityRepository.SaveChanges();
 
-        //    return RedirectToAction("Details", investment);
-        //}
+            return RedirectToAction("Details", investment);
+        }
 
-        //public IActionResult DissassociateRegion(int regionID, int investmentID)
-        //{
-        //    var region = EntityRepository.GetEntityByType<Models.Region>().Find(regionID);
-        //    var investment = EntityRepository.Entities.Find(investmentID);
-        //    investment.Regions.Remove(region);
-        //    region.Investments.Remove(investment);
-        //    EntityRepository.SaveChanges();
+        public IActionResult DissassociateRegion(int regionID, int investmentID)
+        {
+            var investment = EntityRepository.Entities.Find(investmentID);
+            var region = investment.Regions.First(r => r.RegionID == regionID);
+            investment.Regions.Remove(region);
+            EntityRepository.SaveChanges();
 
-        //    return RedirectToAction("Details", investment);
-        //}
+            return RedirectToAction("Details", investment);
+        }
 
-        //public IActionResult AssociateRisk(int id)
-        //{
-        //    var investment = EntityRepository.Entities.Find(id);
-        //    var model = new ParentChildEntity<CheckModel, Investment>
-        //    {
-        //        Parent = investment,
-        //        Children = EntityRepository.GetEntityByType<InvestmentRisk>().Select(risk => new CheckModel
-        //        {
-        //            ID = risk.ID, Name = risk.Name, Description = risk.Description, Checked = false
-        //        }).ToList()
-        //    };
-        //    AddCustomCreateAndCustomCreateRedirect(checkItemsViewTitle: "Risks", createActionControllerName: "Risk", createActionName: "Create", redirectToControllerName: "Investment", redirectToAction: "AssociateRisk", routeValues: new { Id = id});
-        //    return View("SelectItemsWithParent", model);
-        //}
+        public IActionResult AssociateRisk(int id)
+        {
+            var investment = EntityRepository.Entities.Find(id);
+            var model = new ParentChildEntity<CheckModel, Investment>
+            {
+                Parent = investment,
+                Children = EntityRepository.GetEntityByType<InvestmentRisk>().Select(risk => new CheckModel
+                {
+                    ID = risk.ID,
+                    Name = risk.Name,
+                    Description = risk.Description,
+                    Checked = false
+                }).ToList()
+            };
+            AddCustomCreateAndCustomCreateRedirect(checkItemsViewTitle: "Risks", createActionControllerName: "Risk", createActionName: "Create", redirectToControllerName: "Investment", redirectToAction: "AssociateRisk", routeValues: new { Id = id });
+            return View("SelectItemsWithParent", model);
+        }
 
-        //[HttpPost]
-        //[ClearCustomRedirects]
-        //public IActionResult AssociateRisk(int id, List<CheckModel> Children)
-        //{
-        //    var investment = EntityRepository.Entities.Find(id);
-        //    var riskIDs = Children.Where(o => o.Checked).Select(o => o.ID);
-        //    foreach(var ID in riskIDs)
-        //    {
-        //        var risk = EntityRepository.GetEntityByType<InvestmentRisk>().Find(ID);
-        //        if (!risk.Investments.Contains(investment)) {
-        //            risk.Investments.Add(investment);
-        //        }
-        //        if (!investment.Risks.Contains(risk)) {
-        //            investment.Risks.Add(risk);
-        //        }
-        //    }
-        //    EntityRepository.SaveChanges();
+        [HttpPost]
+        [ClearCustomRedirects]
+        public IActionResult AssociateRisk(int id, List<CheckModel> Children)
+        {
+            var investment = EntityRepository.Entities.Find(id);
+            var riskIDs = Children.Where(o => o.Checked).Select(o => o.ID);
+            foreach (var ID in riskIDs)
+            {
+                var risk = EntityRepository.GetEntityByType<InvestmentRisk>().Find(ID);
+                investment.Risks.Add(new InvestmentRisk_Investment { Investment = investment, InvestmentRisk = risk });
+            }
+            EntityRepository.SaveChanges();
 
 
-        //    return RedirectToAction("Details", investment);
-        //}
-
-        
-        //public IActionResult AssociateFactor(int id)
-        //{
-        //    var investment = EntityRepository.Entities.Find(id);
-        //    var model = new ParentChildEntity<CheckModel, Investment>
-        //    {
-        //        Parent = investment,
-        //        Children = EntityRepository.GetEntityByType<InvestmentInfluenceFactor>().Select(risk => new CheckModel
-        //        {
-        //            ID = risk.ID,
-        //            Name = risk.Name,
-        //            Description = risk.Description,
-        //            Checked = false
-        //        }).ToList()
-        //    };
-        //    AddCustomCreateAndCustomCreateRedirect(checkItemsViewTitle: "Factors", createActionControllerName: "Factor", createActionName: "Create", redirectToControllerName: "Investment", redirectToAction: "AssociateFactor", routeValues: new { Id = id });
-        //    return View("SelectItemsWithParent", model);
-        //}
-
-        //[HttpPost]
-        //[ClearCustomRedirects]
-        //public IActionResult AssociateFactor(int id, List<CheckModel> Children)
-        //{
-        //    var investment = EntityRepository.Entities.Find(id);
-        //    var factorIDs = Children.Where(o => o.Checked).Select(o => o.ID);
-        //    foreach (var ID in factorIDs)
-        //    {
-        //        var factor = EntityRepository.GetEntityByType<InvestmentInfluenceFactor>().Find(ID);
-        //        if (!factor.Investments.Contains(investment))
-        //        {
-        //            factor.Investments.Add(investment);
-        //        }
-        //        if (!investment.Factors.Contains(factor))
-        //        {
-        //            investment.Factors.Add(factor);
-        //        }
-        //    }
-        //    EntityRepository.SaveChanges();
+            return RedirectToAction("Details", investment);
+        }
 
 
-        //    return RedirectToAction("Details", investment);
-        //}
-        
-        //public IActionResult AssociateGroup(int id)
-        //{
-        //    var investment = EntityRepository.Entities.Find(id);
-        //    var model = new ParentChildEntity<CheckModel, Investment>
-        //    {
-        //        Parent = investment,
-        //        Children = EntityRepository.GetEntityByType<InvestmentGroup>().Select(group => new CheckModel
-        //        {
-        //            ID = group.ID,
-        //            Name = group.Name,
-        //            Description = group.Description,
-        //            Checked = false,                    
-                    
-        //        }).ToList()
-        //    };
-        //    AddCustomCreateAndCustomCreateRedirect(checkItemsViewTitle: "Groups", createActionControllerName: "Group", createActionName: "Create", redirectToControllerName: "Investment", redirectToAction: "AssociateGroup", routeValues: new { Id = id });
-        //    return View("SelectItemsWithParent", model);
-        //}
+        public IActionResult AssociateFactor(int id)
+        {
+            var investment = EntityRepository.Entities.Find(id);
+            var model = new ParentChildEntity<CheckModel, Investment>
+            {
+                Parent = investment,
+                Children = EntityRepository.GetEntityByType<InvestmentInfluenceFactor>().Select(risk => new CheckModel
+                {
+                    ID = risk.ID,
+                    Name = risk.Name,
+                    Description = risk.Description,
+                    Checked = false
+                }).ToList()
+            };
+            AddCustomCreateAndCustomCreateRedirect(checkItemsViewTitle: "Factors", createActionControllerName: "Factor", createActionName: "Create", redirectToControllerName: "Investment", redirectToAction: "AssociateFactor", routeValues: new { Id = id });
+            return View("SelectItemsWithParent", model);
+        }
 
-        //[HttpPost]
-        //[ClearCustomRedirects]
-        //public IActionResult AssociateGroup(int id, List<CheckModel> Children)
-        //{
-        //    var investment = EntityRepository.Entities.Find(id);
-        //    var groupIDs = Children.Where(o => o.Checked).Select(o => o.ID);
-        //    foreach (var ID in groupIDs)
-        //    {
-        //        var group = EntityRepository.GetEntityByType<InvestmentGroup>().Find(ID);
-        //        if (!group.Investments.Contains(investment))
-        //        {
-        //            group.Investments.Add(investment);
-        //        }
-        //        if (!investment.Groups.Contains(group))
-        //        {
-        //            investment.Groups.Add(group);
-        //        }
-        //    }
-        //    EntityRepository.SaveChanges();
+        [HttpPost]
+        [ClearCustomRedirects]
+        public IActionResult AssociateFactor(int id, List<CheckModel> Children)
+        {
+            var investment = EntityRepository.Entities.Find(id);
+            var factorIDs = Children.Where(o => o.Checked).Select(o => o.ID);
+            foreach (var ID in factorIDs)
+            {
+                var factor = EntityRepository.GetEntityByType<InvestmentInfluenceFactor>().Find(ID);
+                investment.Factors.Add(new InvestmentInfluenceFactor_Investment { Investment = investment, InvestmentInfluenceFactor = factor });
+            }
+            EntityRepository.SaveChanges();
 
 
-        //    return RedirectToAction("Details", investment);
-        //}
-        ////
-        //public IActionResult AssociateRegion(int id)
-        //{
-        //    var investment = EntityRepository.Entities.Find(id);
-        //    var model = new ParentChildEntity<CheckModel, Investment>
-        //    {
-        //        Parent = investment,
-        //        Children = EntityRepository.GetEntityByType<Region>().Select(risk => new CheckModel
-        //        {
-        //            ID = risk.ID,
-        //            Name = risk.Name,
-        //            Description = risk.Description,
-        //            Checked = false
-        //        }).ToList()
-        //    };
-        //    AddCustomCreateAndCustomCreateRedirect(checkItemsViewTitle: "Regions", createActionControllerName: "Region", createActionName: "Create", redirectToControllerName: "Investment", redirectToAction: "AssociateRegion", routeValues: new { Id = id });
-        //    return View("SelectItemsWithParent", model);
-        //}
+            return RedirectToAction("Details", investment);
+        }
 
-        //[HttpPost]
-        //[ClearCustomRedirects]
-        //[GlobalLoggingAttribute]
-        //public IActionResult AssociateRegion(int id, List<CheckModel> Children)
-        //{
-        //    var investment = EntityRepository.Entities.Find(id);
-        //    var regionIDs = Children.Where(o => o.Checked).Select(o => o.ID);
-        //    foreach (var ID in regionIDs)
-        //    {
-        //        var region = EntityRepository.GetEntityByType<Region>().Find(ID);
-        //        if (!region.Investments.Contains(investment))
-        //        {
-        //            region.Investments.Add(investment);
-        //        }
-        //        if (!investment.Regions.Contains(region))
-        //        {
-        //            investment.Regions.Add(region);
-        //        }
-        //    }
-        //    EntityRepository.SaveChanges();
+        public IActionResult AssociateGroup(int id)
+        {
+            var investment = EntityRepository.Entities.Find(id);
+            var model = new ParentChildEntity<CheckModel, Investment>
+            {
+                Parent = investment,
+                Children = EntityRepository.GetEntityByType<InvestmentGroup>().Select(group => new CheckModel
+                {
+                    ID = group.ID,
+                    Name = group.Name,
+                    Description = group.Description,
+                    Checked = false,
+
+                }).ToList()
+            };
+            AddCustomCreateAndCustomCreateRedirect(checkItemsViewTitle: "Groups", createActionControllerName: "Group", createActionName: "Create", redirectToControllerName: "Investment", redirectToAction: "AssociateGroup", routeValues: new { Id = id });
+            return View("SelectItemsWithParent", model);
+        }
+
+        [HttpPost]
+        [ClearCustomRedirects]
+        public IActionResult AssociateGroup(int id, List<CheckModel> Children)
+        {
+            var investment = EntityRepository.Entities.Find(id);
+            var groupIDs = Children.Where(o => o.Checked).Select(o => o.ID);
+            foreach (var ID in groupIDs)
+            {
+                var group = EntityRepository.GetEntityByType<InvestmentGroup>().Find(ID);
+                investment.Groups.Add(new InvestmentGroup_Investment { Investment = investment, InvestmentGroup = group });
+            }
+            EntityRepository.SaveChanges();
 
 
-        //    return RedirectToAction("Details", investment);
-        //}
+            return RedirectToAction("Details", investment);
+        }
+        //
+        public IActionResult AssociateRegion(int id)
+        {
+            var investment = EntityRepository.Entities.Find(id);
+            var model = new ParentChildEntity<CheckModel, Investment>
+            {
+                Parent = investment,
+                Children = EntityRepository.GetEntityByType<Region>().Select(risk => new CheckModel
+                {
+                    ID = risk.ID,
+                    Name = risk.Name,
+                    Description = risk.Description,
+                    Checked = false
+                }).ToList()
+            };
+            AddCustomCreateAndCustomCreateRedirect(checkItemsViewTitle: "Regions", createActionControllerName: "Region", createActionName: "Create", redirectToControllerName: "Investment", redirectToAction: "AssociateRegion", routeValues: new { Id = id });
+            return View("SelectItemsWithParent", model);
+        }
+
+        [HttpPost]
+        [ClearCustomRedirects]
+        [GlobalLoggingAttribute]
+        public IActionResult AssociateRegion(int id, List<CheckModel> Children)
+        {
+            var investment = EntityRepository.Entities.Find(id);
+            var regionIDs = Children.Where(o => o.Checked).Select(o => o.ID);
+            foreach (var ID in regionIDs)
+            {
+                var region = EntityRepository.GetEntityByType<Region>().Find(ID);
+                investment.Regions.Add(new Region_Investment { Investment = investment, Region = region });
+            }
+            EntityRepository.SaveChanges();
+
+
+            return RedirectToAction("Details", investment);
+        }
 
         [GlobalLoggingAttribute]
         public IActionResult ShowGraph()

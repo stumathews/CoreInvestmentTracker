@@ -17,10 +17,9 @@ namespace CoreInvestmentTracker
         public static void Main(string[] args)
         {
             var host = BuildWebHost(args);
-
             using (var scope = host.Services.CreateScope())
             {
-                var services = scope.ServiceProvider;
+                var services = scope.ServiceProvider;                
                 try
                 {
                     var context = services.GetRequiredService<ApplicationDbContext>();

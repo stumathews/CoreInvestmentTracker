@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 
 namespace CoreInvestmentTracker.Common
 {    
@@ -27,18 +28,16 @@ namespace CoreInvestmentTracker.Common
     public class EntityManagedController<T> : Controller where T : class, IDbInvestmentEntity
     {
         //[Dependency]
-        protected IMyLogger Logger { get; set; }
-                
+        public readonly IMyLogger Logger;
+        
         /// <summary>
         /// Access to te underlying store of entities
         /// </summary>
-        //[Dependency]
-        
-
         public readonly IEntityApplicationDbContext<T> EntityRepository;
-        public EntityManagedController(IEntityApplicationDbContext<T> entityApplicationDbContext)
+        public EntityManagedController(IEntityApplicationDbContext<T> entityApplicationDbContext, IMyLogger logger)
         {
             EntityRepository = entityApplicationDbContext;
+            Logger = logger;
         }
         
         /// <summary>
@@ -65,7 +64,8 @@ namespace CoreInvestmentTracker.Common
         /// <returns>Index view</returns>
         public virtual IActionResult Index()
         {
-            return View(EntityRepository.Entities.ToList());
+            return new JsonResult(EntityRepository.Entities.ToList());
+            //return View(EntityRepository.Entities.ToList());
         }
 
         /// <summary>

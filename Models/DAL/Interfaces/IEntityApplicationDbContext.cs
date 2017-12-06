@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using CoreInvestmentTracker.Models.DEL.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace CoreInvestmentTracker.Models.DAL.Interfaces
 {
@@ -15,6 +16,8 @@ namespace CoreInvestmentTracker.Models.DAL.Interfaces
         /// </summary>
         DbSet<T> Entities { get; }
 
+        ApplicationDbContext db { get; }
+
         /// <summary>
         /// The ability to save <see cref="Entities"/> 
         /// </summary>
@@ -24,7 +27,7 @@ namespace CoreInvestmentTracker.Models.DAL.Interfaces
 
         void Dispose();
 
-        //Database Database { get; }
+        DatabaseFacade Database { get; }
 
         DbSet<T1> GetEntityByType<T1>() where T1 : class;
     }

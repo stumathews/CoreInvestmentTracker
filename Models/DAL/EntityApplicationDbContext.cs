@@ -8,6 +8,7 @@ using System.Web;
 using CoreInvestmentTracker.Models.DAL.Interfaces;
 using CoreInvestmentTracker.Models.DEL.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace CoreInvestmentTracker.Models.DAL
 {
@@ -23,12 +24,12 @@ namespace CoreInvestmentTracker.Models.DAL
         public EntityApplicationDbContext(ApplicationDbContext context)
         {
             _db = context;
-        }          
-        
-        //readonly ApplicationDbContext _db = new ApplicationDbContext();
+        }
+
+        public ApplicationDbContext db => _db;
         public virtual DbSet<T> Entities => _db.Set<T>();
 
-        //public virtual Database Database => _db.Database;
+        public virtual DatabaseFacade Database => _db.Database;
 
         public virtual DbSet<T1> GetEntityByType<T1>() where T1 : class => _db.Set<T1>();
 

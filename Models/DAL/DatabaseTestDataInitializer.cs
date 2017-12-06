@@ -22,7 +22,6 @@ namespace CoreInvestmentTracker.Models.DAL
         {
             db.Database.EnsureCreated();
 
-            // Look for any students.
             if (db.Investments.Any())
             {
                 return;   // DB has been seeded
