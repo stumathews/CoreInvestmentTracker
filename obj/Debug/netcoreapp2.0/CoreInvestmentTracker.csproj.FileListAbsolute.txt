@@ -1,0 +1,22 @@
+C:\Users\Stuart\Documents\Visual Studio 2017\Projects\WinInvestmentTracker\CoreInvestmentTracker\bin\Debug\netcoreapp2.0\CoreInvestmentTracker.deps.json
+C:\Users\Stuart\Documents\Visual Studio 2017\Projects\WinInvestmentTracker\CoreInvestmentTracker\bin\Debug\netcoreapp2.0\CoreInvestmentTracker.runtimeconfig.json
+C:\Users\Stuart\Documents\Visual Studio 2017\Projects\WinInvestmentTracker\CoreInvestmentTracker\bin\Debug\netcoreapp2.0\CoreInvestmentTracker.runtimeconfig.dev.json
+C:\Users\Stuart\Documents\Visual Studio 2017\Projects\WinInvestmentTracker\CoreInvestmentTracker\bin\Debug\netcoreapp2.0\CoreInvestmentTracker.dll
+C:\Users\Stuart\Documents\Visual Studio 2017\Projects\WinInvestmentTracker\CoreInvestmentTracker\bin\Debug\netcoreapp2.0\CoreInvestmentTracker.pdb
+C:\Users\Stuart\Documents\Visual Studio 2017\Projects\WinInvestmentTracker\CoreInvestmentTracker\obj\Debug\netcoreapp2.0\CoreInvestmentTracker.csprojResolveAssemblyReference.cache
+C:\Users\Stuart\Documents\Visual Studio 2017\Projects\WinInvestmentTracker\CoreInvestmentTracker\obj\Debug\netcoreapp2.0\CoreInvestmentTracker.csproj.CoreCompileInputs.cache
+C:\Users\Stuart\Documents\Visual Studio 2017\Projects\WinInvestmentTracker\CoreInvestmentTracker\obj\Debug\netcoreapp2.0\CoreInvestmentTracker.AssemblyInfoInputs.cache
+C:\Users\Stuart\Documents\Visual Studio 2017\Projects\WinInvestmentTracker\CoreInvestmentTracker\obj\Debug\netcoreapp2.0\CoreInvestmentTracker.AssemblyInfo.cs
+C:\Users\Stuart\Documents\Visual Studio 2017\Projects\WinInvestmentTracker\CoreInvestmentTracker\obj\Debug\netcoreapp2.0\CoreInvestmentTracker.dll
+C:\Users\Stuart\Documents\Visual Studio 2017\Projects\WinInvestmentTracker\CoreInvestmentTracker\obj\Debug\netcoreapp2.0\CoreInvestmentTracker.pdb
+C:\Users\Stuart\git\InvestmentTracker\ASPNET_MVC5\CoreInvestmentTracker\obj\Debug\netcoreapp2.0\CoreInvestmentTracker.csprojResolveAssemblyReference.cache
+C:\Users\Stuart\git\InvestmentTracker\ASPNET_MVC5\CoreInvestmentTracker\obj\Debug\netcoreapp2.0\CoreInvestmentTracker.csproj.CoreCompileInputs.cache
+C:\Users\Stuart\git\InvestmentTracker\ASPNET_MVC5\CoreInvestmentTracker\obj\Debug\netcoreapp2.0\CoreInvestmentTracker.AssemblyInfoInputs.cache
+C:\Users\Stuart\git\InvestmentTracker\ASPNET_MVC5\CoreInvestmentTracker\obj\Debug\netcoreapp2.0\CoreInvestmentTracker.AssemblyInfo.cs
+C:\Users\Stuart\git\InvestmentTracker\ASPNET_MVC5\CoreInvestmentTracker\bin\Debug\netcoreapp2.0\CoreInvestmentTracker.deps.json
+C:\Users\Stuart\git\InvestmentTracker\ASPNET_MVC5\CoreInvestmentTracker\bin\Debug\netcoreapp2.0\CoreInvestmentTracker.runtimeconfig.json
+C:\Users\Stuart\git\InvestmentTracker\ASPNET_MVC5\CoreInvestmentTracker\bin\Debug\netcoreapp2.0\CoreInvestmentTracker.runtimeconfig.dev.json
+C:\Users\Stuart\git\InvestmentTracker\ASPNET_MVC5\CoreInvestmentTracker\bin\Debug\netcoreapp2.0\CoreInvestmentTracker.dll
+C:\Users\Stuart\git\InvestmentTracker\ASPNET_MVC5\CoreInvestmentTracker\bin\Debug\netcoreapp2.0\CoreInvestmentTracker.pdb
+C:\Users\Stuart\git\InvestmentTracker\ASPNET_MVC5\CoreInvestmentTracker\obj\Debug\netcoreapp2.0\CoreInvestmentTracker.dll
+C:\Users\Stuart\git\InvestmentTracker\ASPNET_MVC5\CoreInvestmentTracker\obj\Debug\netcoreapp2.0\CoreInvestmentTracker.pdb
