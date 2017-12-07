@@ -44,11 +44,11 @@ namespace CoreInvestmentTracker.Common
             Logger = logger;
         }
 
-        [HttpGet]
         /// <summary>
-        /// Get all Entities
+        /// Get all entities
         /// </summary>
-        /// <returns>Gets all the entities</returns>
+        /// <returns>Array of entities</returns>
+        [HttpGet]        
         public IEnumerable<T> GetAll()
         {
             return EntityRepository.Entities.ToList();
@@ -58,7 +58,7 @@ namespace CoreInvestmentTracker.Common
         /// Get Entity by ID
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
+        /// <returns>item</returns>
         [HttpGet("{id}")]
         public IActionResult GetById(long id)
         {
@@ -73,11 +73,15 @@ namespace CoreInvestmentTracker.Common
         /// <summary>
         /// Create a entity
         /// </summary>
-        /// <param name="entity"></param>
+        /// <param name="entity">the entity to create</param>
         /// <returns>view details of the entity</returns>
         [HttpPost]
-        public virtual IActionResult Create([FromBody]T entity)
+        public IActionResult Create([FromBody]T entity)
         {
+            if (entity == null)
+            {
+                return BadRequest();
+            }
             EntityRepository.Entities.Add(entity);
             EntityRepository.SaveChanges();            
             return CreatedAtRoute("GetInvestment", new { id = entity.ID }, entity);
@@ -87,9 +91,9 @@ namespace CoreInvestmentTracker.Common
         /// <summary>
         /// Updates and existing Entity
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="item"></param>
-        /// <returns></returns>
+        /// <param name="id">Id of the entity to update</param>
+        /// <param name="item">the contents of the entity to change</param>
+        /// <returns>NoContentResult</returns>
         [HttpPut("{id}")]
         public IActionResult Update(long id, [FromBody] T item)
         {
@@ -108,12 +112,12 @@ namespace CoreInvestmentTracker.Common
             EntityRepository.SaveChanges();
             return new NoContentResult();
         }
-        
+
         /// <summary>
         /// Deletes and Entity
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">The id of the entity to delete</param>
+        /// <returns>NoContentResult</returns>
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {

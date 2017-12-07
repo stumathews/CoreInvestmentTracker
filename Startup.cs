@@ -18,13 +18,23 @@ using System.IO;
 
 namespace CoreInvestmentTracker
 {
+    /// <summary>
+    /// Startup Class
+    /// </summary>
     public class Startup
     {
+        /// <summary>
+        /// Startup configuration
+        /// </summary>
+        /// <param name="configuration"></param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
+        /// <summary>
+        /// Configuration object
+        /// </summary>
         public IConfiguration Configuration { get; }
 
         /// <summary>
@@ -43,11 +53,11 @@ namespace CoreInvestmentTracker
                 c.SwaggerDoc("v1", new Info
                 {
                     Version = "v1",
-                    Title = "ToDo API",
-                    Description = "A simple example ASP.NET Core Web API",
+                    Title = "Core Investment Tracker API",
+                    Description = "nvestment tracker is a platform that allows you to track aspects that affect your investments",
                     TermsOfService = "None",
-                    Contact = new Contact { Name = "Shayne Boyer", Email = "", Url = "https://twitter.com/spboyer" },
-                    License = new License { Name = "Use under LICX", Url = "https://example.com/license" }
+                    Contact = new Contact { Name = "Stuart Mathews", Email = "", Url = "https://twitter.com/stumathews" },
+                    License = new License { Name = "License information", Url = "https://www.stuartmathews.com" }
                 });
 
                 // Set the comments path for the Swagger JSON and UI.
@@ -83,10 +93,8 @@ namespace CoreInvestmentTracker
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Core Investment Tracker API V1");
             });
-            
-
         }
     }
 }
