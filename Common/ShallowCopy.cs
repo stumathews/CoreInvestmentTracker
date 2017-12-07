@@ -1,0 +1,36 @@
+﻿using CoreInvestmentTracker.Models.DEL.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace CoreInvestmentTracker.Common
+{
+    public static class ShallowCopy
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="old"></param>
+        /// <param name="new"></param>
+        /// <returns></returns>
+        public static void Merge<T>(T old, T @new, string[] except)
+        {
+            var newProperties = TypeDescriptor.GetProperties(typeof(T)).Cast<PropertyDescriptor>();
+            var oldProperties = TypeDescriptor.GetProperties(old).Cast<PropertyDescriptor>();
+            
+            foreach (var oldProperty in oldProperties)
+            {                
+                var property = oldProperty;
+                var newProperty = newProperties.FirstOrDefault(prop => prop.Name == property.Name);
+                if (except.Contains(newProperty.Name)) continue;
+                if (newProperty != null)
+                {
+                    oldProperty.SetValue(old, Convert.ChangeType(newProperty.GetValue(@new), oldProperty.PropertyType));
+                }
+            }
+        }
+    }
+}

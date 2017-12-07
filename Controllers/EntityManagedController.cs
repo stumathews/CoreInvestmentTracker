@@ -33,6 +33,8 @@ namespace CoreInvestmentTracker.Common
         /// </summary>
         public readonly IEntityApplicationDbContext<T> EntityRepository;
 
+        
+
         /// <summary>
         /// Constructor for dependency injection support
         /// </summary>
@@ -60,7 +62,7 @@ namespace CoreInvestmentTracker.Common
         /// <param name="id"></param>
         /// <returns>item</returns>
         [HttpGet("{id}")]
-        public IActionResult GetById(long id)
+        public IActionResult GetById(int id)
         {
             var item = EntityRepository.Entities.Find(id);
             if (item == null)
@@ -83,8 +85,8 @@ namespace CoreInvestmentTracker.Common
                 return BadRequest();
             }
             EntityRepository.Entities.Add(entity);
-            EntityRepository.SaveChanges();            
-            return CreatedAtRoute("GetInvestment", new { id = entity.ID }, entity);
+            EntityRepository.SaveChanges();     
+            return CreatedAtAction("Create",new { id = entity.ID }, entity);
             
         }
 
@@ -95,31 +97,33 @@ namespace CoreInvestmentTracker.Common
         /// <param name="item">the contents of the entity to change</param>
         /// <returns>NoContentResult</returns>
         [HttpPut("{id}")]
-        public IActionResult Update(long id, [FromBody] T item)
+        public IActionResult Update(int id, [FromBody] T item)
         {
             if (item == null || item.ID != id)
             {
                 return BadRequest();
             }
 
-            var entity = EntityRepository.Entities.FirstOrDefault(t => t.ID == id);
-            if (entity == null)
+            var old = EntityRepository.Entities.FirstOrDefault(t => t.ID == id);
+            if (old == null)
             {
                 return NotFound();
             }
+
+            ShallowCopy.Merge(old, item, new string[] { "ID" });
             
-            EntityRepository.Entities.Update(item);
+            EntityRepository.Entities.Update(old);
             EntityRepository.SaveChanges();
             return new NoContentResult();
         }
-
+        
         /// <summary>
         /// Deletes and Entity
         /// </summary>
         /// <param name="id">The id of the entity to delete</param>
         /// <returns>NoContentResult</returns>
         [HttpDelete("{id}")]
-        public IActionResult Delete(long id)
+        public IActionResult Delete(int id)
         {
             var todo = EntityRepository.Entities.FirstOrDefault(t => t.ID == id);
             if (todo == null)
