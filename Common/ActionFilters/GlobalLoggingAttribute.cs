@@ -1,11 +1,11 @@
-﻿
-
-using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace CoreInvestmentTracker.Common
 {
-    public class GlobalLoggingAttribute : ActionFilterAttribute
+    /// <summary>
+    /// Provides global logging for controllers
+    /// </summary>
+    public class GlobalControllerLoggingAttribute : ActionFilterAttribute
     {        
         public override void OnActionExecuting(ActionExecutingContext actionContext)
         {

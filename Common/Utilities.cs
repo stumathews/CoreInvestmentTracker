@@ -1,11 +1,16 @@
-﻿using System;
+﻿using CoreInvestmentTracker.Models.DEL.Interfaces;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Web;
 
 namespace CoreInvestmentTracker.Common
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ReflectionUtilities
     {
         public static Object SetPropertyValue(Object entity, string propertyName, string propertyValue)
@@ -35,5 +40,6 @@ namespace CoreInvestmentTracker.Common
             }
             return entity;
         }
+        
     }
 }
