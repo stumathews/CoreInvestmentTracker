@@ -9,8 +9,18 @@ namespace CoreInvestmentTracker.Models.DEL.Interfaces
     /// </summary>
     public interface IDbInvestmentEntity
     {       
+        /// <summary>
+        /// The identifier of the entity
+        /// </summary>
         int ID { get; set; }
+        /// <summary>
+        /// the name of the entity
+        /// </summary>
         string Name { get; set; }
+        /// <summary>
+        /// The description of the entity
+        /// </summary>
         string Description { get; set; }
+        
     }
 }

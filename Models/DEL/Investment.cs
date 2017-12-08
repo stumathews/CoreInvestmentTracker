@@ -39,7 +39,6 @@ namespace CoreInvestmentTracker.Models
         public virtual ICollection<InvestmentInfluenceFactor_Investment> Factors { get; set; }
         public virtual ICollection<Region_Investment> Regions { get; set; }
         public virtual ICollection<InvestmentRisk_Investment> Risks { get; set; }
-        public virtual ICollection<InvestmentGroup_Investment> Groups { get; set; }
-
+        public virtual ICollection<InvestmentGroup_Investment> Groups { get; set; }        
     }
 }
