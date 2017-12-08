@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-//using System.Data.Entity;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-//using System.Web.Mvc;
-//using Microsoft.Practices.Unity;
-//using Unity;
-using CoreInvestmentTracker.Models;
-using CoreInvestmentTracker.Models.DAL;
 using CoreInvestmentTracker.Models.DAL.Interfaces;
 using CoreInvestmentTracker.Models.DEL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 
 namespace CoreInvestmentTracker.Common
@@ -33,8 +24,6 @@ namespace CoreInvestmentTracker.Common
         /// Access to te underlying store of entities. This is resolved by depedency injection.
         /// </summary>
         public readonly IEntityApplicationDbContext<T> EntityRepository;
-
-        
 
         /// <summary>
         /// Constructor for dependency injection support
@@ -131,7 +120,7 @@ namespace CoreInvestmentTracker.Common
         /// <param name="id">Id of entity to patch</param>
         /// <param name="patchDocument">the patched object</param>
         /// <returns>the new object updated</returns>
-        [HttpPatch]
+        [HttpPatch("{id}")]
         public IActionResult Patch(int id, [FromBody] JsonPatchDocument<T> patchDocument)
         {
             if (!ModelState.IsValid)
@@ -173,23 +162,24 @@ namespace CoreInvestmentTracker.Common
             return new NoContentResult();
         }
 
-        
-        ///// <summary>
-        ///// Primarily used to update entities using x-editable post backs
-        ///// </summary>
-        ///// <param name="propertyName">name of changed entity property</param>
-        ///// <param name="propertyValue">value of the property</param>
-        ///// <param name="pk">the primary key of the entity</param>
-        ///// <returns></returns>
-        //[HttpPost]
-        //public IActionResult UpdatePropertyOnly(string propertyName, string propertyValue, int pk)
-        //{
-        //    var candidate = EntityRepository.Entities.Find(pk);
-        //    ReflectionUtilities.SetPropertyValue(candidate, propertyName, propertyValue);
-        //    EntityRepository.SaveChanges();
 
-        //    return StatusCode(StatusCodes.Status200OK);
-        //}
-       
+        /// <summary>
+        /// Update entities.
+        /// </summary>
+        /// <param name="propertyName">name of changed entity property</param>
+        /// <param name="propertyValue">value of the property</param>
+        /// <param name="pk">the primary key of the entity</param>
+        /// <remarks>Consider using Patch method</remarks>
+        /// <returns></returns>
+        [HttpPost("UpdatePropertyOnly/{propertyName}/{propertyValue}/{id}")]
+        public IActionResult UpdatePropertyOnly(string propertyName, string propertyValue, int pk)
+        {
+            var candidate = EntityRepository.Entities.Find(pk);
+            ReflectionUtilities.SetPropertyValue(candidate, propertyName, propertyValue);
+            EntityRepository.SaveChanges();
+
+            return new NoContentResult();
+        }
+
     }
 }
