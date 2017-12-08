@@ -110,8 +110,15 @@ namespace CoreInvestmentTracker.Common
             {
                 return NotFound();
             }
-
-            ShallowCopy.Merge(old, item, new string[] { "ID" });
+            
+            /*Note we need to come up with a way to fetch the child entities*/
+            try
+            {
+                ShallowCopy.Merge(old, item, new string[] { "ID" });
+            }
+            catch {
+                old = ShallowCopy.MergeObjects(old, item);
+            }
             
             EntityRepository.Entities.Update(old);
             EntityRepository.SaveChanges();
