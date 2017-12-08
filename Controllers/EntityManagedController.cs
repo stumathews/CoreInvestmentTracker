@@ -12,6 +12,7 @@ using CoreInvestmentTracker.Models.DAL.Interfaces;
 using CoreInvestmentTracker.Models.DEL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace CoreInvestmentTracker.Common
 {
@@ -21,7 +22,7 @@ namespace CoreInvestmentTracker.Common
     /// </summary>
     /// <typeparam name="T"></typeparam>
     [GlobalControllerLogging]    
-    public class EntityManagedController<T> : Controller where T : class, IDbInvestmentEntity
+    public class EntityManagedController<T> : Controller where T : class, IDbInvestmentEntity, new()
     {
         /// <summary>
         /// Logging facility. This is resolved by dependency injection
@@ -116,7 +117,36 @@ namespace CoreInvestmentTracker.Common
             EntityRepository.SaveChanges();
             return new NoContentResult();
         }
-        
+
+        /// <summary>
+        /// Updates an entity partially
+        /// </summary>
+        /// <param name="id">Id of entity to patch</param>
+        /// <param name="patchDocument">the patched object</param>
+        /// <returns>the new object updated</returns>
+        [HttpPatch]
+        public IActionResult Patch(int id, [FromBody] JsonPatchDocument<T> patchDocument)
+        {
+            if (!ModelState.IsValid)
+            {
+                return new BadRequestObjectResult(ModelState);
+            }
+
+            var old = EntityRepository.Entities.FirstOrDefault(t => t.ID == id);
+            
+            patchDocument.ApplyTo(old, ModelState);
+
+            EntityRepository.Entities.Update(old);
+            EntityRepository.SaveChanges();
+
+            if (!ModelState.IsValid)
+            {
+                return new BadRequestObjectResult(ModelState);
+            }
+
+            return Ok(old);
+        }
+
         /// <summary>
         /// Deletes and Entity
         /// </summary>
