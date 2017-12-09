@@ -42,8 +42,11 @@ namespace CoreInvestmentTracker
         /// </summary>
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddMvc();                        
+        {            
+            var mvc = services.AddMvc();
+            mvc.AddJsonOptions(options => {
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             // Add application services for dependency injection
             services.AddTransient(typeof(IEntityApplicationDbContext<>), typeof(EntityApplicationDbContext<>));
@@ -66,6 +69,12 @@ namespace CoreInvestmentTracker
                 c.IncludeXmlComments(xmlPath);
             });
 
+            services.AddCors(options => options.AddPolicy("Cors", builder => {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
+
         }
 
         /// <summary>
@@ -83,10 +92,13 @@ namespace CoreInvestmentTracker
             
 
             app.UseStaticFiles();
+            app.UseCors("Cors");
             app.UseMvc(routes =>
             {
                 routes.MapRoute("default", "{controller=Investment}/{action=Index}/{id?}");
             });
+            
+            
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
 

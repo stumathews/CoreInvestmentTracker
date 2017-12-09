@@ -41,7 +41,7 @@ namespace CoreInvestmentTracker.Common
         /// </summary>
         /// <returns>Array of entities</returns>
         [HttpGet]        
-        public IEnumerable<T> GetAll()
+        public virtual IEnumerable<T> GetAll()
         {
             return EntityRepository.Entities.ToList();
         }
@@ -67,7 +67,9 @@ namespace CoreInvestmentTracker.Common
         /// </summary>
         /// <param name="entity">the entity to create</param>
         /// <returns>view details of the entity</returns>
-        [HttpPost]
+        /// <response code="201">Returns the newly-created item</response>
+        /// <response code="400">If the item is null</response>
+        [HttpPost()]
         public IActionResult Create([FromBody]T entity)
         {
             if (entity == null)

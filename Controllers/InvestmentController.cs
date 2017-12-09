@@ -28,6 +28,8 @@ namespace CoreInvestmentTracker.Controllers
         {
         }
 
+        
+
         /// <summary>
         /// Generates a data for a risk graph
         /// </summary>
@@ -290,7 +292,7 @@ namespace CoreInvestmentTracker.Controllers
         /// Associates Risks with an investment where risks are represented as CheckModels
         /// </summary>
         /// <param name="id">investment</param>
-        /// <param name="Children">List<CheckModel> risks</param>
+        /// <param name="Children">List[CheckModel] risks</param>
         /// <returns>status code</returns>
         [HttpPost("AssociateRisks/{id}")]
         public IActionResult AssociateRisks(int id, [FromBody] List<CheckModel> Children)

@@ -12,6 +12,7 @@ namespace CoreInvestmentTracker.Controllers
         public FactorController(IEntityApplicationDbContext<InvestmentInfluenceFactor> db, IMyLogger logger) 
             : base(db, logger)
         {
+
         }
     }
 }
