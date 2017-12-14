@@ -27,7 +27,7 @@ namespace CoreInvestmentTracker.Models.DAL
         }
 
         public ApplicationDbContext db => _db;
-        private bool IsAnyOfTypes<T>(Type[] types)
+        public static bool IsAnyOfTypes<T>(Type[] types)
         {
             foreach( Type t in types)
             {
@@ -73,7 +73,11 @@ namespace CoreInvestmentTracker.Models.DAL
                     }
                     if (typeof(T) == typeof(Investment))
                     {
-                        filtered.AddRange(_db.Set<Investment>().Include(a => a.Risks).Include(b => b.Factors).Include(c => c.Groups).Include(d => d.Regions).Select(o => ChangeType<T>(o)).ToList());                        
+                        filtered.AddRange(_db.Set<Investment>().Include(a => a.Risks)
+                            .Include(b => b.Factors)
+                            .Include(c => c.Groups)
+                            .Include(d => d.Regions)
+                            .Select(o => ChangeType<T>(o)).ToList());                        
                     }
                     var t = _db.Set<T>();
                     t.AddRange(filtered);
@@ -95,7 +99,7 @@ namespace CoreInvestmentTracker.Models.DAL
 
         public virtual void Dispose() => _db.Dispose();
 
-        private T ChangeType<T>(object obj)
+        public static T ChangeType<T>(object obj)
         {
             return (T)Convert.ChangeType(obj, typeof(T));
         }

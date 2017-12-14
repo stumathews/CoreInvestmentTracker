@@ -4,6 +4,9 @@ using CoreInvestmentTracker.Models.DAL.Interfaces;
 using CoreInvestmentTracker.Models.DEL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.JsonPatch;
+using System;
+using CoreInvestmentTracker.Models;
+using CoreInvestmentTracker.Models.DAL;
 
 namespace CoreInvestmentTracker.Common
 {
@@ -70,14 +73,57 @@ namespace CoreInvestmentTracker.Common
         /// <response code="201">Returns the newly-created item</response>
         /// <response code="400">If the item is null</response>
         [HttpPost()]
-        public IActionResult Create([FromBody]T entity)
+        public virtual IActionResult Create([FromBody]T entity)
         {
             if (entity == null)
             {
                 return BadRequest();
             }
-            EntityRepository.Entities.Add(entity);
-            EntityRepository.SaveChanges();     
+
+            /* Save Entity Workaround:  This allows us to at least create new entitys from the incomming API requests.
+             * At the moment, I cant figure out why when using a Generic entity type, EF
+             does not respect the [DatabaseGenerated(DatabaseGeneratedOption.Identity)] on the underlying type. 
+             I can't use the FluentAPI on a generic type either - it was CLR types or something like that...
+
+             So for now, we're going to have to interpret the generic type to its underlying type, so that EF recognises the 
+             that the ID columns of each type has [DatabaseGenerated(DatabaseGeneratedOption.Identity)] and will thus automatically generate a new value for it
+             and not literally take the value weve got for ID in the entity type and try insert that... directly into the column and we dont want that 
+             and the database complains rightly so saying that we dont support IDENTITY_INSERTs which is what it tries to do instead of generate a new ID...
+
+            If anything good about this, is that we dont have to write each entry below for each controller(which would work but is just added more code). Here its in one place.
+            
+             */
+
+            if (typeof(T) == typeof(InvestmentInfluenceFactor))
+            {
+                EntityRepository.db.Factors.Add(EntityApplicationDbContext<T>.ChangeType<InvestmentInfluenceFactor>(entity));
+                EntityRepository.db.SaveChanges();
+            }
+            else if (typeof(T) == typeof(InvestmentRisk))
+            {
+                EntityRepository.db.Risks.Add(EntityApplicationDbContext<T>.ChangeType<InvestmentRisk>(entity));
+                EntityRepository.db.SaveChanges();
+            }
+            else if (typeof(T) == typeof(InvestmentGroup))
+            {
+                EntityRepository.db.Groups.Add(EntityApplicationDbContext<T>.ChangeType<InvestmentGroup>(entity));
+                EntityRepository.db.SaveChanges();
+            }
+            else if (typeof(T) == typeof(Region))
+            {
+                EntityRepository.db.Regions.Add(EntityApplicationDbContext<T>.ChangeType<Region>(entity));
+                EntityRepository.db.SaveChanges();
+            }
+            else if (typeof(T) == typeof(Investment))
+            {
+                EntityRepository.db.Investments.Add(EntityApplicationDbContext<T>.ChangeType<Investment>(entity));
+                EntityRepository.db.SaveChanges();
+            } else
+            {
+                EntityRepository.Entities.Add(entity);
+                EntityRepository.SaveChanges();
+            }
+               
             return CreatedAtAction("Create",new { id = entity.ID }, entity);
             
         }
