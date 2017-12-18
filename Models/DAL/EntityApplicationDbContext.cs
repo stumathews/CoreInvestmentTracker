@@ -21,6 +21,10 @@ namespace CoreInvestmentTracker.Models.DAL
     {
         private readonly ApplicationDbContext _db;
        
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="context"></param>
         public EntityApplicationDbContext(ApplicationDbContext context)
         {
             _db = context;
@@ -35,6 +39,10 @@ namespace CoreInvestmentTracker.Models.DAL
             }
             return false;
         }
+
+        /// <summary>
+        /// Read only access to the type Entities
+        /// </summary>
         public virtual IQueryable<T> Entities
         {
             get
@@ -89,17 +97,41 @@ namespace CoreInvestmentTracker.Models.DAL
             }
         }
 
+        /// <summary>
+        /// Underlying database
+        /// </summary>
         public virtual DatabaseFacade Database => _db.Database;
 
+        /// <summary>
+        /// Get specific type entities other than the current entity type
+        /// </summary>
+        /// <typeparam name="T1"></typeparam>
+        /// <returns></returns>
         public virtual DbSet<T1> GetEntityByType<T1>() where T1 : class => _db.Set<T1>();
 
+        /// <summary>
+        /// Save the db changes
+        /// </summary>
         public virtual void SaveChanges() => _db.SaveChanges();
 
+        /// <summary>
+        /// Save the db changes asynchonously
+        /// </summary>
+        /// <returns></returns>
         public virtual async Task SaveChangesAsync() => await _db.SaveChangesAsync();              
 
+        /// <summary>
+        /// Dispose
+        /// </summary>
         public virtual void Dispose() => _db.Dispose();
 
-        public static T ChangeType<T>(object obj)
+        /// <summary>
+        /// Utility function to change the type
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        private static T ChangeType<T>(object obj)
         {
             return (T)Convert.ChangeType(obj, typeof(T));
         }

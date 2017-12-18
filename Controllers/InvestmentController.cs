@@ -49,6 +49,7 @@ namespace CoreInvestmentTracker.Controllers
         /// Easily Generate investment graphs of entities that implement IDbInvestmentEntity, IDbInvestmentEntityHasInvestments
         /// </summary>
         /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T1"></typeparam>
         /// <param name="investmentId"></param>
         /// <param name="aspects"></param>
         /// <returns></returns>

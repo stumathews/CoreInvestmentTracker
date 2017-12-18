@@ -18,6 +18,9 @@ namespace CoreInvestmentTracker.Models.DAL.Interfaces
         /// </summary>
         IQueryable<T> Entities { get; }
 
+        /// <summary>
+        /// Expose our application db context
+        /// </summary>
         ApplicationDbContext db { get; }
 
         /// <summary>
@@ -25,12 +28,27 @@ namespace CoreInvestmentTracker.Models.DAL.Interfaces
         /// </summary>
         void SaveChanges();
 
+        /// <summary>
+        /// Async save changes
+        /// </summary>
+        /// <returns></returns>
         Task SaveChangesAsync();
 
+        /// <summary>
+        /// Dispose
+        /// </summary>
         void Dispose();
 
+        /// <summary>
+        /// Database
+        /// </summary>
         DatabaseFacade Database { get; }
 
+        /// <summary>
+        /// Get type of entities
+        /// </summary>
+        /// <typeparam name="T1"></typeparam>
+        /// <returns></returns>
         DbSet<T1> GetEntityByType<T1>() where T1 : class;
     }
 }
