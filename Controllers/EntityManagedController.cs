@@ -4,10 +4,6 @@ using CoreInvestmentTracker.Models.DAL.Interfaces;
 using CoreInvestmentTracker.Models.DEL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.JsonPatch;
-using System;
-using CoreInvestmentTracker.Models;
-using CoreInvestmentTracker.Models.DAL;
-using Microsoft.EntityFrameworkCore;
 
 namespace CoreInvestmentTracker.Common
 {
@@ -133,11 +129,11 @@ namespace CoreInvestmentTracker.Common
                 return new BadRequestObjectResult(ModelState);
             }
 
-            var old = EntityRepository.Entities.FirstOrDefault(t => t.ID == id);
+            var old = EntityRepository.db.Find<T>(id);
 
             patchDocument.ApplyTo(old, ModelState);
 
-            EntityRepository.Entities.Update(old);
+            EntityRepository.db.Update<T>(old);
             EntityRepository.SaveChanges();
 
             if (!ModelState.IsValid)
