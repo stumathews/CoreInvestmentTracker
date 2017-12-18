@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using CoreInvestmentTracker.Models.DEL.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
@@ -14,7 +16,7 @@ namespace CoreInvestmentTracker.Models.DAL.Interfaces
         /// <summary>
         /// The underlying entities that this class will expose
         /// </summary>
-        DbSet<T> Entities { get; }
+        IQueryable<T> Entities { get; }
 
         ApplicationDbContext db { get; }
 

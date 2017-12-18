@@ -35,7 +35,7 @@ namespace CoreInvestmentTracker.Models.DAL
             }
             return false;
         }
-        public virtual DbSet<T> Entities
+        public virtual IQueryable<T> Entities
         {
             get
             {
@@ -43,7 +43,7 @@ namespace CoreInvestmentTracker.Models.DAL
                  * We want to eager collect some of the members but we dont know what type we are when we 
                  * are dealing with generics as we are here. So this will determine the type,
                  * add the entity framework include() statements and return the generic type(set) again.
-                 * This was we dont have to do any include() statements in the controllers what are 
+                 * This way we dont have to do any include() statements in the controllers what are 
                  * using the generic entity controller base class. This keeps the functionality in one place: here.
                  */
                 Type[] types = { typeof(InvestmentRisk),
@@ -79,9 +79,9 @@ namespace CoreInvestmentTracker.Models.DAL
                             .Include(d => d.Regions)
                             .Select(o => ChangeType<T>(o)).ToList());                        
                     }
-                    var t = _db.Set<T>();
+                    var t = _db.Set<T>();                    
                     t.AddRange(filtered);
-                    return t;
+                    return t; 
                 }
 
                 // Return the entity type so no eager loading applied to T

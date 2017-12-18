@@ -54,7 +54,7 @@ namespace CoreInvestmentTracker.Common
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            var item = EntityRepository.Entities.Find(id);
+            var item = EntityRepository.db.Find<T>(id);
             if (item == null)
             {
                 return NotFound();
@@ -81,39 +81,6 @@ namespace CoreInvestmentTracker.Common
             return CreatedAtAction("Create", new { id = entity.ID }, entity);
         }
 
-        /// <summary>
-        /// Updates and existing Entity
-        /// </summary>
-        /// <param name="id">Id of the entity to update</param>
-        /// <param name="item">the contents of the entity to change</param>
-        /// <returns>NoContentResult</returns>
-        [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody] T item)
-        {
-            if (item == null || item.ID != id)
-            {
-                return BadRequest();
-            }
-
-            var old = EntityRepository.Entities.FirstOrDefault(t => t.ID == id);
-            if (old == null)
-            {
-                return NotFound();
-            }
-
-            /*Note we need to come up with a way to fetch the child entities*/
-            try
-            {
-                ShallowCopy.Merge(old, item, new string[] { "ID" });
-            }
-            catch {
-                old = ShallowCopy.MergeObjects(old, item);
-            }
-
-            EntityRepository.Entities.Update(old);
-            EntityRepository.SaveChanges();
-            return new NoContentResult();
-        }
 
         /// <summary>
         /// Updates an entity partially
@@ -122,7 +89,7 @@ namespace CoreInvestmentTracker.Common
         /// <param name="patchDocument">the patched object</param>
         /// <returns>the new object updated</returns>
         [HttpPatch("{id}")]
-        public IActionResult Patch(int id, [FromBody] JsonPatchDocument<T> patchDocument)
+        public virtual IActionResult Patch(int id, [FromBody] JsonPatchDocument<T> patchDocument)
         {
             if (!ModelState.IsValid)
             {
@@ -130,7 +97,6 @@ namespace CoreInvestmentTracker.Common
             }
 
             var old = EntityRepository.db.Find<T>(id);
-
             patchDocument.ApplyTo(old, ModelState);
 
             EntityRepository.db.Update<T>(old);
@@ -164,22 +130,45 @@ namespace CoreInvestmentTracker.Common
 
 
         /// <summary>
-        /// Update entities.
+        /// Replaces and existing Entity.
+        /// Note this is not for partial updates, for that use PATCH. This is used for replacing the entire entity.
+        /// At the moment it is not possible to replace everything on the existing generic entity with that on the new one and
+        /// sometimes we dont want to: we dont want to replace the ID property for example, but we might want to replace
+        /// collections in the orignal item with the new collections in the new item, but this is currently not possible in the
+        /// implemantation. It just replaces simple members.
+        /// ** So if you want to do it propery, override this method in the controller for the type you want to implementa replacement
+        /// routine for.
         /// </summary>
-        /// <param name="propertyName">name of changed entity property</param>
-        /// <param name="propertyValue">value of the property</param>
-        /// <param name="pk">the primary key of the entity</param>
-        /// <remarks>Consider using Patch method</remarks>
-        /// <returns></returns>
-        [HttpPost("UpdatePropertyOnly/{propertyName}/{propertyValue}/{id}")]
-        public IActionResult UpdatePropertyOnly(string propertyName, string propertyValue, int pk)
+        /// <param name="id">Id of the entity to update</param>
+        /// <param name="newItem">the contents of the entity to change</param>
+        /// <returns>NoContentResult</returns>
+        [HttpPut("{id}")]
+        public virtual IActionResult Replace(int id, [FromBody] T newItem)
         {
-            var candidate = EntityRepository.Entities.Find(pk);
-            ReflectionUtilities.SetPropertyValue(candidate, propertyName, propertyValue);
-            EntityRepository.SaveChanges();
+            if (newItem == null || newItem.ID != id)
+            {
+                return BadRequest();
+            }
 
+            var old = EntityRepository.db.Find<T>(id);
+            if (old == null)
+            {
+                return NotFound();
+            }
+
+            /* Note we need to come up with a way to fetch the child entities */
+            try
+            {
+                ShallowCopy.Merge(old, newItem, new string[] { "ID" });
+            }
+            catch
+            {
+                old = ShallowCopy.MergeObjects(old, newItem);
+            }
+
+            EntityRepository.db.Update<T>(old);
+            EntityRepository.SaveChanges();
             return new NoContentResult();
         }
-
     }
 }

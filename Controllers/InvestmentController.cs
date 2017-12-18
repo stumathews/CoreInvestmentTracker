@@ -81,7 +81,7 @@ namespace CoreInvestmentTracker.Controllers
             }
              */
 
-            var investment = EntityRepository.Entities.Find(investmentId);
+            var investment = EntityRepository.db.Investments.Find(investmentId);
             var nodes = new List<object> { new { name = investment.Name, value = 1 } };
             var links = new List<object>();
             var index = 1;
@@ -205,7 +205,7 @@ namespace CoreInvestmentTracker.Controllers
         [HttpPost("DissassociateRisk/{riskID}/{investmentID}")]
         public IActionResult DissassociateRisk(int riskID, int investmentID)
         {
-            var investment = EntityRepository.Entities.Find(investmentID);
+            var investment = EntityRepository.db.Investments.Find(investmentID);
             var risk = investment.Risks.First(r => r.InvestmentRiskID == riskID);
             investment.Risks.Remove(risk);
             EntityRepository.SaveChanges();
@@ -222,7 +222,7 @@ namespace CoreInvestmentTracker.Controllers
         [HttpPost("DissassociateFactor/{factorID}/{investmentID}")]
         public IActionResult DissassociateFactor(int factorID, int investmentID)
         {
-            var investment = EntityRepository.Entities.Find(investmentID);
+            var investment = EntityRepository.db.Investments.Find(investmentID);
             var factor = investment.Factors.First(f => f.InvestmentInfluenceFactorID == factorID);
             investment.Factors.Remove(factor);
             EntityRepository.SaveChanges();
@@ -239,7 +239,7 @@ namespace CoreInvestmentTracker.Controllers
         [HttpPost("DissassociateGroup/{groupID}/{investmentID}")]
         public IActionResult DissassociateGroup(int groupID, int investmentID)
         {
-            var investment = EntityRepository.Entities.Find(investmentID);
+            var investment = EntityRepository.db.Investments.Find(investmentID);
             var group = investment.Groups.First(g => g.InvestmentGroupID == groupID);
             investment.Groups.Remove(group);
             EntityRepository.SaveChanges();
@@ -256,7 +256,7 @@ namespace CoreInvestmentTracker.Controllers
         [HttpPost("DissassociateRegion/{regionID}/{investmentID}")]
         public IActionResult DissassociateRegion(int regionID, int investmentID)
         {
-            var investment = EntityRepository.Entities.Find(investmentID);
+            var investment = EntityRepository.db.Investments.Find(investmentID);
             var region = investment.Regions.First(r => r.RegionID == regionID);
             investment.Regions.Remove(region);
             EntityRepository.SaveChanges();
@@ -272,7 +272,7 @@ namespace CoreInvestmentTracker.Controllers
         [HttpGet("RisksAsCheckModelsFor/{id}")]
         public IActionResult GetRisksAsCheckModels(int id)
         {
-            var investment = EntityRepository.Entities.Find(id);
+            var investment = EntityRepository.db.Investments.Find(id);
             var model = new ParentChildEntity<CheckModel, Investment>
             {
                 Parent = investment,
@@ -297,7 +297,7 @@ namespace CoreInvestmentTracker.Controllers
         [HttpPost("AssociateRisks/{id}")]
         public IActionResult AssociateRisks(int id, [FromBody] List<CheckModel> Children)
         {
-            var investment = EntityRepository.Entities.Find(id);
+            var investment = EntityRepository.db.Investments.Find(id);
             var riskIDs = Children.Where(o => o.Checked).Select(o => o.ID);
             foreach (var ID in riskIDs)
             {
@@ -316,7 +316,7 @@ namespace CoreInvestmentTracker.Controllers
         [HttpGet("FactorsAsCheckModelFor/{id}")]
         public IActionResult GetFactorsAsCheckModel(int id)
         {
-            var investment = EntityRepository.Entities.Find(id);
+            var investment = EntityRepository.db.Investments.Find(id);
             var model = new ParentChildEntity<CheckModel, Investment>
             {
                 Parent = investment,
@@ -341,7 +341,7 @@ namespace CoreInvestmentTracker.Controllers
         [HttpPost("AssociateFactors/{id}")]        
         public IActionResult AssociateFactors(int id, [FromBody] List<CheckModel> Children)
         {
-            var investment = EntityRepository.Entities.Find(id);
+            var investment = EntityRepository.db.Investments.Find(id);
             var factorIDs = Children.Where(o => o.Checked).Select(o => o.ID);
             foreach (var ID in factorIDs)
             {
@@ -360,7 +360,7 @@ namespace CoreInvestmentTracker.Controllers
         [HttpGet("GroupsAsCheckModelsFor/{id}")]
         public IActionResult GetGroupsAsCheckModelsForInvestment(int id)
         {
-            var investment = EntityRepository.Entities.Find(id);
+            var investment = EntityRepository.db.Investments.Find(id);
             var model = new ParentChildEntity<CheckModel, Investment>
             {
                 Parent = investment,
@@ -386,7 +386,7 @@ namespace CoreInvestmentTracker.Controllers
         [HttpPost("AssociateGroups/{id}")]
         public IActionResult AssociateGroups(int id, [FromBody] List<CheckModel> Children)
         {
-            var investment = EntityRepository.Entities.Find(id);
+            var investment = EntityRepository.db.Investments.Find(id);
             var groupIDs = Children.Where(o => o.Checked).Select(o => o.ID);
             foreach (var ID in groupIDs)
             {
@@ -405,7 +405,7 @@ namespace CoreInvestmentTracker.Controllers
         [HttpGet("RegionsAsCheckModelsFor/{id}")]
         public IActionResult GetRegionsAsCheckModelsFor(int id)
         {
-            var investment = EntityRepository.Entities.Find(id);
+            var investment = EntityRepository.db.Investments.Find(id);
             var model = new ParentChildEntity<CheckModel, Investment>
             {
                 Parent = investment,
@@ -430,7 +430,7 @@ namespace CoreInvestmentTracker.Controllers
         [HttpPost("AssociateRegions/{id}")]
         public IActionResult AssociateRegions(int id, [FromBody] List<CheckModel> Children)
         {
-            var investment = EntityRepository.Entities.Find(id);
+            var investment = EntityRepository.db.Investments.Find(id);
             var regionIDs = Children.Where(o => o.Checked).Select(o => o.ID);
             foreach (var ID in regionIDs)
             {
