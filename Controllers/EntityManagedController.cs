@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.JsonPatch;
 using System;
 using CoreInvestmentTracker.Models;
 using CoreInvestmentTracker.Models.DAL;
+using Microsoft.EntityFrameworkCore;
 
 namespace CoreInvestmentTracker.Common
 {
@@ -15,14 +16,14 @@ namespace CoreInvestmentTracker.Common
     /// Also contains the common controller Actions
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    [GlobalControllerLogging]    
+    [GlobalControllerLogging]
     public class EntityManagedController<T> : Controller where T : class, IDbInvestmentEntity, new()
     {
         /// <summary>
         /// Logging facility. This is resolved by dependency injection
         /// </summary>
         public readonly IMyLogger Logger;
-        
+
         /// <summary>
         /// Access to te underlying store of entities. This is resolved by depedency injection.
         /// </summary>
@@ -43,7 +44,7 @@ namespace CoreInvestmentTracker.Common
         /// Get all entities
         /// </summary>
         /// <returns>Array of entities</returns>
-        [HttpGet]        
+        [HttpGet]
         public virtual IEnumerable<T> GetAll()
         {
             return EntityRepository.Entities.ToList();
@@ -78,54 +79,10 @@ namespace CoreInvestmentTracker.Common
             if (entity == null)
             {
                 return BadRequest();
-            }
-
-            /* Save Entity Workaround:  This allows us to at least create new entitys from the incomming API requests.
-             * At the moment, I cant figure out why when using a Generic entity type, EF
-             does not respect the [DatabaseGenerated(DatabaseGeneratedOption.Identity)] on the underlying type. 
-             I can't use the FluentAPI on a generic type either - it was CLR types or something like that...
-
-             So for now, we're going to have to interpret the generic type to its underlying type, so that EF recognises the 
-             that the ID columns of each type has [DatabaseGenerated(DatabaseGeneratedOption.Identity)] and will thus automatically generate a new value for it
-             and not literally take the value weve got for ID in the entity type and try insert that... directly into the column and we dont want that 
-             and the database complains rightly so saying that we dont support IDENTITY_INSERTs which is what it tries to do instead of generate a new ID...
-
-            If anything good about this, is that we dont have to write each entry below for each controller(which would work but is just added more code). Here its in one place.
-            
-             */
-
-            if (typeof(T) == typeof(InvestmentInfluenceFactor))
-            {
-                EntityRepository.db.Factors.Add(EntityApplicationDbContext<T>.ChangeType<InvestmentInfluenceFactor>(entity));
-                EntityRepository.db.SaveChanges();
-            }
-            else if (typeof(T) == typeof(InvestmentRisk))
-            {
-                EntityRepository.db.Risks.Add(EntityApplicationDbContext<T>.ChangeType<InvestmentRisk>(entity));
-                EntityRepository.db.SaveChanges();
-            }
-            else if (typeof(T) == typeof(InvestmentGroup))
-            {
-                EntityRepository.db.Groups.Add(EntityApplicationDbContext<T>.ChangeType<InvestmentGroup>(entity));
-                EntityRepository.db.SaveChanges();
-            }
-            else if (typeof(T) == typeof(Region))
-            {
-                EntityRepository.db.Regions.Add(EntityApplicationDbContext<T>.ChangeType<Region>(entity));
-                EntityRepository.db.SaveChanges();
-            }
-            else if (typeof(T) == typeof(Investment))
-            {
-                EntityRepository.db.Investments.Add(EntityApplicationDbContext<T>.ChangeType<Investment>(entity));
-                EntityRepository.db.SaveChanges();
-            } else
-            {
-                EntityRepository.Entities.Add(entity);
-                EntityRepository.SaveChanges();
-            }
-               
-            return CreatedAtAction("Create",new { id = entity.ID }, entity);
-            
+            }            
+            EntityRepository.db.Add<T>(entity);
+            EntityRepository.SaveChanges();
+            return CreatedAtAction("Create", new { id = entity.ID }, entity);
         }
 
         /// <summary>
@@ -147,7 +104,7 @@ namespace CoreInvestmentTracker.Common
             {
                 return NotFound();
             }
-            
+
             /*Note we need to come up with a way to fetch the child entities*/
             try
             {
@@ -156,7 +113,7 @@ namespace CoreInvestmentTracker.Common
             catch {
                 old = ShallowCopy.MergeObjects(old, item);
             }
-            
+
             EntityRepository.Entities.Update(old);
             EntityRepository.SaveChanges();
             return new NoContentResult();
@@ -177,7 +134,7 @@ namespace CoreInvestmentTracker.Common
             }
 
             var old = EntityRepository.Entities.FirstOrDefault(t => t.ID == id);
-            
+
             patchDocument.ApplyTo(old, ModelState);
 
             EntityRepository.Entities.Update(old);
@@ -190,22 +147,21 @@ namespace CoreInvestmentTracker.Common
 
             return Ok(old);
         }
-
+        
         /// <summary>
         /// Deletes and Entity
         /// </summary>
         /// <param name="id">The id of the entity to delete</param>
         /// <returns>NoContentResult</returns>
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
-        {
-            var todo = EntityRepository.Entities.FirstOrDefault(t => t.ID == id);
-            if (todo == null)
+        public virtual IActionResult Delete(int id)
+        { 
+            var entity = EntityRepository.db.Find<T>(id);
+            if (entity == null)
             {
                 return NotFound();
             }
-
-            EntityRepository.Entities.Remove(todo);
+            EntityRepository.db.Remove<T>(entity);
             EntityRepository.SaveChanges();
             return new NoContentResult();
         }

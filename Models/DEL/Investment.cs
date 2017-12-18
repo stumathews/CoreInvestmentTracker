@@ -14,7 +14,7 @@ namespace CoreInvestmentTracker.Models
     public class Investment : IDbInvestmentEntity
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-     
+        //[Key]
         public int ID { get; set; }
         public String Description { get; set; }
         public String Symbol { get; set; }

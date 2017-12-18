@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CoreInvestmentTracker.Models.DEL.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +24,7 @@ namespace CoreInvestmentTracker.Models.DAL
         public DbSet<InvestmentRisk> Risks { get; set; }
         public DbSet<Region> Regions { get; set; }
 
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {            
             modelBuilder.Entity<Investment>().ToTable("Investment");

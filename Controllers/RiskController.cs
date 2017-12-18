@@ -2,6 +2,7 @@
 using CoreInvestmentTracker.Models;
 using CoreInvestmentTracker.Models.DAL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace CoreInvestmentTracker.Controllers
 {
