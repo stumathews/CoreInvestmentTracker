@@ -13,18 +13,40 @@ namespace CoreInvestmentTracker.Models.DAL
     /// </summary>
     public class ApplicationDbContext : DbContext
     {        
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="options"></param>
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)        
         {
             
         }
         
+        /// <summary>
+        /// Investments
+        /// </summary>
         public DbSet<Investment> Investments { get; set; }
+        /// <summary>
+        /// Groups
+        /// </summary>
         public DbSet<InvestmentGroup> Groups { get; set; }
+        /// <summary>
+        /// Factors
+        /// </summary>
         public DbSet<InvestmentInfluenceFactor> Factors { get; set; }
+        /// <summary>
+        /// Risks
+        /// </summary>
         public DbSet<InvestmentRisk> Risks { get; set; }
+        /// <summary>
+        /// Regions
+        /// </summary>
         public DbSet<Region> Regions { get; set; }
 
-        
+        /// <summary>
+        /// OnModelCreating
+        /// </summary>
+        /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {            
             modelBuilder.Entity<Investment>().ToTable("Investment");

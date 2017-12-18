@@ -11,13 +11,14 @@ namespace CoreInvestmentTracker.Models.DAL
     /// </summary>
     public class DatabaseTestDataInitializer
     {
-        /*
-         * This method(seed) basically creates and adds our entities to our derived DbContext object,
-         * which has a list(DbSet) for each of the entities we want to persist.
-         * We basically create those entities here by hand and add them to that list in the DbContext.
-         * We then ask the DBContext to SaveChanges() which persists what we've setup to be added to those lists(managed by the DbContext)
-         */
         const int MAX = 10;
+        /// <summary>
+        /// This method(seed) basically creates and adds our entities to our derived DbContext object,
+        /// which has a list(DbSet) for each of the entities we want to persist.
+        /// We basically create those entities here by hand and add them to that list in the DbContext.
+        /// We then ask the DBContext to SaveChanges() which persists what we've setup to be added to those lists(managed by the DbContext)
+        /// </summary>
+        /// <param name="db"></param>
         public static void Initialize(ApplicationDbContext db)
         {
             db.Database.EnsureCreated();

@@ -16,7 +16,7 @@ namespace CoreInvestmentTracker.Models.DAL
     /// Class implementation that will expose the underlying entity framework entities without having to name the entity collection memeber
     /// on the dbcontext.
     /// </summary>
-    /// <typeparam name="TEntity"></typeparam>
+    /// <typeparam name="T"></typeparam>
     public class EntityApplicationDbContext<T> : IEntityApplicationDbContext<T> where T : class, IDbInvestmentEntity
     {
         private readonly ApplicationDbContext _db;
@@ -30,8 +30,12 @@ namespace CoreInvestmentTracker.Models.DAL
             _db = context;
         }
 
+        /// <summary>
+        /// ApplicationDbContext
+        /// </summary>
         public ApplicationDbContext db => _db;
-        public static bool IsAnyOfTypes<T>(Type[] types)
+
+        private static bool IsAnyOfTypes<T>(Type[] types)
         {
             foreach( Type t in types)
             {
@@ -128,12 +132,12 @@ namespace CoreInvestmentTracker.Models.DAL
         /// <summary>
         /// Utility function to change the type
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T1"></typeparam>
         /// <param name="obj"></param>
         /// <returns></returns>
-        private static T ChangeType<T>(object obj)
+        private static T1 ChangeType<T1>(object obj)
         {
-            return (T)Convert.ChangeType(obj, typeof(T));
+            return (T1)Convert.ChangeType(obj, typeof(T1));
         }
     }
 }
