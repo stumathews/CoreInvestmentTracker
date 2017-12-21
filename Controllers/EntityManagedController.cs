@@ -54,7 +54,7 @@ namespace CoreInvestmentTracker.Common
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            var item = EntityRepository.db.Find<T>(id);
+            var item = EntityRepository.Entities.FirstOrDefault( p => p.ID == id);
             if (item == null)
             {
                 return NotFound();
