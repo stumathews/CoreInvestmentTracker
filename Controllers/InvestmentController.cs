@@ -206,12 +206,11 @@ namespace CoreInvestmentTracker.Controllers
         [HttpPost("DissassociateRisk/{riskID}/{investmentID}")]
         public IActionResult DissassociateRisk(int riskID, int investmentID)
         {
-            var investment = EntityRepository.db.Investments.Find(investmentID);
-            var risk = investment.Risks.First(r => r.InvestmentRiskID == riskID);
-            investment.Risks.Remove(risk);
+            var riskInvestmentLink = EntityRepository.db.Find<InvestmentRisk_Investment>(new object[] { investmentID, riskID });
+            EntityRepository.db.Remove(riskInvestmentLink);
             EntityRepository.SaveChanges();
 
-            return StatusCode(StatusCodes.Status200OK);
+            return new NoContentResult();
         }
 
         /// <summary>
@@ -223,12 +222,11 @@ namespace CoreInvestmentTracker.Controllers
         [HttpPost("DissassociateFactor/{factorID}/{investmentID}")]
         public IActionResult DissassociateFactor(int factorID, int investmentID)
         {
-            var investment = EntityRepository.db.Investments.Find(investmentID);
-            var factor = investment.Factors.First(f => f.InvestmentInfluenceFactorID == factorID);
-            investment.Factors.Remove(factor);
+            var factorInvestmentLink = EntityRepository.db.Find<InvestmentInfluenceFactor_Investment>(new object[] { investmentID, factorID });
+            EntityRepository.db.Remove(factorInvestmentLink);
             EntityRepository.SaveChanges();
 
-            return StatusCode(StatusCodes.Status200OK);
+            return new NoContentResult();
         }
 
         /// <summary>
@@ -240,12 +238,10 @@ namespace CoreInvestmentTracker.Controllers
         [HttpPost("DissassociateGroup/{groupID}/{investmentID}")]
         public IActionResult DissassociateGroup(int groupID, int investmentID)
         {
-            var investment = EntityRepository.db.Investments.Find(investmentID);
-            var group = investment.Groups.First(g => g.InvestmentGroupID == groupID);
-            investment.Groups.Remove(group);
+            var groupInvestmentLink = EntityRepository.db.Find<InvestmentGroup_Investment>(new object[] { investmentID, groupID });
+            EntityRepository.db.Remove(groupInvestmentLink);
             EntityRepository.SaveChanges();
-
-            return StatusCode(StatusCodes.Status200OK);
+            return new NoContentResult();
         }
 
         /// <summary>
@@ -257,12 +253,11 @@ namespace CoreInvestmentTracker.Controllers
         [HttpPost("DissassociateRegion/{regionID}/{investmentID}")]
         public IActionResult DissassociateRegion(int regionID, int investmentID)
         {
-            var investment = EntityRepository.db.Investments.Find(investmentID);
-            var region = investment.Regions.First(r => r.RegionID == regionID);
-            investment.Regions.Remove(region);
+            var regionInvestmentLink = EntityRepository.db.Find<Region_Investment>(new object[] { investmentID, regionID });
+            EntityRepository.db.Remove(regionInvestmentLink);
             EntityRepository.SaveChanges();
 
-            return StatusCode(StatusCodes.Status200OK);
+            return new NoContentResult();
         }
 
         /// <summary>
