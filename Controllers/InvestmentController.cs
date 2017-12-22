@@ -288,20 +288,22 @@ namespace CoreInvestmentTracker.Controllers
         /// Associates Risks with an investment where risks are represented as CheckModels
         /// </summary>
         /// <param name="id">investment</param>
-        /// <param name="Children">List[CheckModel] risks</param>
+        /// <param name="riskIDs"></param>
         /// <returns>status code</returns>
         [HttpPost("AssociateRisks/{id}")]
-        public IActionResult AssociateRisks(int id, [FromBody] List<CheckModel> Children)
+        public IActionResult AssociateRisks(int id, [FromBody] int[] riskIDs)
         {
-            var investment = EntityRepository.db.Investments.Find(id);
-            var riskIDs = Children.Where(o => o.Checked).Select(o => o.ID);
-            foreach (var ID in riskIDs)
+            foreach (var riskID in riskIDs)
             {
-                var risk = EntityRepository.GetEntityByType<InvestmentRisk>().Find(ID);
-                investment.Risks.Add(new InvestmentRisk_Investment { Investment = investment, InvestmentRisk = risk });
+                var riskInvestmentLink = new InvestmentRisk_Investment
+                {
+                    InvestmentID = id,
+                    InvestmentRiskID = riskID
+                };
+                EntityRepository.db.Add(riskInvestmentLink);
             }
             EntityRepository.SaveChanges();
-            return StatusCode(StatusCodes.Status200OK);
+            return new NoContentResult();
         }
 
         /// <summary>
@@ -332,20 +334,21 @@ namespace CoreInvestmentTracker.Controllers
         /// Associates factors(as checkmodels) with an investment
         /// </summary>
         /// <param name="id">investment</param>
-        /// <param name="Children">factors as checkmodel</param>
+        /// <param name="factorIDs"></param>
         /// <returns>status code</returns>
         [HttpPost("AssociateFactors/{id}")]        
-        public IActionResult AssociateFactors(int id, [FromBody] List<CheckModel> Children)
+        public IActionResult AssociateFactors(int id, [FromBody] int[] factorIDs)
         {
-            var investment = EntityRepository.db.Investments.Find(id);
-            var factorIDs = Children.Where(o => o.Checked).Select(o => o.ID);
-            foreach (var ID in factorIDs)
+            foreach (var factorID in factorIDs)
             {
-                var factor = EntityRepository.GetEntityByType<InvestmentInfluenceFactor>().Find(ID);
-                investment.Factors.Add(new InvestmentInfluenceFactor_Investment { Investment = investment, InvestmentInfluenceFactor = factor });
+                var factorInvestmentLink = new InvestmentInfluenceFactor_Investment{
+                    InvestmentID = id,
+                    InvestmentInfluenceFactorID = factorID
+                };
+                EntityRepository.db.Add(factorInvestmentLink);
             }
             EntityRepository.SaveChanges();
-            return StatusCode(StatusCodes.Status200OK);
+            return new NoContentResult();
         }
 
         /// <summary>
@@ -377,20 +380,22 @@ namespace CoreInvestmentTracker.Controllers
         /// Associate a groups with an investment
         /// </summary>
         /// <param name="id">investment</param>
-        /// <param name="Children">Groups to associate with investment</param>
+        /// <param name="groupIDs"></param>
         /// <returns>status code</returns>
         [HttpPost("AssociateGroups/{id}")]
-        public IActionResult AssociateGroups(int id, [FromBody] List<CheckModel> Children)
+        public IActionResult AssociateGroups(int id, [FromBody] int[] groupIDs)
         {
-            var investment = EntityRepository.db.Investments.Find(id);
-            var groupIDs = Children.Where(o => o.Checked).Select(o => o.ID);
-            foreach (var ID in groupIDs)
+            foreach (var groupID in groupIDs)
             {
-                var group = EntityRepository.GetEntityByType<InvestmentGroup>().Find(ID);
-                investment.Groups.Add(new InvestmentGroup_Investment { Investment = investment, InvestmentGroup = group });
+                var groupInvestmentLink = new InvestmentGroup_Investment
+                {
+                    InvestmentID = id,
+                    InvestmentGroupID = groupID
+                };
+                EntityRepository.db.Add(groupInvestmentLink);
             }
             EntityRepository.SaveChanges();
-            return StatusCode(StatusCodes.Status200OK);
+            return new NoContentResult();
         }
 
         /// <summary>
@@ -421,21 +426,22 @@ namespace CoreInvestmentTracker.Controllers
         /// Associate regions with an investment
         /// </summary>
         /// <param name="id">investment</param>
-        /// <param name="Children">regions to associate with the investment</param>
+        /// <param name="regionIDs"></param>
         /// <returns>status code</returns>
         [HttpPost("AssociateRegions/{id}")]
-        public IActionResult AssociateRegions(int id, [FromBody] List<CheckModel> Children)
+        public IActionResult AssociateRegions(int id, [FromBody] int[] regionIDs)
         {
-            var investment = EntityRepository.db.Investments.Find(id);
-            var regionIDs = Children.Where(o => o.Checked).Select(o => o.ID);
-            foreach (var ID in regionIDs)
+            foreach (var regionID in regionIDs)
             {
-                var region = EntityRepository.GetEntityByType<Region>().Find(ID);
-                investment.Regions.Add(new Region_Investment { Investment = investment, Region = region });
+                var regionInvestmentLink = new Region_Investment
+                {
+                    InvestmentID = id,
+                    RegionID = regionID
+                };
+                EntityRepository.db.Add(regionInvestmentLink);
             }
             EntityRepository.SaveChanges();
-            return StatusCode(StatusCodes.Status200OK);
+            return new NoContentResult();
         }
-
     }
 }
