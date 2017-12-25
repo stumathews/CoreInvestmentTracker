@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # set environment variables used in deploy.sh and AWS task-definition.json:
-export IMAGE_NAME=coreinvestmenttracker
+export IMAGE_NAME=CoreInvestmentTracker
 export IMAGE_VERSION=latest
 
 export AWS_DEFAULT_REGION=eu-west-2
