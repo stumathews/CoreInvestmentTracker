@@ -35,7 +35,7 @@ namespace CoreInvestmentTracker.Controllers
         /// </summary>
         /// <param name="ID">The investment Id</param>
         /// <returns>A json repsresentation of the graph data</returns>
-        [HttpPost("RisksGraph/{id}")]
+        [HttpGet("RisksGraph/{id}")]
         public IActionResult GenerateRisksGraph(int ID)
         {
             var investment = EntityRepository.Entities
@@ -136,20 +136,7 @@ namespace CoreInvestmentTracker.Controllers
                 .ThenInclude(e => e.Region).Single(o => o.ID == ID);
             return GenerateGraph<Region, Region_Investment>(ID, investment.Regions.Select(r => r.Region));
         }
-
-        /// <summary>
-        /// Gets all the factors and arranges them into checkbox models
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet("FactorsAsCheckBoxModels")]
-        public IActionResult GetFactorsAsCheckBoxModels()
-        {
-            var checkModels = EntityRepository.
-                GetEntityByType<InvestmentInfluenceFactor>().
-                Select(o => new CheckModel { ID = o.ID, Name = o.Name, Checked = false }).ToList();
-
-            return new ObjectResult(checkModels);
-        }
+        
                 
         /// <summary>
         /// Get investments By Risk
@@ -259,30 +246,7 @@ namespace CoreInvestmentTracker.Controllers
 
             return new NoContentResult();
         }
-
-        /// <summary>
-        /// Gets all risks and prepares them as a ParentChildEntity[checkModel]
-        /// </summary>
-        /// <param name="id">the investment to represent the parent</param>
-        /// <returns>ParentChildEntity[CheckModel]</returns>
-        [HttpGet("RisksAsCheckModelsFor/{id}")]
-        public IActionResult GetRisksAsCheckModels(int id)
-        {
-            var investment = EntityRepository.db.Investments.Find(id);
-            var model = new ParentChildEntity<CheckModel, Investment>
-            {
-                Parent = investment,
-                Children = EntityRepository.GetEntityByType<InvestmentRisk>().Select(risk => new CheckModel
-                {
-                    ID = risk.ID,
-                    Name = risk.Name,
-                    Description = risk.Description,
-                    Checked = false
-                }).ToList()
-            };
-            //AddCustomCreateAndCustomCreateRedirect(checkItemsViewTitle: "Risks", createActionControllerName: "Risk", createActionName: "Create", redirectToControllerName: "Investment", redirectToAction: "AssociateRisk", routeValues: new { Id = id });
-            return new ObjectResult(model);
-        }
+        
 
         /// <summary>
         /// Associates Risks with an investment where risks are represented as CheckModels
@@ -307,30 +271,6 @@ namespace CoreInvestmentTracker.Controllers
         }
 
         /// <summary>
-        /// Prepare a ParentChildEntity[CheckModel, Investment]
-        /// </summary>
-        /// <param name="id">investment ID</param>
-        /// <returns>status code</returns>
-        [HttpGet("FactorsAsCheckModelFor/{id}")]
-        public IActionResult GetFactorsAsCheckModel(int id)
-        {
-            var investment = EntityRepository.db.Investments.Find(id);
-            var model = new ParentChildEntity<CheckModel, Investment>
-            {
-                Parent = investment,
-                Children = EntityRepository.GetEntityByType<InvestmentInfluenceFactor>().Select(risk => new CheckModel
-                {
-                    ID = risk.ID,
-                    Name = risk.Name,
-                    Description = risk.Description,
-                    Checked = false
-                }).ToList()
-            };
-            //AddCustomCreateAndCustomCreateRedirect(checkItemsViewTitle: "Factors", createActionControllerName: "Factor", createActionName: "Create", redirectToControllerName: "Investment", redirectToAction: "AssociateFactor", routeValues: new { Id = id });
-            return StatusCode(StatusCodes.Status200OK);
-        }
-
-        /// <summary>
         /// Associates factors(as checkmodels) with an investment
         /// </summary>
         /// <param name="id">investment</param>
@@ -349,31 +289,6 @@ namespace CoreInvestmentTracker.Controllers
             }
             EntityRepository.SaveChanges();
             return new NoContentResult();
-        }
-
-        /// <summary>
-        /// Prepares a ParentChildEntity[CheckModel, Investment] for the investment
-        /// </summary>
-        /// <param name="id">the investment</param>
-        /// <returns>ParentChildEntity</returns>
-        [HttpGet("GroupsAsCheckModelsFor/{id}")]
-        public IActionResult GetGroupsAsCheckModelsForInvestment(int id)
-        {
-            var investment = EntityRepository.db.Investments.Find(id);
-            var model = new ParentChildEntity<CheckModel, Investment>
-            {
-                Parent = investment,
-                Children = EntityRepository.GetEntityByType<InvestmentGroup>().Select(group => new CheckModel
-                {
-                    ID = group.ID,
-                    Name = group.Name,
-                    Description = group.Description,
-                    Checked = false,
-
-                }).ToList()
-            };
-            //AddCustomCreateAndCustomCreateRedirect(checkItemsViewTitle: "Groups", createActionControllerName: "Group", createActionName: "Create", redirectToControllerName: "Investment", redirectToAction: "AssociateGroup", routeValues: new { Id = id });
-            return StatusCode(StatusCodes.Status200OK);
         }
 
         /// <summary>
@@ -398,30 +313,7 @@ namespace CoreInvestmentTracker.Controllers
             return new NoContentResult();
         }
 
-        /// <summary>
-        /// Prepares a ParentChildEntity[CheckModel, Investment] for the investment with all regions as check models
-        /// </summary>
-        /// <param name="id">the investment</param>
-        /// <returns>ParentChildEntity[CheckModel, Investment]</returns>
-        [HttpGet("RegionsAsCheckModelsFor/{id}")]
-        public IActionResult GetRegionsAsCheckModelsFor(int id)
-        {
-            var investment = EntityRepository.db.Investments.Find(id);
-            var model = new ParentChildEntity<CheckModel, Investment>
-            {
-                Parent = investment,
-                Children = EntityRepository.GetEntityByType<Region>().Select(risk => new CheckModel
-                {
-                    ID = risk.ID,
-                    Name = risk.Name,
-                    Description = risk.Description,
-                    Checked = false
-                }).ToList()
-            };
-//            AddCustomCreateAndCustomCreateRedirect(checkItemsViewTitle: "Regions", createActionControllerName: "Region", createActionName: "Create", redirectToControllerName: "Investment", redirectToAction: "AssociateRegion", routeValues: new { Id = id });
-            return new ObjectResult(model);
-        }
-
+        
         /// <summary>
         /// Associate regions with an investment
         /// </summary>
