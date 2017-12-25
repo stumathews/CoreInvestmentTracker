@@ -31,5 +31,7 @@ FROM microsoft/aspnetcore:2.0
 WORKDIR /app
 COPY --from=build-env /app/out .
 #COPY --from=build-env /app/CoreInvestmentTracker/out .
+EXPOSE 5000/tcp
 ENV ASPNETCORE_URLS http://*:5000
-ENTRYPOINT ["dotnet", "CoreInvestmentTracker.dll"]
+ENTRYPOINT ["dotnet", "run", "--server.urls", "http://*:5000"]
+#ENTRYPOINT ["dotnet", "CoreInvestmentTracker.dll"]
