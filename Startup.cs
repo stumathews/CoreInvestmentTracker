@@ -23,15 +23,18 @@ namespace CoreInvestmentTracker
     /// </summary>
     public class Startup
     {
+
+        public IHostingEnvironment HostingEnvironment { get; set; }
         /// <summary>
         /// Startup configuration
         /// </summary>
         /// <param name="configuration"></param>
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
             Configuration = configuration;
+            HostingEnvironment = env;
         }
-
+        
         /// <summary>
         /// Configuration object
         /// </summary>
@@ -47,6 +50,16 @@ namespace CoreInvestmentTracker
             mvc.AddJsonOptions(options => {
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
+
+            if (HostingEnvironment.IsDevelopment())
+            {
+                services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            }
+            else
+            {
+                services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(GetRDSConnectionString()));
+            }
+            
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             // Add application services for dependency injection
             services.AddTransient(typeof(IEntityApplicationDbContext<>), typeof(EntityApplicationDbContext<>));
@@ -64,9 +77,7 @@ namespace CoreInvestmentTracker
                 });
 
                 // Set the comments path for the Swagger JSON and UI.
-                var basePath = PlatformServices.Default.Application.ApplicationBasePath;
-                var xmlPath = Path.Combine(basePath, "CoreInvestmentTracker.xml");
-                c.IncludeXmlComments(xmlPath);
+                c.IncludeXmlComments(GetXmlCommentsPath());
             });
 
             services.AddCors(options => options.AddPolicy("Cors", builder => {
@@ -75,6 +86,27 @@ namespace CoreInvestmentTracker
                        .AllowAnyHeader();
             }));
 
+        }
+        private string GetXmlCommentsPath()
+        {
+            var app = PlatformServices.Default.Application;
+            return System.IO.Path.Combine(app.ApplicationBasePath, System.IO.Path.ChangeExtension(app.ApplicationName, "xml"));
+        }
+
+        private string GetRDSConnectionString()
+        {
+            var appConfig = Configuration;
+
+            string dbname = appConfig["RDS_DB_NAME"];
+
+            if (string.IsNullOrEmpty(dbname)) return null;
+
+            string username = appConfig["RDS_USERNAME"];
+            string password = appConfig["RDS_PASSWORD"];
+            string hostname = appConfig["RDS_HOSTNAME"];
+            string port = appConfig["RDS_PORT"];
+
+            return "Data Source=" + hostname + ";Initial Catalog=" + dbname + ";User ID=" + username + ";Password=" + password + ";";
         }
 
         /// <summary>
@@ -85,12 +117,12 @@ namespace CoreInvestmentTracker
         /// <param name="loggerFactory"></param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            HostingEnvironment = env;
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
             
-
             app.UseStaticFiles();
             app.UseCors("Cors");
             app.UseMvc(routes =>

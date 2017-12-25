@@ -24,6 +24,16 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "applicationUrl": "http://localhost:49922/"
+    },
+    "AWS": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "swagger/",
+      "environmentVariables": {
+        "AWS_CONNECTION_STRING": "Server=(localdb)\\\\mssqllocaldb;Database=Investments;Trusted_Connection=True;ConnectRetryCount=0",
+        "ASPNETCORE_ENVIRONMENT": "Production"
+      },
+      "applicationUrl": "http://localhost:80/"
     }
   }
 }
