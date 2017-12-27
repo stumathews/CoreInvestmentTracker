@@ -1,0 +1,15 @@
+﻿version: '3'
+services:
+  coreinvestmenttracker:
+    build:
+      context: .
+    image: coreinvestmenttracker:latest
+    environment:
+    - ASPNETCORE_ENVIRONMENT=Development
+    - VIRTUAL_HOST=localhost
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
