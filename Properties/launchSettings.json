@@ -30,10 +30,24 @@
       "launchBrowser": true,
       "launchUrl": "swagger/",
       "environmentVariables": {
-        "AWS_CONNECTION_STRING": "Server=(localdb)\\\\mssqllocaldb;Database=Investments;Trusted_Connection=True;ConnectRetryCount=0",
         "ASPNETCORE_ENVIRONMENT": "Production"
       },
       "applicationUrl": "http://localhost:80/"
+    },
+    "CoreInvestmentTracker-AWS-Prod": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "swagger/",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Production"
+      }
+    },
+    "CoreInvestmentTracker-Local-Dev": {
+      "commandName": "Project",
+      "launchUrl": "swagger/",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
     }
   }
 }
