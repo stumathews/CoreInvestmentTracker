@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using CoreInvestmentTracker.Models.DAL;
 using CoreInvestmentTracker.Models.DAL.Interfaces;
 using CoreInvestmentTracker.Common;
 using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.Extensions.PlatformAbstractions;
-using System.IO;
 
 namespace CoreInvestmentTracker
 {
@@ -24,11 +18,15 @@ namespace CoreInvestmentTracker
     public class Startup
     {
 
+        /// <summary>
+        /// Provides us with access to the hosting environment details
+        /// </summary>
         public IHostingEnvironment HostingEnvironment { get; set; }
         /// <summary>
         /// Startup configuration
         /// </summary>
         /// <param name="configuration"></param>
+        /// <param name="env"></param>
         public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
             Configuration = configuration;
@@ -53,14 +51,13 @@ namespace CoreInvestmentTracker
 
             if (HostingEnvironment.IsDevelopment())
             {
-                services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlExpress2017Connection")));
             }
             else
             {
                 services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(GetRDSConnectionString()));
-            }
+            }           
             
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             // Add application services for dependency injection
             services.AddTransient(typeof(IEntityApplicationDbContext<>), typeof(EntityApplicationDbContext<>));
             services.AddTransient(typeof(IMyLogger), typeof(MyLogger));
