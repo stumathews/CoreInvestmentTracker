@@ -14,7 +14,9 @@ FROM microsoft/aspnetcore:2.0
 WORKDIR /app
 COPY --from=build-env /app/out .
 
-# Make port 5000 available to the world outside this container
+# Expose port 5000 on container to the world outside (container host)
 EXPOSE 5000/tcp
+
+# Ask Kestral to listen on 5000
 ENV ASPNETCORE_URLS http://*:5000
 ENTRYPOINT ["dotnet", "CoreInvestmentTracker.dll"]
