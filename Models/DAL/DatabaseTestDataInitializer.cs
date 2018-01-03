@@ -76,6 +76,11 @@ namespace CoreInvestmentTracker.Models.DAL
                 new InvestmentGroup{ Name = "Emerging markets", Description = "places like Japan, Turkey, Brazil, Taiwan etc.", Type = "" },
             };
 
+            groups.ForEach(g => {
+                g.Children = new List<InvestmentGroup>();
+                InvestmentGroup child = new InvestmentGroup { Name = g.Name + "Child", Description = "Child", Type = "", Parent = g };
+                g.Children.Add(child);
+            });
             groups.ForEach(g => g.Investments = new List<InvestmentGroup_Investment>());
             groups.ForEach(g => db.Groups.Add(g));
 

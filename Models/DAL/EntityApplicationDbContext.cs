@@ -35,11 +35,11 @@ namespace CoreInvestmentTracker.Models.DAL
         /// </summary>
         public ApplicationDbContext db => _db;
 
-        private static bool IsAnyOfTypes<T>(Type[] types)
+        private static bool IsAnyOfTypes<T1>(Type[] types)
         {
             foreach( Type t in types)
             {
-                return (typeof(T) == typeof(T)) ? true: false;
+                return (typeof(T1) == typeof(T1)) ? true: false;
             }
             return false;
         }
@@ -73,7 +73,10 @@ namespace CoreInvestmentTracker.Models.DAL
                     }
                     if (typeof(T) == typeof(InvestmentGroup))
                     {
-                        filtered.AddRange(_db.Set<InvestmentGroup>().Include(x => x.Investments).Select(o => ChangeType<T>(o)).ToList());                        
+                        filtered.AddRange(_db.Set<InvestmentGroup>()                            
+                            .Include(x => x.Children).ThenInclude( x => x.Parent )
+                            .Include(x => x.Investments).Select(o => ChangeType<T>(o))
+                            .ToList());                        
                     }
                     if (typeof(T) == typeof(InvestmentInfluenceFactor))
                     {
