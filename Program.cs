@@ -12,8 +12,15 @@ using Microsoft.Extensions.Logging;
 
 namespace CoreInvestmentTracker
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Program
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="args"></param>
         public static void Main(string[] args)
         {
             var host = BuildWebHost(args);
@@ -36,6 +43,11 @@ namespace CoreInvestmentTracker
             host.Run();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()

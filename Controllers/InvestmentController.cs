@@ -5,7 +5,7 @@ using CoreInvestmentTracker.Models;
 using CoreInvestmentTracker.Models.DAL.Interfaces;
 using CoreInvestmentTracker.Models.DEL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using WinInvestmentTracker.Models.BOLO;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 

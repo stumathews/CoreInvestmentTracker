@@ -7,6 +7,10 @@ namespace CoreInvestmentTracker.Common
     /// </summary>
     public class GlobalControllerLoggingAttribute : ActionFilterAttribute
     {        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="actionContext"></param>
         public override void OnActionExecuting(ActionExecutingContext actionContext)
         {
            var Log =(IMyLogger) actionContext.HttpContext.RequestServices.GetService(typeof(IMyLogger));
@@ -15,6 +19,10 @@ namespace CoreInvestmentTracker.Common
            base.OnActionExecuting(actionContext);
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="actionExecutedContext"></param>
         public override void OnActionExecuted(ActionExecutedContext actionExecutedContext)
         {
             var Log = (IMyLogger)actionExecutedContext.HttpContext.RequestServices.GetService(typeof(IMyLogger));

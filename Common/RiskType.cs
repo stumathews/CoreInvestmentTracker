@@ -5,9 +5,18 @@ using System.Web;
 
 namespace CoreInvestmentTracker.Common
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public enum RiskType
     {
-        Company, // risk specific to company
-        Market // risk specific to market (systemic risk)
+        /// <summary>
+        /// risk specific to company
+        /// </summary>
+        Company,
+        /// <summary>
+        /// risk specific to market (systemic risk)
+        /// </summary>
+        Market
     }
 }

@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
-using WinInvestmentTracker.Models;
 
 namespace CoreInvestmentTracker.Models
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public  interface IDbInvestmentEntityHasInvestments<T>
     {
         /// <summary>

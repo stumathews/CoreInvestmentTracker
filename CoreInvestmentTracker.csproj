@@ -26,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Models\BOLO\" />
     <Folder Include="Models\BSL\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>

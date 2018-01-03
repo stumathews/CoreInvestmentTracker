@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace CoreInvestmentTracker.Common
 {
+    /// <summary>
+    /// Stuff to do with shalow copying objects
+    /// </summary>
     public static class ShallowCopy
     {
         /// <summary>
@@ -15,6 +18,7 @@ namespace CoreInvestmentTracker.Common
         /// <typeparam name="T"></typeparam>
         /// <param name="old"></param>
         /// <param name="new"></param>
+        /// <param name="except"></param>
         /// <returns></returns>
         public static void Merge<T>(T old, T @new, string[] except)
         {
@@ -32,6 +36,13 @@ namespace CoreInvestmentTracker.Common
                 }
             }
         }
+        /// <summary>
+        /// Merges two objects
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obj1"></param>
+        /// <param name="obj2"></param>
+        /// <returns></returns>
         public static T MergeObjects<T>(T obj1, T obj2)
         {
             var objResult = Activator.CreateInstance(typeof(T));
@@ -65,7 +76,6 @@ namespace CoreInvestmentTracker.Common
                     }
                 }
             }
-
             return (T)objResult;
         }
     }

@@ -13,6 +13,13 @@ namespace CoreInvestmentTracker.Common
     /// </summary>
     public class ReflectionUtilities
     {
+        /// <summary>
+        /// Sets a specific property on a object using reflection.
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="propertyName"></param>
+        /// <param name="propertyValue"></param>
+        /// <returns>the object, modified</returns>
         public static Object SetPropertyValue(Object entity, string propertyName, string propertyValue)
         {
             PropertyInfo propInfo = entity.GetType().GetProperty(propertyName);
@@ -39,7 +46,6 @@ namespace CoreInvestmentTracker.Common
                 propInfo.SetValue(entity, d, null);
             }
             return entity;
-        }
-        
+        }        
     }
 }

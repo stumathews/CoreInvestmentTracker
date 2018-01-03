@@ -1,10 +1,4 @@
-﻿using CoreInvestmentTracker.Models.DEL.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace CoreInvestmentTracker.Models.DAL
 {
@@ -62,11 +56,17 @@ namespace CoreInvestmentTracker.Models.DAL
 
             modelBuilder.Entity<InvestmentGroup_Investment>()
             .HasKey(i => new { i.InvestmentID, i.InvestmentGroupID })
-            .HasName("PrimaryKey_InvestmentID_InvestmentGroup");
+            .HasName("PrimaryKey_InvestmentID_InvestmentGroupID");
 
             modelBuilder.Entity<InvestmentRisk_Investment>()
            .HasKey(i => new { i.InvestmentID, i.InvestmentRiskID })
-           .HasName("PrimaryKey_InvestmentID_InvestmentRisk");
+           .HasName("PrimaryKey_InvestmentID_InvestmentRiskID");
+
+            /*
+            modelBuilder.Entity<InvestmentGroup_ChildInvestmentGroup>()
+            .HasKey(i => new { i.InvestmentGroupID, i. })
+            .HasName("PrimaryKey_InvestmentGroupID_ChildInvestmentGroupID"); */
+            
         }
     }
 }

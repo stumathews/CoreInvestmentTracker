@@ -8,16 +8,30 @@ using CoreInvestmentTracker.Models.DEL.Interfaces;
 
 namespace CoreInvestmentTracker.Models
 {    
+    /// <summary>
+    /// 
+    /// </summary>
     public class Region : IDbInvestmentEntity, IDbInvestmentEntityHasInvestments<Region_Investment>
     {
+        /// <summary>
+        /// 
+        /// </summary>
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-
         public int ID { get; set; }        
-        [Display(Name = "Description of region")]
+        /// <summary>
+        /// 
+        /// </summary>
+        [Display(Name = "Description of region")]        
         public String Description { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         [Required]
         [Display(Name="Region Name")]
         public String Name { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public virtual ICollection<Region_Investment> Investments { get; set; }
     }
 }
