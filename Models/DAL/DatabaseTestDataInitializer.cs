@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CoreInvestmentTracker.Models.DEL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -62,6 +63,12 @@ namespace CoreInvestmentTracker.Models.DAL
             }
             factors.ForEach(f => f.Investments = new List<InvestmentInfluenceFactor_Investment>());
             factors.ForEach(f => db.Factors.Add(f));
+                        
+            db.SaveChanges();
+
+            // make some notes for factors
+            var notes = factors.Select(f => new InvestmentNote { OwningEntityType = Common.EntityType.InvestmentInfluenceFactor, OwningEntityId = f.ID, Description = "Note contents for factor " + f.Name, Name = "Title" + f.Name });
+            db.Notes.AddRange(notes);
             db.SaveChanges();
 
             var groups = new List<InvestmentGroup> {
@@ -86,6 +93,22 @@ namespace CoreInvestmentTracker.Models.DAL
 
             db.SaveChanges();
 
+            // make some group notes
+            List<InvestmentNote> group_notes = new List<InvestmentNote>();
+            groups.ForEach(r => {
+                group_notes.Add(new InvestmentNote
+                {
+                    Name = "note for risk " + r.Name,
+                    Description = "description for " + r.Description,
+                    OwningEntityId = r.ID,
+                    OwningEntityType = Common.EntityType.InvestmentGroup
+                });
+            });
+
+            db.Notes.AddRange(group_notes);
+            db.SaveChanges();
+
+
             var regions = new List<Region> {
                 new Region { Name = "UK ALL COMPANIES (Fund Sector)" },
                 new Region { Name = "UK SMALLER COMPANIES (Fund Sector)"},
@@ -106,6 +129,21 @@ namespace CoreInvestmentTracker.Models.DAL
             regions.ForEach(r => db.Regions.Add(r));
             db.SaveChanges();
 
+            // make some region notes
+            List<InvestmentNote> region_notes = new List<InvestmentNote>();
+            regions.ForEach(r => {
+                region_notes.Add(new InvestmentNote
+                {
+                    Name = "note for risk " + r.Name,
+                    Description = "description for " + r.Description,
+                    OwningEntityId = r.ID,
+                    OwningEntityType = Common.EntityType.Region
+                });
+            });
+
+            db.Notes.AddRange(region_notes);
+            db.SaveChanges();
+
             var risks = new List<InvestmentRisk> {
                 new InvestmentRisk { Name = "Director dismissal", Description = "Financial officer fired due to corruption", Type = Common.RiskType.Company },
                 new InvestmentRisk { Name = "Competition", Description = "Competition from other companies", Type = Common.RiskType.Company },
@@ -117,13 +155,23 @@ namespace CoreInvestmentTracker.Models.DAL
             risks.ForEach(r => db.Risks.Add(r));
             db.SaveChanges();
 
+            // make some risk notes
+            List<InvestmentNote> risk_notes = new List<InvestmentNote>();
+            risks.ForEach(r => {
+                risk_notes.Add(new InvestmentNote { Name = "note for risk " + r.Name, Description = "description for "+ r.Description, OwningEntityId = r.ID,
+                                                    OwningEntityType = Common.EntityType.InvestmentRisk });
+            });
+
+            db.Notes.AddRange(risk_notes);
+            db.SaveChanges();
+
             var investments = new List<Investment>();
             for (int i = 0; i < MAX; i++)
             {
                 var investment = new Investment
                 {
                     Description = "Description",
-                    Symbol = "symbol",
+                    Symbol = "£",
                     DesirabilityStatement = "default desirabliity statement#" + i,
                     InitialInvestment = i,
                     Name = "investment#" + i,
@@ -189,6 +237,11 @@ namespace CoreInvestmentTracker.Models.DAL
             }
 
             investments.ForEach(inv => db.Investments.Add(inv));
+            db.SaveChanges();
+
+            // make some investment notes
+
+            db.Notes.AddRange( investments.Select( m=> new InvestmentNote { OwningEntityType = Common.EntityType.Investment, OwningEntityId = m.ID, Name = "note for " + m.Name, Description = "note for " + m.Name } ));
             db.SaveChanges();
 
         }

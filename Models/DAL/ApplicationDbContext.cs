@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CoreInvestmentTracker.Models.DEL;
+using Microsoft.EntityFrameworkCore;
 
 namespace CoreInvestmentTracker.Models.DAL
 {
@@ -38,6 +39,11 @@ namespace CoreInvestmentTracker.Models.DAL
         public DbSet<Region> Regions { get; set; }
 
         /// <summary>
+        /// Notes
+        /// </summary>
+        public DbSet<InvestmentNote> Notes { get; set; }
+
+        /// <summary>
         /// OnModelCreating
         /// </summary>
         /// <param name="modelBuilder"></param>
@@ -61,6 +67,8 @@ namespace CoreInvestmentTracker.Models.DAL
             modelBuilder.Entity<InvestmentRisk_Investment>()
            .HasKey(i => new { i.InvestmentID, i.InvestmentRiskID })
            .HasName("PrimaryKey_InvestmentID_InvestmentRiskID");
+
+            modelBuilder.Entity<InvestmentNote>().HasKey(i => new { i.OwningEntityId, i.OwningEntityType, i.ID });
 
             /*
             modelBuilder.Entity<InvestmentGroup_ChildInvestmentGroup>()

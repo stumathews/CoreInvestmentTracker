@@ -8,6 +8,33 @@ using System.Web;
 
 namespace CoreInvestmentTracker.Common
 {
+
+    /// <summary>
+    /// Types of entity
+    /// </summary>
+    public enum EntityType
+    {
+        /// <summary>
+        /// Investment
+        /// </summary>
+        Investment,
+        /// <summary>
+        /// Group
+        /// </summary>
+        InvestmentGroup,
+        /// <summary>
+        /// Risk
+        /// </summary>
+        InvestmentRisk,
+        /// <summary>
+        /// Factor
+        /// </summary>
+        InvestmentInfluenceFactor,
+        /// <summary>
+        /// Region
+        /// </summary>
+        Region
+    }
     /// <summary>
     /// 
     /// </summary>

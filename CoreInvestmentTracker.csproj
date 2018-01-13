@@ -22,7 +22,6 @@
 
   <ItemGroup>
     <Compile Remove="Common\EntityManagedODataController.cs" />
-    <Compile Remove="Models\DEL\InvestmentNote.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -51,6 +51,7 @@ namespace CoreInvestmentTracker
 
             if (HostingEnvironment.IsDevelopment())
             {
+
                 services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlExpress2017Connection")));
             }
             else
@@ -121,6 +122,7 @@ namespace CoreInvestmentTracker
             }
             
             app.UseStaticFiles();
+            app.UseStatusCodePages("text/plain", "Status code page, status code: {0}");
             app.UseCors("Cors");
             app.UseMvc(routes =>
             {
