@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CoreInvestmentTracker.Controllers
 {
+    /// <inheritdoc />
     /// <summary>
     /// Controller for InvestmentInfluenceFactors
     /// </summary>

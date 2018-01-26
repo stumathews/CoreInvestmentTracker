@@ -39,5 +39,24 @@ namespace CoreInvestmentTracker.Controllers
                                                           && o.OwningEntityType == (EntityType)owningEntityType);
             return items.ToList();
         }
+
+        /// <summary>
+        /// Deletes and Entity
+        /// </summary>
+        /// <param name="noteType">Type of note</param>
+        /// <param name="id">The id of the entity to delete</param>
+        /// <returns>NoContentResult</returns>
+        [HttpDelete("{owningEntityId}/{owningEntityType}/{ID}")]
+        public IActionResult Delete(int owningEntityId, int owningEntityType, int ID)
+        {
+            var entity = EntityRepository.db.Find<InvestmentNote>(owningEntityId, (EntityType)owningEntityType, ID);
+            if (entity == null)
+            {
+                return NotFound();
+            }
+            EntityRepository.db.Remove(entity);
+            EntityRepository.SaveChanges();
+            return new NoContentResult();
+        }
     }
 }

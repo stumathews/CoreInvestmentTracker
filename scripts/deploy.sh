@@ -16,6 +16,7 @@ envsubst < task-definition.json > new-task-definition.json
 
 eval $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email | sed 's|https://||') #needs AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY envvars
 
+## Check to see if the repository already existsm otherwise create it
 if [ $(aws ecr describe-repositories | jq --arg x $IMAGE_NAME '[.repositories[] | .repositoryName == $x] | any') == "true" ]; then
     echo "Found ECS Repository $IMAGE_NAME"
 else
@@ -23,10 +24,13 @@ else
     aws ecr create-repository --repository-name $IMAGE_NAME
 fi
 
+# Push the image to the repository
 docker push $AWS_ECS_REPO_DOMAIN/$IMAGE_NAME:$IMAGE_VERSION
 
-aws ecs register-task-definition --cli-input-json file://new-task-definition.json --region $AWS_DEFAULT_REGION > /dev/null # Create a new task revision
-TASK_REVISION=$(aws ecs describe-task-definition --task-definition $ECS_TASK --region $AWS_DEFAULT_REGION | jq '.taskDefinition.revision') #get latest revision
+ # Create a new task revision
+aws ecs register-task-definition --cli-input-json file://new-task-definition.json --region $AWS_DEFAULT_REGION > /dev/null
+ #get latest revision
+TASK_REVISION=$(aws ecs describe-task-definition --task-definition $ECS_TASK --region $AWS_DEFAULT_REGION | jq '.taskDefinition.revision')
 SERVICE_ARN="arn:aws:ecs:$AWS_DEFAULT_REGION:$AWS_ACCOUNT_NUMBER:service/$ECS_SERVICE"
 ECS_SERVICE_EXISTS=$(aws ecs list-services --region $AWS_DEFAULT_REGION --cluster $AWS_ECS_CLUSTER_NAME | jq '.serviceArns' | jq 'contains(["'"$SERVICE_ARN"'"])')
 if [ "$ECS_SERVICE_EXISTS" == "true" ]; then
