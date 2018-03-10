@@ -19,8 +19,28 @@
       "environment": [
         {
           "name": "VIRTUAL_HOST",
-          "value": "${AWS_VIRTUAL_HOST}"
-        }        
+          "value": "${AWS_VIRTUAL_HOST}"          
+        },
+        {
+          "name": "RDS_DB_NAME",
+          "value": "Investments"
+        },
+        {
+          "name": "RDS_HOSTNAME",
+          "value": "mydbinstance.cwfwf1cg6vhc.eu-west-2.rds.amazonaws.com"
+        },
+        {
+          "name": "RDS_PASSWORD",
+          "value": ""
+        },
+        {
+          "name": "RDS_PORT",
+          "value": "1433"
+        },
+        {
+          "name": "RDS_USERNAME",
+          "value": "sa"
+        }
       ]
     }    
   ]
