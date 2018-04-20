@@ -5,12 +5,12 @@ sudo: required
 dotnet: 2.0.0
 mono: none
 env: DOTNETCORE=1
-services:
-  - docker
-addons:
-  apt:
-    packages:
-      - docker-ce
+before_script:
+  - sudo apt-get -y update
+  - sudo apt-get -y install -o Dpkg::Options::="--force-confnew" docker-ce=18.03.0~ce-0~ubuntu
+  - sudo apt-get install jq -y #install jq for json parsing
+  - sudo apt-get install gettext -y 
+  - pip install --user awscli # install aws cli w/o sudO
 script:
   - chmod +x ./deploy-envs.sh
   - chmod +x ./scripts/build.sh
