@@ -6,8 +6,8 @@ export ECS_SERVICE=$IMAGE_NAME-service
 export ECS_TASK=$IMAGE_NAME-task
 
 # install dependencies
-pip install --upgrade pip
-pip install pyOpenSSL ndg-httpsclient pyasn1
+sudo pip install --upgrade pip
+sudo pip install pyOpenSSL ndg-httpsclient pyasn1
 sudo apt-get install jq -y #install jq for json parsing
 sudo apt-get install gettext -y 
 pip install --user awscli # install aws cli w/o sudo
