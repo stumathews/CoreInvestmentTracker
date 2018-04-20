@@ -81,6 +81,23 @@ namespace CoreInvestmentTracker.Common
             return CreatedAtAction("Create", new { id = entity.ID }, entity);
         }
 
+        /// <summary>
+        /// Import a list of entities
+        /// </summary>
+        /// <param name="entities"></param>
+        /// <returns></returns>
+        [HttpPost("import")]
+        public virtual IActionResult Import([FromBody] T[] entities)
+        {
+            if (entities.Length == 0)
+            {
+                return BadRequest();
+            }
+            EntityRepository.db.AddRange(entities);
+            EntityRepository.SaveChanges();
+            return CreatedAtAction("Import", entities);
+        }
+
 
         /// <summary>
         /// Updates an entity partially
