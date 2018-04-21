@@ -40,7 +40,7 @@ namespace CoreInvestmentTracker.Common
         /// Get all entities
         /// </summary>
         /// <returns>Array of entities</returns>
-        [HttpGet("")]
+        [HttpGet()]
         public virtual IEnumerable<T> GetAll()
         {
             return EntityRepository.Entities(withChildren: true).ToList();
