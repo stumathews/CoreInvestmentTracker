@@ -69,16 +69,23 @@ namespace CoreInvestmentTracker.Models.DAL
                     if (typeof(T) == typeof(InvestmentRisk))
                     {
                         filtered.AddRange(withChildren
-                            ? _db.Set<InvestmentRisk>().Select(o => ChangeType<T>(o)).ToList()
-                            : _db.Set<InvestmentRisk>().Include(x => x.Investments).Select(o => ChangeType<T>(o))
-                                .ToList());
+                             
+                            ? _db.Set<InvestmentRisk>()
+                                 .Include(x => x.Investments)
+                                 .Select(o => ChangeType<T>(o))
+                                 .ToList()
+                            : _db.Set<InvestmentRisk>()
+                                 .Select(o => ChangeType<T>(o))
+                                 .ToList());
                     }
                     if (typeof(T) == typeof(InvestmentGroup))
                     {
                         filtered.AddRange(withChildren 
                             ? _db.Set<InvestmentGroup>()
-                                .Include(x => x.Children).ThenInclude(x => x.Parent)
-                                .Include(x => x.Investments).Select(o => ChangeType<T>(o))
+                                .Include(x => x.Children)
+                                .ThenInclude(x => x.Parent)
+                                .Include(x => x.Investments)
+                                .Select(o => ChangeType<T>(o))
                                 .ToList() 
                             : _db.Set<InvestmentGroup>().Select(o => ChangeType<T>(o)).ToList());
                         
@@ -86,23 +93,36 @@ namespace CoreInvestmentTracker.Models.DAL
                     if (typeof(T) == typeof(InvestmentInfluenceFactor))
                     {
                         filtered.AddRange(withChildren 
-                            ? _db.Set<InvestmentInfluenceFactor>().Include(x => x.Investments).Select(o => ChangeType<T>(o)).ToList()
-                            : _db.Set<InvestmentInfluenceFactor>().Select(o => ChangeType<T>(o)).ToList());                        
+                            ? _db.Set<InvestmentInfluenceFactor>()
+                                .Include(x => x.Investments)
+                                .Select(o => ChangeType<T>(o))
+                                .ToList()
+                            : _db.Set<InvestmentInfluenceFactor>()
+                                .Select(o => ChangeType<T>(o))
+                                .ToList());                        
                     }
                     if (typeof(T) == typeof(Region))
                     {
-                        filtered.AddRange(withChildren ? _db.Set<Region>().Include(x => x.Investments).Select(o => ChangeType<T>(o)).ToList()
-                            : _db.Set<Region>().Select(o => ChangeType<T>(o)).ToList());                        
+                        filtered.AddRange(withChildren 
+                            ? _db.Set<Region>()
+                                .Include(x => x.Investments)
+                                .Select(o => ChangeType<T>(o))
+                                .ToList()
+                            : _db.Set<Region>()
+                                .Select(o => ChangeType<T>(o))
+                                .ToList());                        
                     }
                     if (typeof(T) == typeof(Investment))
                     {
                         filtered.AddRange(withChildren 
                             ? _db.Set<Investment>().Include(a => a.Risks)
-                            .Include(b => b.Factors)
-                            .Include(c => c.Groups)
-                            .Include(d => d.Regions)
-                            .Select(o => ChangeType<T>(o)).ToList()
-                            : _db.Set<Investment>().Select(o => ChangeType<T>(o)).ToList());                        
+                                .Include(b => b.Factors)
+                                .Include(c => c.Groups)
+                                .Include(d => d.Regions)
+                                .Select(o => ChangeType<T>(o)).ToList()
+                            : _db.Set<Investment>()
+                                .Select(o => ChangeType<T>(o))
+                                .ToList());                        
                     }
                     var t = _db.Set<T>();                    
                     t.AddRange(filtered);
