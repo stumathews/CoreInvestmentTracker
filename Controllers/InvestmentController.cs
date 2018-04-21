@@ -38,7 +38,7 @@ namespace CoreInvestmentTracker.Controllers
         [HttpGet("RisksGraph/{id}")]
         public IActionResult GenerateRisksGraph(int ID)
         {
-            var investment = EntityRepository.Entities
+            var investment = EntityRepository.Entities()
                 .Include(e => e.Risks)
                 .ThenInclude(e => e.InvestmentRisk).Single(o => o.ID == ID);
 
@@ -103,7 +103,7 @@ namespace CoreInvestmentTracker.Controllers
         [HttpGet("FactorsGraph/{id}")]
         public IActionResult GenerateFactorsGraph(int ID)
         {
-            var investment = EntityRepository.Entities
+            var investment = EntityRepository.Entities()
                 .Include(e => e.Factors)
                 .ThenInclude(e => e.InvestmentInfluenceFactor).Single(o => o.ID == ID);
             return GenerateGraph<InvestmentInfluenceFactor, InvestmentInfluenceFactor_Investment>(ID, investment.Factors.Select(o => o.InvestmentInfluenceFactor));
@@ -117,7 +117,7 @@ namespace CoreInvestmentTracker.Controllers
         [HttpGet("GroupsGraph/{id}")]
         public IActionResult GenerateGroupsGraph(int ID)
         {
-            var investment = EntityRepository.Entities
+            var investment = EntityRepository.Entities()
                 .Include(e => e.Groups)
                 .ThenInclude(e => e.InvestmentGroup).Single(o => o.ID == ID);
             return GenerateGraph<InvestmentGroup, InvestmentGroup_Investment>(ID, investment.Groups.Select(o => o.InvestmentGroup));
@@ -131,7 +131,7 @@ namespace CoreInvestmentTracker.Controllers
         [HttpGet("RegionsGraph/{id}")]
         public IActionResult GenerateRegionsGraph(int ID)
         {
-            var investment = EntityRepository.Entities
+            var investment = EntityRepository.Entities()
                 .Include(e => e.Regions)
                 .ThenInclude(e => e.Region).Single(o => o.ID == ID);
             return GenerateGraph<Region, Region_Investment>(ID, investment.Regions.Select(r => r.Region));

@@ -40,10 +40,20 @@ namespace CoreInvestmentTracker.Common
         /// Get all entities
         /// </summary>
         /// <returns>Array of entities</returns>
-        [HttpGet]
+        [HttpGet("")]
         public virtual IEnumerable<T> GetAll()
         {
-            return EntityRepository.Entities.ToList();
+            return EntityRepository.Entities(withChildren: true).ToList();
+        }
+
+        /// <summary>
+        /// Gets all entities but not their children
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("WithoutChildren")]
+        public virtual IEnumerable<T> GetAllWithoutChildren()
+        {
+            return EntityRepository.Entities(withChildren:false).ToList();
         }
 
         /// <summary>
@@ -54,7 +64,7 @@ namespace CoreInvestmentTracker.Common
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            var item = EntityRepository.Entities.FirstOrDefault( p => p.ID == id);
+            var item = EntityRepository.Entities().FirstOrDefault( p => p.ID == id);
             if (item == null)
             {
                 return NotFound();

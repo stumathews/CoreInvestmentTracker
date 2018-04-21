@@ -47,10 +47,9 @@ namespace CoreInvestmentTracker.Models.DAL
         /// <summary>
         /// Read only access to the type Entities
         /// </summary>
-        public virtual IQueryable<T> Entities
+        public virtual IQueryable<T> Entities(bool withChildren = true)
         {
-            get
-            {
+            
                 /*
                  * We want to eager collect some of the members but we dont know what type we are when we 
                  * are dealing with generics as we are here. So this will determine the type,
@@ -69,30 +68,41 @@ namespace CoreInvestmentTracker.Models.DAL
                     var filtered = new List<T>();
                     if (typeof(T) == typeof(InvestmentRisk))
                     {
-                        filtered.AddRange(_db.Set<InvestmentRisk>().Include(x => x.Investments).Select(o=> ChangeType<T>(o)).ToList());                        
+                        filtered.AddRange(withChildren
+                            ? _db.Set<InvestmentRisk>().Select(o => ChangeType<T>(o)).ToList()
+                            : _db.Set<InvestmentRisk>().Include(x => x.Investments).Select(o => ChangeType<T>(o))
+                                .ToList());
                     }
                     if (typeof(T) == typeof(InvestmentGroup))
                     {
-                        filtered.AddRange(_db.Set<InvestmentGroup>()                            
-                            .Include(x => x.Children).ThenInclude( x => x.Parent )
-                            .Include(x => x.Investments).Select(o => ChangeType<T>(o))
-                            .ToList());                        
+                        filtered.AddRange(withChildren 
+                            ? _db.Set<InvestmentGroup>()
+                                .Include(x => x.Children).ThenInclude(x => x.Parent)
+                                .Include(x => x.Investments).Select(o => ChangeType<T>(o))
+                                .ToList() 
+                            : _db.Set<InvestmentGroup>().Select(o => ChangeType<T>(o)).ToList());
+                        
                     }
                     if (typeof(T) == typeof(InvestmentInfluenceFactor))
                     {
-                        filtered.AddRange(_db.Set<InvestmentInfluenceFactor>().Include(x => x.Investments).Select(o => ChangeType<T>(o)).ToList());                        
+                        filtered.AddRange(withChildren 
+                            ? _db.Set<InvestmentInfluenceFactor>().Include(x => x.Investments).Select(o => ChangeType<T>(o)).ToList()
+                            : _db.Set<InvestmentInfluenceFactor>().Select(o => ChangeType<T>(o)).ToList());                        
                     }
                     if (typeof(T) == typeof(Region))
                     {
-                        filtered.AddRange(_db.Set<Region>().Include(x => x.Investments).Select(o => ChangeType<T>(o)).ToList());                        
+                        filtered.AddRange(withChildren ? _db.Set<Region>().Include(x => x.Investments).Select(o => ChangeType<T>(o)).ToList()
+                            : _db.Set<Region>().Select(o => ChangeType<T>(o)).ToList());                        
                     }
                     if (typeof(T) == typeof(Investment))
                     {
-                        filtered.AddRange(_db.Set<Investment>().Include(a => a.Risks)
+                        filtered.AddRange(withChildren 
+                            ? _db.Set<Investment>().Include(a => a.Risks)
                             .Include(b => b.Factors)
                             .Include(c => c.Groups)
                             .Include(d => d.Regions)
-                            .Select(o => ChangeType<T>(o)).ToList());                        
+                            .Select(o => ChangeType<T>(o)).ToList()
+                            : _db.Set<Investment>().Select(o => ChangeType<T>(o)).ToList());                        
                     }
                     var t = _db.Set<T>();                    
                     t.AddRange(filtered);
@@ -101,7 +111,7 @@ namespace CoreInvestmentTracker.Models.DAL
 
                 // Return the entity type so no eager loading applied to T
                 return _db.Set<T>();
-            }
+            
         }
 
         /// <summary>

@@ -16,7 +16,7 @@ namespace CoreInvestmentTracker.Models.DAL.Interfaces
         /// <summary>
         /// The underlying entities that this class will expose
         /// </summary>
-        IQueryable<T> Entities { get; }
+        IQueryable<T> Entities(bool withChildren = false);
 
         /// <summary>
         /// Expose our application db context
