@@ -21,7 +21,8 @@ namespace CoreInvestmentTracker
         /// <summary>
         /// Provides us with access to the hosting environment details
         /// </summary>
-        public IHostingEnvironment HostingEnvironment { get; set; }
+        private IHostingEnvironment HostingEnvironment { get; set; }
+
         /// <summary>
         /// Startup configuration
         /// </summary>
@@ -36,7 +37,7 @@ namespace CoreInvestmentTracker
         /// <summary>
         /// Configuration object
         /// </summary>
-        public IConfiguration Configuration { get; }
+        private IConfiguration Configuration { get; }
 
         /// <summary>
         /// This method gets called by the runtime. Use this method to add services to the container.
@@ -49,16 +50,18 @@ namespace CoreInvestmentTracker
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
 
-            if (HostingEnvironment.IsDevelopment())
+            // Which database location to connect to?
+            services.AddDbContext<ApplicationDbContext>(options =>
             {
+                var devConnectionString = Configuration.GetConnectionString("SqlExpress2017Connection");
 
-                services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlExpress2017Connection")));
-            }
-            else
-            {
-                services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(GetRDSConnectionString()));
-            }           
-            
+                options.UseSqlServer(!HostingEnvironment.IsDevelopment()
+                    // Connect to amazon RDS database in production
+                    ? GetRdsConnectionString() ?? devConnectionString // fallback to local if cant find rds but not useful really
+                    // Connect to whatever defined database in config file while in development
+                    : devConnectionString);
+            });
+
             // Add application services for dependency injection
             services.AddTransient(typeof(IEntityApplicationDbContext<>), typeof(EntityApplicationDbContext<>));
             services.AddTransient(typeof(IMyLogger), typeof(MyLogger));
@@ -68,7 +71,7 @@ namespace CoreInvestmentTracker
                 {
                     Version = "v1",
                     Title = "Core Investment Tracker API",
-                    Description = "nvestment tracker is a platform that allows you to track aspects that affect your investments",
+                    Description = "Investment tracker is a platform that allows you to track aspects that affect your investments",
                     TermsOfService = "None",
                     Contact = new Contact { Name = "Stuart Mathews", Email = "", Url = "https://twitter.com/stumathews" },
                     License = new License { Name = "License information", Url = "https://www.stuartmathews.com" }
@@ -85,26 +88,21 @@ namespace CoreInvestmentTracker
             }));
 
         }
-        private string GetXmlCommentsPath()
+        private static string GetXmlCommentsPath()
         {
             var app = PlatformServices.Default.Application;
             return System.IO.Path.Combine(app.ApplicationBasePath, System.IO.Path.ChangeExtension(app.ApplicationName, "xml"));
         }
 
-        private string GetRDSConnectionString()
+        private string GetRdsConnectionString()
         {
             var appConfig = Configuration;
 
-            string dbname = appConfig["RDS_DB_NAME"];
+            var dbname = appConfig["RDS_DB_NAME"];
 
             if (string.IsNullOrEmpty(dbname)) return null;
-
-            string username = appConfig["RDS_USERNAME"];
-            string password = appConfig["RDS_PASSWORD"];
-            string hostname = appConfig["RDS_HOSTNAME"];
-            string port = appConfig["RDS_PORT"];
-
-            return "Data Source=" + hostname + ";Initial Catalog=" + dbname + ";User ID=" + username + ";Password=" + password + ";";
+            
+            return "Data Source=" + appConfig["RDS_HOSTNAME"] + ";Initial Catalog=" + dbname + ";User ID=" + appConfig["RDS_USERNAME"] + ";Password=" + appConfig["RDS_PASSWORD"] + ";";
         }
 
         /// <summary>
@@ -115,8 +113,7 @@ namespace CoreInvestmentTracker
         /// <param name="loggerFactory"></param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            HostingEnvironment = env;
-            if (env.IsDevelopment())
+            if (HostingEnvironment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }

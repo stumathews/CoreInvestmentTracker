@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using CoreInvestmentTracker.Common.ActionFilters;
 using CoreInvestmentTracker.Models.DAL.Interfaces;
 using CoreInvestmentTracker.Models.DEL.Interfaces;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CoreInvestmentTracker.Common
 {
+    /// <inheritdoc />
     /// <summary> 
     /// A controller that has access the the strongly typed entity type specified through the EntityRepository memeber.
     /// Also contains the common controller Actions
@@ -18,12 +20,12 @@ namespace CoreInvestmentTracker.Common
         /// <summary>
         /// Logging facility. This is resolved by dependency injection
         /// </summary>
-        public readonly IMyLogger Logger;
+        private readonly IMyLogger Logger;
 
         /// <summary>
-        /// Access to te underlying store of entities. This is resolved by depedency injection.
+        /// Access to te underlying store of entities for this T type of managed entity controller. This is resolved by depedency injection.
         /// </summary>
-        public readonly IEntityApplicationDbContext<T> EntityRepository;
+        protected readonly IEntityApplicationDbContext<T> EntityRepository;
 
         /// <summary>
         /// Constructor for dependency injection support
@@ -41,9 +43,9 @@ namespace CoreInvestmentTracker.Common
         /// </summary>
         /// <returns>Array of entities</returns>
         [HttpGet()]
-        public virtual IEnumerable<T> GetAll()
+        public IEnumerable<T> GetAll()
         {
-            return EntityRepository.Entities(withChildren: true).ToList();
+            return EntityRepository.GetAllEntities(withChildren: true).ToList();
         }
 
         /// <summary>
@@ -51,9 +53,9 @@ namespace CoreInvestmentTracker.Common
         /// </summary>
         /// <returns></returns>
         [HttpGet("WithoutChildren")]
-        public virtual IEnumerable<T> GetAllWithoutChildren()
+        public IEnumerable<T> GetAllWithoutChildren()
         {
-            return EntityRepository.Entities(withChildren:false).ToList();
+            return EntityRepository.GetAllEntities(withChildren:false).ToList();
         }
 
         /// <summary>
@@ -64,12 +66,8 @@ namespace CoreInvestmentTracker.Common
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            var item = EntityRepository.Entities().FirstOrDefault( p => p.ID == id);
-            if (item == null)
-            {
-                return NotFound();
-            }
-            return new ObjectResult(item);
+            var item = EntityRepository.GetAllEntities().FirstOrDefault(p => p.Id == id);
+            return item == null ? (IActionResult) NotFound() : new ObjectResult(item);
         }
 
         /// <summary>
@@ -80,15 +78,15 @@ namespace CoreInvestmentTracker.Common
         /// <response code="201">Returns the newly-created item</response>
         /// <response code="400">If the item is null</response>
         [HttpPost()]
-        public virtual IActionResult Create([FromBody]T entity)
+        public IActionResult Create([FromBody]T entity)
         {
             if (entity == null)
             {
                 return BadRequest();
             }            
-            EntityRepository.db.Add<T>(entity);
+            EntityRepository.Db.Add(entity);
             EntityRepository.SaveChanges();
-            return CreatedAtAction("Create", new { id = entity.ID }, entity);
+            return CreatedAtAction("Create", new { id = entity.Id }, entity);
         }
 
         /// <summary>
@@ -97,13 +95,13 @@ namespace CoreInvestmentTracker.Common
         /// <param name="entities"></param>
         /// <returns></returns>
         [HttpPost("import")]
-        public virtual IActionResult Import([FromBody] T[] entities)
+        public IActionResult Import([FromBody] object[] entities)
         {
             if (entities.Length == 0)
             {
                 return BadRequest();
             }
-            EntityRepository.db.AddRange(entities);
+            EntityRepository.Db.AddRange(entities);
             EntityRepository.SaveChanges();
             return CreatedAtAction("Import", entities);
         }
@@ -116,17 +114,17 @@ namespace CoreInvestmentTracker.Common
         /// <param name="patchDocument">the patched object</param>
         /// <returns>the new object updated</returns>
         [HttpPatch("{id}")]
-        public virtual IActionResult Patch(int id, [FromBody] JsonPatchDocument<T> patchDocument)
+        public IActionResult Patch(int id, [FromBody] JsonPatchDocument<T> patchDocument)
         {
             if (!ModelState.IsValid)
             {
                 return new BadRequestObjectResult(ModelState);
             }
 
-            var old = EntityRepository.db.Find<T>(id);
-            patchDocument.ApplyTo(old, ModelState);
+            var old = EntityRepository.Db.Find<T>(id);
+            JsonPatchExtensions.ApplyTo(patchDocument, old, ModelState);
 
-            EntityRepository.db.Update<T>(old);
+            EntityRepository.Db.Update(old);
             EntityRepository.SaveChanges();
 
             if (!ModelState.IsValid)
@@ -143,14 +141,14 @@ namespace CoreInvestmentTracker.Common
         /// <param name="id">The id of the entity to delete</param>
         /// <returns>NoContentResult</returns>
         [HttpDelete("{id}")]
-        public virtual IActionResult Delete(int id)
+        public IActionResult Delete(int id)
         { 
-            var entity = EntityRepository.db.Find<T>(id);
+            var entity = EntityRepository.Db.Find<T>(id);
             if (entity == null)
             {
                 return NotFound();
             }
-            EntityRepository.db.Remove<T>(entity);
+            EntityRepository.Db.Remove(entity);
             EntityRepository.SaveChanges();
             return new NoContentResult();
         }
@@ -170,14 +168,14 @@ namespace CoreInvestmentTracker.Common
         /// <param name="newItem">the contents of the entity to change</param>
         /// <returns>NoContentResult</returns>
         [HttpPut("{id}")]
-        public virtual IActionResult Replace(int id, [FromBody] T newItem)
+        public IActionResult Replace(int id, [FromBody] T newItem)
         {
-            if (newItem == null || newItem.ID != id)
+            if (newItem == null || newItem.Id != id)
             {
                 return BadRequest();
             }
 
-            var old = EntityRepository.db.Find<T>(id);
+            var old = EntityRepository.Db.Find<T>(id);
             if (old == null)
             {
                 return NotFound();
@@ -193,7 +191,7 @@ namespace CoreInvestmentTracker.Common
                 old = ShallowCopy.MergeObjects(old, newItem);
             }
 
-            EntityRepository.db.Update<T>(old);
+            EntityRepository.Db.Update(old);
             EntityRepository.SaveChanges();
             return new NoContentResult();
         }

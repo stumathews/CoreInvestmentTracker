@@ -1,10 +1,12 @@
 ﻿using CoreInvestmentTracker.Common;
+using CoreInvestmentTracker.Common.ActionFilters;
 using CoreInvestmentTracker.Models;
 using CoreInvestmentTracker.Models.DAL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoreInvestmentTracker.Controllers
 {
+    /// <inheritdoc />
     /// <summary>
     /// This automaticall maps /controller/method such as /region/xvz
     /// </summary>
@@ -12,6 +14,7 @@ namespace CoreInvestmentTracker.Controllers
     [GlobalControllerLogging]    
     public class RegionController : EntityManagedController<Region>
     {
+        /// <inheritdoc />
         /// <summary>
         /// Constructor
         /// </summary>

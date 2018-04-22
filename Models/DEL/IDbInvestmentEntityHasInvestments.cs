@@ -3,7 +3,7 @@
 namespace CoreInvestmentTracker.Models
 {
     /// <summary>
-    /// 
+    /// Something that has investments of the specified type
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public  interface IDbInvestmentEntityHasInvestments<T>

@@ -1,41 +1,34 @@
 ﻿//using log4net;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace CoreInvestmentTracker.Common
 {
+    /// <inheritdoc />
     /// <summary>
-    /// 
     /// </summary>
     public class MyLogger : IMyLogger
     {
         /// <summary>
-        /// 
+        /// Internal access to logger
         /// </summary>
-        public readonly ILogger logger;
+        private readonly ILogger _logger;
+
         /// <summary>
-        /// 
-        /// </summary>
-        public readonly ILoggerFactory Factory;
-        /// <summary>
-        /// 
+        /// Construct a logger
         /// </summary>
         /// <param name="factory"></param>
         public MyLogger(ILoggerFactory factory)
         {
-            Factory = factory;
-            logger = Factory.CreateLogger("Global");
+            _logger = factory.CreateLogger("Global");
         }
+        /// <inheritdoc />
         /// <summary>
-        /// 
+        /// Prints debug messages
         /// </summary>
         /// <param name="message"></param>
         public void Debug(string message)
         {
-            logger.LogInformation(message);            
+            _logger.LogInformation(message);            
         }
     }
 }

@@ -3,9 +3,11 @@ using CoreInvestmentTracker.Models;
 using CoreInvestmentTracker.Models.DAL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using CoreInvestmentTracker.Common.ActionFilters;
 
 namespace CoreInvestmentTracker.Controllers
 {
+    /// <inheritdoc />
     /// <summary>
     /// WebApi Risk controller
     /// </summary>
@@ -13,6 +15,7 @@ namespace CoreInvestmentTracker.Controllers
     [GlobalControllerLogging]
     public class RiskController : EntityManagedController<InvestmentRisk>
     {
+        /// <inheritdoc />
         /// <summary>
         /// Constructor
         /// </summary>

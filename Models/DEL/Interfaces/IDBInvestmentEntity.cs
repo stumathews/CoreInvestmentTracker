@@ -12,7 +12,7 @@ namespace CoreInvestmentTracker.Models.DEL.Interfaces
         /// <summary>
         /// The identifier of the entity
         /// </summary>
-        int ID { get; set; }
+        int Id { get; set; }
         /// <summary>
         /// the name of the entity
         /// </summary>
@@ -21,6 +21,5 @@ namespace CoreInvestmentTracker.Models.DEL.Interfaces
         /// The description of the entity
         /// </summary>
         string Description { get; set; }
-        
     }
 }

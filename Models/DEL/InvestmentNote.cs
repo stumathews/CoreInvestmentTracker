@@ -15,7 +15,7 @@ namespace CoreInvestmentTracker.Models.DEL
     public class InvestmentNote: IDbInvestmentEntity
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { get; set; }
+        public int Id { get; set; }
         /// <summary>
         /// Title of the note
         /// </summary>

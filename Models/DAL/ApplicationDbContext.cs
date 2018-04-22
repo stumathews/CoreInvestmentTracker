@@ -3,18 +3,20 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CoreInvestmentTracker.Models.DAL
 {
+    /// <inheritdoc />
     /// <summary>
     /// This will manage our interaction with the database
     /// </summary>
     public class ApplicationDbContext : DbContext
-    {        
+    {
+        /// <inheritdoc />
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="options"></param>
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)        
+        public ApplicationDbContext(DbContextOptions options) : base(options)
         {
-            
+
         }
         
         /// <summary>
@@ -43,6 +45,7 @@ namespace CoreInvestmentTracker.Models.DAL
         /// </summary>
         public DbSet<InvestmentNote> Notes { get; set; }
 
+        /// <inheritdoc />
         /// <summary>
         /// OnModelCreating
         /// </summary>
@@ -53,28 +56,23 @@ namespace CoreInvestmentTracker.Models.DAL
             modelBuilder.Entity<InvestmentInfluenceFactor>().ToTable("InvestmentInfluenceFactor");
 
             modelBuilder.Entity<InvestmentInfluenceFactor_Investment>()            
-            .HasKey(i => new { i.InvestmentID, i.InvestmentInfluenceFactorID })
-            .HasName("PrimaryKey_InvestmentID_InvestmentInfluenceFactorID");
+                .HasKey(i => new { i.InvestmentID, i.InvestmentInfluenceFactorID })
+                .HasName("PrimaryKey_InvestmentID_InvestmentInfluenceFactorID");
 
             modelBuilder.Entity<Region_Investment>()
-            .HasKey(i => new { i.InvestmentID, i.RegionID })
-            .HasName("PrimaryKey_InvestmentID_RegionID");
+                .HasKey(i => new { i.InvestmentID, i.RegionID })
+                .HasName("PrimaryKey_InvestmentID_RegionID");
 
             modelBuilder.Entity<InvestmentGroup_Investment>()
-            .HasKey(i => new { i.InvestmentID, i.InvestmentGroupID })
-            .HasName("PrimaryKey_InvestmentID_InvestmentGroupID");
+                .HasKey(i => new { i.InvestmentID, i.InvestmentGroupID })
+                .HasName("PrimaryKey_InvestmentID_InvestmentGroupID");
 
             modelBuilder.Entity<InvestmentRisk_Investment>()
-           .HasKey(i => new { i.InvestmentID, i.InvestmentRiskID })
-           .HasName("PrimaryKey_InvestmentID_InvestmentRiskID");
+               .HasKey(i => new { i.InvestmentID, i.InvestmentRiskID })
+               .HasName("PrimaryKey_InvestmentID_InvestmentRiskID");
 
-            modelBuilder.Entity<InvestmentNote>().HasKey(i => new { i.OwningEntityId, i.OwningEntityType, i.ID });
-
-            /*
-            modelBuilder.Entity<InvestmentGroup_ChildInvestmentGroup>()
-            .HasKey(i => new { i.InvestmentGroupID, i. })
-            .HasName("PrimaryKey_InvestmentGroupID_ChildInvestmentGroupID"); */
-            
+            modelBuilder.Entity<InvestmentNote>()
+                .HasKey(i => new { i.OwningEntityId, i.OwningEntityType, ID = i.Id });
         }
     }
 }

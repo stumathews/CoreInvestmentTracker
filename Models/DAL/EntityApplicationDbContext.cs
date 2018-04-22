@@ -12,42 +12,38 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace CoreInvestmentTracker.Models.DAL
 {
+    /// <inheritdoc />
     /// <summary>
     /// Class implementation that will expose the underlying entity framework entities without having to name the entity collection memeber
     /// on the dbcontext.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class EntityApplicationDbContext<T> : IEntityApplicationDbContext<T> where T : class, IDbInvestmentEntity
+    public sealed class EntityApplicationDbContext<T> : IEntityApplicationDbContext<T> where T : class, IDbInvestmentEntity
     {
-        private readonly ApplicationDbContext _db;
-       
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="context"></param>
         public EntityApplicationDbContext(ApplicationDbContext context)
         {
-            _db = context;
+            Db = context;
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// ApplicationDbContext
         /// </summary>
-        public ApplicationDbContext db => _db;
+        public ApplicationDbContext Db { get; }
 
         private static bool IsAnyOfTypes<T1>(Type[] types)
         {
-            foreach( Type t in types)
-            {
-                return (typeof(T1) == typeof(T1)) ? true: false;
-            }
-            return false;
+            return types.Select(t => t == typeof(T1)).FirstOrDefault();
         }
 
         /// <summary>
         /// Read only access to the type Entities
         /// </summary>
-        public virtual IQueryable<T> Entities(bool withChildren = true)
+        public IQueryable<T> GetAllEntities(bool withChildren = true)
         {
             
                 /*
@@ -57,111 +53,108 @@ namespace CoreInvestmentTracker.Models.DAL
                  * This way we dont have to do any include() statements in the controllers what are 
                  * using the generic entity controller base class. This keeps the functionality in one place: here.
                  */
-                Type[] types = { typeof(InvestmentRisk),
-                                 typeof(InvestmentGroup),
-                                 typeof(InvestmentInfluenceFactor),
-                                 typeof(Region),
-                                 typeof(Investment) };
 
-                if (IsAnyOfTypes<T>(types))
-                {
-                    var filtered = new List<T>();
-                    if (typeof(T) == typeof(InvestmentRisk))
-                    {
-                        filtered.AddRange(withChildren
-                             
-                            ? _db.Set<InvestmentRisk>()
-                                 .Include(x => x.Investments)
-                                 .Select(o => ChangeType<T>(o))
-                                 .ToList()
-                            : _db.Set<InvestmentRisk>()
-                                 .Select(o => ChangeType<T>(o))
-                                 .ToList());
-                    }
-                    if (typeof(T) == typeof(InvestmentGroup))
-                    {
-                        filtered.AddRange(withChildren 
-                            ? _db.Set<InvestmentGroup>()
-                                .Include(x => x.Children)
-                                .ThenInclude(x => x.Parent)
-                                .Include(x => x.Investments)
-                                .Select(o => ChangeType<T>(o))
-                                .ToList() 
-                            : _db.Set<InvestmentGroup>().Select(o => ChangeType<T>(o)).ToList());
-                        
-                    }
-                    if (typeof(T) == typeof(InvestmentInfluenceFactor))
-                    {
-                        filtered.AddRange(withChildren 
-                            ? _db.Set<InvestmentInfluenceFactor>()
-                                .Include(x => x.Investments)
-                                .Select(o => ChangeType<T>(o))
-                                .ToList()
-                            : _db.Set<InvestmentInfluenceFactor>()
-                                .Select(o => ChangeType<T>(o))
-                                .ToList());                        
-                    }
-                    if (typeof(T) == typeof(Region))
-                    {
-                        filtered.AddRange(withChildren 
-                            ? _db.Set<Region>()
-                                .Include(x => x.Investments)
-                                .Select(o => ChangeType<T>(o))
-                                .ToList()
-                            : _db.Set<Region>()
-                                .Select(o => ChangeType<T>(o))
-                                .ToList());                        
-                    }
-                    if (typeof(T) == typeof(Investment))
-                    {
-                        filtered.AddRange(withChildren 
-                            ? _db.Set<Investment>().Include(a => a.Risks)
-                                .Include(b => b.Factors)
-                                .Include(c => c.Groups)
-                                .Include(d => d.Regions)
-                                .Select(o => ChangeType<T>(o)).ToList()
-                            : _db.Set<Investment>()
-                                .Select(o => ChangeType<T>(o))
-                                .ToList());                        
-                    }
-                    var t = _db.Set<T>();                    
-                    t.AddRange(filtered);
-                    return t; 
-                }
+            // We only want to do special handling of some types
+            if (!IsAnyOfTypes<T>(new[] {
+                typeof(InvestmentRisk),
+                typeof(InvestmentGroup),
+                typeof(InvestmentInfluenceFactor),
+                typeof(Region),
+                typeof(Investment)
+            }))
+            {
+                return Db.Set<T>();
+            }
 
-                // Return the entity type so no eager loading applied to T
-                return _db.Set<T>();
+            var entities = new List<T>();
+
+            /* In most cases we want to go down further in the object graph to return more
+               decendants than just the top level members of the entity. Here is where we do it
+             */
             
+            if (typeof(T) == typeof(InvestmentRisk))
+            {
+                entities.AddRange(withChildren
+                    ? Db.Set<InvestmentRisk>()
+                        .Include(x => x.Investments)
+                        .Select(o => ChangeType<T>(o))
+                        .ToList()
+                    : Db.Set<InvestmentRisk>()
+                        .Select(o => ChangeType<T>(o))
+                        .ToList());
+            }
+            if (typeof(T) == typeof(InvestmentGroup))
+            {
+                entities.AddRange(withChildren 
+                    ? Db.Set<InvestmentGroup>()
+                        .Include(x => x.Children)
+                        .ThenInclude(x => x.Parent)
+                        .Include(x => x.Investments)
+                        .Select(o => ChangeType<T>(o))
+                        .ToList() 
+                    : Db.Set<InvestmentGroup>().Select(o => ChangeType<T>(o)).ToList());
+                        
+            }
+            if (typeof(T) == typeof(InvestmentInfluenceFactor))
+            {
+                entities.AddRange(withChildren 
+                    ? Db.Set<InvestmentInfluenceFactor>()
+                        .Include(x => x.Investments)
+                        .Select(o => ChangeType<T>(o))
+                        .ToList()
+                    : Db.Set<InvestmentInfluenceFactor>()
+                        .Select(o => ChangeType<T>(o))
+                        .ToList());                        
+            }
+            if (typeof(T) == typeof(Region))
+            {
+                entities.AddRange(withChildren 
+                    ? Db.Set<Region>()
+                        .Include(x => x.Investments)
+                        .Select(o => ChangeType<T>(o))
+                        .ToList()
+                    : Db.Set<Region>()
+                        .Select(o => ChangeType<T>(o))
+                        .ToList());                        
+            }
+            if (typeof(T) == typeof(Investment))
+            {
+                entities.AddRange(withChildren 
+                    ? Db.Set<Investment>().Include(a => a.Risks)
+                        .Include(b => b.Factors)
+                        .Include(c => c.Groups)
+                        .Include(d => d.Regions)
+                        .Select(o => ChangeType<T>(o)).ToList()
+                    : Db.Set<Investment>()
+                        .Select(o => ChangeType<T>(o))
+                        .ToList());                        
+            }
+
+            // Return the entity type so no eager loading applied to T
+            var ret = Db.Set<T>();                    
+                ret.AddRange(entities);
+            return ret;
         }
 
         /// <summary>
         /// Underlying database
         /// </summary>
-        public virtual DatabaseFacade Database => _db.Database;
+        public DatabaseFacade Database => Db.Database;
 
+        /// <inheritdoc />
         /// <summary>
         /// Get specific type entities other than the current entity type
         /// </summary>
         /// <typeparam name="T1"></typeparam>
         /// <returns></returns>
-        public virtual DbSet<T1> GetEntityByType<T1>() where T1 : class => _db.Set<T1>();
+        public DbSet<T1> GetEntityByType<T1>() where T1 : class => Db.Set<T1>();
 
+        /// <inheritdoc />
         /// <summary>
         /// Save the db changes
         /// </summary>
-        public virtual void SaveChanges() => _db.SaveChanges();
-
-        /// <summary>
-        /// Save the db changes asynchonously
-        /// </summary>
-        /// <returns></returns>
-        public virtual async Task SaveChangesAsync() => await _db.SaveChangesAsync();              
-
-        /// <summary>
-        /// Dispose
-        /// </summary>
-        public virtual void Dispose() => _db.Dispose();
-
+        public void SaveChanges() => Db.SaveChanges();
+        
         /// <summary>
         /// Utility function to change the type
         /// </summary>

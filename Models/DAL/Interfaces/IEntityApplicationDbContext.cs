@@ -11,44 +11,28 @@ namespace CoreInvestmentTracker.Models.DAL.Interfaces
     /// Provides specific entity type services
     /// </summary>
     /// <typeparam name="T">The type of the underlying entity that this class will manage</typeparam>
-    public interface IEntityApplicationDbContext<T> where T : class, IDbInvestmentEntity
+    public interface IEntityApplicationDbContext<out T> where T : class, IDbInvestmentEntity
     {
         /// <summary>
-        /// The underlying entities that this class will expose
+        /// The underlying entities that this class will expose. Retrieves all children by default unless withChildren = false
         /// </summary>
-        IQueryable<T> Entities(bool withChildren = true);
+        IQueryable<T> GetAllEntities(bool withChildren = true);
 
         /// <summary>
         /// Expose our application db context
         /// </summary>
-        ApplicationDbContext db { get; }
+        ApplicationDbContext Db { get; }
 
         /// <summary>
-        /// The ability to save <see cref="Entities"/> 
+        /// The ability to save <see cref="GetAllEntities"/> 
         /// </summary>
         void SaveChanges();
 
         /// <summary>
-        /// Async save changes
-        /// </summary>
-        /// <returns></returns>
-        Task SaveChangesAsync();
-
-        /// <summary>
-        /// Dispose
-        /// </summary>
-        void Dispose();
-
-        /// <summary>
-        /// Database
-        /// </summary>
-        DatabaseFacade Database { get; }
-
-        /// <summary>
         /// Get type of entities
         /// </summary>
-        /// <typeparam name="T1"></typeparam>
+        /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        DbSet<T1> GetEntityByType<T1>() where T1 : class;
+        DbSet<T> GetEntityByType<T>() where T : class;
     }
 }

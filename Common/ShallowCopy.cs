@@ -13,12 +13,12 @@ namespace CoreInvestmentTracker.Common
     public static class ShallowCopy
     {
         /// <summary>
-        /// 
+        /// Merges two objects but skips specified property names
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="old"></param>
-        /// <param name="new"></param>
-        /// <param name="except"></param>
+        /// <typeparam name="T">type of both items</typeparam>
+        /// <param name="old">old item</param>
+        /// <param name="new">ne witem</param>
+        /// <param name="except">skipp these property names in merge</param>
         /// <returns></returns>
         public static void Merge<T>(T old, T @new, string[] except)
         {

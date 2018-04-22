@@ -1,10 +1,12 @@
 ﻿using CoreInvestmentTracker.Common;
+using CoreInvestmentTracker.Common.ActionFilters;
 using CoreInvestmentTracker.Models;
 using CoreInvestmentTracker.Models.DAL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoreInvestmentTracker.Controllers
 {
+    /// <inheritdoc />
     /// <summary>
     /// WebAPI Controller for investment groups
     /// </summary>

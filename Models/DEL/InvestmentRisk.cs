@@ -18,7 +18,7 @@ namespace CoreInvestmentTracker.Models
         /// ID
         /// </summary>
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { get; set; }
+        public int Id { get; set; }
         /// <summary>
         /// Description
         /// </summary>

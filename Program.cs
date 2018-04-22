@@ -13,12 +13,12 @@ using Microsoft.Extensions.Logging;
 namespace CoreInvestmentTracker
 {
     /// <summary>
-    /// 
+    /// Program.cs file
     /// </summary>
     public class Program
     {
         /// <summary>
-        /// 
+        /// Main method
         /// </summary>
         /// <param name="args"></param>
         public static void Main(string[] args)
@@ -30,13 +30,16 @@ namespace CoreInvestmentTracker
                 var services = scope.ServiceProvider;                
                 try
                 {
+                    // Connect to the database and initialize it
                     var context = services.GetRequiredService<ApplicationDbContext>();
+                    
+                    // Custom initializer
                     DatabaseTestDataInitializer.Initialize(context);
                 }
                 catch (Exception ex)
                 {
                     var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(ex, "An error occurred while seeding the database.");
+                        logger.LogError(ex, "An error occurred while seeding the database.");
                 }
             }
 
@@ -44,13 +47,10 @@ namespace CoreInvestmentTracker
         }
 
         /// <summary>
-        /// 
+        /// BuildWebHost
         /// </summary>
         /// <param name="args"></param>
         /// <returns></returns>
-        public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .Build();
+        public static IWebHost BuildWebHost(string[] args) => WebHost.CreateDefaultBuilder(args).UseStartup<Startup>().Build();
     }
 }

@@ -447,7 +447,7 @@ namespace CoreInvestmentTracker.Models.DAL
             db.SaveChanges();
 
             // make some notes for factors
-            var notes = factors.Select(f => new InvestmentNote { OwningEntityType = Common.EntityType.InvestmentInfluenceFactor, OwningEntityId = f.ID, Description = "Note contents for factor " + f.Name, Name = "Title" + f.Name });
+            var notes = factors.Select(f => new InvestmentNote { OwningEntityType = Common.EntityType.InvestmentInfluenceFactor, OwningEntityId = f.Id, Description = "Note contents for factor " + f.Name, Name = "Title" + f.Name });
             db.Notes.AddRange(notes);
             db.SaveChanges();
 
@@ -480,7 +480,7 @@ namespace CoreInvestmentTracker.Models.DAL
                 {
                     Name = "note for risk " + r.Name,
                     Description = "description for " + r.Description,
-                    OwningEntityId = r.ID,
+                    OwningEntityId = r.Id,
                     OwningEntityType = Common.EntityType.InvestmentGroup
                 });
             });
@@ -516,7 +516,7 @@ namespace CoreInvestmentTracker.Models.DAL
                 {
                     Name = "note for risk " + r.Name,
                     Description = "description for " + r.Description,
-                    OwningEntityId = r.ID,
+                    OwningEntityId = r.Id,
                     OwningEntityType = Common.EntityType.Region
                 });
             });
@@ -542,7 +542,7 @@ namespace CoreInvestmentTracker.Models.DAL
                 {
                     Name = "note for risk " + r.Name,
                     Description = "description for " + r.Description,
-                    OwningEntityId = r.ID,
+                    OwningEntityId = r.Id,
                     OwningEntityType = Common.EntityType.InvestmentRisk
                 });
             });
@@ -626,7 +626,7 @@ namespace CoreInvestmentTracker.Models.DAL
 
             // make some investment notes
 
-            db.Notes.AddRange(investments.Select(m => new InvestmentNote { OwningEntityType = Common.EntityType.Investment, OwningEntityId = m.ID, Name = "note for " + m.Name, Description = "note for " + m.Name }));
+            db.Notes.AddRange(investments.Select(m => new InvestmentNote { OwningEntityType = Common.EntityType.Investment, OwningEntityId = m.Id, Name = "note for " + m.Name, Description = "note for " + m.Name }));
             db.SaveChanges();
         }
     }

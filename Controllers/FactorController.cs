@@ -1,4 +1,5 @@
 ﻿using CoreInvestmentTracker.Common;
+using CoreInvestmentTracker.Common.ActionFilters;
 using CoreInvestmentTracker.Models;
 using CoreInvestmentTracker.Models.DAL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,7 @@ namespace CoreInvestmentTracker.Controllers
     [GlobalControllerLogging]
     public class FactorController : EntityManagedController<InvestmentInfluenceFactor>
     {
+        /// <inheritdoc />
         /// <summary>
         /// Constructor
         /// </summary>
