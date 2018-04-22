@@ -35,10 +35,7 @@ namespace CoreInvestmentTracker.Models.DAL
         /// </summary>
         public ApplicationDbContext Db { get; }
 
-        private static bool IsAnyOfTypes<T1>(Type[] types)
-        {
-            return types.Select(t => t == typeof(T1)).FirstOrDefault();
-        }
+        private static bool IsAnyOfTypes<T1>(IEnumerable<Type> types) => types.Any(type => type == typeof(T1));
 
         /// <summary>
         /// Read only access to the type Entities
