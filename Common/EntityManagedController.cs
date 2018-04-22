@@ -122,7 +122,7 @@ namespace CoreInvestmentTracker.Common
             }
 
             var old = EntityRepository.Db.Find<T>(id);
-            JsonPatchExtensions.ApplyTo(patchDocument, old, ModelState);
+            patchDocument.ApplyTo(old, ModelState);
 
             EntityRepository.Db.Update(old);
             EntityRepository.SaveChanges();
