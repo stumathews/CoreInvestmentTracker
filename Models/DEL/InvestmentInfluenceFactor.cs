@@ -27,6 +27,10 @@ namespace CoreInvestmentTracker.Models
         /// Description
         /// </summary>
         public String Description { get; set; }
+
+        [NotMapped]
+        public int[] investmentIds { get => Investments.Select(i => i.InvestmentID).ToArray(); }
+
         /// <summary>
         /// Influence
         /// </summary>

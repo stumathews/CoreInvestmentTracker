@@ -23,7 +23,13 @@ namespace CoreInvestmentTracker.Models.DEL
         /// <summary>
         /// Contents of the note
         /// </summary>
-        public string Description { get; set; }        
+        public string Description { get; set; }
+
+        [NotMapped]
+        public int[] investmentIds
+        {
+            get => new int[] { };
+        }
 
         /// <summary>
         /// The entity ID for the entity that owns this note, specifically of type OwningEntityType

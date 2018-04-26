@@ -74,10 +74,10 @@ namespace CoreInvestmentTracker.Models.DAL
                 entities.AddRange(withChildren
                     ? Db.Set<InvestmentRisk>()
                         .Include(x => x.Investments)
-                        .Select(o => ChangeType<T>(o))
+                        .Select(o => Utils.ChangeType<T>(o))
                         .ToList()
                     : Db.Set<InvestmentRisk>()
-                        .Select(o => ChangeType<T>(o))
+                        .Select(o => Utils.ChangeType<T>(o))
                         .ToList());
             }
             if (typeof(T) == typeof(InvestmentGroup))
@@ -87,9 +87,9 @@ namespace CoreInvestmentTracker.Models.DAL
                         .Include(x => x.Children)
                         .ThenInclude(x => x.Parent)
                         .Include(x => x.Investments)
-                        .Select(o => ChangeType<T>(o))
+                        .Select(o => Utils.ChangeType<T>(o))
                         .ToList() 
-                    : Db.Set<InvestmentGroup>().Select(o => ChangeType<T>(o)).ToList());
+                    : Db.Set<InvestmentGroup>().Select(o => Utils.ChangeType<T>(o)).ToList());
                         
             }
             if (typeof(T) == typeof(InvestmentInfluenceFactor))
@@ -97,10 +97,10 @@ namespace CoreInvestmentTracker.Models.DAL
                 entities.AddRange(withChildren 
                     ? Db.Set<InvestmentInfluenceFactor>()
                         .Include(x => x.Investments)
-                        .Select(o => ChangeType<T>(o))
+                        .Select(o => Utils.ChangeType<T>(o))
                         .ToList()
                     : Db.Set<InvestmentInfluenceFactor>()
-                        .Select(o => ChangeType<T>(o))
+                        .Select(o => Utils.ChangeType<T>(o))
                         .ToList());                        
             }
             if (typeof(T) == typeof(Region))
@@ -108,10 +108,10 @@ namespace CoreInvestmentTracker.Models.DAL
                 entities.AddRange(withChildren 
                     ? Db.Set<Region>()
                         .Include(x => x.Investments)
-                        .Select(o => ChangeType<T>(o))
+                        .Select(o => Utils.ChangeType<T>(o))
                         .ToList()
                     : Db.Set<Region>()
-                        .Select(o => ChangeType<T>(o))
+                        .Select(o => Utils.ChangeType<T>(o))
                         .ToList());                        
             }
             if (typeof(T) == typeof(Investment))
@@ -121,9 +121,9 @@ namespace CoreInvestmentTracker.Models.DAL
                         .Include(b => b.Factors)
                         .Include(c => c.Groups)
                         .Include(d => d.Regions)
-                        .Select(o => ChangeType<T>(o)).ToList()
+                        .Select(o => Utils.ChangeType<T>(o)).ToList()
                     : Db.Set<Investment>()
-                        .Select(o => ChangeType<T>(o))
+                        .Select(o => Utils.ChangeType<T>(o))
                         .ToList());                        
             }
 
@@ -151,16 +151,5 @@ namespace CoreInvestmentTracker.Models.DAL
         /// Save the db changes
         /// </summary>
         public void SaveChanges() => Db.SaveChanges();
-        
-        /// <summary>
-        /// Utility function to change the type
-        /// </summary>
-        /// <typeparam name="T1"></typeparam>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        private static T1 ChangeType<T1>(object obj)
-        {
-            return (T1)Convert.ChangeType(obj, typeof(T1));
-        }
     }
 }

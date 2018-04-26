@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CoreInvestmentTracker.Models.DEL.Interfaces
@@ -21,5 +22,7 @@ namespace CoreInvestmentTracker.Models.DEL.Interfaces
         /// The description of the entity
         /// </summary>
         string Description { get; set; }
+
+        int[] investmentIds { get; }
     }
 }

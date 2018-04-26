@@ -23,6 +23,13 @@ namespace CoreInvestmentTracker.Models
         /// </summary>
         [Display(Name = "Description of region")]        
         public String Description { get; set; }
+
+        [NotMapped]
+        public int[] investmentIds
+        {
+            get => Investments.Select(x => x.InvestmentID).ToArray();
+        }
+
         /// <summary>
         /// 
         /// </summary>

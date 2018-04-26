@@ -74,5 +74,7 @@ namespace CoreInvestmentTracker.Models
         /// Groups
         /// </summary>
         public virtual ICollection<InvestmentGroup_Investment> Groups { get; set; }        
+
+        public int[] investmentIds { get; set; }
     }
 }

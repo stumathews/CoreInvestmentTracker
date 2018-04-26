@@ -52,8 +52,15 @@ namespace CoreInvestmentTracker.Models.DAL
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {            
+
             modelBuilder.Entity<Investment>().ToTable("Investment");
+            modelBuilder.Entity<Investment>().Ignore(x => x.investmentIds);
             modelBuilder.Entity<InvestmentInfluenceFactor>().ToTable("InvestmentInfluenceFactor");
+            modelBuilder.Entity<InvestmentInfluenceFactor>().Ignore(x => x.investmentIds);
+            modelBuilder.Entity<InvestmentGroup>().Ignore(x => x.investmentIds);
+            modelBuilder.Entity<Region>().Ignore(x => x.investmentIds);
+            modelBuilder.Entity<InvestmentNote>().Ignore(x => x.investmentIds);
+            modelBuilder.Entity<InvestmentRisk>().Ignore(x => x.investmentIds);
 
             modelBuilder.Entity<InvestmentInfluenceFactor_Investment>()            
                 .HasKey(i => new { i.InvestmentID, i.InvestmentInfluenceFactorID })

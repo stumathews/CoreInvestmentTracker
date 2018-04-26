@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using CoreInvestmentTracker.Common.ActionFilters;
+using CoreInvestmentTracker.Models;
+using CoreInvestmentTracker.Models.DAL;
 using CoreInvestmentTracker.Models.DAL.Interfaces;
 using CoreInvestmentTracker.Models.DEL.Interfaces;
 using Microsoft.AspNetCore.JsonPatch;
@@ -194,6 +196,97 @@ namespace CoreInvestmentTracker.Common
             EntityRepository.Db.Update(old);
             EntityRepository.SaveChanges();
             return new NoContentResult();
+        }
+
+        [HttpGet("GenerateSharedInvestmentsGraphDataFor")]
+        public IActionResult GenerateSharedGraphDataFor()
+        {
+            /*
+               var data = {
+                "nodes":[
+                    { "name": "index", "value": 5},
+                    { "name": "about", "value": 5},
+                    { "name": "contact", "value": 5},
+                    { "name": "store", "value": 8},
+                    { "name": "cheese", "value": 8},
+                    { "name": "yoghurt", "value": 10},
+                    { "name": "milk", "value": 2}
+                    ],
+                    "links":[
+                    {"source":0,"target":1,"value":25},
+                    {"source":0,"target":2,"value":10},
+                    {"source":0,"target":3,"value":40},
+                    {"source":1,"target":2,"value":10},
+                    {"source":3,"target":4,"value":25},
+                    {"source":3,"target":5,"value":10},
+                    {"source":3,"target":6,"value":5},
+                    {"source":4,"target":6,"value":5},
+                    {"source":4,"target":5,"value":15}
+                ]
+            }
+             */
+
+            var entities = EntityRepository.GetAllEntities(withChildren: true).ToArray();
+            
+            // inventmentId,List<EntityId>
+            var mappings = new Dictionary<int,List<int>>();
+            foreach (var entity in entities)
+            {
+                foreach (var entityInvestmentId in entity.investmentIds)
+                {
+                    if (!mappings.ContainsKey(entityInvestmentId))
+                    {
+                        mappings.Add(entityInvestmentId, new List<int>());
+                    }
+                    mappings[entityInvestmentId].Add(entity.Id);
+                }
+            }
+            
+            var nodes = new List<object> { };
+            var links = new List<object>();
+            
+            // a invisible root that all connect to - keeps things together
+            //nodes.Add(new {name = "Root", value = 0});
+
+            var investments = EntityRepository.Db.Investments.Where(x=> mappings.ContainsKey(x.Id)).ToArray();
+            
+            foreach (var map in mappings)
+            {
+                var investment = investments.Single(x => x.Id == map.Key);
+                var countLinkedEntities = map.Value.Count;
+                var investmentNode = new
+                {
+                    name = investment.Name, 
+                    value = 1
+                };
+                nodes.Add(investmentNode);
+                
+                foreach (var child in map.Value)
+                {
+                    var entity = entities.Single(x => x.Id == child);
+                    var entityNode = new
+                    {
+                        name = entity.Name,
+                        
+                        // Entity is bigger when its linked to more investments
+                        value = mappings.SelectMany(x=>x.Value).Count(x => x == child)
+                    };
+                    if (!nodes.Contains(entityNode))
+                    {
+                        nodes.Add(entityNode);
+                    }
+                    
+                    links.Add(new
+                    {
+                        source = nodes.LastIndexOf(investmentNode), 
+                        target = nodes.LastIndexOf(entityNode), 
+                        value = 1
+                    });
+                }
+                // add invisible root
+                //links.Add(new { source = nodes.LastIndexOf(i), target = 0, value = 0 });
+            }
+            return new ObjectResult(new { nodes, links });
         }
     }
 }
