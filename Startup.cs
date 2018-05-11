@@ -53,7 +53,7 @@ namespace CoreInvestmentTracker
             // Which database location to connect to?
             services.AddDbContext<ApplicationDbContext>(options =>
             {
-                var devConnectionString = Configuration.GetConnectionString("SqlExpress2017Connection");
+                var devConnectionString = Configuration.GetConnectionString("LocalDBConnection");
 
                 options.UseSqlServer(!HostingEnvironment.IsDevelopment()
                     // Connect to amazon RDS database in production

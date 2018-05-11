@@ -45,6 +45,17 @@ namespace CoreInvestmentTracker.Models.DAL
         /// </summary>
         public DbSet<InvestmentNote> Notes { get; set; }
 
+
+        /// <summary>
+        /// User information
+        /// </summary>
+        public DbSet<DEL.User> Users { get; set; }
+
+        /// <summary>
+        /// Audit log
+        /// </summary>
+        public DbSet<RecordedActivity> RecordedActivities { get; set; }
+
         /// <inheritdoc />
         /// <summary>
         /// OnModelCreating

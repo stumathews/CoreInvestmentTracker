@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc.Filters;
+﻿using System;
+using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.EntityFrameworkCore.Query.ExpressionTranslators.Internal;
 
 namespace CoreInvestmentTracker.Common.ActionFilters
 {
@@ -17,7 +19,7 @@ namespace CoreInvestmentTracker.Common.ActionFilters
         {
            var log =(IMyLogger) actionContext.HttpContext.RequestServices.GetService(typeof(IMyLogger));
             
-           log.Debug(string.Format("Request {0} {1}", actionContext.HttpContext.Request.ToString(), actionContext.HttpContext.Request.ToString()));
+           log.Debug(string.Format("Time {2} Request {0} {1}", actionContext.HttpContext.Request.ToString(), actionContext.HttpContext.Request.ToString(), DateTime.UtcNow));
            base.OnActionExecuting(actionContext);
         }
 

@@ -12,7 +12,7 @@ namespace CoreInvestmentTracker.Models.DEL
     /// <summary>
     /// Simple text note for an entity
     /// </summary>
-    public class InvestmentNote: IDbInvestmentEntity
+    public class InvestmentNote: IDbInvestmentEntity, IReferToAnEntity
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -26,18 +26,18 @@ namespace CoreInvestmentTracker.Models.DEL
         public string Description { get; set; }
 
         [NotMapped]
-        public int[] investmentIds
-        {
-            get => new int[] { };
-        }
+        public int[] investmentIds => new int[] { };
 
+        /// <inheritdoc />
         /// <summary>
-        /// The entity ID for the entity that owns this note, specifically of type OwningEntityType
+        /// Owning id
         /// </summary>
         public int OwningEntityId { get; set; }
+
+        /// <inheritdoc />
         /// <summary>
-        /// All notes will be in relation to a particular type
+        /// Type of owning It
         /// </summary>
-        public EntityType OwningEntityType { get; set; }
+        public EntityType OwningEntityType  { get; set; }
     }
 }

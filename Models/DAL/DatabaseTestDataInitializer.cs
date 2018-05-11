@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web;
 
 namespace CoreInvestmentTracker.Models.DAL
@@ -627,6 +628,21 @@ namespace CoreInvestmentTracker.Models.DAL
             // make some investment notes
 
             db.Notes.AddRange(investments.Select(m => new InvestmentNote { OwningEntityType = Common.EntityType.Investment, OwningEntityId = m.Id, Name = "note for " + m.Name, Description = "note for " + m.Name }));
+            db.SaveChanges();
+
+
+            // make the default system user
+
+            User systemUser = new User
+            {
+                Id = 0,
+                DisplayName = "System User",
+                TimeZone = 0,
+                Password = "",
+                UserName = "system",
+            };
+
+            db.Users.Add(systemUser);
             db.SaveChanges();
         }
     }

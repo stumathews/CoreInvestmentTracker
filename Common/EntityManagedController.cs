@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using CoreInvestmentTracker.Common.ActionFilters;
 using CoreInvestmentTracker.Models;
 using CoreInvestmentTracker.Models.DAL;
 using CoreInvestmentTracker.Models.DAL.Interfaces;
+using CoreInvestmentTracker.Models.DEL;
 using CoreInvestmentTracker.Models.DEL.Interfaces;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -85,7 +87,10 @@ namespace CoreInvestmentTracker.Common
             if (entity == null)
             {
                 return BadRequest();
-            }            
+            }
+
+            User systemUser = EntityRepository.Db.Users.First(u => u.Id == 0);
+            EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(systemUser, "tag","Created entity", DateTimeOffset.UtcNow, entity.Id, EntityType.Investment));
             EntityRepository.Db.Add(entity);
             EntityRepository.SaveChanges();
             return CreatedAtAction("Create", new { id = entity.Id }, entity);
