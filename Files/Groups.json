@@ -1,0 +1,1176 @@
+[
+  {
+    "id": 8,
+    "name": "Gold",
+    "description": "Commodity which is valuable when markets are volatile",
+    "investmentIds": [
+      67
+    ],
+    "type": "",
+    "investments": [
+      {
+        "investmentID": 67,
+        "investment": null,
+        "investmentGroupID": 8
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 19,
+    "name": "Sports nutrition Investments",
+    "description": "Investments that generally centre around sports nutrition",
+    "investmentIds": [
+      51,
+      70
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 51,
+        "investment": null,
+        "investmentGroupID": 19
+      },
+      {
+        "investmentID": 70,
+        "investment": null,
+        "investmentGroupID": 19
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 20,
+    "name": "Aviation",
+    "description": "Aviation",
+    "investmentIds": [
+      68
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 68,
+        "investment": null,
+        "investmentGroupID": 20
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 21,
+    "name": "Web Application performance",
+    "description": "Web Application performance",
+    "investmentIds": [
+      66
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 66,
+        "investment": null,
+        "investmentGroupID": 21
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 22,
+    "name": "Application Security Solutions",
+    "description": "Application Security Solutions",
+    "investmentIds": [
+      66
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 66,
+        "investment": null,
+        "investmentGroupID": 22
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 23,
+    "name": "Media Delivery Solutions",
+    "description": "Media Delivery Solutions",
+    "investmentIds": [
+      66
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 66,
+        "investment": null,
+        "investmentGroupID": 23
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 24,
+    "name": "Service and Support Solutions. ",
+    "description": "Service and Support Solutions. ",
+    "investmentIds": [
+      66
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 66,
+        "investment": null,
+        "investmentGroupID": 24
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 25,
+    "name": "Educational Training ",
+    "description": "Training and teaching ",
+    "investmentIds": [
+      65,
+      81
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 65,
+        "investment": null,
+        "investmentGroupID": 25
+      },
+      {
+        "investmentID": 81,
+        "investment": null,
+        "investmentGroupID": 25
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 26,
+    "name": "Dating",
+    "description": "Dating and match-making",
+    "investmentIds": [
+      64
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 64,
+        "investment": null,
+        "investmentGroupID": 26
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 27,
+    "name": "Fitness and activity tracking. ",
+    "description": "Fitness and activity tracking. ",
+    "investmentIds": [
+      68
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 68,
+        "investment": null,
+        "investmentGroupID": 27
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 28,
+    "name": "Cosmetics",
+    "description": "Womans beauty ",
+    "investmentIds": [
+      58,
+      59,
+      61,
+      63
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 58,
+        "investment": null,
+        "investmentGroupID": 28
+      },
+      {
+        "investmentID": 59,
+        "investment": null,
+        "investmentGroupID": 28
+      },
+      {
+        "investmentID": 61,
+        "investment": null,
+        "investmentGroupID": 28
+      },
+      {
+        "investmentID": 63,
+        "investment": null,
+        "investmentGroupID": 28
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 29,
+    "name": "Fashion related",
+    "description": "related or dealing with fashion ",
+    "investmentIds": [
+      56,
+      58,
+      78,
+      87
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 56,
+        "investment": null,
+        "investmentGroupID": 29
+      },
+      {
+        "investmentID": 58,
+        "investment": null,
+        "investmentGroupID": 29
+      },
+      {
+        "investmentID": 78,
+        "investment": null,
+        "investmentGroupID": 29
+      },
+      {
+        "investmentID": 87,
+        "investment": null,
+        "investmentGroupID": 29
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 30,
+    "name": "Semiconductor packaging and test services",
+    "description": "semiconductor packaging and test services",
+    "investmentIds": [],
+    "type": "£",
+    "investments": [],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 31,
+    "name": "Outdoor advertising",
+    "description": "Outdoor advertising",
+    "investmentIds": [
+      53,
+      68
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 53,
+        "investment": null,
+        "investmentGroupID": 31
+      },
+      {
+        "investmentID": 68,
+        "investment": null,
+        "investmentGroupID": 31
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 32,
+    "name": "Advertising",
+    "description": "Advertising",
+    "investmentIds": [
+      45,
+      48
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 45,
+        "investment": null,
+        "investmentGroupID": 32
+      },
+      {
+        "investmentID": 48,
+        "investment": null,
+        "investmentGroupID": 32
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 33,
+    "name": "Food and beverage investments",
+    "description": "Food and beverage investments",
+    "investmentIds": [
+      50
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 50,
+        "investment": null,
+        "investmentGroupID": 33
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 34,
+    "name": "Sugar related",
+    "description": "Relating to sugar",
+    "investmentIds": [
+      50
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 50,
+        "investment": null,
+        "investmentGroupID": 34
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 35,
+    "name": "Children's Toys",
+    "description": "Toys for children",
+    "investmentIds": [
+      47
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 47,
+        "investment": null,
+        "investmentGroupID": 35
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 36,
+    "name": "Fragrance investments",
+    "description": "Perfumes etc",
+    "investmentIds": [
+      58,
+      59,
+      60,
+      61,
+      62
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 58,
+        "investment": null,
+        "investmentGroupID": 36
+      },
+      {
+        "investmentID": 59,
+        "investment": null,
+        "investmentGroupID": 36
+      },
+      {
+        "investmentID": 60,
+        "investment": null,
+        "investmentGroupID": 36
+      },
+      {
+        "investmentID": 61,
+        "investment": null,
+        "investmentGroupID": 36
+      },
+      {
+        "investmentID": 62,
+        "investment": null,
+        "investmentGroupID": 36
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 37,
+    "name": "Dog Tracking and Training/Pet Obedience Devices.",
+    "description": "Dog Tracking and Training/Pet Obedience Devices.",
+    "investmentIds": [
+      68
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 68,
+        "investment": null,
+        "investmentGroupID": 37
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 38,
+    "name": "Golf Devices",
+    "description": "Golf Devices",
+    "investmentIds": [
+      68
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 68,
+        "investment": null,
+        "investmentGroupID": 38
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 39,
+    "name": "Wearable Devices",
+    "description": "Wearable Devices",
+    "investmentIds": [
+      68,
+      83,
+      85
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 68,
+        "investment": null,
+        "investmentGroupID": 39
+      },
+      {
+        "investmentID": 83,
+        "investment": null,
+        "investmentGroupID": 39
+      },
+      {
+        "investmentID": 85,
+        "investment": null,
+        "investmentGroupID": 39
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 40,
+    "name": "Entertainment",
+    "description": "Investments that are around entertainment",
+    "investmentIds": [
+      44,
+      47,
+      86
+    ],
+    "type": " ",
+    "investments": [
+      {
+        "investmentID": 44,
+        "investment": null,
+        "investmentGroupID": 40
+      },
+      {
+        "investmentID": 47,
+        "investment": null,
+        "investmentGroupID": 40
+      },
+      {
+        "investmentID": 86,
+        "investment": null,
+        "investmentGroupID": 40
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 41,
+    "name": "Houseold Goods",
+    "description": "todo",
+    "investmentIds": [
+      60,
+      71
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 60,
+        "investment": null,
+        "investmentGroupID": 41
+      },
+      {
+        "investmentID": 71,
+        "investment": null,
+        "investmentGroupID": 41
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 42,
+    "name": "Apparel",
+    "description": "todo",
+    "investmentIds": [
+      56,
+      71,
+      78,
+      87
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 56,
+        "investment": null,
+        "investmentGroupID": 42
+      },
+      {
+        "investmentID": 71,
+        "investment": null,
+        "investmentGroupID": 42
+      },
+      {
+        "investmentID": 78,
+        "investment": null,
+        "investmentGroupID": 42
+      },
+      {
+        "investmentID": 87,
+        "investment": null,
+        "investmentGroupID": 42
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 43,
+    "name": "Car Rentals",
+    "description": "todo",
+    "investmentIds": [
+      71
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 71,
+        "investment": null,
+        "investmentGroupID": 43
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 44,
+    "name": "Building material",
+    "description": "Building material",
+    "investmentIds": [
+      71
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 71,
+        "investment": null,
+        "investmentGroupID": 44
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 45,
+    "name": "Consumer Electronics",
+    "description": "Consumer Electronic",
+    "investmentIds": [
+      71,
+      89
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 71,
+        "investment": null,
+        "investmentGroupID": 45
+      },
+      {
+        "investmentID": 89,
+        "investment": null,
+        "investmentGroupID": 45
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 46,
+    "name": "Furniture",
+    "description": "Furniture",
+    "investmentIds": [
+      71
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 71,
+        "investment": null,
+        "investmentGroupID": 46
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 47,
+    "name": "Logistics",
+    "description": "Logistics",
+    "investmentIds": [
+      71,
+      75,
+      83,
+      85
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 71,
+        "investment": null,
+        "investmentGroupID": 47
+      },
+      {
+        "investmentID": 75,
+        "investment": null,
+        "investmentGroupID": 47
+      },
+      {
+        "investmentID": 83,
+        "investment": null,
+        "investmentGroupID": 47
+      },
+      {
+        "investmentID": 85,
+        "investment": null,
+        "investmentGroupID": 47
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 48,
+    "name": "Warehousing and distribution",
+    "description": "Warehousing and distribution",
+    "investmentIds": [
+      71
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 71,
+        "investment": null,
+        "investmentGroupID": 48
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 49,
+    "name": "Agricultural services",
+    "description": "Agricultural services",
+    "investmentIds": [
+      71
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 71,
+        "investment": null,
+        "investmentGroupID": 49
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 50,
+    "name": "Social media advertising",
+    "description": "Social media advertising",
+    "investmentIds": [
+      45,
+      72
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 45,
+        "investment": null,
+        "investmentGroupID": 50
+      },
+      {
+        "investmentID": 72,
+        "investment": null,
+        "investmentGroupID": 50
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 51,
+    "name": "Trendy and popular",
+    "description": "Trendy and popular investment",
+    "investmentIds": [
+      72
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 72,
+        "investment": null,
+        "investmentGroupID": 51
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 52,
+    "name": "Data analytics",
+    "description": "Data analytics",
+    "investmentIds": [
+      73
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 73,
+        "investment": null,
+        "investmentGroupID": 52
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 53,
+    "name": "Cloud based",
+    "description": "Cloud",
+    "investmentIds": [
+      45,
+      66,
+      73,
+      79
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 45,
+        "investment": null,
+        "investmentGroupID": 53
+      },
+      {
+        "investmentID": 66,
+        "investment": null,
+        "investmentGroupID": 53
+      },
+      {
+        "investmentID": 73,
+        "investment": null,
+        "investmentGroupID": 53
+      },
+      {
+        "investmentID": 79,
+        "investment": null,
+        "investmentGroupID": 53
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 54,
+    "name": "Software developer",
+    "description": "Software developer",
+    "investmentIds": [
+      45,
+      49,
+      72,
+      73,
+      74,
+      79,
+      81,
+      84,
+      86
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 45,
+        "investment": null,
+        "investmentGroupID": 54
+      },
+      {
+        "investmentID": 49,
+        "investment": null,
+        "investmentGroupID": 54
+      },
+      {
+        "investmentID": 72,
+        "investment": null,
+        "investmentGroupID": 54
+      },
+      {
+        "investmentID": 73,
+        "investment": null,
+        "investmentGroupID": 54
+      },
+      {
+        "investmentID": 74,
+        "investment": null,
+        "investmentGroupID": 54
+      },
+      {
+        "investmentID": 79,
+        "investment": null,
+        "investmentGroupID": 54
+      },
+      {
+        "investmentID": 81,
+        "investment": null,
+        "investmentGroupID": 54
+      },
+      {
+        "investmentID": 84,
+        "investment": null,
+        "investmentGroupID": 54
+      },
+      {
+        "investmentID": 86,
+        "investment": null,
+        "investmentGroupID": 54
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 55,
+    "name": "Auto navigation",
+    "description": "Auto navigation",
+    "investmentIds": [
+      68
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 68,
+        "investment": null,
+        "investmentGroupID": 55
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 56,
+    "name": "Outdoor Handhelds",
+    "description": "Outdoor Handhelds",
+    "investmentIds": [
+      68,
+      83
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 68,
+        "investment": null,
+        "investmentGroupID": 56
+      },
+      {
+        "investmentID": 83,
+        "investment": null,
+        "investmentGroupID": 56
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 57,
+    "name": "Artificial Intelligance",
+    "description": "Artificial Intelligence",
+    "investmentIds": [
+      45,
+      85
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 45,
+        "investment": null,
+        "investmentGroupID": 57
+      },
+      {
+        "investmentID": 85,
+        "investment": null,
+        "investmentGroupID": 57
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 58,
+    "name": "Online marketing",
+    "description": "Online marketing",
+    "investmentIds": [
+      45
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 45,
+        "investment": null,
+        "investmentGroupID": 58
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 59,
+    "name": "Networking and Communications",
+    "description": "Networking and Communications",
+    "investmentIds": [
+      76,
+      83
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 76,
+        "investment": null,
+        "investmentGroupID": 59
+      },
+      {
+        "investmentID": 83,
+        "investment": null,
+        "investmentGroupID": 59
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 60,
+    "name": "Managed Services",
+    "description": "Servicing customer",
+    "investmentIds": [
+      76
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 76,
+        "investment": null,
+        "investmentGroupID": 60
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 61,
+    "name": "Property",
+    "description": "Property investments",
+    "investmentIds": [
+      77,
+      80
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 77,
+        "investment": null,
+        "investmentGroupID": 61
+      },
+      {
+        "investmentID": 80,
+        "investment": null,
+        "investmentGroupID": 61
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 62,
+    "name": "Identity managment",
+    "description": "identity and credential management",
+    "investmentIds": [
+      79
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 79,
+        "investment": null,
+        "investmentGroupID": 62
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 63,
+    "name": "Simulation",
+    "description": "Simultation",
+    "investmentIds": [
+      81
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 81,
+        "investment": null,
+        "investmentGroupID": 63
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 64,
+    "name": "GPS Tracking ",
+    "description": "GPS Tracking ",
+    "investmentIds": [
+      83,
+      85
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 83,
+        "investment": null,
+        "investmentGroupID": 64
+      },
+      {
+        "investmentID": 85,
+        "investment": null,
+        "investmentGroupID": 64
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 65,
+    "name": "Venture capitalists",
+    "description": "Private investors",
+    "investmentIds": [
+      84
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 84,
+        "investment": null,
+        "investmentGroupID": 65
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 66,
+    "name": "Internet of things(IOT)",
+    "description": "IOT",
+    "investmentIds": [
+      84
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 84,
+        "investment": null,
+        "investmentGroupID": 66
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 67,
+    "name": "Gaming",
+    "description": "The gaming industry",
+    "investmentIds": [
+      49,
+      86
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 49,
+        "investment": null,
+        "investmentGroupID": 67
+      },
+      {
+        "investmentID": 86,
+        "investment": null,
+        "investmentGroupID": 67
+      }
+    ],
+    "parent": null,
+    "children": []
+  },
+  {
+    "id": 68,
+    "name": "Film and Cinema",
+    "description": "Film and Cinema",
+    "investmentIds": [
+      49
+    ],
+    "type": "£",
+    "investments": [
+      {
+        "investmentID": 49,
+        "investment": null,
+        "investmentGroupID": 68
+      }
+    ],
+    "parent": null,
+    "children": []
+  }
+]

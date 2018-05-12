@@ -1,0 +1,656 @@
+[
+  {
+    "id": 17,
+    "name": "Sports nutrition",
+    "description": "Sports nutrition market",
+    "investmentIds": [
+      51,
+      70
+    ],
+    "influence": "The will to have sports nutrition to help your performance",
+    "investments": [
+      {
+        "investmentID": 51,
+        "investment": null,
+        "investmentInfluenceFactorID": 17
+      },
+      {
+        "investmentID": 70,
+        "investment": null,
+        "investmentInfluenceFactorID": 17
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "name": "Beauty and grooming",
+    "description": "The beauty and grooming market",
+    "investmentIds": [
+      58,
+      59,
+      63
+    ],
+    "influence": "How well or not the beauty industry is doing",
+    "investments": [
+      {
+        "investmentID": 58,
+        "investment": null,
+        "investmentInfluenceFactorID": 18
+      },
+      {
+        "investmentID": 59,
+        "investment": null,
+        "investmentInfluenceFactorID": 18
+      },
+      {
+        "investmentID": 63,
+        "investment": null,
+        "investmentInfluenceFactorID": 18
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "name": "Hair care",
+    "description": "Deal in hair care products",
+    "investmentIds": [
+      61
+    ],
+    "influence": "The will to look after and managed ones hair",
+    "investments": [
+      {
+        "investmentID": 61,
+        "investment": null,
+        "investmentInfluenceFactorID": 19
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "name": "Skin care",
+    "description": "Skin care products",
+    "investmentIds": [
+      58,
+      59,
+      61
+    ],
+    "influence": "The will to look after your skin",
+    "investments": [
+      {
+        "investmentID": 58,
+        "investment": null,
+        "investmentInfluenceFactorID": 20
+      },
+      {
+        "investmentID": 59,
+        "investment": null,
+        "investmentInfluenceFactorID": 20
+      },
+      {
+        "investmentID": 61,
+        "investment": null,
+        "investmentInfluenceFactorID": 20
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "name": "Toiletries ",
+    "description": "Toiletries ",
+    "investmentIds": [
+      60
+    ],
+    "influence": "The need to have toiletries",
+    "investments": [
+      {
+        "investmentID": 60,
+        "investment": null,
+        "investmentInfluenceFactorID": 21
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "name": "Being fit and healthy",
+    "description": "Trend in being healthy",
+    "investmentIds": [
+      50,
+      56,
+      70
+    ],
+    "influence": "Will to engage in physical fitness",
+    "investments": [
+      {
+        "investmentID": 50,
+        "investment": null,
+        "investmentInfluenceFactorID": 22
+      },
+      {
+        "investmentID": 56,
+        "investment": null,
+        "investmentInfluenceFactorID": 22
+      },
+      {
+        "investmentID": 70,
+        "investment": null,
+        "investmentInfluenceFactorID": 22
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "name": "Battery technology",
+    "description": "Batteries",
+    "investmentIds": [
+      55
+    ],
+    "influence": "The need for portable electricity",
+    "investments": [
+      {
+        "investmentID": 55,
+        "investment": null,
+        "investmentInfluenceFactorID": 23
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "name": "Automotive/Car industry",
+    "description": "Automotive/Car industry",
+    "investmentIds": [
+      55
+    ],
+    "influence": "The eagerness for cars and all things car related",
+    "investments": [
+      {
+        "investmentID": 55,
+        "investment": null,
+        "investmentInfluenceFactorID": 24
+      }
+    ]
+  },
+  {
+    "id": 25,
+    "name": "Stevia extract",
+    "description": "Stevia extract production",
+    "investmentIds": [
+      50
+    ],
+    "influence": "The eagerness to have healthy alternative to sugar",
+    "investments": [
+      {
+        "investmentID": 50,
+        "investment": null,
+        "investmentInfluenceFactorID": 25
+      }
+    ]
+  },
+  {
+    "id": 26,
+    "name": "Cinema Advertising",
+    "description": "Cinema Advertising",
+    "investmentIds": [
+      49
+    ],
+    "influence": "Peoples will to watch movies",
+    "investments": [
+      {
+        "investmentID": 49,
+        "investment": null,
+        "investmentInfluenceFactorID": 26
+      }
+    ]
+  },
+  {
+    "id": 28,
+    "name": "Mobile devices",
+    "description": "Mobile devices OK",
+    "investmentIds": [
+      49,
+      74,
+      79,
+      83,
+      86
+    ],
+    "influence": "Cellphones and mobility",
+    "investments": [
+      {
+        "investmentID": 49,
+        "investment": null,
+        "investmentInfluenceFactorID": 28
+      },
+      {
+        "investmentID": 74,
+        "investment": null,
+        "investmentInfluenceFactorID": 28
+      },
+      {
+        "investmentID": 79,
+        "investment": null,
+        "investmentInfluenceFactorID": 28
+      },
+      {
+        "investmentID": 83,
+        "investment": null,
+        "investmentInfluenceFactorID": 28
+      },
+      {
+        "investmentID": 86,
+        "investment": null,
+        "investmentInfluenceFactorID": 28
+      }
+    ]
+  },
+  {
+    "id": 29,
+    "name": "PCs",
+    "description": "Personal Computers",
+    "investmentIds": [
+      49
+    ],
+    "influence": "The will and need to use personal computers",
+    "investments": [
+      {
+        "investmentID": 49,
+        "investment": null,
+        "investmentInfluenceFactorID": 29
+      }
+    ]
+  },
+  {
+    "id": 31,
+    "name": "Visual Entertainment",
+    "description": "Visual Entertainment",
+    "investmentIds": [
+      48,
+      49
+    ],
+    "influence": "The will and desire for visual entertainment like on screen movies/entertainment",
+    "investments": [
+      {
+        "investmentID": 48,
+        "investment": null,
+        "investmentInfluenceFactorID": 31
+      },
+      {
+        "investmentID": 49,
+        "investment": null,
+        "investmentInfluenceFactorID": 31
+      }
+    ]
+  },
+  {
+    "id": 33,
+    "name": "Elizabeth Arden",
+    "description": "Revlon company",
+    "investmentIds": [
+      63
+    ],
+    "influence": "How well this Revlon company does",
+    "investments": [
+      {
+        "investmentID": 63,
+        "investment": null,
+        "investmentInfluenceFactorID": 33
+      }
+    ]
+  },
+  {
+    "id": 34,
+    "name": "LoveScout24",
+    "description": "Company related to match.com",
+    "investmentIds": [
+      64
+    ],
+    "influence": "How well this company does",
+    "investments": [
+      {
+        "investmentID": 64,
+        "investment": null,
+        "investmentInfluenceFactorID": 34
+      }
+    ]
+  },
+  {
+    "id": 35,
+    "name": "BlackPeopleMeet",
+    "description": "Company related to match.com",
+    "investmentIds": [
+      64
+    ],
+    "influence": "How well this company does",
+    "investments": [
+      {
+        "investmentID": 64,
+        "investment": null,
+        "investmentInfluenceFactorID": 35
+      }
+    ]
+  },
+  {
+    "id": 36,
+    "name": "OurTime",
+    "description": "Company related to match.com",
+    "investmentIds": [
+      64
+    ],
+    "influence": "how well this company performs",
+    "investments": [
+      {
+        "investmentID": 64,
+        "investment": null,
+        "investmentInfluenceFactorID": 36
+      }
+    ]
+  },
+  {
+    "id": 37,
+    "name": "Live entertainment",
+    "description": "The live entertainment market",
+    "investmentIds": [
+      44
+    ],
+    "influence": "How much the live entertainment industry is in demand",
+    "investments": [
+      {
+        "investmentID": 44,
+        "investment": null,
+        "investmentInfluenceFactorID": 37
+      }
+    ]
+  },
+  {
+    "id": 38,
+    "name": "Pepco Performance ",
+    "description": "How well Pepco does financially",
+    "investmentIds": [
+      71
+    ],
+    "influence": "This is the apparel part of the business",
+    "investments": [
+      {
+        "investmentID": 71,
+        "investment": null,
+        "investmentInfluenceFactorID": 38
+      }
+    ]
+  },
+  {
+    "id": 39,
+    "name": "Conforma performance",
+    "description": "How well Conforma does financially",
+    "investmentIds": [
+      71
+    ],
+    "influence": "How well this company does",
+    "investments": [
+      {
+        "investmentID": 71,
+        "investment": null,
+        "investmentInfluenceFactorID": 39
+      }
+    ]
+  },
+  {
+    "id": 40,
+    "name": "Lipo Einrichtungsmaerkte performance",
+    "description": "How well the furniture company is doing",
+    "investmentIds": [
+      71
+    ],
+    "influence": "How well this company does",
+    "investments": [
+      {
+        "investmentID": 71,
+        "investment": null,
+        "investmentInfluenceFactorID": 40
+      }
+    ]
+  },
+  {
+    "id": 41,
+    "name": "Poco Performance",
+    "description": "Steinhoff company",
+    "investmentIds": [
+      71
+    ],
+    "influence": "How well Poco is doing",
+    "investments": [
+      {
+        "investmentID": 71,
+        "investment": null,
+        "investmentInfluenceFactorID": 41
+      }
+    ]
+  },
+  {
+    "id": 42,
+    "name": "Travel Sector",
+    "description": "Travel Sector",
+    "investmentIds": [
+      75,
+      83
+    ],
+    "influence": "how well the travel sector is doing",
+    "investments": [
+      {
+        "investmentID": 75,
+        "investment": null,
+        "investmentInfluenceFactorID": 42
+      },
+      {
+        "investmentID": 83,
+        "investment": null,
+        "investmentInfluenceFactorID": 42
+      }
+    ]
+  },
+  {
+    "id": 43,
+    "name": "Technology sector",
+    "description": "Technology sector",
+    "investmentIds": [
+      74,
+      76,
+      79,
+      83,
+      84,
+      86
+    ],
+    "influence": "How well the technology sector is doing",
+    "investments": [
+      {
+        "investmentID": 74,
+        "investment": null,
+        "investmentInfluenceFactorID": 43
+      },
+      {
+        "investmentID": 76,
+        "investment": null,
+        "investmentInfluenceFactorID": 43
+      },
+      {
+        "investmentID": 79,
+        "investment": null,
+        "investmentInfluenceFactorID": 43
+      },
+      {
+        "investmentID": 83,
+        "investment": null,
+        "investmentInfluenceFactorID": 43
+      },
+      {
+        "investmentID": 84,
+        "investment": null,
+        "investmentInfluenceFactorID": 43
+      },
+      {
+        "investmentID": 86,
+        "investment": null,
+        "investmentInfluenceFactorID": 43
+      }
+    ]
+  },
+  {
+    "id": 45,
+    "name": "Leisure sector",
+    "description": "Leisure sectors",
+    "investmentIds": [
+      48,
+      49,
+      86
+    ],
+    "influence": "How well the leisure sector is doing",
+    "investments": [
+      {
+        "investmentID": 48,
+        "investment": null,
+        "investmentInfluenceFactorID": 45
+      },
+      {
+        "investmentID": 49,
+        "investment": null,
+        "investmentInfluenceFactorID": 45
+      },
+      {
+        "investmentID": 86,
+        "investment": null,
+        "investmentInfluenceFactorID": 45
+      }
+    ]
+  },
+  {
+    "id": 46,
+    "name": "Match",
+    "description": "Match dating company",
+    "investmentIds": [
+      64
+    ],
+    "influence": "How well this company is performing",
+    "investments": [
+      {
+        "investmentID": 64,
+        "investment": null,
+        "investmentInfluenceFactorID": 46
+      }
+    ]
+  },
+  {
+    "id": 47,
+    "name": "Tinder",
+    "description": "Tinder dating and match site",
+    "investmentIds": [
+      64
+    ],
+    "influence": "How well this company is performing",
+    "investments": [
+      {
+        "investmentID": 64,
+        "investment": null,
+        "investmentInfluenceFactorID": 47
+      }
+    ]
+  },
+  {
+    "id": 48,
+    "name": "PlentyOfFish",
+    "description": "Dating and match-making",
+    "investmentIds": [
+      64
+    ],
+    "influence": "How well this company is performing",
+    "investments": [
+      {
+        "investmentID": 64,
+        "investment": null,
+        "investmentInfluenceFactorID": 48
+      }
+    ]
+  },
+  {
+    "id": 49,
+    "name": "Meetic",
+    "description": "Meetic is a subsidirary of match.com",
+    "investmentIds": [
+      64
+    ],
+    "influence": "How well this company is performing",
+    "investments": [
+      {
+        "investmentID": 64,
+        "investment": null,
+        "investmentInfluenceFactorID": 49
+      }
+    ]
+  },
+  {
+    "id": 50,
+    "name": "OkCupid",
+    "description": "Company related to match.com",
+    "investmentIds": [
+      64
+    ],
+    "influence": "How well this company is performing",
+    "investments": [
+      {
+        "investmentID": 64,
+        "investment": null,
+        "investmentInfluenceFactorID": 50
+      }
+    ]
+  },
+  {
+    "id": 51,
+    "name": "Pairs",
+    "description": "Company related to match.com",
+    "investmentIds": [
+      64
+    ],
+    "influence": "How well this company is performing",
+    "investments": [
+      {
+        "investmentID": 64,
+        "investment": null,
+        "investmentInfluenceFactorID": 51
+      }
+    ]
+  },
+  {
+    "id": 52,
+    "name": "Twoo",
+    "description": "Company related to match.com",
+    "investmentIds": [
+      64
+    ],
+    "influence": "How well this company is performing",
+    "investments": [
+      {
+        "investmentID": 64,
+        "investment": null,
+        "investmentInfluenceFactorID": 52
+      }
+    ]
+  },
+  {
+    "id": 53,
+    "name": "Content delivery network (CDN) services. ",
+    "description": "Content delivery network (CDN) services. ",
+    "investmentIds": [
+      66,
+      76
+    ],
+    "influence": "How much in demand CDNs are in",
+    "investments": [
+      {
+        "investmentID": 66,
+        "investment": null,
+        "investmentInfluenceFactorID": 53
+      },
+      {
+        "investmentID": 76,
+        "investment": null,
+        "investmentInfluenceFactorID": 53
+      }
+    ]
+  }
+]

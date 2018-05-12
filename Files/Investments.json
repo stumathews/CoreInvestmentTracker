@@ -1,0 +1,1913 @@
+[
+  {
+    "id": 44,
+    "description": "Live Nation is an American events promoter and venue operator based in Beverly Hills",
+    "symbol": "LYV",
+    "valueProposition": "Its a valuable investment because many people like attending live events like concerts, festivals and various live entertainment. ",
+    "desirabilityStatement": "It deals with a significant amount of the liv eentertainment industry. Its also a well known brand.",
+    "initialInvestment": 2,
+    "name": "Live Nation Entertainment Inc",
+    "value": 2,
+    "factors": [
+      {
+        "investmentID": 44,
+        "investmentInfluenceFactorID": 37,
+        "investmentInfluenceFactor": null
+      }
+    ],
+    "regions": [
+      {
+        "investmentID": 44,
+        "regionID": 18,
+        "region": null
+      }
+    ],
+    "risks": [
+      {
+        "investmentID": 44,
+        "investmentRiskID": 5,
+        "investmentRisk": null
+      },
+      {
+        "investmentID": 44,
+        "investmentRiskID": 11,
+        "investmentRisk": null
+      }
+    ],
+    "groups": [
+      {
+        "investmentID": 44,
+        "investmentGroupID": 40,
+        "investmentGroup": null
+      }
+    ],
+    "investmentIds": null
+  },
+  {
+    "id": 45,
+    "description": "Artificial intelligence marketing platform",
+    "symbol": " ALB",
+    "valueProposition": "Could be used by much more brands and could grow significantly. Good solid technical hires.",
+    "desirabilityStatement": "TBD",
+    "initialInvestment": 0,
+    "name": "Albert Technologies Ltd",
+    "value": 0,
+    "factors": [],
+    "regions": [
+      {
+        "investmentID": 45,
+        "regionID": 19,
+        "region": null
+      }
+    ],
+    "risks": [
+      {
+        "investmentID": 45,
+        "investmentRiskID": 5,
+        "investmentRisk": null
+      },
+      {
+        "investmentID": 45,
+        "investmentRiskID": 9,
+        "investmentRisk": null
+      },
+      {
+        "investmentID": 45,
+        "investmentRiskID": 11,
+        "investmentRisk": null
+      }
+    ],
+    "groups": [
+      {
+        "investmentID": 45,
+        "investmentGroupID": 32,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 45,
+        "investmentGroupID": 50,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 45,
+        "investmentGroupID": 53,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 45,
+        "investmentGroupID": 54,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 45,
+        "investmentGroupID": 57,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 45,
+        "investmentGroupID": 58,
+        "investmentGroup": null
+      }
+    ],
+    "investmentIds": null
+  },
+  {
+    "id": 47,
+    "description": "Global Toy company",
+    "symbol": "MAT",
+    "valueProposition": "Everyone is a child",
+    "desirabilityStatement": "Everyone is a child",
+    "initialInvestment": 0,
+    "name": "Mattel",
+    "value": 0,
+    "factors": [],
+    "regions": [
+      {
+        "investmentID": 47,
+        "regionID": 18,
+        "region": null
+      },
+      {
+        "investmentID": 47,
+        "regionID": 20,
+        "region": null
+      }
+    ],
+    "risks": [
+      {
+        "investmentID": 47,
+        "investmentRiskID": 5,
+        "investmentRisk": null
+      },
+      {
+        "investmentID": 47,
+        "investmentRiskID": 11,
+        "investmentRisk": null
+      },
+      {
+        "investmentID": 47,
+        "investmentRiskID": 12,
+        "investmentRisk": null
+      },
+      {
+        "investmentID": 47,
+        "investmentRiskID": 13,
+        "investmentRisk": null
+      }
+    ],
+    "groups": [
+      {
+        "investmentID": 47,
+        "investmentGroupID": 35,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 47,
+        "investmentGroupID": 40,
+        "investmentGroup": null
+      }
+    ],
+    "investmentIds": null
+  },
+  {
+    "id": 48,
+    "description": "Cinemark are involved in the motion picture exhibition business",
+    "symbol": "CNK",
+    "valueProposition": "People like to go to the movies",
+    "desirabilityStatement": "Holds many cinemas and is a well known brand  and it represents a captured audience and thus has access to selling more to them such as food and beverages etc.",
+    "initialInvestment": 0,
+    "name": "Cinemark",
+    "value": 0,
+    "factors": [
+      {
+        "investmentID": 48,
+        "investmentInfluenceFactorID": 31,
+        "investmentInfluenceFactor": null
+      },
+      {
+        "investmentID": 48,
+        "investmentInfluenceFactorID": 45,
+        "investmentInfluenceFactor": null
+      }
+    ],
+    "regions": [
+      {
+        "investmentID": 48,
+        "regionID": 18,
+        "region": null
+      }
+    ],
+    "risks": [],
+    "groups": [
+      {
+        "investmentID": 48,
+        "investmentGroupID": 32,
+        "investmentGroup": null
+      }
+    ],
+    "investmentIds": null
+  },
+  {
+    "id": 49,
+    "description": "Online gaming in China.",
+    "symbol": "CYOU",
+    "valueProposition": "Popularity in gaming predicted and china as a large population",
+    "desirabilityStatement": "TBD",
+    "initialInvestment": 0,
+    "name": "Changyou.com",
+    "value": 0,
+    "factors": [
+      {
+        "investmentID": 49,
+        "investmentInfluenceFactorID": 26,
+        "investmentInfluenceFactor": null
+      },
+      {
+        "investmentID": 49,
+        "investmentInfluenceFactorID": 28,
+        "investmentInfluenceFactor": null
+      },
+      {
+        "investmentID": 49,
+        "investmentInfluenceFactorID": 29,
+        "investmentInfluenceFactor": null
+      },
+      {
+        "investmentID": 49,
+        "investmentInfluenceFactorID": 31,
+        "investmentInfluenceFactor": null
+      },
+      {
+        "investmentID": 49,
+        "investmentInfluenceFactorID": 45,
+        "investmentInfluenceFactor": null
+      }
+    ],
+    "regions": [
+      {
+        "investmentID": 49,
+        "regionID": 15,
+        "region": null
+      }
+    ],
+    "risks": [],
+    "groups": [
+      {
+        "investmentID": 49,
+        "investmentGroupID": 54,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 49,
+        "investmentGroupID": 67,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 49,
+        "investmentGroupID": 68,
+        "investmentGroup": null
+      }
+    ],
+    "investmentIds": null
+  },
+  {
+    "id": 50,
+    "description": "PureCircle Limited is a producer of stevia ingredients for the global food and beverage industry",
+    "symbol": "PURE",
+    "valueProposition": "",
+    "desirabilityStatement": "",
+    "initialInvestment": 2,
+    "name": "Pure Circle Limited",
+    "value": 2,
+    "factors": [
+      {
+        "investmentID": 50,
+        "investmentInfluenceFactorID": 22,
+        "investmentInfluenceFactor": null
+      },
+      {
+        "investmentID": 50,
+        "investmentInfluenceFactorID": 25,
+        "investmentInfluenceFactor": null
+      }
+    ],
+    "regions": [],
+    "risks": [],
+    "groups": [
+      {
+        "investmentID": 50,
+        "investmentGroupID": 33,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 50,
+        "investmentGroupID": 34,
+        "investmentGroup": null
+      }
+    ],
+    "investmentIds": null
+  },
+  {
+    "id": 51,
+    "description": "Science in Sport plc is engaged in developing, manufacturing and marketing sports nutrition products for professional athletes and sports ",
+    "symbol": "SIS",
+    "valueProposition": "",
+    "desirabilityStatement": "",
+    "initialInvestment": 2,
+    "name": "Science In Sport Ltd",
+    "value": 2,
+    "factors": [
+      {
+        "investmentID": 51,
+        "investmentInfluenceFactorID": 17,
+        "investmentInfluenceFactor": null
+      }
+    ],
+    "regions": [
+      {
+        "investmentID": 51,
+        "regionID": 19,
+        "region": null
+      }
+    ],
+    "risks": [
+      {
+        "investmentID": 51,
+        "investmentRiskID": 5,
+        "investmentRisk": null
+      }
+    ],
+    "groups": [
+      {
+        "investmentID": 51,
+        "investmentGroupID": 19,
+        "investmentGroup": null
+      }
+    ],
+    "investmentIds": null
+  },
+  {
+    "id": 53,
+    "description": "Clear Channel Outdoor Holdings, Inc. is an outdoor advertising company.",
+    "symbol": "NYSE: CCO",
+    "valueProposition": "",
+    "desirabilityStatement": "",
+    "initialInvestment": 2,
+    "name": "Clear Channel Outdoor Holdings Inc",
+    "value": 2,
+    "factors": [],
+    "regions": [
+      {
+        "investmentID": 53,
+        "regionID": 14,
+        "region": null
+      },
+      {
+        "investmentID": 53,
+        "regionID": 15,
+        "region": null
+      },
+      {
+        "investmentID": 53,
+        "regionID": 18,
+        "region": null
+      },
+      {
+        "investmentID": 53,
+        "regionID": 21,
+        "region": null
+      }
+    ],
+    "risks": [],
+    "groups": [
+      {
+        "investmentID": 53,
+        "investmentGroupID": 31,
+        "investmentGroup": null
+      }
+    ],
+    "investmentIds": null
+  },
+  {
+    "id": 55,
+    "description": "Ceres Power Holdings PLC is a United Kingdom-based company, which is a fuel cell technology and engineering company.",
+    "symbol": "LON: CWR",
+    "valueProposition": "",
+    "desirabilityStatement": "",
+    "initialInvestment": 2,
+    "name": "Ceres Power Holdings PLC",
+    "value": 2,
+    "factors": [
+      {
+        "investmentID": 55,
+        "investmentInfluenceFactorID": 23,
+        "investmentInfluenceFactor": null
+      },
+      {
+        "investmentID": 55,
+        "investmentInfluenceFactorID": 24,
+        "investmentInfluenceFactor": null
+      }
+    ],
+    "regions": [],
+    "risks": [],
+    "groups": [],
+    "investmentIds": null
+  },
+  {
+    "id": 56,
+    "description": "Under Armour, Inc. is engaged in the development, marketing and distribution of branded performance apparel, footwear and accessories for men, women and youth",
+    "symbol": "NYSE: UAA",
+    "valueProposition": "Upcoming and strong competition to Nike and Adidas for the sports apparel market.",
+    "desirabilityStatement": "Has many good products at reasonable prices compared to Nike and other competition",
+    "initialInvestment": 2,
+    "name": "Under Armour Inc",
+    "value": 2,
+    "factors": [
+      {
+        "investmentID": 56,
+        "investmentInfluenceFactorID": 22,
+        "investmentInfluenceFactor": null
+      }
+    ],
+    "regions": [
+      {
+        "investmentID": 56,
+        "regionID": 14,
+        "region": null
+      },
+      {
+        "investmentID": 56,
+        "regionID": 15,
+        "region": null
+      },
+      {
+        "investmentID": 56,
+        "regionID": 16,
+        "region": null
+      },
+      {
+        "investmentID": 56,
+        "regionID": 18,
+        "region": null
+      },
+      {
+        "investmentID": 56,
+        "regionID": 19,
+        "region": null
+      },
+      {
+        "investmentID": 56,
+        "regionID": 21,
+        "region": null
+      }
+    ],
+    "risks": [
+      {
+        "investmentID": 56,
+        "investmentRiskID": 2,
+        "investmentRisk": null
+      },
+      {
+        "investmentID": 56,
+        "investmentRiskID": 5,
+        "investmentRisk": null
+      },
+      {
+        "investmentID": 56,
+        "investmentRiskID": 10,
+        "investmentRisk": null
+      },
+      {
+        "investmentID": 56,
+        "investmentRiskID": 12,
+        "investmentRisk": null
+      }
+    ],
+    "groups": [
+      {
+        "investmentID": 56,
+        "investmentGroupID": 29,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 56,
+        "investmentGroupID": 42,
+        "investmentGroup": null
+      }
+    ],
+    "investmentIds": null
+  },
+  {
+    "id": 58,
+    "description": "Avon Products, Inc. is a manufacturer and marketer of beauty and related products",
+    "symbol": "LON: AVON",
+    "valueProposition": "Woman all over the world are concerned with their facial appearance",
+    "desirabilityStatement": "Well known and stable brand",
+    "initialInvestment": 2,
+    "name": "Avon Products Inc",
+    "value": 2,
+    "factors": [
+      {
+        "investmentID": 58,
+        "investmentInfluenceFactorID": 18,
+        "investmentInfluenceFactor": null
+      },
+      {
+        "investmentID": 58,
+        "investmentInfluenceFactorID": 20,
+        "investmentInfluenceFactor": null
+      }
+    ],
+    "regions": [
+      {
+        "investmentID": 58,
+        "regionID": 14,
+        "region": null
+      },
+      {
+        "investmentID": 58,
+        "regionID": 15,
+        "region": null
+      },
+      {
+        "investmentID": 58,
+        "regionID": 16,
+        "region": null
+      },
+      {
+        "investmentID": 58,
+        "regionID": 18,
+        "region": null
+      }
+    ],
+    "risks": [
+      {
+        "investmentID": 58,
+        "investmentRiskID": 2,
+        "investmentRisk": null
+      },
+      {
+        "investmentID": 58,
+        "investmentRiskID": 5,
+        "investmentRisk": null
+      },
+      {
+        "investmentID": 58,
+        "investmentRiskID": 9,
+        "investmentRisk": null
+      },
+      {
+        "investmentID": 58,
+        "investmentRiskID": 12,
+        "investmentRisk": null
+      }
+    ],
+    "groups": [
+      {
+        "investmentID": 58,
+        "investmentGroupID": 28,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 58,
+        "investmentGroupID": 29,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 58,
+        "investmentGroupID": 36,
+        "investmentGroup": null
+      }
+    ],
+    "investmentIds": null
+  },
+  {
+    "id": 59,
+    "description": "Coty Inc. is a beauty company",
+    "symbol": "NYSE: COTY",
+    "valueProposition": "People want to enhance their image and look after themselves",
+    "desirabilityStatement": "Produces well known fragrances and cosmetics brands for men and woman",
+    "initialInvestment": 2,
+    "name": "Coty Inc",
+    "value": 2,
+    "factors": [
+      {
+        "investmentID": 59,
+        "investmentInfluenceFactorID": 18,
+        "investmentInfluenceFactor": null
+      },
+      {
+        "investmentID": 59,
+        "investmentInfluenceFactorID": 20,
+        "investmentInfluenceFactor": null
+      }
+    ],
+    "regions": [
+      {
+        "investmentID": 59,
+        "regionID": 14,
+        "region": null
+      },
+      {
+        "investmentID": 59,
+        "regionID": 15,
+        "region": null
+      },
+      {
+        "investmentID": 59,
+        "regionID": 16,
+        "region": null
+      },
+      {
+        "investmentID": 59,
+        "regionID": 18,
+        "region": null
+      }
+    ],
+    "risks": [
+      {
+        "investmentID": 59,
+        "investmentRiskID": 2,
+        "investmentRisk": null
+      },
+      {
+        "investmentID": 59,
+        "investmentRiskID": 10,
+        "investmentRisk": null
+      },
+      {
+        "investmentID": 59,
+        "investmentRiskID": 12,
+        "investmentRisk": null
+      }
+    ],
+    "groups": [
+      {
+        "investmentID": 59,
+        "investmentGroupID": 28,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 59,
+        "investmentGroupID": 36,
+        "investmentGroup": null
+      }
+    ],
+    "investmentIds": null
+  },
+  {
+    "id": 60,
+    "description": "Creightons plc is engaged in the development, marketing and manufacture of toiletries and fragrances",
+    "symbol": "LON: CRL",
+    "valueProposition": "Good products",
+    "desirabilityStatement": "People want to use toiletries that appeal to them",
+    "initialInvestment": 2,
+    "name": "Creighton's PLC",
+    "value": 2,
+    "factors": [
+      {
+        "investmentID": 60,
+        "investmentInfluenceFactorID": 21,
+        "investmentInfluenceFactor": null
+      }
+    ],
+    "regions": [],
+    "risks": [
+      {
+        "investmentID": 60,
+        "investmentRiskID": 2,
+        "investmentRisk": null
+      },
+      {
+        "investmentID": 60,
+        "investmentRiskID": 12,
+        "investmentRisk": null
+      }
+    ],
+    "groups": [
+      {
+        "investmentID": 60,
+        "investmentGroupID": 36,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 60,
+        "investmentGroupID": 41,
+        "investmentGroup": null
+      }
+    ],
+    "investmentIds": null
+  },
+  {
+    "id": 61,
+    "description": "The Estee Lauder Companies Inc. manufactures and markets skin care, makeup, fragrance and hair care products.",
+    "symbol": "NYSE: EL",
+    "valueProposition": "",
+    "desirabilityStatement": "",
+    "initialInvestment": 2,
+    "name": "Estee lauder Cos Inc",
+    "value": 2,
+    "factors": [
+      {
+        "investmentID": 61,
+        "investmentInfluenceFactorID": 19,
+        "investmentInfluenceFactor": null
+      },
+      {
+        "investmentID": 61,
+        "investmentInfluenceFactorID": 20,
+        "investmentInfluenceFactor": null
+      }
+    ],
+    "regions": [],
+    "risks": [],
+    "groups": [
+      {
+        "investmentID": 61,
+        "investmentGroupID": 28,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 61,
+        "investmentGroupID": 36,
+        "investmentGroup": null
+      }
+    ],
+    "investmentIds": null
+  },
+  {
+    "id": 62,
+    "description": "Inter Parfums, Inc. operates in the fragrance business",
+    "symbol": "NASDAQ: IPAR",
+    "valueProposition": "",
+    "desirabilityStatement": "",
+    "initialInvestment": 2,
+    "name": "Inter parfums Inc",
+    "value": 2,
+    "factors": [],
+    "regions": [
+      {
+        "investmentID": 62,
+        "regionID": 14,
+        "region": null
+      },
+      {
+        "investmentID": 62,
+        "regionID": 18,
+        "region": null
+      }
+    ],
+    "risks": [],
+    "groups": [
+      {
+        "investmentID": 62,
+        "investmentGroupID": 36,
+        "investmentGroup": null
+      }
+    ],
+    "investmentIds": null
+  },
+  {
+    "id": 63,
+    "description": "Revlon, Inc. manufactures, markets and sells around the world a range of beauty and personal care products",
+    "symbol": "NYSE: REV",
+    "valueProposition": "Company creates a wide variety of beauty and personal care products",
+    "desirabilityStatement": "Many people want personal care products",
+    "initialInvestment": 2,
+    "name": "Revlon Inc",
+    "value": 2,
+    "factors": [
+      {
+        "investmentID": 63,
+        "investmentInfluenceFactorID": 18,
+        "investmentInfluenceFactor": null
+      },
+      {
+        "investmentID": 63,
+        "investmentInfluenceFactorID": 33,
+        "investmentInfluenceFactor": null
+      }
+    ],
+    "regions": [],
+    "risks": [],
+    "groups": [
+      {
+        "investmentID": 63,
+        "investmentGroupID": 28,
+        "investmentGroup": null
+      }
+    ],
+    "investmentIds": null
+  },
+  {
+    "id": 64,
+    "description": " The Company operates in the Dating segment. ",
+    "symbol": "NASDAQ: MTCH",
+    "valueProposition": "",
+    "desirabilityStatement": "",
+    "initialInvestment": 2,
+    "name": "Match Group Inc",
+    "value": 2,
+    "factors": [
+      {
+        "investmentID": 64,
+        "investmentInfluenceFactorID": 34,
+        "investmentInfluenceFactor": null
+      },
+      {
+        "investmentID": 64,
+        "investmentInfluenceFactorID": 35,
+        "investmentInfluenceFactor": null
+      },
+      {
+        "investmentID": 64,
+        "investmentInfluenceFactorID": 36,
+        "investmentInfluenceFactor": null
+      },
+      {
+        "investmentID": 64,
+        "investmentInfluenceFactorID": 46,
+        "investmentInfluenceFactor": null
+      },
+      {
+        "investmentID": 64,
+        "investmentInfluenceFactorID": 47,
+        "investmentInfluenceFactor": null
+      },
+      {
+        "investmentID": 64,
+        "investmentInfluenceFactorID": 48,
+        "investmentInfluenceFactor": null
+      },
+      {
+        "investmentID": 64,
+        "investmentInfluenceFactorID": 49,
+        "investmentInfluenceFactor": null
+      },
+      {
+        "investmentID": 64,
+        "investmentInfluenceFactorID": 50,
+        "investmentInfluenceFactor": null
+      },
+      {
+        "investmentID": 64,
+        "investmentInfluenceFactorID": 51,
+        "investmentInfluenceFactor": null
+      },
+      {
+        "investmentID": 64,
+        "investmentInfluenceFactorID": 52,
+        "investmentInfluenceFactor": null
+      }
+    ],
+    "regions": [
+      {
+        "investmentID": 64,
+        "regionID": 20,
+        "region": null
+      }
+    ],
+    "risks": [],
+    "groups": [
+      {
+        "investmentID": 64,
+        "investmentGroupID": 26,
+        "investmentGroup": null
+      }
+    ],
+    "investmentIds": null
+  },
+  {
+    "id": 65,
+    "description": "The Company, through its subsidiaries, provides professional education services",
+    "symbol": "NASDAQ: TEDU",
+    "valueProposition": "",
+    "desirabilityStatement": "",
+    "initialInvestment": 2,
+    "name": "Tarena International Inc",
+    "value": 2,
+    "factors": [],
+    "regions": [],
+    "risks": [
+      {
+        "investmentID": 65,
+        "investmentRiskID": 9,
+        "investmentRisk": null
+      },
+      {
+        "investmentID": 65,
+        "investmentRiskID": 11,
+        "investmentRisk": null
+      }
+    ],
+    "groups": [
+      {
+        "investmentID": 65,
+        "investmentGroupID": 25,
+        "investmentGroup": null
+      }
+    ],
+    "investmentIds": null
+  },
+  {
+    "id": 66,
+    "description": "Akamai Technologies, Inc. is engaged in providing cloud services for delivering, optimizing and securing content and business applications over the Internet",
+    "symbol": "NASDAQ: AKAM",
+    "valueProposition": "",
+    "desirabilityStatement": "",
+    "initialInvestment": 2,
+    "name": "Akamai Technologies Inc",
+    "value": 2,
+    "factors": [
+      {
+        "investmentID": 66,
+        "investmentInfluenceFactorID": 53,
+        "investmentInfluenceFactor": null
+      }
+    ],
+    "regions": [],
+    "risks": [],
+    "groups": [
+      {
+        "investmentID": 66,
+        "investmentGroupID": 21,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 66,
+        "investmentGroupID": 22,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 66,
+        "investmentGroupID": 23,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 66,
+        "investmentGroupID": 24,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 66,
+        "investmentGroupID": 53,
+        "investmentGroup": null
+      }
+    ],
+    "investmentIds": null
+  },
+  {
+    "id": 67,
+    "description": "ETFS Physical Gold (1672) is designed to offer security holders a simple and cost-efficient way to access the gold market by providing a return equivalent to the movements in the gold spot price less the applicable management fee. ",
+    "symbol": "JE00B1VS3770",
+    "valueProposition": "",
+    "desirabilityStatement": "",
+    "initialInvestment": 2,
+    "name": "ETFS Physical Gold",
+    "value": 2,
+    "factors": [],
+    "regions": [
+      {
+        "investmentID": 67,
+        "regionID": 20,
+        "region": null
+      }
+    ],
+    "risks": [],
+    "groups": [
+      {
+        "investmentID": 67,
+        "investmentGroupID": 8,
+        "investmentGroup": null
+      }
+    ],
+    "investmentIds": null
+  },
+  {
+    "id": 68,
+    "description": "Garmin Ltd. (Garmin) and subsidiaries offer global positioning system (GPS) navigation and wireless devices and applications.",
+    "symbol": "NASDAQ: GRMN",
+    "valueProposition": "",
+    "desirabilityStatement": "",
+    "initialInvestment": 2,
+    "name": "Garmin Ltd",
+    "value": 2,
+    "factors": [],
+    "regions": [
+      {
+        "investmentID": 68,
+        "regionID": 14,
+        "region": null
+      },
+      {
+        "investmentID": 68,
+        "regionID": 18,
+        "region": null
+      }
+    ],
+    "risks": [],
+    "groups": [
+      {
+        "investmentID": 68,
+        "investmentGroupID": 20,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 68,
+        "investmentGroupID": 27,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 68,
+        "investmentGroupID": 31,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 68,
+        "investmentGroupID": 37,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 68,
+        "investmentGroupID": 38,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 68,
+        "investmentGroupID": 39,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 68,
+        "investmentGroupID": 55,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 68,
+        "investmentGroupID": 56,
+        "investmentGroup": null
+      }
+    ],
+    "investmentIds": null
+  },
+  {
+    "id": 69,
+    "description": "Nanoco Group PLC is engaged in research, development and manufacturing of heavy-metal free quantum dots and semiconductor nanoparticles for use in display, lighting, solar energy and bio-imaging",
+    "symbol": "LON: NANO",
+    "valueProposition": "",
+    "desirabilityStatement": "",
+    "initialInvestment": 2,
+    "name": "Nanoco Group PLC",
+    "value": 2,
+    "factors": [],
+    "regions": [],
+    "risks": [
+      {
+        "investmentID": 69,
+        "investmentRiskID": 6,
+        "investmentRisk": null
+      },
+      {
+        "investmentID": 69,
+        "investmentRiskID": 9,
+        "investmentRisk": null
+      },
+      {
+        "investmentID": 69,
+        "investmentRiskID": 11,
+        "investmentRisk": null
+      }
+    ],
+    "groups": [],
+    "investmentIds": null
+  },
+  {
+    "id": 70,
+    "description": "Glanbia plc is a global nutrition group with operations in 32 countries. It has leading market positions in sports nutrition, cheese, dairy ingredients, speciality non-dairy ingredients and vitamin and mineral premixes.",
+    "symbol": " GLAPF",
+    "valueProposition": "",
+    "desirabilityStatement": "",
+    "initialInvestment": 2,
+    "name": "Glanbia PLC",
+    "value": 2,
+    "factors": [
+      {
+        "investmentID": 70,
+        "investmentInfluenceFactorID": 17,
+        "investmentInfluenceFactor": null
+      },
+      {
+        "investmentID": 70,
+        "investmentInfluenceFactorID": 22,
+        "investmentInfluenceFactor": null
+      }
+    ],
+    "regions": [
+      {
+        "investmentID": 70,
+        "regionID": 14,
+        "region": null
+      }
+    ],
+    "risks": [],
+    "groups": [
+      {
+        "investmentID": 70,
+        "investmentGroupID": 19,
+        "investmentGroup": null
+      }
+    ],
+    "investmentIds": null
+  },
+  {
+    "id": 71,
+    "description": "Steinhoff International Holdings NV is a Germany-based company that is active in the retail of household goods, apparel, as well as in the automotive industry.",
+    "symbol": "JSE:SNH",
+    "valueProposition": "Diverse market segments and good footing in consumer markets",
+    "desirabilityStatement": "They are large and stable, and their apparel business is cheaper than most",
+    "initialInvestment": 2,
+    "name": "Steinhoff International Holdings NV(Ger)",
+    "value": 2,
+    "factors": [
+      {
+        "investmentID": 71,
+        "investmentInfluenceFactorID": 38,
+        "investmentInfluenceFactor": null
+      },
+      {
+        "investmentID": 71,
+        "investmentInfluenceFactorID": 39,
+        "investmentInfluenceFactor": null
+      },
+      {
+        "investmentID": 71,
+        "investmentInfluenceFactorID": 40,
+        "investmentInfluenceFactor": null
+      },
+      {
+        "investmentID": 71,
+        "investmentInfluenceFactorID": 41,
+        "investmentInfluenceFactor": null
+      }
+    ],
+    "regions": [
+      {
+        "investmentID": 71,
+        "regionID": 14,
+        "region": null
+      },
+      {
+        "investmentID": 71,
+        "regionID": 15,
+        "region": null
+      },
+      {
+        "investmentID": 71,
+        "regionID": 16,
+        "region": null
+      },
+      {
+        "investmentID": 71,
+        "regionID": 17,
+        "region": null
+      }
+    ],
+    "risks": [
+      {
+        "investmentID": 71,
+        "investmentRiskID": 1,
+        "investmentRisk": null
+      },
+      {
+        "investmentID": 71,
+        "investmentRiskID": 8,
+        "investmentRisk": null
+      },
+      {
+        "investmentID": 71,
+        "investmentRiskID": 10,
+        "investmentRisk": null
+      },
+      {
+        "investmentID": 71,
+        "investmentRiskID": 12,
+        "investmentRisk": null
+      }
+    ],
+    "groups": [
+      {
+        "investmentID": 71,
+        "investmentGroupID": 41,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 71,
+        "investmentGroupID": 42,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 71,
+        "investmentGroupID": 43,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 71,
+        "investmentGroupID": 44,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 71,
+        "investmentGroupID": 45,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 71,
+        "investmentGroupID": 46,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 71,
+        "investmentGroupID": 47,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 71,
+        "investmentGroupID": 48,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 71,
+        "investmentGroupID": 49,
+        "investmentGroup": null
+      }
+    ],
+    "investmentIds": null
+  },
+  {
+    "id": 72,
+    "description": "Twitter, Inc. offers products and services for users, advertisers, developers and data partners.",
+    "symbol": "NYSE: TWTR",
+    "valueProposition": "",
+    "desirabilityStatement": "",
+    "initialInvestment": 2,
+    "name": "Twitter Inc (All Sessions)",
+    "value": 2,
+    "factors": [],
+    "regions": [
+      {
+        "investmentID": 72,
+        "regionID": 18,
+        "region": null
+      },
+      {
+        "investmentID": 72,
+        "regionID": 20,
+        "region": null
+      }
+    ],
+    "risks": [
+      {
+        "investmentID": 72,
+        "investmentRiskID": 9,
+        "investmentRisk": null
+      }
+    ],
+    "groups": [
+      {
+        "investmentID": 72,
+        "investmentGroupID": 50,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 72,
+        "investmentGroupID": 51,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 72,
+        "investmentGroupID": 54,
+        "investmentGroup": null
+      }
+    ],
+    "investmentIds": null
+  },
+  {
+    "id": 73,
+    "description": "Rosslyn Data Technologies plc is a United Kingdom-based company, which is engaged in the development and provision of data analytics software. ",
+    "symbol": "LON: RDT",
+    "valueProposition": "",
+    "desirabilityStatement": "",
+    "initialInvestment": 2,
+    "name": "Rosslyn Data Technologies",
+    "value": 2,
+    "factors": [],
+    "regions": [
+      {
+        "investmentID": 73,
+        "regionID": 19,
+        "region": null
+      }
+    ],
+    "risks": [
+      {
+        "investmentID": 73,
+        "investmentRiskID": 7,
+        "investmentRisk": null
+      },
+      {
+        "investmentID": 73,
+        "investmentRiskID": 9,
+        "investmentRisk": null
+      },
+      {
+        "investmentID": 73,
+        "investmentRiskID": 10,
+        "investmentRisk": null
+      }
+    ],
+    "groups": [
+      {
+        "investmentID": 73,
+        "investmentGroupID": 52,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 73,
+        "investmentGroupID": 53,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 73,
+        "investmentGroupID": 54,
+        "investmentGroup": null
+      }
+    ],
+    "investmentIds": null
+  },
+  {
+    "id": 74,
+    "description": "Corporate mobile device enrolment and management software",
+    "symbol": "NASDAQ: MOBL",
+    "valueProposition": "Companies buy this software to manage mobile devices in a companies workforce",
+    "desirabilityStatement": "Mobile is a growth area driven by increased usage and popularity. Business concerns around policy and data protection and use this software to manage this",
+    "initialInvestment": 0,
+    "name": "MobileIron",
+    "value": 0,
+    "factors": [
+      {
+        "investmentID": 74,
+        "investmentInfluenceFactorID": 28,
+        "investmentInfluenceFactor": null
+      },
+      {
+        "investmentID": 74,
+        "investmentInfluenceFactorID": 43,
+        "investmentInfluenceFactor": null
+      }
+    ],
+    "regions": [],
+    "risks": [
+      {
+        "investmentID": 74,
+        "investmentRiskID": 11,
+        "investmentRisk": null
+      }
+    ],
+    "groups": [
+      {
+        "investmentID": 74,
+        "investmentGroupID": 54,
+        "investmentGroup": null
+      }
+    ],
+    "investmentIds": null
+  },
+  {
+    "id": 75,
+    "description": "Create container packaging solutions as well as tracking solutions",
+    "symbol": "LON: RM2",
+    "valueProposition": "Create a unique pallet which is better than standard wood. Smart enough to know important it it to know where you goods are.",
+    "desirabilityStatement": "Unique product which many useful features. Innovative concept which seems to extend to their realisation that asset tracking is important",
+    "initialInvestment": 0,
+    "name": "RM2 International SA",
+    "value": 0,
+    "factors": [
+      {
+        "investmentID": 75,
+        "investmentInfluenceFactorID": 42,
+        "investmentInfluenceFactor": null
+      }
+    ],
+    "regions": [],
+    "risks": [
+      {
+        "investmentID": 75,
+        "investmentRiskID": 11,
+        "investmentRisk": null
+      }
+    ],
+    "groups": [
+      {
+        "investmentID": 75,
+        "investmentGroupID": 47,
+        "investmentGroup": null
+      }
+    ],
+    "investmentIds": null
+  },
+  {
+    "id": 76,
+    "description": "ADTRAN, Inc. (ADTRAN) is a provider of networking and communications equipment. ",
+    "symbol": "NASDAQ: ADTN",
+    "valueProposition": "TBD",
+    "desirabilityStatement": "TBD",
+    "initialInvestment": 0,
+    "name": "ADTRAN Inc",
+    "value": 0,
+    "factors": [
+      {
+        "investmentID": 76,
+        "investmentInfluenceFactorID": 43,
+        "investmentInfluenceFactor": null
+      },
+      {
+        "investmentID": 76,
+        "investmentInfluenceFactorID": 53,
+        "investmentInfluenceFactor": null
+      }
+    ],
+    "regions": [],
+    "risks": [
+      {
+        "investmentID": 76,
+        "investmentRiskID": 9,
+        "investmentRisk": null
+      }
+    ],
+    "groups": [
+      {
+        "investmentID": 76,
+        "investmentGroupID": 59,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 76,
+        "investmentGroupID": 60,
+        "investmentGroup": null
+      }
+    ],
+    "investmentIds": null
+  },
+  {
+    "id": 77,
+    "description": "The Company invests in commercial properties in Europe, which are held through its subsidiaries. ",
+    "symbol": "LON: APT",
+    "valueProposition": "TBD",
+    "desirabilityStatement": "TBD",
+    "initialInvestment": 0,
+    "name": "AXA Property Trust Ltd",
+    "value": 0,
+    "factors": [],
+    "regions": [
+      {
+        "investmentID": 77,
+        "regionID": 19,
+        "region": null
+      }
+    ],
+    "risks": [],
+    "groups": [
+      {
+        "investmentID": 77,
+        "investmentGroupID": 61,
+        "investmentGroup": null
+      }
+    ],
+    "investmentIds": null
+  },
+  {
+    "id": 78,
+    "description": "Canada Goose Inc. is a Canadian manufacturer of outwear apparel.",
+    "symbol": "TSE: GOOS",
+    "valueProposition": "TBD",
+    "desirabilityStatement": "TBD",
+    "initialInvestment": 0,
+    "name": "Canada Goose Holdings Inc",
+    "value": 0,
+    "factors": [],
+    "regions": [
+      {
+        "investmentID": 78,
+        "regionID": 21,
+        "region": null
+      }
+    ],
+    "risks": [],
+    "groups": [
+      {
+        "investmentID": 78,
+        "investmentGroupID": 29,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 78,
+        "investmentGroupID": 42,
+        "investmentGroup": null
+      }
+    ],
+    "investmentIds": null
+  },
+  {
+    "id": 79,
+    "description": "Intercede Group plc is a United Kingdom-based software and service company. ",
+    "symbol": "LON: IGP",
+    "valueProposition": "TBD",
+    "desirabilityStatement": "TDB",
+    "initialInvestment": 0,
+    "name": "Intercede Group PLC",
+    "value": 0,
+    "factors": [
+      {
+        "investmentID": 79,
+        "investmentInfluenceFactorID": 28,
+        "investmentInfluenceFactor": null
+      },
+      {
+        "investmentID": 79,
+        "investmentInfluenceFactorID": 43,
+        "investmentInfluenceFactor": null
+      }
+    ],
+    "regions": [],
+    "risks": [],
+    "groups": [
+      {
+        "investmentID": 79,
+        "investmentGroupID": 53,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 79,
+        "investmentGroupID": 54,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 79,
+        "investmentGroupID": 62,
+        "investmentGroup": null
+      }
+    ],
+    "investmentIds": null
+  },
+  {
+    "id": 80,
+    "description": "The Fund seeks to track the performance of an index composed of UK listed real estate companies and Real Estate Investment Trusts (REITS)",
+    "symbol": "IUKP",
+    "valueProposition": "TBD",
+    "desirabilityStatement": "TBD",
+    "initialInvestment": 0,
+    "name": "iShares UK Property UCITS ETF",
+    "value": 0,
+    "factors": [],
+    "regions": [],
+    "risks": [],
+    "groups": [
+      {
+        "investmentID": 80,
+        "investmentGroupID": 61,
+        "investmentGroup": null
+      }
+    ],
+    "investmentIds": null
+  },
+  {
+    "id": 81,
+    "description": "SimiGon Ltd is engaged in developing learning, training and simulation technologies and applications for use in professional communities. ",
+    "symbol": "LON: SIM",
+    "valueProposition": "0",
+    "desirabilityStatement": "0",
+    "initialInvestment": 0,
+    "name": "SimiGon Ltd",
+    "value": 0,
+    "factors": [],
+    "regions": [],
+    "risks": [],
+    "groups": [
+      {
+        "investmentID": 81,
+        "investmentGroupID": 25,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 81,
+        "investmentGroupID": 54,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 81,
+        "investmentGroupID": 63,
+        "investmentGroup": null
+      }
+    ],
+    "investmentIds": null
+  },
+  {
+    "id": 82,
+    "description": "Simon Property Group, Inc. is a self-administered and self-managed real estate investment trust (REIT). ",
+    "symbol": "NYSE: SPG",
+    "valueProposition": "TBD",
+    "desirabilityStatement": "0",
+    "initialInvestment": 0,
+    "name": "Simon Property Group Inc",
+    "value": 0,
+    "factors": [],
+    "regions": [],
+    "risks": [],
+    "groups": [],
+    "investmentIds": null
+  },
+  {
+    "id": 83,
+    "description": "Starcom plc is engaged in the development of wireless solutions for the remote tracking, monitoring and protection of various types of assets and people.",
+    "symbol": "LON: STAR",
+    "valueProposition": "0",
+    "desirabilityStatement": "0",
+    "initialInvestment": 0,
+    "name": "Starcom Plc",
+    "value": 0,
+    "factors": [
+      {
+        "investmentID": 83,
+        "investmentInfluenceFactorID": 28,
+        "investmentInfluenceFactor": null
+      },
+      {
+        "investmentID": 83,
+        "investmentInfluenceFactorID": 42,
+        "investmentInfluenceFactor": null
+      },
+      {
+        "investmentID": 83,
+        "investmentInfluenceFactorID": 43,
+        "investmentInfluenceFactor": null
+      }
+    ],
+    "regions": [],
+    "risks": [],
+    "groups": [
+      {
+        "investmentID": 83,
+        "investmentGroupID": 39,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 83,
+        "investmentGroupID": 47,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 83,
+        "investmentGroupID": 56,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 83,
+        "investmentGroupID": 59,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 83,
+        "investmentGroupID": 64,
+        "investmentGroup": null
+      }
+    ],
+    "investmentIds": null
+  },
+  {
+    "id": 84,
+    "description": "Tern Plc invests in, develops and sells private software companies with technology, based in the United Kingdom. ",
+    "symbol": "LON: TERN",
+    "valueProposition": "0",
+    "desirabilityStatement": "0",
+    "initialInvestment": 0,
+    "name": "Tern Plc",
+    "value": 0,
+    "factors": [
+      {
+        "investmentID": 84,
+        "investmentInfluenceFactorID": 43,
+        "investmentInfluenceFactor": null
+      }
+    ],
+    "regions": [],
+    "risks": [],
+    "groups": [
+      {
+        "investmentID": 84,
+        "investmentGroupID": 54,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 84,
+        "investmentGroupID": 65,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 84,
+        "investmentGroupID": 66,
+        "investmentGroup": null
+      }
+    ],
+    "investmentIds": null
+  },
+  {
+    "id": 85,
+    "description": "Ubisense Group Plc is engaged in providing enterprise location intelligence solutions for manufacturing, logistics, transit, communication and utility companies.",
+    "symbol": "LON: UBI",
+    "valueProposition": "0",
+    "desirabilityStatement": "0",
+    "initialInvestment": 0,
+    "name": "Ubisense Group PLC",
+    "value": 0,
+    "factors": [],
+    "regions": [],
+    "risks": [],
+    "groups": [
+      {
+        "investmentID": 85,
+        "investmentGroupID": 39,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 85,
+        "investmentGroupID": 47,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 85,
+        "investmentGroupID": 57,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 85,
+        "investmentGroupID": 64,
+        "investmentGroup": null
+      }
+    ],
+    "investmentIds": null
+  },
+  {
+    "id": 86,
+    "description": "Zynga Inc. is an American social game developer running social video game services",
+    "symbol": "NASDAQ: ZNGA",
+    "valueProposition": "0",
+    "desirabilityStatement": "0",
+    "initialInvestment": 0,
+    "name": "Zynga",
+    "value": 0,
+    "factors": [
+      {
+        "investmentID": 86,
+        "investmentInfluenceFactorID": 28,
+        "investmentInfluenceFactor": null
+      },
+      {
+        "investmentID": 86,
+        "investmentInfluenceFactorID": 43,
+        "investmentInfluenceFactor": null
+      },
+      {
+        "investmentID": 86,
+        "investmentInfluenceFactorID": 45,
+        "investmentInfluenceFactor": null
+      }
+    ],
+    "regions": [
+      {
+        "investmentID": 86,
+        "regionID": 20,
+        "region": null
+      }
+    ],
+    "risks": [],
+    "groups": [
+      {
+        "investmentID": 86,
+        "investmentGroupID": 40,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 86,
+        "investmentGroupID": 54,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 86,
+        "investmentGroupID": 67,
+        "investmentGroup": null
+      }
+    ],
+    "investmentIds": null
+  },
+  {
+    "id": 87,
+    "description": "Gildan Activewear Inc. is a manufacturer and marketer of branded basic family apparel, including T-shirts, fleece, sport shirts, underwear, socks, hosiery and shapewear. ",
+    "symbol": "TSE: GIL",
+    "valueProposition": "Cheaper and sales a lot of apparel",
+    "desirabilityStatement": "asd",
+    "initialInvestment": 0,
+    "name": "Gildan Activewear Inc(US)",
+    "value": 0,
+    "factors": [],
+    "regions": [
+      {
+        "investmentID": 87,
+        "regionID": 14,
+        "region": null
+      },
+      {
+        "investmentID": 87,
+        "regionID": 16,
+        "region": null
+      },
+      {
+        "investmentID": 87,
+        "regionID": 18,
+        "region": null
+      },
+      {
+        "investmentID": 87,
+        "regionID": 21,
+        "region": null
+      },
+      {
+        "investmentID": 87,
+        "regionID": 22,
+        "region": null
+      }
+    ],
+    "risks": [
+      {
+        "investmentID": 87,
+        "investmentRiskID": 2,
+        "investmentRisk": null
+      },
+      {
+        "investmentID": 87,
+        "investmentRiskID": 5,
+        "investmentRisk": null
+      },
+      {
+        "investmentID": 87,
+        "investmentRiskID": 9,
+        "investmentRisk": null
+      }
+    ],
+    "groups": [
+      {
+        "investmentID": 87,
+        "investmentGroupID": 29,
+        "investmentGroup": null
+      },
+      {
+        "investmentID": 87,
+        "investmentGroupID": 42,
+        "investmentGroup": null
+      }
+    ],
+    "investmentIds": null
+  },
+  {
+    "id": 89,
+    "description": "Advanced Micro Devices, Inc. is a global semiconductor company",
+    "symbol": "NASDAQ: AMD",
+    "valueProposition": "tbd",
+    "desirabilityStatement": "tbd",
+    "initialInvestment": 0,
+    "name": "Advanced Micro Devices Inc",
+    "value": 0,
+    "factors": [],
+    "regions": [],
+    "risks": [
+      {
+        "investmentID": 89,
+        "investmentRiskID": 2,
+        "investmentRisk": null
+      },
+      {
+        "investmentID": 89,
+        "investmentRiskID": 12,
+        "investmentRisk": null
+      }
+    ],
+    "groups": [
+      {
+        "investmentID": 89,
+        "investmentGroupID": 45,
+        "investmentGroup": null
+      }
+    ],
+    "investmentIds": null
+  }
+]

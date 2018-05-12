@@ -1,0 +1,376 @@
+[
+  {
+    "id": 1,
+    "description": "Financial officer fired due to corruption",
+    "investmentIds": [
+      71
+    ],
+    "type": 0,
+    "name": "Director dismissal",
+    "investments": [
+      {
+        "investmentID": 71,
+        "investment": null,
+        "investmentRiskID": 1
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "description": "Competition from other companies",
+    "investmentIds": [
+      56,
+      58,
+      59,
+      60,
+      87,
+      89
+    ],
+    "type": 0,
+    "name": "Competition",
+    "investments": [
+      {
+        "investmentID": 56,
+        "investment": null,
+        "investmentRiskID": 2
+      },
+      {
+        "investmentID": 58,
+        "investment": null,
+        "investmentRiskID": 2
+      },
+      {
+        "investmentID": 59,
+        "investment": null,
+        "investmentRiskID": 2
+      },
+      {
+        "investmentID": 60,
+        "investment": null,
+        "investmentRiskID": 2
+      },
+      {
+        "investmentID": 87,
+        "investment": null,
+        "investmentRiskID": 2
+      },
+      {
+        "investmentID": 89,
+        "investment": null,
+        "investmentRiskID": 2
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "description": "Fashion/popularity of the comodity",
+    "investmentIds": [
+      44,
+      45,
+      47,
+      51,
+      56,
+      58,
+      87
+    ],
+    "type": 0,
+    "name": "Popularity uncertain ",
+    "investments": [
+      {
+        "investmentID": 44,
+        "investment": null,
+        "investmentRiskID": 5
+      },
+      {
+        "investmentID": 45,
+        "investment": null,
+        "investmentRiskID": 5
+      },
+      {
+        "investmentID": 47,
+        "investment": null,
+        "investmentRiskID": 5
+      },
+      {
+        "investmentID": 51,
+        "investment": null,
+        "investmentRiskID": 5
+      },
+      {
+        "investmentID": 56,
+        "investment": null,
+        "investmentRiskID": 5
+      },
+      {
+        "investmentID": 58,
+        "investment": null,
+        "investmentRiskID": 5
+      },
+      {
+        "investmentID": 87,
+        "investment": null,
+        "investmentRiskID": 5
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "description": "Investor is unclear what the company really does",
+    "investmentIds": [
+      69
+    ],
+    "type": 0,
+    "name": "Investor misunderstanding",
+    "investments": [
+      {
+        "investmentID": 69,
+        "investment": null,
+        "investmentRiskID": 6
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "description": "I don't know how well cloud analytics does or doesn't do",
+    "investmentIds": [
+      73
+    ],
+    "type": 0,
+    "name": "Cloud Analytics Uncertainty",
+    "investments": [
+      {
+        "investmentID": 73,
+        "investment": null,
+        "investmentRiskID": 7
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "description": "Recently Steinhoff as misreported their preformance and this has lead to the value of the stock plunging. This could happen again.",
+    "investmentIds": [
+      71
+    ],
+    "type": 0,
+    "name": "Steinhoff mismanagement",
+    "investments": [
+      {
+        "investmentID": 71,
+        "investment": null,
+        "investmentRiskID": 8
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "description": "Investor does not have clear picture of if product's value is growing",
+    "investmentIds": [
+      45,
+      58,
+      65,
+      69,
+      72,
+      73,
+      76,
+      87
+    ],
+    "type": 1,
+    "name": "Product growth uncertainty",
+    "investments": [
+      {
+        "investmentID": 45,
+        "investment": null,
+        "investmentRiskID": 9
+      },
+      {
+        "investmentID": 58,
+        "investment": null,
+        "investmentRiskID": 9
+      },
+      {
+        "investmentID": 65,
+        "investment": null,
+        "investmentRiskID": 9
+      },
+      {
+        "investmentID": 69,
+        "investment": null,
+        "investmentRiskID": 9
+      },
+      {
+        "investmentID": 72,
+        "investment": null,
+        "investmentRiskID": 9
+      },
+      {
+        "investmentID": 73,
+        "investment": null,
+        "investmentRiskID": 9
+      },
+      {
+        "investmentID": 76,
+        "investment": null,
+        "investmentRiskID": 9
+      },
+      {
+        "investmentID": 87,
+        "investment": null,
+        "investmentRiskID": 9
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "description": "Does many things",
+    "investmentIds": [
+      56,
+      59,
+      71,
+      73
+    ],
+    "type": 0,
+    "name": "Does many things",
+    "investments": [
+      {
+        "investmentID": 56,
+        "investment": null,
+        "investmentRiskID": 10
+      },
+      {
+        "investmentID": 59,
+        "investment": null,
+        "investmentRiskID": 10
+      },
+      {
+        "investmentID": 71,
+        "investment": null,
+        "investmentRiskID": 10
+      },
+      {
+        "investmentID": 73,
+        "investment": null,
+        "investmentRiskID": 10
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "description": "Investor is unfamiliar with the market",
+    "investmentIds": [
+      44,
+      45,
+      47,
+      65,
+      69,
+      74,
+      75
+    ],
+    "type": 0,
+    "name": "Unfamilar market",
+    "investments": [
+      {
+        "investmentID": 44,
+        "investment": null,
+        "investmentRiskID": 11
+      },
+      {
+        "investmentID": 45,
+        "investment": null,
+        "investmentRiskID": 11
+      },
+      {
+        "investmentID": 47,
+        "investment": null,
+        "investmentRiskID": 11
+      },
+      {
+        "investmentID": 65,
+        "investment": null,
+        "investmentRiskID": 11
+      },
+      {
+        "investmentID": 69,
+        "investment": null,
+        "investmentRiskID": 11
+      },
+      {
+        "investmentID": 74,
+        "investment": null,
+        "investmentRiskID": 11
+      },
+      {
+        "investmentID": 75,
+        "investment": null,
+        "investmentRiskID": 11
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "description": "When the will to purchase decreases",
+    "investmentIds": [
+      47,
+      56,
+      58,
+      59,
+      60,
+      71,
+      89
+    ],
+    "type": 0,
+    "name": "Decrease in popularity",
+    "investments": [
+      {
+        "investmentID": 47,
+        "investment": null,
+        "investmentRiskID": 12
+      },
+      {
+        "investmentID": 56,
+        "investment": null,
+        "investmentRiskID": 12
+      },
+      {
+        "investmentID": 58,
+        "investment": null,
+        "investmentRiskID": 12
+      },
+      {
+        "investmentID": 59,
+        "investment": null,
+        "investmentRiskID": 12
+      },
+      {
+        "investmentID": 60,
+        "investment": null,
+        "investmentRiskID": 12
+      },
+      {
+        "investmentID": 71,
+        "investment": null,
+        "investmentRiskID": 12
+      },
+      {
+        "investmentID": 89,
+        "investment": null,
+        "investmentRiskID": 12
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "description": "If the will and want for toys is not good, then its follows that investments based on them will suffer",
+    "investmentIds": [
+      47
+    ],
+    "type": 0,
+    "name": "Toys industry does badly",
+    "investments": [
+      {
+        "investmentID": 47,
+        "investment": null,
+        "investmentRiskID": 13
+      }
+    ]
+  }
+]

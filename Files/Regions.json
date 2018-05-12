@@ -1,0 +1,365 @@
+[
+  {
+    "id": 14,
+    "description": "Europe",
+    "investmentIds": [
+      53,
+      56,
+      58,
+      59,
+      62,
+      68,
+      70,
+      71,
+      87
+    ],
+    "name": "Europe",
+    "investments": [
+      {
+        "investmentID": 53,
+        "investment": null,
+        "regionID": 14
+      },
+      {
+        "investmentID": 56,
+        "investment": null,
+        "regionID": 14
+      },
+      {
+        "investmentID": 58,
+        "investment": null,
+        "regionID": 14
+      },
+      {
+        "investmentID": 59,
+        "investment": null,
+        "regionID": 14
+      },
+      {
+        "investmentID": 62,
+        "investment": null,
+        "regionID": 14
+      },
+      {
+        "investmentID": 68,
+        "investment": null,
+        "regionID": 14
+      },
+      {
+        "investmentID": 70,
+        "investment": null,
+        "regionID": 14
+      },
+      {
+        "investmentID": 71,
+        "investment": null,
+        "regionID": 14
+      },
+      {
+        "investmentID": 87,
+        "investment": null,
+        "regionID": 14
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "description": "Asia",
+    "investmentIds": [
+      49,
+      53,
+      56,
+      58,
+      59,
+      71
+    ],
+    "name": "Asia",
+    "investments": [
+      {
+        "investmentID": 49,
+        "investment": null,
+        "regionID": 15
+      },
+      {
+        "investmentID": 53,
+        "investment": null,
+        "regionID": 15
+      },
+      {
+        "investmentID": 56,
+        "investment": null,
+        "regionID": 15
+      },
+      {
+        "investmentID": 58,
+        "investment": null,
+        "regionID": 15
+      },
+      {
+        "investmentID": 59,
+        "investment": null,
+        "regionID": 15
+      },
+      {
+        "investmentID": 71,
+        "investment": null,
+        "regionID": 15
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "description": "Africa",
+    "investmentIds": [
+      56,
+      58,
+      59,
+      71,
+      87
+    ],
+    "name": "Africa",
+    "investments": [
+      {
+        "investmentID": 56,
+        "investment": null,
+        "regionID": 16
+      },
+      {
+        "investmentID": 58,
+        "investment": null,
+        "regionID": 16
+      },
+      {
+        "investmentID": 59,
+        "investment": null,
+        "regionID": 16
+      },
+      {
+        "investmentID": 71,
+        "investment": null,
+        "regionID": 16
+      },
+      {
+        "investmentID": 87,
+        "investment": null,
+        "regionID": 16
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "description": "Australia",
+    "investmentIds": [
+      71
+    ],
+    "name": "Australia",
+    "investments": [
+      {
+        "investmentID": 71,
+        "investment": null,
+        "regionID": 17
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "description": "Geographically In or around the United States of America",
+    "investmentIds": [
+      44,
+      47,
+      48,
+      53,
+      56,
+      58,
+      59,
+      62,
+      68,
+      72,
+      87
+    ],
+    "name": "USA",
+    "investments": [
+      {
+        "investmentID": 44,
+        "investment": null,
+        "regionID": 18
+      },
+      {
+        "investmentID": 47,
+        "investment": null,
+        "regionID": 18
+      },
+      {
+        "investmentID": 48,
+        "investment": null,
+        "regionID": 18
+      },
+      {
+        "investmentID": 53,
+        "investment": null,
+        "regionID": 18
+      },
+      {
+        "investmentID": 56,
+        "investment": null,
+        "regionID": 18
+      },
+      {
+        "investmentID": 58,
+        "investment": null,
+        "regionID": 18
+      },
+      {
+        "investmentID": 59,
+        "investment": null,
+        "regionID": 18
+      },
+      {
+        "investmentID": 62,
+        "investment": null,
+        "regionID": 18
+      },
+      {
+        "investmentID": 68,
+        "investment": null,
+        "regionID": 18
+      },
+      {
+        "investmentID": 72,
+        "investment": null,
+        "regionID": 18
+      },
+      {
+        "investmentID": 87,
+        "investment": null,
+        "regionID": 18
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "description": "United Kingdom",
+    "investmentIds": [
+      45,
+      51,
+      56,
+      73,
+      77
+    ],
+    "name": "United Kingdom",
+    "investments": [
+      {
+        "investmentID": 45,
+        "investment": null,
+        "regionID": 19
+      },
+      {
+        "investmentID": 51,
+        "investment": null,
+        "regionID": 19
+      },
+      {
+        "investmentID": 56,
+        "investment": null,
+        "regionID": 19
+      },
+      {
+        "investmentID": 73,
+        "investment": null,
+        "regionID": 19
+      },
+      {
+        "investmentID": 77,
+        "investment": null,
+        "regionID": 19
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "description": "Global presence such as internet based",
+    "investmentIds": [
+      47,
+      64,
+      67,
+      72,
+      86
+    ],
+    "name": "Global",
+    "investments": [
+      {
+        "investmentID": 47,
+        "investment": null,
+        "regionID": 20
+      },
+      {
+        "investmentID": 64,
+        "investment": null,
+        "regionID": 20
+      },
+      {
+        "investmentID": 67,
+        "investment": null,
+        "regionID": 20
+      },
+      {
+        "investmentID": 72,
+        "investment": null,
+        "regionID": 20
+      },
+      {
+        "investmentID": 86,
+        "investment": null,
+        "regionID": 20
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "description": "Canada",
+    "investmentIds": [
+      53,
+      56,
+      78,
+      87
+    ],
+    "name": "Canada",
+    "investments": [
+      {
+        "investmentID": 53,
+        "investment": null,
+        "regionID": 21
+      },
+      {
+        "investmentID": 56,
+        "investment": null,
+        "regionID": 21
+      },
+      {
+        "investmentID": 78,
+        "investment": null,
+        "regionID": 21
+      },
+      {
+        "investmentID": 87,
+        "investment": null,
+        "regionID": 21
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "description": "Mexico",
+    "investmentIds": [
+      87
+    ],
+    "name": "Mexico",
+    "investments": [
+      {
+        "investmentID": 87,
+        "investment": null,
+        "regionID": 22
+      }
+    ]
+  }
+]
