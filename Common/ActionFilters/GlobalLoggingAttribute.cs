@@ -1,4 +1,5 @@
 ﻿using System;
+using CoreInvestmentTracker.Models.DEL;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore.Query.ExpressionTranslators.Internal;
 
@@ -31,6 +32,7 @@ namespace CoreInvestmentTracker.Common.ActionFilters
         public override void OnActionExecuted(ActionExecutedContext actionExecutedContext)
         {
             var log = (IMyLogger)actionExecutedContext.HttpContext.RequestServices.GetService(typeof(IMyLogger));
+            
             log.Debug(string.Format("{0} Response Code: {1}", actionExecutedContext.HttpContext.Request.ToString(), actionExecutedContext.HttpContext.Response.StatusCode.ToString()));
             base.OnActionExecuted(actionExecutedContext);
         }

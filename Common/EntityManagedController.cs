@@ -7,6 +7,7 @@ using CoreInvestmentTracker.Models.DAL;
 using CoreInvestmentTracker.Models.DAL.Interfaces;
 using CoreInvestmentTracker.Models.DEL;
 using CoreInvestmentTracker.Models.DEL.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
@@ -46,7 +47,7 @@ namespace CoreInvestmentTracker.Common
         /// Get all entities
         /// </summary>
         /// <returns>Array of entities</returns>
-        [HttpGet()]
+        [HttpGet,Authorize]
         public IEnumerable<T> GetAll()
         {
             return EntityRepository.GetAllEntities(withChildren: true).ToList();
@@ -56,7 +57,7 @@ namespace CoreInvestmentTracker.Common
         /// Gets all entities but not their children
         /// </summary>
         /// <returns></returns>
-        [HttpGet("WithoutChildren")]
+        [HttpGet("WithoutChildren"), Authorize]
         public IEnumerable<T> GetAllWithoutChildren()
         {
             return EntityRepository.GetAllEntities(withChildren:false).ToList();
@@ -67,7 +68,7 @@ namespace CoreInvestmentTracker.Common
         /// </summary>
         /// <param name="id"></param>
         /// <returns>item</returns>
-        [HttpGet("{id}")]
+        [HttpGet("{id}"), Authorize]
         public IActionResult GetById(int id)
         {
             var item = EntityRepository.GetAllEntities().FirstOrDefault(p => p.Id == id);
@@ -81,7 +82,7 @@ namespace CoreInvestmentTracker.Common
         /// <returns>view details of the entity</returns>
         /// <response code="201">Returns the newly-created item</response>
         /// <response code="400">If the item is null</response>
-        [HttpPost()]
+        [HttpPost, Authorize]
         public IActionResult Create([FromBody]T entity)
         {
             if (entity == null)
@@ -89,7 +90,7 @@ namespace CoreInvestmentTracker.Common
                 return BadRequest();
             }
 
-            User systemUser = EntityRepository.Db.Users.First(u => u.Id == 0);
+            User systemUser = EntityRepository.Db.Users.First(u => u.Id == 1);
             EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(systemUser, "tag","Created entity", DateTimeOffset.UtcNow, entity.Id, EntityType.Investment));
             EntityRepository.Db.Add(entity);
             EntityRepository.SaveChanges();
@@ -101,7 +102,7 @@ namespace CoreInvestmentTracker.Common
         /// </summary>
         /// <param name="entities"></param>
         /// <returns></returns>
-        [HttpPost("import")]
+        [HttpPost("import"), Authorize]
         public IActionResult Import([FromBody] object[] entities)
         {
             if (entities.Length == 0)
@@ -120,7 +121,7 @@ namespace CoreInvestmentTracker.Common
         /// <param name="id">Id of entity to patch</param>
         /// <param name="patchDocument">the patched object</param>
         /// <returns>the new object updated</returns>
-        [HttpPatch("{id}")]
+        [HttpPatch("{id}"), Authorize]
         public IActionResult Patch(int id, [FromBody] JsonPatchDocument<T> patchDocument)
         {
             if (!ModelState.IsValid)
@@ -147,7 +148,7 @@ namespace CoreInvestmentTracker.Common
         /// </summary>
         /// <param name="id">The id of the entity to delete</param>
         /// <returns>NoContentResult</returns>
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}"), Authorize]
         public IActionResult Delete(int id)
         { 
             var entity = EntityRepository.Db.Find<T>(id);
@@ -174,7 +175,7 @@ namespace CoreInvestmentTracker.Common
         /// <param name="id">Id of the entity to update</param>
         /// <param name="newItem">the contents of the entity to change</param>
         /// <returns>NoContentResult</returns>
-        [HttpPut("{id}")]
+        [HttpPut("{id}"), Authorize]
         public IActionResult Replace(int id, [FromBody] T newItem)
         {
             if (newItem == null || newItem.Id != id)
@@ -203,7 +204,7 @@ namespace CoreInvestmentTracker.Common
             return new NoContentResult();
         }
 
-        [HttpGet("GenerateSharedInvestmentsGraphDataFor")]
+        [HttpGet("GenerateSharedInvestmentsGraphDataFor"), Authorize]
         public IActionResult GenerateSharedGraphDataFor()
         {
             /*

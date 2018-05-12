@@ -3,3 +3,5 @@
 ################################################################################
 
 /.vs/CoreInvestmentTracker/v15
+/.vscode
+/bin/Debug/netcoreapp2.0

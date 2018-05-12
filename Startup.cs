@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Text;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -7,8 +8,10 @@ using Microsoft.EntityFrameworkCore;
 using CoreInvestmentTracker.Models.DAL;
 using CoreInvestmentTracker.Models.DAL.Interfaces;
 using CoreInvestmentTracker.Common;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.Extensions.PlatformAbstractions;
+using Microsoft.IdentityModel.Tokens;
 
 namespace CoreInvestmentTracker
 {
@@ -53,7 +56,7 @@ namespace CoreInvestmentTracker
             // Which database location to connect to?
             services.AddDbContext<ApplicationDbContext>(options =>
             {
-                var devConnectionString = Configuration.GetConnectionString("LocalDBConnection");
+                var devConnectionString = Configuration.GetConnectionString("SqlExpress2017LocalHostConnection");
 
                 options.UseSqlServer(!HostingEnvironment.IsDevelopment()
                     // Connect to amazon RDS database in production
@@ -65,6 +68,24 @@ namespace CoreInvestmentTracker
             // Add application services for dependency injection
             services.AddTransient(typeof(IEntityApplicationDbContext<>), typeof(EntityApplicationDbContext<>));
             services.AddTransient(typeof(IMyLogger), typeof(MyLogger));
+            
+            // Configure authentication
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = Configuration["Jwt:Issuer"],
+                        ValidAudience = Configuration["Jwt:Issuer"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+                    };
+                });
+            
+            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info
@@ -77,10 +98,18 @@ namespace CoreInvestmentTracker
                     License = new License { Name = "License information", Url = "https://www.stuartmathews.com" }
                 });
 
+                c.AddSecurityDefinition("Bearer", new ApiKeyScheme
+                {
+                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                    Name = "Authorization",
+                    In = "header",
+                    Type = "apiKey"
+                });
+
                 // Set the comments path for the Swagger JSON and UI.
                 c.IncludeXmlComments(GetXmlCommentsPath());
             });
-
+            
             services.AddCors(options => options.AddPolicy("Cors", builder => {
                 builder.AllowAnyOrigin()
                        .AllowAnyMethod()
@@ -117,7 +146,7 @@ namespace CoreInvestmentTracker
             {
                 app.UseDeveloperExceptionPage();
             }
-            
+            app.UseAuthentication();
             app.UseStaticFiles();
             app.UseStatusCodePages("text/plain", "Status code page, status code: {0}");
             app.UseCors("Cors");
@@ -135,6 +164,8 @@ namespace CoreInvestmentTracker
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Core Investment Tracker API V1");
             });
+
+            
         }
     }
 }
