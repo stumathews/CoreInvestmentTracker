@@ -110,11 +110,12 @@ namespace CoreInvestmentTracker
                 c.IncludeXmlComments(GetXmlCommentsPath());
             });
             
-            services.AddCors(options => options.AddPolicy("Cors", builder => {
-                builder.AllowAnyOrigin()
+            services.AddCors(options => options.AddPolicy("Cors", 
+                builder => builder.AllowAnyOrigin()
                        .AllowAnyMethod()
-                       .AllowAnyHeader();
-            }));
+                       .AllowAnyHeader()
+                       .AllowCredentials()
+            ));
 
         }
         private static string GetXmlCommentsPath()

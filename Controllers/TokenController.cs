@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using CoreInvestmentTracker.Models.BOLO;
@@ -52,9 +53,16 @@ namespace CoreInvestmentTracker.Controllers
         {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
+            var claims = new[]
+            {
+                new Claim(JwtRegisteredClaimNames.Sub, user.Name), 
+                new Claim(JwtRegisteredClaimNames.Email, user.Email), 
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+            };
             var token = new JwtSecurityToken(
-                            _config["Jwt:Issuer"], _config["Jwt:Issuer"], 
+                            _config["Jwt:Issuer"], 
+                            _config["Jwt:Issuer"], 
+                            claims,
                             expires: DateTime.Now.AddMinutes(30),
                             signingCredentials: creds);
 
@@ -78,6 +86,7 @@ namespace CoreInvestmentTracker.Controllers
             public string Name { get; set; }
             public string Email { get; set; }
             public DateTime Birthdate { get; set; }
+            public int TimeZone { get;set; }
         }
     }
     

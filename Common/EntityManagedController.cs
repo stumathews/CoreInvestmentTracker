@@ -50,6 +50,8 @@ namespace CoreInvestmentTracker.Common
         [HttpGet,Authorize]
         public IEnumerable<T> GetAll()
         {
+            var currentUser = HttpContext.User;
+                
             return EntityRepository.GetAllEntities(withChildren: true).ToList();
         }
 
