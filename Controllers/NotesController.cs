@@ -38,7 +38,7 @@ namespace CoreInvestmentTracker.Controllers
         [HttpGet("{owningEntityId}/{owningEntityType}")]
         public IEnumerable<InvestmentNote> GetAllNotesFor(int owningEntityId, int owningEntityType)
         {
-            var items = EntityRepository.GetAllEntities().Where(o => o.OwningEntityId == owningEntityId 
+            var items = EntityRepository.GetOneOrAllEntities().Where(o => o.OwningEntityId == owningEntityId 
                                                           && o.OwningEntityType == (EntityType)owningEntityType);
             return items.ToList();
         }

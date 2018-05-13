@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 //using System.Data.Entity;
 //using System.Data.Entity.Infrastructure;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Web;
 using CoreInvestmentTracker.Models.DAL.Interfaces;
@@ -40,7 +42,7 @@ namespace CoreInvestmentTracker.Models.DAL
         /// <summary>
         /// Read only access to the type Entities
         /// </summary>
-        public IQueryable<T> GetAllEntities(bool withChildren = true)
+        public IQueryable<T> GetOneOrAllEntities(bool withChildren = true, int? specificId = null)
         {
             
                 /*
@@ -73,6 +75,7 @@ namespace CoreInvestmentTracker.Models.DAL
             {
                 entities.AddRange(withChildren
                     ? Db.Set<InvestmentRisk>()
+                        .Where(OneOrAll<InvestmentRisk>(specificId))
                         .Include(x => x.Investments)
                         .Select(o => Utils.ChangeType<T>(o))
                         .ToList()
@@ -84,6 +87,7 @@ namespace CoreInvestmentTracker.Models.DAL
             {
                 entities.AddRange(withChildren 
                     ? Db.Set<InvestmentGroup>()
+                        .Where(OneOrAll<InvestmentGroup>(specificId))
                         .Include(x => x.Children)
                         .ThenInclude(x => x.Parent)
                         .Include(x => x.Investments)
@@ -96,6 +100,7 @@ namespace CoreInvestmentTracker.Models.DAL
             {
                 entities.AddRange(withChildren 
                     ? Db.Set<InvestmentInfluenceFactor>()
+                        .Where(OneOrAll<InvestmentInfluenceFactor>(specificId))
                         .Include(x => x.Investments)
                         .Select(o => Utils.ChangeType<T>(o))
                         .ToList()
@@ -107,6 +112,7 @@ namespace CoreInvestmentTracker.Models.DAL
             {
                 entities.AddRange(withChildren 
                     ? Db.Set<Region>()
+                        .Where(OneOrAll<Region>(specificId))
                         .Include(x => x.Investments)
                         .Select(o => Utils.ChangeType<T>(o))
                         .ToList()
@@ -117,7 +123,9 @@ namespace CoreInvestmentTracker.Models.DAL
             if (typeof(T) == typeof(Investment))
             {
                 entities.AddRange(withChildren 
-                    ? Db.Set<Investment>().Include(a => a.Risks)
+                    ? Db.Set<Investment>()
+                        .Where(OneOrAll<Investment>(specificId))
+                        .Include(a => a.Risks)
                         .Include(b => b.Factors)
                         .Include(c => c.Groups)
                         .Include(d => d.Regions)
@@ -133,6 +141,9 @@ namespace CoreInvestmentTracker.Models.DAL
             return ret;
         }
 
+        private static Expression<Func<T1, bool>> OneOrAll<T1>(int? specificId)
+        where T1 : class, IDbInvestmentEntity => entity => !specificId.HasValue || entity.Id == specificId.Value;
+
         /// <summary>
         /// Underlying database
         /// </summary>
@@ -145,7 +156,7 @@ namespace CoreInvestmentTracker.Models.DAL
         /// <typeparam name="T1"></typeparam>
         /// <returns></returns>
         public DbSet<T1> GetEntityByType<T1>() where T1 : class => Db.Set<T1>();
-
+        
         /// <inheritdoc />
         /// <summary>
         /// Save the db changes

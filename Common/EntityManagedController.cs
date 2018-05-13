@@ -50,9 +50,7 @@ namespace CoreInvestmentTracker.Common
         [HttpGet,Authorize]
         public IEnumerable<T> GetAll()
         {
-            var currentUser = HttpContext.User;
-                
-            return EntityRepository.GetAllEntities(withChildren: true).ToList();
+            return EntityRepository.GetOneOrAllEntities(withChildren: true).ToList();
         }
 
         /// <summary>
@@ -62,7 +60,7 @@ namespace CoreInvestmentTracker.Common
         [HttpGet("WithoutChildren"), Authorize]
         public IEnumerable<T> GetAllWithoutChildren()
         {
-            return EntityRepository.GetAllEntities(withChildren:false).ToList();
+            return EntityRepository.GetOneOrAllEntities(withChildren:false).ToList();
         }
 
         /// <summary>
@@ -73,7 +71,7 @@ namespace CoreInvestmentTracker.Common
         [HttpGet("{id}"), Authorize]
         public IActionResult GetById(int id)
         {
-            var item = EntityRepository.GetAllEntities().FirstOrDefault(p => p.Id == id);
+            var item = EntityRepository.GetOneOrAllEntities().FirstOrDefault(p => p.Id == id);
             return item == null ? (IActionResult) NotFound() : new ObjectResult(item);
         }
 
@@ -206,10 +204,21 @@ namespace CoreInvestmentTracker.Common
             return new NoContentResult();
         }
 
-        [HttpGet("GenerateSharedInvestmentsGraphDataFor"), Authorize]
-        public IActionResult GenerateSharedGraphDataFor()
+        [HttpGet("GenerateEntityInvestmentsGraphFor/{entityId}")]
+        public IActionResult GenerateEntityInvestmentsGraphFor(int entityId)
         {
-            /*
+            return GenerateSharedEntityGraphDataFor(entityId);
+        }
+
+        [HttpGet("GenerateSharedInvestmentsGraphDataForAll"), Authorize]
+        public IActionResult GenerateSharedGraphDataForAll()
+        {
+            return GenerateSharedEntityGraphDataFor();
+        }
+
+        private IActionResult GenerateSharedEntityGraphDataFor(int? entityId = null)
+        {
+/*
                var data = {
                 "nodes":[
                     { "name": "index", "value": 5},
@@ -234,10 +243,10 @@ namespace CoreInvestmentTracker.Common
             }
              */
 
-            var entities = EntityRepository.GetAllEntities(withChildren: true).ToArray();
-            
+            var entities = EntityRepository.GetOneOrAllEntities(withChildren: true, specificId: entityId).ToArray();
+
             // inventmentId,List<EntityId>
-            var mappings = new Dictionary<int,List<int>>();
+            var mappings = new Dictionary<int, List<int>>();
             foreach (var entity in entities)
             {
                 foreach (var entityInvestmentId in entity.investmentIds)
@@ -246,55 +255,58 @@ namespace CoreInvestmentTracker.Common
                     {
                         mappings.Add(entityInvestmentId, new List<int>());
                     }
+
                     mappings[entityInvestmentId].Add(entity.Id);
                 }
             }
-            
+
             var nodes = new List<object> { };
             var links = new List<object>();
-            
+
             // a invisible root that all connect to - keeps things together
             //nodes.Add(new {name = "Root", value = 0});
 
-            var investments = EntityRepository.Db.Investments.Where(x=> mappings.ContainsKey(x.Id)).ToArray();
-            
+            var investments = EntityRepository.Db.Investments.Where(x => mappings.ContainsKey(x.Id)).ToArray();
+
             foreach (var map in mappings)
             {
                 var investment = investments.Single(x => x.Id == map.Key);
                 var countLinkedEntities = map.Value.Count;
                 var investmentNode = new
                 {
-                    name = investment.Name, 
+                    name = investment.Name,
                     value = 1
                 };
                 nodes.Add(investmentNode);
-                
+
                 foreach (var child in map.Value)
                 {
                     var entity = entities.Single(x => x.Id == child);
                     var entityNode = new
                     {
                         name = entity.Name,
-                        
+
                         // Entity is bigger when its linked to more investments
-                        value = mappings.SelectMany(x=>x.Value).Count(x => x == child)
+                        value = mappings.SelectMany(x => x.Value).Count(x => x == child)
                     };
                     if (!nodes.Contains(entityNode))
                     {
                         nodes.Add(entityNode);
                     }
-                    
+
                     links.Add(new
                     {
-                        source = nodes.LastIndexOf(investmentNode), 
-                        target = nodes.LastIndexOf(entityNode), 
+                        source = nodes.LastIndexOf(investmentNode),
+                        target = nodes.LastIndexOf(entityNode),
                         value = 1
                     });
                 }
+
                 // add invisible root
                 //links.Add(new { source = nodes.LastIndexOf(i), target = 0, value = 0 });
             }
-            return new ObjectResult(new { nodes, links });
+
+            return new ObjectResult(new {nodes, links});
         }
     }
 }

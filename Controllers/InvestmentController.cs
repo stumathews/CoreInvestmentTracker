@@ -299,7 +299,7 @@ namespace CoreInvestmentTracker.Controllers
         [HttpGet("RisksGraph/{id}")]
         public IActionResult GenerateRisksGraph(int id)
         {
-            var investment = EntityRepository.GetAllEntities()
+            var investment = EntityRepository.GetOneOrAllEntities()
                 .Include(e => e.Risks)
                 .ThenInclude(e => e.InvestmentRisk).Single(o => o.Id == id);
 
@@ -314,7 +314,7 @@ namespace CoreInvestmentTracker.Controllers
         [HttpGet("FactorsGraph/{id}")]
         public IActionResult GenerateFactorsGraph(int id)
         {
-            var investment = EntityRepository.GetAllEntities()
+            var investment = EntityRepository.GetOneOrAllEntities()
                 .Include(e => e.Factors)
                 .ThenInclude(e => e.InvestmentInfluenceFactor).Single(o => o.Id == id);
             return GenerateGraph<InvestmentInfluenceFactor, InvestmentInfluenceFactor_Investment>(id, investment.Factors.Select(o => o.InvestmentInfluenceFactor));
@@ -328,7 +328,7 @@ namespace CoreInvestmentTracker.Controllers
         [HttpGet("GroupsGraph/{id}")]
         public IActionResult GenerateGroupsGraph(int id)
         {
-            var investment = EntityRepository.GetAllEntities()
+            var investment = EntityRepository.GetOneOrAllEntities()
                 .Include(e => e.Groups)
                 .ThenInclude(e => e.InvestmentGroup).Single(o => o.Id == id);
             return GenerateGraph<InvestmentGroup, InvestmentGroup_Investment>(id, investment.Groups.Select(o => o.InvestmentGroup));
@@ -342,7 +342,7 @@ namespace CoreInvestmentTracker.Controllers
         [HttpGet("RegionsGraph/{id}")]
         public IActionResult GenerateRegionsGraph(int id)
         {
-            var investment = EntityRepository.GetAllEntities()
+            var investment = EntityRepository.GetOneOrAllEntities()
                 .Include(e => e.Regions)
                 .ThenInclude(e => e.Region).Single(o => o.Id == id);
             return GenerateGraph<Region, Region_Investment>(id, investment.Regions.Select(r => r.Region));

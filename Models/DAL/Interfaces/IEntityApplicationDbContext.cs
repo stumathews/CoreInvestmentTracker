@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CoreInvestmentTracker.Models.DEL.Interfaces;
@@ -16,7 +17,7 @@ namespace CoreInvestmentTracker.Models.DAL.Interfaces
         /// <summary>
         /// The underlying entities that this class will expose. Retrieves all children by default unless withChildren = false
         /// </summary>
-        IQueryable<T> GetAllEntities(bool withChildren = true);
+        IQueryable<T> GetOneOrAllEntities(bool withChildren = true, int? specificId = null);
 
         /// <summary>
         /// Expose our application db context
@@ -24,7 +25,7 @@ namespace CoreInvestmentTracker.Models.DAL.Interfaces
         ApplicationDbContext Db { get; }
 
         /// <summary>
-        /// The ability to save <see cref="GetAllEntities"/> 
+        /// The ability to save <see cref="GetOneOrAllEntities"/> 
         /// </summary>
         void SaveChanges();
 
