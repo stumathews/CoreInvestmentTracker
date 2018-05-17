@@ -12,7 +12,7 @@ namespace CoreInvestmentTracker.Models
     /// <summary>
     /// 
     /// </summary>
-    public class InvestmentRisk : IDbInvestmentEntity, IDbInvestmentEntityHasInvestments<InvestmentRisk_Investment>
+    public class InvestmentRisk : IInvestmentEntity, IDbInvestmentEntityHasInvestments<InvestmentRisk_Investment>
     {
         /// <summary>
         /// ID
@@ -25,7 +25,7 @@ namespace CoreInvestmentTracker.Models
         public String Description { get; set; }
 
         [NotMapped]
-        public int[] investmentIds => Investments?.Select(x => x.InvestmentID).ToArray() ?? new int[] { };
+        public int[] InvestmentIds => Investments?.Select(x => x.InvestmentID).ToArray() ?? new int[] { };
 
         /// <summary>
         /// Type

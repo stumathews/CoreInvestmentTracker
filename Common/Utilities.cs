@@ -15,6 +15,10 @@ namespace CoreInvestmentTracker.Common
     public enum EntityType
     {
         /// <summary>
+        /// Represents a unknown entity type
+        /// </summary>
+        None,
+        /// <summary>
         /// Investment
         /// </summary>
         Investment,
@@ -33,7 +37,22 @@ namespace CoreInvestmentTracker.Common
         /// <summary>
         /// Region
         /// </summary>
-        Region
+        Region,
+
+        /// <summary>
+        /// User
+        /// </summary>
+        User,
+
+        /// <summary>
+        /// Note
+        /// </summary>
+        Note,
+
+        /// <summary>
+        /// Activity
+        /// </summary>
+        Activity
     }
     /// <summary>
     /// 

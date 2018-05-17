@@ -11,7 +11,7 @@ namespace CoreInvestmentTracker.Models
     /// <summary>
     /// Investment group
     /// </summary>
-    public class InvestmentGroup : IDbInvestmentEntity, IDbInvestmentEntityHasInvestments<InvestmentGroup_Investment>
+    public class InvestmentGroup : IInvestmentEntity, IDbInvestmentEntityHasInvestments<InvestmentGroup_Investment>
     {
         /// <summary>
         /// ID
@@ -28,7 +28,7 @@ namespace CoreInvestmentTracker.Models
         public String Description { get; set; }
 
         [NotMapped]
-        public int[] investmentIds => Investments?.Select(i => i.InvestmentID).ToArray() ?? new int[] { };
+        public int[] InvestmentIds => Investments?.Select(i => i.InvestmentID).ToArray() ?? new int[] { };
 
         /// <summary>
         /// Type

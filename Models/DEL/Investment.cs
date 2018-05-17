@@ -11,7 +11,7 @@ namespace CoreInvestmentTracker.Models
     /// <summary>
     /// Represents an investment
     /// </summary>
-    public class Investment : IDbInvestmentEntity
+    public class Investment : IInvestmentEntity
     {
         /// <summary>
         /// ID
@@ -75,6 +75,6 @@ namespace CoreInvestmentTracker.Models
         /// </summary>
         public virtual ICollection<InvestmentGroup_Investment> Groups { get; set; }        
 
-        public int[] investmentIds { get; set; }
+        public int[] InvestmentIds { get; set; }
     }
 }

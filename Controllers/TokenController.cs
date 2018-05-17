@@ -9,6 +9,10 @@ using CoreInvestmentTracker.Models.BOLO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using CoreInvestmentTracker.Models.DAL;
+using CoreInvestmentTracker.Models.DEL;
+using CoreInvestmentTracker.Common;
+using CoreInvestmentTracker.Models.DAL.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
@@ -22,11 +26,14 @@ namespace CoreInvestmentTracker.Controllers
     [Route("api/Token")]
     public class TokenController : Controller
     {
+        public ApplicationDbContext Db { get; }
         private readonly IConfiguration _config;
-
+        
+        
         /// <inheritdoc />
-        public TokenController(IConfiguration config)
+        public TokenController(IConfiguration config, ApplicationDbContext db)
         {
+            Db = db;
             _config = config;
         }
         
@@ -69,14 +76,14 @@ namespace CoreInvestmentTracker.Controllers
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        private static UserModel Authenticate(UserLoginInfo login)
+        private UserModel Authenticate(UserLoginInfo login)
         {
-            UserModel user = null;
-
-            if (login.Username == "stuart" && login.Password == "secret")
-            {
-                user = new UserModel { Name = "Stuart Mathews", Email = "stumathews@gmail.com"};
-            }
+            UserModel user = new UserModel();
+            var dbuser = Db.Users.Where(u => u.UserName.Equals(login.Username))
+                .FirstOrDefault();
+            user.Name = dbuser.UserName;
+            user.TimeZone = dbuser.TimeZone;
+            user.Email = dbuser.Email;
             return user;
         }
 

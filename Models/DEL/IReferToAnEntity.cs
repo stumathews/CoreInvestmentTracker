@@ -1,8 +1,9 @@
 ﻿using CoreInvestmentTracker.Common;
+using CoreInvestmentTracker.Models.DEL.Interfaces;
 
 namespace CoreInvestmentTracker.Models.DEL
 {
-    internal interface IReferToAnEntity
+    public interface IReferToAnEntity : IDbEntity
     {
         /// <summary>
         /// The entity ID for the entity that owns this note, specifically of type OwningEntityType

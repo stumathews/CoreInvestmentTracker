@@ -12,7 +12,7 @@ namespace CoreInvestmentTracker.Models.DEL
     /// <summary>
     /// Simple text note for an entity
     /// </summary>
-    public class InvestmentNote: IDbInvestmentEntity, IReferToAnEntity
+    public class InvestmentNote: IInvestmentEntity, IReferToAnEntity
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -26,7 +26,7 @@ namespace CoreInvestmentTracker.Models.DEL
         public string Description { get; set; }
 
         [NotMapped]
-        public int[] investmentIds => new int[] { };
+        public int[] InvestmentIds => new int[] { };
 
         /// <inheritdoc />
         /// <summary>

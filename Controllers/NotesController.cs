@@ -15,7 +15,7 @@ namespace CoreInvestmentTracker.Controllers
     /// </summary>
     [Route("api/[controller]")]
     [GlobalControllerLogging]
-    public class NotesController : EntityManagedController<InvestmentNote>
+    public class NotesController : RefersToAnEntityControllerFunctionality<InvestmentNote>
     {
         /// <inheritdoc />
         /// <summary>
@@ -24,40 +24,8 @@ namespace CoreInvestmentTracker.Controllers
         /// <param name="db"></param>
         /// <param name="logger"></param>
         public NotesController(IEntityApplicationDbContext<InvestmentNote> db, IMyLogger logger) 
-            : base(db, logger)
+            : base(db)
         {
-
-        }
-
-        /// <summary>
-        /// Get Entity by ID
-        /// </summary>
-        /// <param name="owningEntityId"></param>
-        /// <param name="owningEntityType"></param>
-        /// <returns>item</returns>
-        [HttpGet("{owningEntityId}/{owningEntityType}")]
-        public IEnumerable<InvestmentNote> GetAllNotesFor(int owningEntityId, int owningEntityType)
-        {
-            var items = EntityRepository.GetOneOrAllEntities().Where(o => o.OwningEntityId == owningEntityId 
-                                                          && o.OwningEntityType == (EntityType)owningEntityType);
-            return items.ToList();
-        }
-
-        /// <summary>
-        /// Deletes and Entity
-        /// </summary>
-        /// <param name="id">The id of the entity to delete</param>
-        /// <param name="owningEntityId">The id of the type you want the note for</param>
-        /// <param name="owningEntityType">The type of the owning entity</param>
-        /// <returns>NoContentResult</returns>
-        [HttpDelete("{owningEntityId}/{owningEntityType}/{id}")]
-        public IActionResult Delete(int owningEntityId, int owningEntityType, int id)
-        {
-            var entity = EntityRepository.Db.Find<InvestmentNote>(owningEntityId, (EntityType)owningEntityType, id);
-            if (entity == null) return NotFound();
-            EntityRepository.Db.Remove(entity);
-            EntityRepository.SaveChanges();
-            return new NoContentResult();
 
         }
     }

@@ -65,13 +65,13 @@ namespace CoreInvestmentTracker.Models.DAL
         {            
 
             modelBuilder.Entity<Investment>().ToTable("Investment");
-            modelBuilder.Entity<Investment>().Ignore(x => x.investmentIds);
+            modelBuilder.Entity<Investment>().Ignore(x => x.InvestmentIds);
             modelBuilder.Entity<InvestmentInfluenceFactor>().ToTable("InvestmentInfluenceFactor");
-            modelBuilder.Entity<InvestmentInfluenceFactor>().Ignore(x => x.investmentIds);
-            modelBuilder.Entity<InvestmentGroup>().Ignore(x => x.investmentIds);
-            modelBuilder.Entity<Region>().Ignore(x => x.investmentIds);
-            modelBuilder.Entity<InvestmentNote>().Ignore(x => x.investmentIds);
-            modelBuilder.Entity<InvestmentRisk>().Ignore(x => x.investmentIds);
+            modelBuilder.Entity<InvestmentInfluenceFactor>().Ignore(x => x.InvestmentIds);
+            modelBuilder.Entity<InvestmentGroup>().Ignore(x => x.InvestmentIds);
+            modelBuilder.Entity<Region>().Ignore(x => x.InvestmentIds);
+            modelBuilder.Entity<InvestmentNote>().Ignore(x => x.InvestmentIds);
+            modelBuilder.Entity<InvestmentRisk>().Ignore(x => x.InvestmentIds);
 
             modelBuilder.Entity<InvestmentInfluenceFactor_Investment>()            
                 .HasKey(i => new { i.InvestmentID, i.InvestmentInfluenceFactorID })

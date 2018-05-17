@@ -1,6 +1,8 @@
 ﻿using System;
 using CoreInvestmentTracker.Models.DEL;
+using CoreInvestmentTracker.Models.DEL.Interfaces;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore.Query.ExpressionTranslators.Internal;
 
@@ -34,14 +36,6 @@ namespace CoreInvestmentTracker.Common.ActionFilters
         {
             var log = (IMyLogger)actionExecutedContext.HttpContext.RequestServices.GetService(typeof(IMyLogger));
             var user = actionExecutedContext.HttpContext.User;
-            //Which controller did this come from?
-            
-            
-
-
-            //actionExecutedContext.ActionDescriptor.DisplayName
-            //User user = null;
-            //RecordedActivity audit = new RecordedActivity(user, string.Empty, actionExecutedContext.ActionDescriptor.DisplayName, DateTimeOffset.UtcNow, ,);
             log.Debug(string.Format("{0} Response Code: {1}", actionExecutedContext.HttpContext.Request.ToString(), actionExecutedContext.HttpContext.Response.StatusCode.ToString()));
             base.OnActionExecuted(actionExecutedContext);
         }

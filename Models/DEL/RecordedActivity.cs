@@ -12,6 +12,15 @@ namespace CoreInvestmentTracker.Models.DEL
     /// </summary>
     public class RecordedActivity: IReferToAnEntity
     {
+        /// <summary>
+        /// Recorded Activity
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="tag"></param>
+        /// <param name="details"></param>
+        /// <param name="atTime"></param>
+        /// <param name="owningEntityId"></param>
+        /// <param name="owningEntityType"></param>
         public RecordedActivity(User user, string tag, string details, DateTimeOffset atTime, int owningEntityId, EntityType owningEntityType)
         {
             User = user;
@@ -22,11 +31,25 @@ namespace CoreInvestmentTracker.Models.DEL
             OwningEntityType = owningEntityType;
         }
 
+        public RecordedActivity()
+        {
+        }
+
         /// <summary>
         /// The Id of the activity
         /// </summary>
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+
+        /// <summary>
+        /// the name of the entity
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// The description of the entity
+        /// </summary>
+        public string Description { get; set; }
 
         /// <summary>
         /// The user that performed the activity

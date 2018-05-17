@@ -20,7 +20,7 @@ namespace CoreInvestmentTracker.Models.DAL
     /// on the dbcontext.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public sealed class EntityApplicationDbContext<T> : IEntityApplicationDbContext<T> where T : class, IDbInvestmentEntity
+    public sealed class EntityApplicationDbContext<T> : IEntityApplicationDbContext<T> where T : class
     {
         /// <summary>
         /// Constructor
@@ -31,21 +31,15 @@ namespace CoreInvestmentTracker.Models.DAL
             Db = context;
         }
 
-        /// <inheritdoc />
-        /// <summary>
-        /// ApplicationDbContext
-        /// </summary>
-        public ApplicationDbContext Db { get; }
-
-        private static bool IsAnyOfTypes<T1>(IEnumerable<Type> types) => types.Any(type => type == typeof(T1));
-
         /// <summary>
         /// Read only access to the type Entities
         /// </summary>
+        /// <param name="withChildren"></param>
+        /// <param name="specificId"></param>
+        /// <returns></returns>
         public IQueryable<T> GetOneOrAllEntities(bool withChildren = true, int? specificId = null)
         {
-            
-                /*
+            /*
                  * We want to eager collect some of the members but we dont know what type we are when we 
                  * are dealing with generics as we are here. So this will determine the type,
                  * add the entity framework include() statements and return the generic type(set) again.
@@ -141,8 +135,16 @@ namespace CoreInvestmentTracker.Models.DAL
             return ret;
         }
 
+        /// <inheritdoc />
+        /// <summary>
+        /// ApplicationDbContext
+        /// </summary>
+        public ApplicationDbContext Db { get; }
+
+        private static bool IsAnyOfTypes<T1>(IEnumerable<Type> types) => types.Any(type => type == typeof(T1));
+        
         private static Expression<Func<T1, bool>> OneOrAll<T1>(int? specificId)
-        where T1 : class, IDbInvestmentEntity => entity => !specificId.HasValue || entity.Id == specificId.Value;
+        where T1 : class, IInvestmentEntity => entity => !specificId.HasValue || entity.Id == specificId.Value;
 
         /// <summary>
         /// Underlying database

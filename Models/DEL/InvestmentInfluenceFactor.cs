@@ -11,7 +11,7 @@ namespace CoreInvestmentTracker.Models
     /// <summary>
     /// 
     /// </summary>
-    public class InvestmentInfluenceFactor : IDbInvestmentEntity, IDbInvestmentEntityHasInvestments<InvestmentInfluenceFactor_Investment>
+    public class InvestmentInfluenceFactor : IInvestmentEntity, IDbInvestmentEntityHasInvestments<InvestmentInfluenceFactor_Investment>
     {
         /// <summary>
         /// ID
@@ -29,7 +29,7 @@ namespace CoreInvestmentTracker.Models
         public String Description { get; set; }
 
         [NotMapped]
-        public int[] investmentIds => Investments?.Select(i => i.InvestmentID).ToArray() ?? new int[] { };
+        public int[] InvestmentIds => Investments?.Select(i => i.InvestmentID).ToArray() ?? new int[] { };
 
         /// <summary>
         /// Influence

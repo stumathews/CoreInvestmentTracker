@@ -242,7 +242,7 @@ namespace CoreInvestmentTracker.Controllers
         #region Graphs Generation Methods
 
         /// <summary>
-        /// Easily Generate investment graphs of entities that implement IDbInvestmentEntity, IDbInvestmentEntityHasInvestments
+        /// Easily Generate investment graphs of entities that implement IInvestmentEntity, IDbInvestmentEntityHasInvestments
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <typeparam name="T1"></typeparam>
@@ -250,7 +250,7 @@ namespace CoreInvestmentTracker.Controllers
         /// <param name="aspects"></param>
         /// <returns></returns>
         private IActionResult GenerateGraph<T, T1>(int investmentId, IEnumerable<T> aspects)
-            where T : IDbInvestmentEntity,
+            where T : IInvestmentEntity,
                       IDbInvestmentEntityHasInvestments<T1>
         {
             /*

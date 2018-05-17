@@ -11,7 +11,7 @@ namespace CoreInvestmentTracker.Models
     /// <summary>
     /// 
     /// </summary>
-    public class Region : IDbInvestmentEntity, IDbInvestmentEntityHasInvestments<Region_Investment>
+    public class Region : IInvestmentEntity, IDbInvestmentEntityHasInvestments<Region_Investment>
     {
         /// <summary>
         /// 
@@ -25,7 +25,7 @@ namespace CoreInvestmentTracker.Models
         public String Description { get; set; }
 
         [NotMapped]
-        public int[] investmentIds => Investments?.Select(x => x.InvestmentID).ToArray() ?? new int[] { };
+        public int[] InvestmentIds => Investments?.Select(x => x.InvestmentID).ToArray() ?? new int[] { };
 
         /// <summary>
         /// 
