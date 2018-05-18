@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CoreInvestmentTracker.Models.DAL.Interfaces;
@@ -7,6 +8,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CoreInvestmentTracker.Common
 {
+    /// <summary>
+    /// A controller that gives IReferToAnEntity entities common specific functionality along with generic CRUD functionality
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class RefersToAnEntityControllerFunctionality<T> : BaseEntityControllerFunctionality<T> where T : class, IReferToAnEntity, new()
     {
         /// <inheritdoc />
@@ -50,6 +55,9 @@ namespace CoreInvestmentTracker.Common
             var entity = EntityRepository.Db.Find<InvestmentNote>(owningEntityId, (EntityType)owningEntityType, id);
             if (entity == null) return NotFound();
             EntityRepository.Db.Remove(entity);
+            EntityRepository.SaveChanges();
+
+            EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(GetUser(), "", $"Deleted entity with id of '{id}' owning entityId of '{owningEntityId}' and owning type of '{(EntityType)owningEntityType}'", DateTimeOffset.UtcNow, entity.Id, GetUnderlyingEntityType<T>()));
             EntityRepository.SaveChanges();
             return new NoContentResult();
 

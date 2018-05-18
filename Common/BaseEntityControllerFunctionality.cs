@@ -77,17 +77,12 @@ namespace CoreInvestmentTracker.Common
 
             EntityRepository.Db.Add(entity);
             EntityRepository.SaveChanges();
-            EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(GetUser(), "tag","Created entity", DateTimeOffset.UtcNow, entity.Id, EntityType.Investment));
+            EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(GetUser(), entity.ToString(),"Created new entity", DateTimeOffset.UtcNow, entity.Id, GetUnderlyingEntityType<T>()));
             
             
             return CreatedAtAction("Create", new { id = entity.Id }, entity);
         }
-
-        private User GetUser()
-        {
-            return EntityRepository.Db.Users.First(u => u.UserName.Equals(u.UserName));
-        }
-
+        
         /// <summary>
         /// Import a list of entities
         /// </summary>
@@ -133,7 +128,7 @@ namespace CoreInvestmentTracker.Common
 
             patchDocument.Operations.ForEach(o =>
             {
-                var entry = $"Modified '{o.path}' from '{o.@from} 'to {o.value}";
+                var entry = $"Modified value '{o.path}' from '{o.@from} ' to {o.value}";
                 EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(GetUser(), "", entry, DateTimeOffset.UtcNow, id, GetUnderlyingEntityType<T>()));
             });
 
@@ -159,7 +154,7 @@ namespace CoreInvestmentTracker.Common
             EntityRepository.Db.Remove(entity);
             EntityRepository.SaveChanges();
 
-            EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(GetUser(), "", "Deleted entity", DateTimeOffset.UtcNow, entity.Id, GetUnderlyingEntityType<T>()));
+            EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(GetUser(), "", $"Deleted entity with id of {id}", DateTimeOffset.UtcNow, entity.Id, GetUnderlyingEntityType<T>()));
             EntityRepository.SaveChanges();
             return new NoContentResult();
         }
@@ -203,6 +198,8 @@ namespace CoreInvestmentTracker.Common
 
             EntityRepository.Db.Update(old);
             EntityRepository.SaveChanges();
+            EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(GetUser(), "", $"Replaced entity with id of {id} with entity of {newItem}", DateTimeOffset.UtcNow, id, GetUnderlyingEntityType<T>()));
+            EntityRepository.SaveChanges();
             return new NoContentResult();
         }
 
@@ -234,7 +231,11 @@ namespace CoreInvestmentTracker.Common
             }
 
             return EntityType.None;
+        }
 
+        protected User GetUser()
+        {
+            return EntityRepository.Db.Users.First(u => u.UserName.Equals(u.UserName));
         }
     }
 }

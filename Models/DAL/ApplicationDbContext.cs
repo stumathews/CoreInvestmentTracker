@@ -91,6 +91,9 @@ namespace CoreInvestmentTracker.Models.DAL
 
             modelBuilder.Entity<InvestmentNote>()
                 .HasKey(i => new { i.OwningEntityId, i.OwningEntityType, ID = i.Id });
+
+            modelBuilder.Entity<RecordedActivity>().HasKey(i => new {i.Id, i.OwningEntityId, i.OwningEntityType})
+                .HasName("PrimaryKey_Id_OwningEntityId_OwningEntityType");
         }
     }
 }

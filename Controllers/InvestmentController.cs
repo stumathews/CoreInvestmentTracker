@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using CoreInvestmentTracker.Common;
 using CoreInvestmentTracker.Common.ActionFilters;
 using CoreInvestmentTracker.Models;
 using CoreInvestmentTracker.Models.DAL.Interfaces;
+using CoreInvestmentTracker.Models.DEL;
 using CoreInvestmentTracker.Models.DEL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -98,6 +100,10 @@ namespace CoreInvestmentTracker.Controllers
             EntityRepository.Db.Remove(riskInvestmentLink);
             EntityRepository.SaveChanges();
 
+            EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(GetUser(), "Dissassociated risk", $"Dissassociated risk '{EntityRepository.GetEntityByType<InvestmentRisk>().Single(r => r.Id == riskId).Name}' with investment.", DateTimeOffset.UtcNow,
+                investmentId, EntityType.Investment));
+            EntityRepository.Db.SaveChanges();
+
             return new NoContentResult();
         }
 
@@ -114,6 +120,10 @@ namespace CoreInvestmentTracker.Controllers
             EntityRepository.Db.Remove(factorInvestmentLink);
             EntityRepository.SaveChanges();
 
+            EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(GetUser(), "Dissassociated factor", $"Dissassociated factor '{EntityRepository.GetEntityByType<InvestmentInfluenceFactor>().Single(f => f.Id == factorId).Name}' with investment.", DateTimeOffset.UtcNow,
+                investmentId, EntityType.Investment));
+            EntityRepository.Db.SaveChanges();
+
             return new NoContentResult();
         }
 
@@ -129,6 +139,10 @@ namespace CoreInvestmentTracker.Controllers
             var groupInvestmentLink = EntityRepository.Db.Find<InvestmentGroup_Investment>(investmentId, groupId);
             EntityRepository.Db.Remove(groupInvestmentLink);
             EntityRepository.SaveChanges();
+
+            EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(GetUser(), "Dissassociated group", $"Dissassociated group '{EntityRepository.GetEntityByType<InvestmentGroup>().Single(g => g.Id == groupId).Name}' with investment.", DateTimeOffset.UtcNow,
+                investmentId, EntityType.Investment));
+
             return new NoContentResult();
         }
 
@@ -144,6 +158,9 @@ namespace CoreInvestmentTracker.Controllers
             var regionInvestmentLink = EntityRepository.Db.Find<Region_Investment>(investmentId, regionId);
             EntityRepository.Db.Remove(regionInvestmentLink);
             EntityRepository.SaveChanges();
+
+            EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(GetUser(), "Dissassociated region", $"Dissassociated group '{EntityRepository.GetEntityByType<Region>().Single(r => r.Id == regionId).Name}' with investment.", DateTimeOffset.UtcNow,
+                investmentId, EntityType.Investment));
 
             return new NoContentResult();
         }
@@ -166,6 +183,9 @@ namespace CoreInvestmentTracker.Controllers
                     InvestmentRiskID = riskId
                 };
                 EntityRepository.Db.Add(riskInvestmentLink);
+                EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(GetUser(), "Associated risk", $"Associated risk '{EntityRepository.GetEntityByType<InvestmentRisk>().Single(r => r.Id == riskId).Name}' with investment.", DateTimeOffset.UtcNow,
+                    id, EntityType.Investment));
+
             }
             EntityRepository.SaveChanges();
             return new NoContentResult();
@@ -188,6 +208,8 @@ namespace CoreInvestmentTracker.Controllers
                     InvestmentInfluenceFactorID = factorId
                 };
                 EntityRepository.Db.Add(factorInvestmentLink);
+                EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(GetUser(), "Associated factor", $"Associated factor '{EntityRepository.GetEntityByType<InvestmentInfluenceFactor>().Single(f => f.Id == factorId).Name}' with investment.", DateTimeOffset.UtcNow,
+                    id, EntityType.Investment));
             }
             EntityRepository.SaveChanges();
             return new NoContentResult();
@@ -210,6 +232,9 @@ namespace CoreInvestmentTracker.Controllers
                     InvestmentGroupID = groupId
                 };
                 EntityRepository.Db.Add(groupInvestmentLink);
+                EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(GetUser(), "Associated group",
+                    $"Associated group '{EntityRepository.GetEntityByType<InvestmentGroup>().Single(g => g.Id == groupId).Name}' with investment..",
+                    DateTimeOffset.UtcNow, id, EntityType.Investment));
             }
             EntityRepository.SaveChanges();
             return new NoContentResult();
@@ -233,6 +258,9 @@ namespace CoreInvestmentTracker.Controllers
                     RegionID = regionId
                 };
                 EntityRepository.Db.Add(regionInvestmentLink);
+                EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(GetUser(), "Associated region",
+                    $"Associated group '{EntityRepository.GetEntityByType<InvestmentGroup>().Single(r => r.Id == regionId).Name}'  with investment..",
+                    DateTimeOffset.UtcNow, id, EntityType.Investment));
             }
             EntityRepository.SaveChanges();
             return new NoContentResult();
