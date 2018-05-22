@@ -15,14 +15,18 @@ namespace CoreInvestmentTracker.Models.DEL
         /// <summary>
         /// Recorded Activity
         /// </summary>
+        /// <param name="Name">Name of operation</param>
+        /// <param name="description"></param>
         /// <param name="user"></param>
         /// <param name="tag"></param>
         /// <param name="details"></param>
         /// <param name="atTime"></param>
         /// <param name="owningEntityId"></param>
         /// <param name="owningEntityType"></param>
-        public RecordedActivity(User user, string tag, string details, DateTimeOffset atTime, int owningEntityId, EntityType owningEntityType)
+        public RecordedActivity(string Name, string description, User user, string tag, string details, DateTimeOffset atTime, int owningEntityId, EntityType owningEntityType)
         {
+            this.Name = Name;
+            Description = description;
             User = user;
             Tag = tag;
             Details = details;

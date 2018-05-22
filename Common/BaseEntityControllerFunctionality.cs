@@ -8,6 +8,7 @@ using CoreInvestmentTracker.Models.DEL.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CoreInvestmentTracker.Common
 {
@@ -68,18 +69,18 @@ namespace CoreInvestmentTracker.Common
         /// <response code="201">Returns the newly-created item</response>
         /// <response code="400">If the item is null</response>
         [HttpPost, Authorize]
-        public IActionResult Create([FromBody]T entity)
+        public virtual IActionResult Create([FromBody]T entity)
         {
             if (entity == null)
             {
                 return BadRequest();
             }
 
+                    
             EntityRepository.Db.Add(entity);
             EntityRepository.SaveChanges();
-            EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(GetUser(), entity.ToString(),"Created new entity", DateTimeOffset.UtcNow, entity.Id, GetUnderlyingEntityType<T>()));
-            
-            
+            EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(ActivityOperation.Create.ToString(), "Created a new entity", GetUser(), entity.ToString(),"Created new entity", DateTimeOffset.UtcNow, entity.Id, GetUnderlyingEntityType<T>()));
+            EntityRepository.SaveChanges();
             return CreatedAtAction("Create", new { id = entity.Id }, entity);
         }
         
@@ -129,7 +130,7 @@ namespace CoreInvestmentTracker.Common
             patchDocument.Operations.ForEach(o =>
             {
                 var entry = $"Modified value '{o.path}' from '{o.@from} ' to {o.value}";
-                EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(GetUser(), "", entry, DateTimeOffset.UtcNow, id, GetUnderlyingEntityType<T>()));
+                EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(ActivityOperation.Update.ToString(), "Updates an existing entity", GetUser(), entry.ToString(), entry, DateTimeOffset.UtcNow, id, GetUnderlyingEntityType<T>()));
             });
 
             EntityRepository.Db.SaveChanges();
@@ -154,7 +155,7 @@ namespace CoreInvestmentTracker.Common
             EntityRepository.Db.Remove(entity);
             EntityRepository.SaveChanges();
 
-            EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(GetUser(), "", $"Deleted entity with id of {id}", DateTimeOffset.UtcNow, entity.Id, GetUnderlyingEntityType<T>()));
+            EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(ActivityOperation.Delete.ToString(), "Deletes an entity", GetUser(), "", $"Deleted entity with id of {id}", DateTimeOffset.UtcNow, entity.Id, GetUnderlyingEntityType<T>()));
             EntityRepository.SaveChanges();
             return new NoContentResult();
         }
@@ -198,7 +199,7 @@ namespace CoreInvestmentTracker.Common
 
             EntityRepository.Db.Update(old);
             EntityRepository.SaveChanges();
-            EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(GetUser(), "", $"Replaced entity with id of {id} with entity of {newItem}", DateTimeOffset.UtcNow, id, GetUnderlyingEntityType<T>()));
+            EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(ActivityOperation.Update.ToString(), "Updates an existing entity", GetUser(), old.ToString(), $"Replaced entity with id of {id} with entity of {newItem}", DateTimeOffset.UtcNow, id, GetUnderlyingEntityType<T>()));
             EntityRepository.SaveChanges();
             return new NoContentResult();
         }

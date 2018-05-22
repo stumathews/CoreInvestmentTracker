@@ -54,6 +54,15 @@ namespace CoreInvestmentTracker.Common
         /// </summary>
         Activity
     }
+
+    public enum ActivityOperation
+    {
+        Create,
+        Read,
+        Update,
+        Delete
+    }
+
     /// <summary>
     /// 
     /// </summary>

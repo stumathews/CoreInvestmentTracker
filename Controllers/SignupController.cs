@@ -46,7 +46,7 @@ namespace CoreInvestmentTracker.Controllers
             Db.Users.Add(user);
             Db.SaveChanges();
             var savedUser = Db.Users.FirstOrDefault(u => u.UserName.Equals(user.UserName));
-            var activity = new RecordedActivity(user, "", $"Created new user '{user.UserName}'", DateTimeOffset.UtcNow, savedUser.Id, EntityType.User);
+            var activity = new RecordedActivity(ActivityOperation.Create.ToString(),"Creates an entity",user, "", $"Created new user '{user.UserName}'", DateTimeOffset.UtcNow, savedUser.Id, EntityType.User);
             Db.RecordedActivities.Add(activity);
             Db.SaveChanges();
             return null;

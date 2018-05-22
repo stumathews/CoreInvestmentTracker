@@ -20,7 +20,7 @@ namespace CoreInvestmentTracker.Models.DAL
     /// on the dbcontext.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public sealed class EntityApplicationDbContext<T> : IEntityApplicationDbContext<T> where T : class
+    public sealed class EntityApplicationDbContext<T> : IEntityApplicationDbContext<T> where T : class, IDbEntity
     {
         /// <summary>
         /// Constructor

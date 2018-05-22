@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CoreInvestmentTracker.Models.DAL.Interfaces;
 using CoreInvestmentTracker.Models.DEL;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoreInvestmentTracker.Common
@@ -55,9 +56,8 @@ namespace CoreInvestmentTracker.Common
             var entity = EntityRepository.Db.Find<InvestmentNote>(owningEntityId, (EntityType)owningEntityType, id);
             if (entity == null) return NotFound();
             EntityRepository.Db.Remove(entity);
-            EntityRepository.SaveChanges();
 
-            EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(GetUser(), "", $"Deleted entity with id of '{id}' owning entityId of '{owningEntityId}' and owning type of '{(EntityType)owningEntityType}'", DateTimeOffset.UtcNow, entity.Id, GetUnderlyingEntityType<T>()));
+            EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(ActivityOperation.Delete.ToString(), "Deletes an exisitng entity", GetUser(), "", $"Deleted entity with id of '{id}' owning entityId of '{owningEntityId}' and owning type of '{(EntityType)owningEntityType}'", DateTimeOffset.UtcNow, entity.Id, GetUnderlyingEntityType<T>()));
             EntityRepository.SaveChanges();
             return new NoContentResult();
 
