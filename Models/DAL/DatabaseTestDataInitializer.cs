@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
+using Microsoft.EntityFrameworkCore;
 
 namespace CoreInvestmentTracker.Models.DAL
 {
@@ -23,6 +24,7 @@ namespace CoreInvestmentTracker.Models.DAL
         /// <param name="db"></param>
         public static void Initialize(ApplicationDbContext db)
         {
+            db.Database.Migrate(); // apply migration at runtime
             db.Database.EnsureCreated();
 
             if (db.Investments.Any())
