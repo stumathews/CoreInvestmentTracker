@@ -4,25 +4,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CoreInvestmentTracker.Models.DEL.Interfaces
 {
+    /// <inheritdoc />
     /// <summary>
     /// All our investment entities classes have references to other investments that it links to
     /// A name and a description.
     /// </summary>
     public interface IInvestmentEntity : IDbEntity, IHaveInvestments
-    {       
-        /// <summary>
-        /// The identifier of the entity
-        /// </summary>
-        int Id { get; set; }
-        /// <summary>
-        /// the name of the entity
-        /// </summary>
-        string Name { get; set; }
-        /// <summary>
-        /// The description of the entity
-        /// </summary>
-        string Description { get; set; }
-       
+    {  
     }
 
     /// <summary>
@@ -49,6 +37,7 @@ namespace CoreInvestmentTracker.Models.DEL.Interfaces
     /// </summary>
     public interface IDbEntity : ICommonIdEntity
     {       
+
     }
 
 

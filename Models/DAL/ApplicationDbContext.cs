@@ -56,6 +56,16 @@ namespace CoreInvestmentTracker.Models.DAL
         /// </summary>
         public DbSet<RecordedActivity> RecordedActivities { get; set; }
 
+        /// <summary>
+        /// User defined entities
+        /// </summary>
+        public DbSet<CustomEntity> CustomEntities { get; set; }
+
+        /// <summary>
+        /// Types of custom entities that exist in the system
+        /// </summary>
+        public DbSet<CustomEntityType> CustomEntityTypes { get; set; }
+
         /// <inheritdoc />
         /// <summary>
         /// OnModelCreating
@@ -94,6 +104,23 @@ namespace CoreInvestmentTracker.Models.DAL
 
             modelBuilder.Entity<RecordedActivity>().HasKey(i => new {i.Id, i.OwningEntityId, i.OwningEntityType})
                 .HasName("PrimaryKey_Id_OwningEntityId_OwningEntityType");
+
+          
+            modelBuilder.Entity<CustomEntity>().HasKey(i => new {i.Id})
+                .HasName("PrimaryKey_Id_CustomEntityTypeId");
+
+           // modelBuilder.Entity<EntityPerformance>();//.HasKey(i => new {i.Id, i.Name}).HasName("PrimaryKey_Id_Name");
+
+            /*
+            
+
+            modelBuilder.Entity<EntityProperty>().ToTable("EntityProperty");//.HasKey(i => new {i.Id, i.OwningEntityType});
+                //.HasName("PrimaryKey_Id_OwningEntityType");
+
+            modelBuilder.Entity<EntitySnapshot>().ToTable("EntitySnapshot");//.HasKey(i => new {i.Id, i.OwningEntityType});
+            //.HasName("PrimaryKey_Id_OwningEntityType");
+            */
+
         }
     }
 }

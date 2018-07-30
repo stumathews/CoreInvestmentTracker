@@ -8,6 +8,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Web;
 using CoreInvestmentTracker.Models.DAL.Interfaces;
+using CoreInvestmentTracker.Models.DEL;
 using CoreInvestmentTracker.Models.DEL.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
@@ -53,7 +54,8 @@ namespace CoreInvestmentTracker.Models.DAL
                 typeof(InvestmentGroup),
                 typeof(InvestmentInfluenceFactor),
                 typeof(Region),
-                typeof(Investment)
+                typeof(Investment),
+                typeof(CustomEntity)
             }))
             {
                 return Db.Set<T>();
@@ -63,8 +65,8 @@ namespace CoreInvestmentTracker.Models.DAL
 
             /* In most cases we want to go down further in the object graph to return more
                decendants than just the top level members of the entity. Here is where we do it
-             */
             
+             */
             if (typeof(T) == typeof(InvestmentRisk))
             {
                 entities.AddRange(withChildren
@@ -127,6 +129,18 @@ namespace CoreInvestmentTracker.Models.DAL
                     : Db.Set<Investment>()
                         .Select(o => Utils.ChangeType<T>(o))
                         .ToList());                        
+            }
+
+            if (typeof(T) == typeof(CustomEntity))
+            {
+                entities.AddRange(withChildren 
+                    ? Db.Set<CustomEntity>()
+                        .Include(x=>x.Associations)
+                        .Include(a=>a.OwningCustomEntity).Select(o=>Utils.ChangeType<T>(o))
+                        .ToList()
+                    : Db.Set<CustomEntity>()
+                        .Select(o=> Utils.ChangeType<T>(o))
+                        .ToList());
             }
 
             // Return the entity type so no eager loading applied to T

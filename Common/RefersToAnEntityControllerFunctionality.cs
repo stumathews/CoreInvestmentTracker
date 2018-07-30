@@ -53,7 +53,7 @@ namespace CoreInvestmentTracker.Common
         [HttpDelete("{owningEntityId}/{owningEntityType}/{id}")]
         public IActionResult Delete(int owningEntityId, int owningEntityType, int id)
         {
-            var entity = EntityRepository.Db.Find<InvestmentNote>(owningEntityId, (EntityType)owningEntityType, id);
+            var entity = EntityRepository.Db.Find<T>(owningEntityId, (EntityType)owningEntityType, id);
             if (entity == null) return NotFound();
             EntityRepository.Db.Remove(entity);
 

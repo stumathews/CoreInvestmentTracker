@@ -52,7 +52,12 @@ namespace CoreInvestmentTracker.Common
         /// <summary>
         /// Activity
         /// </summary>
-        Activity
+        Activity,
+
+        /// <summary>
+        /// Custom entity
+        /// </summary>
+        Custom
     }
 
     public enum ActivityOperation

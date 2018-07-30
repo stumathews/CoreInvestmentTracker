@@ -107,7 +107,7 @@ namespace CoreInvestmentTracker
                 });
 
                 // Set the comments path for the Swagger JSON and UI.
-                c.IncludeXmlComments(GetXmlCommentsPath());
+                //c.IncludeXmlComments(GetXmlCommentsPath());
             });
             
             services.AddCors(options => options.AddPolicy("Cors", 

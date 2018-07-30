@@ -259,7 +259,7 @@ namespace CoreInvestmentTracker.Controllers
                 };
                 EntityRepository.Db.Add(regionInvestmentLink);
                 EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(ActivityOperation.Update.ToString(),"Updates an entity",GetUser(), "Associated region",
-                    $"Associated group '{EntityRepository.GetEntityByType<InvestmentGroup>().Single(r => r.Id == regionId).Name}'  with investment..",
+                    $"Associated region '{EntityRepository.GetEntityByType<Region>().Single(r => r.Id == regionId).Name}'  with investment..",
                     DateTimeOffset.UtcNow, id, EntityType.Investment));
             }
             EntityRepository.SaveChanges();

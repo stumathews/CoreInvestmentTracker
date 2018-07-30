@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
+using CoreInvestmentTracker.Common;
 using Microsoft.EntityFrameworkCore;
 
 namespace CoreInvestmentTracker.Models.DAL
@@ -25,14 +26,18 @@ namespace CoreInvestmentTracker.Models.DAL
         public static void Initialize(ApplicationDbContext db)
         {
             db.Database.Migrate(); // apply migration at runtime
-            db.Database.EnsureCreated();
+           // db.Database.EnsureCreated();
 
-            if (db.Investments.Any())
+            
+
+           
+
+            var inits = new List<IDbInitializer>(new IDbInitializer[]
             {
-                return;   // DB has been seeded
-            }
-
-            var inits = new List<IDbInitializer>(new IDbInitializer[]{ new DbInitilizer2(), new Dbinitializer1()});
+                new DbInitializer3(),  
+                new DbInitilizer2(), 
+                new Dbinitializer1(),
+            });
             inits.ForEach(initializer => initializer.Initialize(db));
 
 
@@ -405,12 +410,60 @@ namespace CoreInvestmentTracker.Models.DAL
         }
     }
 
+    public class DbInitializer3 : IDbInitializer
+    {
+        public void Initialize(ApplicationDbContext db)
+        {
+            if (!db.CustomEntities.Any())
+            {
+                var myType = new CustomEntityType {Description = "test", Name = "test"};
+                var parentEntity = new CustomEntity
+                {
+                    Description = "parentEntity",
+                    Name = "Parent",
+                    OwningCustomEntity = null,
+                    CustomEntityType = myType
+                };
+
+                var assoc = new CustomEntity
+                {
+                    CustomEntityType = myType,
+                    Description = "",
+                    Name = "yes",
+                    OwningCustomEntity = parentEntity
+                };
+
+                var childEntity = new CustomEntity
+                {
+                    Description = "childEntity",
+                    Name = "Parent",
+                    OwningCustomEntity = parentEntity,
+                    CustomEntityType = myType,
+                    Associations = new List<CustomEntity>
+                    {
+                        assoc
+                    }
+                };
+
+
+
+                db.CustomEntityTypes.Add(myType);
+                db.CustomEntities.Add(parentEntity);
+                db.CustomEntities.Add(childEntity);
+                db.SaveChanges();
+            }
+            
+    }
+    }
 
     public class Dbinitializer1 : IDbInitializer
     {
         public void Initialize(ApplicationDbContext db)
         {
-            
+            if (db.Investments.Any())
+            {
+                return;   // DB has been seeded
+            }
 
             var MAX = 10;
             var factors = new List<InvestmentInfluenceFactor> {

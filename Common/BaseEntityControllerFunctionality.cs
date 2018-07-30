@@ -76,6 +76,7 @@ namespace CoreInvestmentTracker.Common
                 return BadRequest();
             }
 
+            
                     
             EntityRepository.Db.Add(entity);
             EntityRepository.SaveChanges();
@@ -90,12 +91,18 @@ namespace CoreInvestmentTracker.Common
         /// <param name="entities"></param>
         /// <returns></returns>
         [HttpPost("import"), Authorize]
-        public IActionResult Import([FromBody] object[] entities)
+        public IActionResult Import([FromBody] T[] entities)
         {
             if (entities.Length == 0)
             {
                 return BadRequest();
             }
+
+            foreach (var e in entities)
+            {
+                e.Id = 0;
+            }
+            
 
             EntityRepository.Db.AddRange(entities);
             EntityRepository.SaveChanges();
@@ -229,6 +236,10 @@ namespace CoreInvestmentTracker.Common
             if (typeof(T) == typeof(RecordedActivity))
             {
                 return EntityType.Activity;
+            }
+            if (typeof(T) == typeof(CustomEntity))
+            {
+                return EntityType.Custom;
             }
 
             return EntityType.None;
