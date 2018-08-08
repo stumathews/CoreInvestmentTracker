@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CoreInvestmentTracker.Common;
 using CoreInvestmentTracker.Common.ActionFilters;
+using CoreInvestmentTracker.Models;
 using CoreInvestmentTracker.Models.DAL.Interfaces;
 using CoreInvestmentTracker.Models.DEL;
 using CoreInvestmentTracker.Models.DEL.Interfaces;
@@ -31,7 +32,7 @@ namespace CoreInvestmentTracker.Controllers
         {
             if (entity.CustomEntityType != null)
             {
-                var found = EntityRepository.Db.CustomEntityTypes.Where(x => x.Id == entity.CustomEntityType.Id);
+                var found = EntityRepository.Db.CustomEntityTypes.Where(x => x.Id == entity.CustomEntityType.Id || x.Name.Equals(entity.CustomEntityType.Name));
                 if (found.Any())
                 {
                     entity.CustomEntityType = found.First();
@@ -46,13 +47,24 @@ namespace CoreInvestmentTracker.Controllers
             if (entity.OwningCustomEntity?.Id == 0 || string.IsNullOrEmpty(entity.OwningCustomEntity.Name))
             {
                 entity.OwningCustomEntity = null;
-            }
-
-            if (entity.Associations != null)
-            {
-                if (entity.Associations.Any(x => x.Id == 0 || string.IsNullOrEmpty(x.Name)))
+                if (entity.OwningEntityType != EntityType.None)
                 {
-                    entity.Associations = null;
+                    switch (entity.OwningEntityType)
+                    {
+                            case EntityType.Investment:
+                                //var investment = EntityRepository.Db.Investments.Single(x => x.Id == entity.OwningEntityId);
+                                //var link = new CustomEntity_Investment
+                                //{
+                                //    InvestmentID = entity.OwningEntityId,
+                                //    Investment = investment,
+                                //    CustomEntity = entity.OwningCustomEntity,
+                                //    CustomEntityId = entity.OwningEntityId
+                                //};
+                                entity.Investments = new List<CustomEntity_Investment>();
+                                entity.Associations = new List<CustomEntity>();
+
+                                break;
+                    }
                 }
             }
 
@@ -69,9 +81,11 @@ namespace CoreInvestmentTracker.Controllers
         [HttpGet("ByType/{type}/{id}"), Authorize]
         public IEnumerable<CustomEntity> ByType(string type, int id)
         {
-            return EntityRepository.Db.CustomEntities.Include(x => x.CustomEntityType)
+            var ret =  EntityRepository.Db.CustomEntities.Include(x => x.CustomEntityType)
                 .Where(x => x.CustomEntityType.Name.Equals(type) && 
-                            (x.OwningCustomEntity != null && x.OwningCustomEntity.Id == id)).ToList();
+                            ((x.OwningCustomEntity != null && x.OwningCustomEntity.Id == id) || 
+                             (x.OwningEntityType == EntityType.Investment && x.OwningEntityId == id)) ).ToList();
+            return ret;
         }
 
         /// <summary>

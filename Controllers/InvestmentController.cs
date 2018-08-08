@@ -108,6 +108,29 @@ namespace CoreInvestmentTracker.Controllers
         }
 
         /// <summary>
+        /// Dissosicate a custom entity with an investment
+        /// </summary>
+        /// <param name="customEntityId">custom entity to dissasociate</param>
+        /// <param name="investmentId">investment to dissasociate risk from</param>
+        /// <returns>Status Code</returns>
+        [HttpPost("DissassociateCustomEntity/{customEntityId}/{investmentId}")]
+        public IActionResult DissassociateCustomEntity(int customEntityId, int investmentId)
+        {
+            var entityInvestmentLink = EntityRepository.Db.Find<CustomEntity_Investment>(investmentId, customEntityId);
+            EntityRepository.Db.Remove(entityInvestmentLink);
+            EntityRepository.SaveChanges();
+
+            EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(ActivityOperation.Update.ToString(),
+                "Updates an existing entity", GetUser(), "Dissassociated custom entity"
+                , $"Dissassociated custom entity '{EntityRepository.GetEntityByType<CustomEntity>().Single(r => r.Id == customEntityId).Name}' with investment.",
+                DateTimeOffset.UtcNow,
+                investmentId, EntityType.Investment));
+            EntityRepository.Db.SaveChanges();
+
+            return new NoContentResult();
+        }
+
+        /// <summary>
         /// Dissociate a factor with an investment
         /// </summary>
         /// <param name="factorId">factor id</param>
@@ -186,6 +209,34 @@ namespace CoreInvestmentTracker.Controllers
                 EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(ActivityOperation.Update.ToString(),"Updates an entity",GetUser(), "Associated risk", $"Associated risk '{EntityRepository.GetEntityByType<InvestmentRisk>().Single(r => r.Id == riskId).Name}' with investment.", DateTimeOffset.UtcNow,
                     id, EntityType.Investment));
 
+            }
+            EntityRepository.SaveChanges();
+            return new NoContentResult();
+        }
+
+        /// <summary>
+        /// Associate custom entity with investments
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="customEnityIds"></param>
+        /// <returns></returns>
+        [HttpPost("AssociateCustomEntities/{id}")]
+        public IActionResult AssociateCustomEntities(int id, [FromBody] int[] customEnityIds)
+        {
+            foreach (var customEntityId in customEnityIds)
+            {
+                var customEntityInvestmentLink = new CustomEntity_Investment
+                {
+                    InvestmentID = id,
+                    CustomEntityId = customEntityId
+                };
+                EntityRepository.Db.Add(customEntityInvestmentLink);
+                EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(ActivityOperation.Update.ToString(),
+                    "Update an entity", GetUser(), "Associated custom entity",
+                    $"Associated custom entity '{EntityRepository.GetEntityByType<CustomEntity>().Single(e => e.Id == customEntityId).Name}' with investment",
+                    DateTimeOffset.UtcNow,
+                    id, EntityType.Custom));
+                
             }
             EntityRepository.SaveChanges();
             return new NoContentResult();

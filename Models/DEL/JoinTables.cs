@@ -1,4 +1,6 @@
-﻿namespace CoreInvestmentTracker.Models
+﻿using CoreInvestmentTracker.Models.DEL;
+
+namespace CoreInvestmentTracker.Models
 {
     /// <summary>
     /// 
@@ -110,6 +112,34 @@
         /// 
         /// </summary>
         public InvestmentGroup ChildInvestmentGroup { get; set; } */
+    }
+
+    /// <summary>
+    /// Custom Entities can link to investments and vice reversa
+    /// </summary>
+    public class CustomEntity_Investment
+    {
+        /// <summary>
+        /// Investment Id
+        /// </summary>
+        public int InvestmentID { get; set; }
+
+        /// <summary>
+        /// Invstment
+        /// </summary>
+        public Investment Investment { get; set; }
+
+        /// <summary>
+        /// CustomEntityId
+        /// </summary>
+        public int CustomEntityId { get; set; }
+
+        /// <summary>
+        /// CustomEntity
+        /// </summary>
+        public CustomEntity CustomEntity { get; set; }
+
+
     }
 
 }

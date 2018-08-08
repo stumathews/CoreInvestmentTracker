@@ -11,7 +11,7 @@ namespace CoreInvestmentTracker.Models.DEL
     /// <summary>
     /// Represents an custom entity that the user can define
     /// </summary>
-    public class CustomEntity : IDbEntity, IReferToAnEntity, IReferToACustomEntity
+    public class CustomEntity : IDbEntity, IReferToAnEntity, IReferToACustomEntity, IHaveInvestments,  IDbInvestmentEntityHasInvestments<CustomEntity_Investment>
     {
         /// <inheritdoc />
         /// <summary>
@@ -56,6 +56,17 @@ namespace CoreInvestmentTracker.Models.DEL
         /// This allows this custom entity to be owned by a non-custom entity
         /// </summary>
         public EntityType OwningEntityType { get; set; }
+
+        /// <summary>
+        /// We have investments
+        /// </summary>
+        public ICollection<CustomEntity_Investment> Investments { get; set; }
+        
+        /// <summary>
+        /// Convienient way to expose investments ids so we can get them generically using IHaveInvestments
+        /// </summary>
+        [NotMapped]
+        public int[] InvestmentIds => Investments?.Select(x => x.InvestmentID).ToArray() ?? new int[] { };
     }
 
     /// <summary>

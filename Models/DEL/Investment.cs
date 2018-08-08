@@ -13,11 +13,13 @@ namespace CoreInvestmentTracker.Models
     /// </summary>
     public class Investment : IInvestmentEntity
     {
+        /// <inheritdoc />
         /// <summary>
         /// ID
         /// </summary>
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]                
         public int Id { get; set; }
+        /// <inheritdoc />
         /// <summary>
         /// Description
         /// </summary>
@@ -25,18 +27,18 @@ namespace CoreInvestmentTracker.Models
         /// <summary>
         /// Symbol
         /// </summary>
-        public String Symbol { get; set; }
+        public string Symbol { get; set; }
         /// <summary>
         /// Value proposition
         /// </summary>
         [Display(Name = "Value Proposition")]
-        public String ValueProposition { get; set; }
+        public string ValueProposition { get; set; }
 
         /// <summary>
         /// Desirability statement
         /// </summary>
         [Display(Name ="Deseriabliity statement")]
-        public String DesirabilityStatement { get; set; }
+        public string DesirabilityStatement { get; set; }
 
         /// <summary>
         /// Initial investment
@@ -50,7 +52,7 @@ namespace CoreInvestmentTracker.Models
         /// </summary>
         [Required]      
         [Display(Name ="Investment Name")]
-        public String Name { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Investment value
@@ -73,8 +75,14 @@ namespace CoreInvestmentTracker.Models
         /// <summary>
         /// Groups
         /// </summary>
-        public virtual ICollection<InvestmentGroup_Investment> Groups { get; set; }        
-
+        public virtual ICollection<InvestmentGroup_Investment> Groups { get; set; }       
+        
+        /// <summary>
+        /// Associated custom entities
+        /// </summary>
+        public virtual ICollection<CustomEntity_Investment> CustomEntities { get; set; }
+        
+        /// <inheritdoc />
         public int[] InvestmentIds { get; set; }
     }
 }
