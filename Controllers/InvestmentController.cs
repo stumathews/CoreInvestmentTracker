@@ -386,6 +386,21 @@ namespace CoreInvestmentTracker.Controllers
         }
 
         /// <summary>
+        /// Generates graph data all custom entities given associated with particular investment
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("CustomEntitiesGraph/{id}")]
+        public IActionResult GenerateCustomEntitiesGraph(int id)
+        {
+            var investment = EntityRepository.GetOneOrAllEntities()
+                .Include(e => e.CustomEntities)
+                .ThenInclude(e => e.CustomEntity).Single(o => o.Id == id);
+            return GenerateGraph<CustomEntity, CustomEntity_Investment>(id,
+                investment.CustomEntities.Select(r => r.CustomEntity));
+        }
+
+        /// <summary>
         /// Generates graph data with all factors associated with particular investment
         /// </summary>
         /// <param name="id">Investment Id</param>

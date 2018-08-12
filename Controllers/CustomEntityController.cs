@@ -17,7 +17,7 @@ namespace CoreInvestmentTracker.Controllers
     /// <inheritdoc />
     [Route("api/[controller]")]
     [GlobalControllerLogging]
-    public class CustomEntityController : BaseEntityControllerFunctionality<CustomEntity>
+    public class CustomEntityController : EntityManagedController<CustomEntity>
     {
 
         /// <summary>
@@ -44,32 +44,51 @@ namespace CoreInvestmentTracker.Controllers
                 }
             }
 
+            CustomEntity_Investment link = null; 
             if (entity.OwningCustomEntity?.Id == 0 || string.IsNullOrEmpty(entity.OwningCustomEntity.Name))
             {
                 entity.OwningCustomEntity = null;
-                if (entity.OwningEntityType != EntityType.None)
+                if (entity.OwningEntityType == EntityType.None) return base.Create(entity);
+                switch (entity.OwningEntityType)
                 {
-                    switch (entity.OwningEntityType)
-                    {
-                            case EntityType.Investment:
-                                //var investment = EntityRepository.Db.Investments.Single(x => x.Id == entity.OwningEntityId);
-                                //var link = new CustomEntity_Investment
-                                //{
-                                //    InvestmentID = entity.OwningEntityId,
-                                //    Investment = investment,
-                                //    CustomEntity = entity.OwningCustomEntity,
-                                //    CustomEntityId = entity.OwningEntityId
-                                //};
-                                entity.Investments = new List<CustomEntity_Investment>();
-                                entity.Associations = new List<CustomEntity>();
+                    case EntityType.Investment:
+                        var investment = EntityRepository.Db.Investments.Single(x => x.Id == entity.OwningEntityId);
+                        link = new CustomEntity_Investment
+                        {
+                            InvestmentID = entity.OwningEntityId,
+                            Investment = investment,
+                            CustomEntity = entity,
+                            CustomEntityId = entity.Id
+                        };
+                        entity.Investments = new List<CustomEntity_Investment> {link};
+                        entity.Associations = new List<CustomEntity>();
 
-                                break;
-                    }
+                        break;
+                    case EntityType.None:
+                        break;
+                    case EntityType.InvestmentGroup:
+                        break;
+                    case EntityType.InvestmentRisk:
+                        break;
+                    case EntityType.InvestmentInfluenceFactor:
+                        break;
+                    case EntityType.Region:
+                        break;
+                    case EntityType.User:
+                        break;
+                    case EntityType.Note:
+                        break;
+                    case EntityType.Activity:
+                        break;
+                    case EntityType.Custom:
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
                 }
             }
 
             // Do normal saving which includes logging
-            return base.Create(entity);
+           return base.Create(entity);
         }
 
         /// <summary>
@@ -89,10 +108,14 @@ namespace CoreInvestmentTracker.Controllers
         }
 
         /// <summary>
-        /// Ctor
+        /// Access to te underlying store of entities for this T type of managed entity controller. This is resolved by depedency injection.
         /// </summary>
-        /// <param name="entityRepository"></param>
-        public CustomEntityController(IEntityApplicationDbContext<CustomEntity> entityRepository) : base(entityRepository)
+        /// <summary>
+        /// Constructor for dependency injection support
+        /// </summary>
+        /// <param name="logger"></param>
+        /// <param name="db"></param>
+        public CustomEntityController(IEntityApplicationDbContext<CustomEntity> db, IMyLogger logger) : base(db, logger)
         {
         }
     }

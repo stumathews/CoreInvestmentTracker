@@ -11,7 +11,7 @@ namespace CoreInvestmentTracker.Models.DEL
     /// <summary>
     /// Represents an custom entity that the user can define
     /// </summary>
-    public class CustomEntity : IDbEntity, IReferToAnEntity, IReferToACustomEntity, IHaveInvestments,  IDbInvestmentEntityHasInvestments<CustomEntity_Investment>
+    public class CustomEntity : IDbEntity, IReferToAnEntity, IReferToACustomEntity, IInvestmentEntity,  IDbInvestmentEntityHasInvestments<CustomEntity_Investment>
     {
         /// <inheritdoc />
         /// <summary>
