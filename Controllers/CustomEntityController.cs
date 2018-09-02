@@ -108,6 +108,19 @@ namespace CoreInvestmentTracker.Controllers
         }
 
         /// <summary>
+        /// Gets all the custom entities for a particular type
+        /// </summary>
+        /// <param name="type">the type of entities to fetch</param>
+        /// <returns></returns>
+        [HttpGet("ByType/{type}"), Authorize]
+        public IEnumerable<CustomEntity> AllByType(string type)
+        {
+            var ret =  EntityRepository.Db.CustomEntities.Include(x => x.CustomEntityType)
+                .Where(x => x.CustomEntityType.Name.Equals(type)).ToList();
+            return ret;
+        }
+
+        /// <summary>
         /// Access to te underlying store of entities for this T type of managed entity controller. This is resolved by depedency injection.
         /// </summary>
         /// <summary>

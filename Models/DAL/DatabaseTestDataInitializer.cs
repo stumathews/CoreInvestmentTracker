@@ -9,6 +9,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CoreInvestmentTracker.Models.DAL
 {
+    public interface IDbInitializer
+    {
+        void Initialize(ApplicationDbContext db);
+    }
+
     /// <summary>
     /// This class is setup in the web.config to create new data in the database at startup.
     /// Its mentioned in the web.config
@@ -25,17 +30,12 @@ namespace CoreInvestmentTracker.Models.DAL
         /// <param name="db"></param>
         public static void Initialize(ApplicationDbContext db)
         {
-            db.Database.Migrate(); // apply migration at runtime
-           // db.Database.EnsureCreated();
-
-            
-
+            db.Database.Migrate(); // apply migration at runtime, replaces db.Database.EnsureCreated();
            
-
             var inits = new List<IDbInitializer>(new IDbInitializer[]
             {
-                new DbInitializer3(),  
-                new DbInitilizer2(), 
+                new CustomEntitiesInitializer(),  
+                new InvestmentInitilizer(), 
                 new Dbinitializer1(),
             });
             inits.ForEach(initializer => initializer.Initialize(db));
@@ -45,17 +45,30 @@ namespace CoreInvestmentTracker.Models.DAL
         }
     }
 
-    public interface IDbInitializer
+    public class InvestmentPackage
     {
-        void Initialize(ApplicationDbContext db);
+        public Investment Investment { get; }
+        public InvestmentInfluenceFactor[] Factors { get; }
+        public InvestmentGroup[] Groups { get; }
+        public InvestmentRisk[] Risks { get; }
+        public InvestmentNote[] Notes { get; }
+        public CustomEntity[] CustomEntities { get; }
+
+        public InvestmentPackage(InvestmentNote[] notes, Investment investment, InvestmentInfluenceFactor[] factors, InvestmentGroup[] groups, InvestmentRisk[] risks, CustomEntity[] customEntities)
+        {
+            Notes = notes;
+            Investment = investment;
+            Factors = factors;
+            Groups = groups;
+            Risks = risks;
+            CustomEntities = customEntities;
+        }
     }
 
-    public class DbInitilizer2 : IDbInitializer
+    public class InvestmentInitilizer : IDbInitializer
     {
         public void Initialize(ApplicationDbContext db)
         {
-            
-
             var investments = new List<Investment>(new []
             {
                 new Investment
@@ -410,50 +423,22 @@ namespace CoreInvestmentTracker.Models.DAL
         }
     }
 
-    public class DbInitializer3 : IDbInitializer
+    public class CustomEntitiesInitializer : IDbInitializer
     {
         public void Initialize(ApplicationDbContext db)
         {
-            if (!db.CustomEntities.Any())
-            {
-                var myType = new CustomEntityType {Description = "test", Name = "test"};
-                var parentEntity = new CustomEntity
-                {
-                    Description = "parentEntity",
-                    Name = "Parent",
-                    OwningCustomEntity = null,
-                    CustomEntityType = myType
-                };
+            if (db.CustomEntities.Any()) return;
 
-                var assoc = new CustomEntity
-                {
-                    CustomEntityType = myType,
-                    Description = "",
-                    Name = "yes",
-                    OwningCustomEntity = parentEntity
-                };
+            var products = new CustomEntityType {Description = "Products sold by this investment", Name = "Products"};
+            var services = new CustomEntityType {Description = "Products sold by this investment", Name = "Services"};
+            var segments = new CustomEntityType {Description = "Part of a business that can be distinctly separated from the company as a whole based on its customers, products, or market places", Name = "Business segments"};
+                
+            db.CustomEntityTypes.Add(segments);
+            db.CustomEntityTypes.Add(products);
+            db.CustomEntityTypes.Add(services);
+            db.SaveChanges();
 
-                var childEntity = new CustomEntity
-                {
-                    Description = "childEntity",
-                    Name = "Parent",
-                    OwningCustomEntity = parentEntity,
-                    CustomEntityType = myType,
-                    Associations = new List<CustomEntity>
-                    {
-                        assoc
-                    }
-                };
-
-
-
-                db.CustomEntityTypes.Add(myType);
-                db.CustomEntities.Add(parentEntity);
-                db.CustomEntities.Add(childEntity);
-                db.SaveChanges();
-            }
-            
-    }
+        }
     }
 
     public class Dbinitializer1 : IDbInitializer
@@ -465,16 +450,12 @@ namespace CoreInvestmentTracker.Models.DAL
                 return;   // DB has been seeded
             }
 
-            var MAX = 10;
+            const int MAX = 10;
             var factors = new List<InvestmentInfluenceFactor> {
-                    new InvestmentInfluenceFactor {
-                        Name = "Weather", Description = "The climate will affect the investment.",
-                        Influence = "Sunny weather helps, rainy weather doesn't"},
-                    new InvestmentInfluenceFactor {
-                        Name = "Competiion", Description = "The competition dictates te supply and demand",
-                        Influence = "The more cometition the less buiness you get if the competition or on par to you"},
+                    new InvestmentInfluenceFactor { Name = "Weather", Description = "The climate will affect the investment.", Influence = "Sunny weather helps, rainy weather doesn't"},
+                    new InvestmentInfluenceFactor { Name = "Competion", Description = "The competition dictates te supply and demand", Influence = "The more cometition the less buiness you get if the competition or on par to you"},
             };
-            String[] samples = new String[]
+            var samples = new[]
             {
                     "Transport",
                     "Travel/Tourism",
@@ -491,9 +472,9 @@ namespace CoreInvestmentTracker.Models.DAL
                     "Consumer Goods",
                     "Agriculture"
             };
-            foreach (String each in samples)
+            foreach (var each in samples)
             {
-                InvestmentInfluenceFactor f = new InvestmentInfluenceFactor { Name = each, Description = "description about " + each };
+                var f = new InvestmentInfluenceFactor { Name = each, Description = "description about " + each };
                 f.Influence = "influenced by " + each;
                 factors.Add(f);
             }

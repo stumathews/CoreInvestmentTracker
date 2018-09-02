@@ -136,7 +136,7 @@ namespace CoreInvestmentTracker.Common
 
             patchDocument.Operations.ForEach(o =>
             {
-                var entry = $"Modified value '{o.path}' from '{o.@from} ' to {o.value}";
+                var entry = $"Modified value '{o.path}' to {o.value}";
                 EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(ActivityOperation.Update.ToString(), "Updates an existing entity", GetUser(), entry.ToString(), entry, DateTimeOffset.UtcNow, id, GetUnderlyingEntityType<T>()));
             });
 

@@ -113,6 +113,8 @@ namespace CoreInvestmentTracker.Models.DAL
                 .HasKey(i => new { i.InvestmentID, i.CustomEntityId })
                 .HasName("PrimaryKey_InvestmentID_CustomEntityID");
 
+            //t=> new {i.CustomEntity.OwningEntityId, i.CustomEntity.OwningEntityType } 
+
            // modelBuilder.Entity<EntityPerformance>();//.HasKey(i => new {i.Id, i.Name}).HasName("PrimaryKey_Id_Name");
 
             /*
