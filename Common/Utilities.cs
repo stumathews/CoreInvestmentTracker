@@ -57,7 +57,13 @@ namespace CoreInvestmentTracker.Common
         /// <summary>
         /// Custom entity
         /// </summary>
-        Custom
+        Custom,
+
+        /// <summary>
+        /// Cusotm Entity type
+        /// </summary>
+        CustomType
+
     }
 
     public enum ActivityOperation

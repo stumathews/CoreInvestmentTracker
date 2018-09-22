@@ -76,8 +76,6 @@ namespace CoreInvestmentTracker.Common
                 return BadRequest();
             }
 
-            
-                    
             EntityRepository.Db.Add(entity);
             EntityRepository.SaveChanges();
             EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(ActivityOperation.Create.ToString(), "Created a new entity", GetUser(), entity.ToString(),"Created new entity", DateTimeOffset.UtcNow, entity.Id, GetUnderlyingEntityType<T>()));
