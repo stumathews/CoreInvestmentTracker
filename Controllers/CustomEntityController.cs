@@ -44,8 +44,13 @@ namespace CoreInvestmentTracker.Controllers
                 }
             }
 
-            CustomEntity_Investment link = null; 
-            if (entity.OwningCustomEntity?.Id == 0 || string.IsNullOrEmpty(entity.OwningCustomEntity.Name))
+            CustomEntity_Investment link = null;
+
+            
+
+            var isOwnedByCustomEntity = !StaticUtilities.NotCustomEntityTheOwningEntity(entity);
+            
+            if (!isOwnedByCustomEntity)
             {
                 entity.OwningCustomEntity = null;
                 if (entity.OwningEntityType == EntityType.None) return base.Create(entity);
@@ -86,9 +91,58 @@ namespace CoreInvestmentTracker.Controllers
                         throw new ArgumentOutOfRangeException();
                 }
             }
+            else
+            {
+                // Entity is owned by another custom entity;
+            }
 
-            // Do normal saving which includes logging
-           return base.Create(entity);
+            // We're not going to call base.Create() because we need to pesist a custom entity in a special way
+            
+            EntityRepository.Db.Add(entity);
+            EntityRepository.SaveChanges();
+            EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(
+                Name: ActivityOperation.Create.ToString(),
+                description: $"Created a new entity '{entity.GetOwningEntityType()}'", 
+                user:  GetUser(),
+                tag: entity.ToStr(),
+                details: $"Created new entity {entity.Name}",
+                atTime: DateTimeOffset.UtcNow,
+                owningEntityId: isOwnedByCustomEntity ? entity.OwningCustomEntity.Id : entity.OwningEntityId,
+                owningEntityType: isOwnedByCustomEntity ? EntityType.CustomType : entity.OwningEntityType));
+            EntityRepository.SaveChanges();
+            return CreatedAtAction("Create", new { id = entity.Id }, entity);
+        }
+
+        /// <summary>
+        /// Deletes and Entity
+        /// </summary>
+        /// <param name="id">The id of the entity to delete</param>
+        /// <returns>NoContentResult</returns>
+        [HttpDelete("{id}"), Authorize]
+        public override IActionResult Delete(int id)
+        {
+            var entity = EntityRepository.GetEntityByType<CustomEntity>().Find(id);
+            if (entity == null)
+            {
+                return NotFound();
+            }
+            
+            var isOwnedByCustomEntity = !StaticUtilities.NotCustomEntityTheOwningEntity(entity);
+
+            EntityRepository.Db.Remove(entity);
+            EntityRepository.SaveChanges();
+
+            EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(
+                Name: ActivityOperation.Delete.ToString(),
+                description: $"Deleted a new entity '{entity.GetOwningEntityType()}'", 
+                user:  GetUser(),
+                tag: entity.ToStr(),
+                details: $"Deleted new entity {entity.Name}",
+                atTime: DateTimeOffset.UtcNow,
+                owningEntityId: isOwnedByCustomEntity ? entity.OwningCustomEntity.Id : entity.OwningEntityId,
+                owningEntityType: isOwnedByCustomEntity ? EntityType.CustomType : entity.OwningEntityType));
+            EntityRepository.SaveChanges();
+            return new NoContentResult();
         }
 
         /// <summary>

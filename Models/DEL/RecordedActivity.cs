@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using CoreInvestmentTracker.Common;
+using CoreInvestmentTracker.Models.DEL.Interfaces;
 
 namespace CoreInvestmentTracker.Models.DEL
 {
@@ -86,5 +87,6 @@ namespace CoreInvestmentTracker.Models.DEL
         /// The type of a the target of this activity
         /// </summary>
         public EntityType OwningEntityType { get; set; }
+        
     }
 }

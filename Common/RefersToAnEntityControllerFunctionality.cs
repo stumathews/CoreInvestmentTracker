@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CoreInvestmentTracker.Models.DAL.Interfaces;
 using CoreInvestmentTracker.Models.DEL;
+using CoreInvestmentTracker.Models.DEL.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

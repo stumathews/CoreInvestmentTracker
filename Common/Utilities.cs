@@ -5,6 +5,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Web;
+using CoreInvestmentTracker.Models.DEL;
+using Microsoft.AspNetCore.SpaServices.Prerendering;
 
 namespace CoreInvestmentTracker.Common
 {
@@ -114,4 +116,31 @@ namespace CoreInvestmentTracker.Common
             return entity;
         }        
     }
+
+    public static class StaticUtilities
+    {
+        public static string ToStr(this CustomEntity entity)
+        {
+            return $"Name={entity.Name}, Desc={entity.Description}, Type={entity.GetType()}, OwningEntityId={entity.OwningEntityId}, IsCustomEntity={!NotCustomEntityTheOwningEntity(entity)}";
+        }
+
+        public static string GetOwningEntityType(this CustomEntity entity)
+        {
+            return NotCustomEntityTheOwningEntity(entity)
+                ? entity.OwningEntityType.ToString()
+                : entity.OwningCustomEntity.Name;
+            
+        }
+
+        /// <summary>
+        /// Determine if there is a custom entity type
+        /// </summary>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        public static bool NotCustomEntityTheOwningEntity(CustomEntity e)
+        {
+            return (e.OwningCustomEntity?.Id == 0 || string.IsNullOrEmpty(e.OwningCustomEntity?.Name));
+        }
+    }
+
 }

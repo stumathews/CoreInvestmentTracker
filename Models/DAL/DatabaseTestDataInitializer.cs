@@ -69,6 +69,11 @@ namespace CoreInvestmentTracker.Models.DAL
     {
         public void Initialize(ApplicationDbContext db)
         {
+            if (db.Investments.Any())
+            {
+                return;   // DB has been seeded
+            }
+
             var investments = new List<Investment>(new []
             {
                 new Investment

@@ -8,10 +8,15 @@ using CoreInvestmentTracker.Models.DEL.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Azure.KeyVault.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace CoreInvestmentTracker.Common
 {
+    /// <summary>
+    /// Deals with all entity persisting and commonalities between the entities at a controller level.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class BaseEntityControllerFunctionality<T> : Controller where T : class, IDbEntity, new()
     {
         /// <summary>
@@ -78,11 +83,19 @@ namespace CoreInvestmentTracker.Common
 
             EntityRepository.Db.Add(entity);
             EntityRepository.SaveChanges();
-            EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(ActivityOperation.Create.ToString(), "Created a new entity", GetUser(), entity.ToString(),"Created new entity", DateTimeOffset.UtcNow, entity.Id, GetUnderlyingEntityType<T>()));
+            EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(
+                Name: ActivityOperation.Create.ToString(),
+                description: "Created a new entity", 
+                user:  GetUser(),
+                tag: entity.ToString(),
+                details: "Created new entity",
+                atTime: DateTimeOffset.UtcNow,
+                owningEntityId: entity.Id,
+                owningEntityType: GetUnderlyingEntityType<T>()));
             EntityRepository.SaveChanges();
             return CreatedAtAction("Create", new { id = entity.Id }, entity);
         }
-        
+
         /// <summary>
         /// Import a list of entities
         /// </summary>
@@ -149,7 +162,7 @@ namespace CoreInvestmentTracker.Common
         /// <param name="id">The id of the entity to delete</param>
         /// <returns>NoContentResult</returns>
         [HttpDelete("{id}"), Authorize]
-        public IActionResult Delete(int id)
+        public virtual IActionResult Delete(int id)
         { 
             var entity = EntityRepository.Db.Find<T>(id);
             if (entity == null)
