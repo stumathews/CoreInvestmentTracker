@@ -1,32 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using System.Web;
 using CoreInvestmentTracker.Models.DEL.Interfaces;
 
-namespace CoreInvestmentTracker.Models
+namespace CoreInvestmentTracker.Models.DEL
 {
     /// <summary>
     /// Investment group
     /// </summary>
-    public class InvestmentGroup : IInvestmentEntity, IDbInvestmentEntityHasInvestments<InvestmentGroup_Investment>
+    public class InvestmentGroup : DbEntityBase, IInvestmentEntity, IDbInvestmentEntityHasInvestments<InvestmentGroup_Investment>
     {
-        /// <summary>
-        /// ID
-        /// </summary>
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-        /// <summary>
-        /// Name
-        /// </summary>
-        public String Name { get; set; }
-        /// <summary>
-        /// Description
-        /// </summary>
-        public String Description { get; set; }
-
         [NotMapped]
         public int[] InvestmentIds => Investments?.Select(i => i.InvestmentID).ToArray() ?? new int[] { };
 
@@ -35,6 +19,7 @@ namespace CoreInvestmentTracker.Models
         /// </summary>
         public String Type { get; set; }
         //public ICollection<InvestmentGroup> Groups { get; set; }
+
         /// <summary>
         /// Investments
         /// </summary>

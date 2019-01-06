@@ -14,6 +14,6 @@ namespace CoreInvestmentTracker.Models.DEL
         /// <summary>
         /// List of properties storing the performance values
         /// </summary>
-        public ICollection<EntityProperty> Performances { get;set; }
+        public ICollection<CustomEntity> Performances { get;set; }
     }
 }

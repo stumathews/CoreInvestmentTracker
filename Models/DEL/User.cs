@@ -10,14 +10,8 @@ namespace CoreInvestmentTracker.Models.DEL
     /// <summary>
     /// Represents a user 
     /// </summary>
-    public class User : IDbEntity
+    public class User : DbEntityBase, IDbEntity
     {
-        /// <summary>
-        /// Id
-        /// </summary>
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; } 
-
         /// <summary>
         /// User's display name
         /// </summary>
@@ -43,15 +37,5 @@ namespace CoreInvestmentTracker.Models.DEL
         /// User's timezone in relation to UTC in which  ie +1 or -4 
         /// </summary>
         public int TimeZone { get; set; }
-
-        /// <summary>
-        /// Every db Entity has a name
-        /// </summary>
-        public string Name { get; set; }
-
-        /// <summary>
-        /// Every db entity has a description
-        /// </summary>
-        public string Description { get; set; }
     }
 }

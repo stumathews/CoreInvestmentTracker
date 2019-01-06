@@ -11,7 +11,7 @@ namespace CoreInvestmentTracker.Models.DEL
     /// <summary>
     /// Represents an activity that that has been performed and persisted
     /// </summary>
-    public class RecordedActivity: IReferToAnEntity
+    public class RecordedActivity: DbEntityBase, IReferToAnEntity
     {
         /// <summary>
         /// Recorded Activity
@@ -31,31 +31,17 @@ namespace CoreInvestmentTracker.Models.DEL
             User = user;
             Tag = tag;
             Details = details;
-            AtTime = atTime;
+            CreatedTime = atTime;
+            LastModifiedTime = atTime;
             OwningEntityId = owningEntityId;
             OwningEntityType = owningEntityType;
         }
 
-        public RecordedActivity()
-        {
-        }
-
         /// <summary>
-        /// The Id of the activity
+        /// Ctor required for being used as a generic type
         /// </summary>
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-
-        /// <summary>
-        /// the name of the entity
-        /// </summary>
-        public string Name { get; set; }
-
-        /// <summary>
-        /// The description of the entity
-        /// </summary>
-        public string Description { get; set; }
-
+        public RecordedActivity() { }
+        
         /// <summary>
         /// The user that performed the activity
         /// </summary>
@@ -70,12 +56,7 @@ namespace CoreInvestmentTracker.Models.DEL
         /// Details of the activity
         /// </summary>
         public string Details { get; set; }
-
-        /// <summary>
-        /// Time at which the Activity was logged
-        /// </summary>
-        public DateTimeOffset AtTime { get; set; }
-
+        
         /// <inheritdoc />
         /// <summary>
         /// The activity target. The entity itself that this activity pertains to

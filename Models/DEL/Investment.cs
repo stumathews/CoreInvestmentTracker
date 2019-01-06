@@ -1,29 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 using CoreInvestmentTracker.Models.DEL.Interfaces;
 
-namespace CoreInvestmentTracker.Models
+namespace CoreInvestmentTracker.Models.DEL
 {
+
     /// <summary>
     /// Represents an investment
     /// </summary>
-    public class Investment : IInvestmentEntity
+    public class Investment : DbEntityBase, IInvestmentEntity
     {
-        /// <inheritdoc />
-        /// <summary>
-        /// ID
-        /// </summary>
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]                
-        public int Id { get; set; }
-        /// <inheritdoc />
-        /// <summary>
-        /// Description
-        /// </summary>
-        public String Description { get; set; }
         /// <summary>
         /// Symbol
         /// </summary>
@@ -46,14 +32,7 @@ namespace CoreInvestmentTracker.Models
         [Display(Name = "Initial Investment")]
         [DataType(DataType.Currency)]
         public float InitialInvestment { get; set; }
-
-        /// <summary>
-        /// Investment Name
-        /// </summary>
-        [Required]      
-        [Display(Name ="Investment Name")]
-        public string Name { get; set; }
-
+        
         /// <summary>
         /// Investment value
         /// </summary>
@@ -63,24 +42,24 @@ namespace CoreInvestmentTracker.Models
         /// <summary>
         /// Factors
         /// </summary>
-        public virtual ICollection<InvestmentInfluenceFactor_Investment> Factors { get; set; }
+        public ICollection<InvestmentInfluenceFactor_Investment> Factors { get; set; }
         /// <summary>
         /// Regions
         /// </summary>
-        public virtual ICollection<Region_Investment> Regions { get; set; }
+        public ICollection<Region_Investment> Regions { get; set; }
         /// <summary>
         /// Risks
         /// </summary>
-        public virtual ICollection<InvestmentRisk_Investment> Risks { get; set; }
+        public ICollection<InvestmentRisk_Investment> Risks { get; set; }
         /// <summary>
         /// Groups
         /// </summary>
-        public virtual ICollection<InvestmentGroup_Investment> Groups { get; set; }       
+        public ICollection<InvestmentGroup_Investment> Groups { get; set; }       
         
         /// <summary>
         /// Associated custom entities
         /// </summary>
-        public virtual ICollection<CustomEntity_Investment> CustomEntities { get; set; }
+        public ICollection<CustomEntity_Investment> CustomEntities { get; set; }
         
         /// <inheritdoc />
         public int[] InvestmentIds { get; set; }

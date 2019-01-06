@@ -81,6 +81,16 @@ namespace CoreInvestmentTracker.Common
                 return BadRequest();
             }
 
+            if (entity.CreatedTime == default)
+            {
+                entity.CreatedTime = DateTimeOffset.UtcNow;
+            }
+
+            if (entity.LastModifiedTime == default)
+            {
+                entity.LastModifiedTime = entity.CreatedTime;
+            }
+
             EntityRepository.Db.Add(entity);
             EntityRepository.SaveChanges();
             EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(
@@ -136,6 +146,8 @@ namespace CoreInvestmentTracker.Common
             
             var old = EntityRepository.Db.Find<T>(id);
             patchDocument.ApplyTo(old, ModelState);
+
+            old.LastModifiedTime = DateTimeOffset.UtcNow;
 
             EntityRepository.Db.Update(old);
             EntityRepository.SaveChanges();
@@ -214,6 +226,8 @@ namespace CoreInvestmentTracker.Common
             {
                 old = ShallowCopy.MergeObjects(old, newItem);
             }
+            
+            old.LastModifiedTime = DateTimeOffset.UtcNow;
 
             EntityRepository.Db.Update(old);
             EntityRepository.SaveChanges();

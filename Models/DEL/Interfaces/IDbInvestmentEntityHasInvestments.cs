@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace CoreInvestmentTracker.Models
+namespace CoreInvestmentTracker.Models.DEL.Interfaces
 {
     /// <summary>
     /// Something that has investments of the specified type

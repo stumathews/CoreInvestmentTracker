@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using CoreInvestmentTracker.Models.DEL;
 using CoreInvestmentTracker.Models.DEL.Interfaces;
 
 namespace CoreInvestmentTracker.Models
@@ -11,30 +12,15 @@ namespace CoreInvestmentTracker.Models
     /// <summary>
     /// 
     /// </summary>
-    public class InvestmentInfluenceFactor : IInvestmentEntity, IDbInvestmentEntityHasInvestments<InvestmentInfluenceFactor_Investment>
+    public class InvestmentInfluenceFactor : DbEntityBase, IInvestmentEntity, IDbInvestmentEntityHasInvestments<InvestmentInfluenceFactor_Investment>
     {
-        /// <summary>
-        /// ID
-        /// </summary>
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-        /// <summary>
-        /// Name
-        /// </summary>
-        [Required]
-        public String Name { get; set; }
-        /// <summary>
-        /// Description
-        /// </summary>
-        public String Description { get; set; }
-
         [NotMapped]
         public int[] InvestmentIds => Investments?.Select(i => i.InvestmentID).ToArray() ?? new int[] { };
 
         /// <summary>
         /// Influence
         /// </summary>
-        public String Influence { get; set; }
+        public string Influence { get; set; }
         /// <summary>
         /// Investments
         /// </summary>

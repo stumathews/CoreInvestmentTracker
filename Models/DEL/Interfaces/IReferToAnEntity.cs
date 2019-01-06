@@ -1,8 +1,10 @@
 ﻿using CoreInvestmentTracker.Common;
-using CoreInvestmentTracker.Models.DEL.Interfaces;
 
-namespace CoreInvestmentTracker.Models.DEL
+namespace CoreInvestmentTracker.Models.DEL.Interfaces
 {
+    /// <summary>
+    /// An object that refers to an existing Entity via a Owning ID and OwningType
+    /// </summary>
     public interface IReferToAnEntity : IDbEntity
     {
         /// <summary>

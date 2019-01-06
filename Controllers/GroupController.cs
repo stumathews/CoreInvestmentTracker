@@ -2,6 +2,7 @@
 using CoreInvestmentTracker.Common.ActionFilters;
 using CoreInvestmentTracker.Models;
 using CoreInvestmentTracker.Models.DAL.Interfaces;
+using CoreInvestmentTracker.Models.DEL;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoreInvestmentTracker.Controllers
