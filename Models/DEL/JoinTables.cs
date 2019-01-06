@@ -2,19 +2,35 @@
 
 namespace CoreInvestmentTracker.Models
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public class InvestmentInfluenceFactor_Investment
+    public interface IWithAnInvestment
     {
         /// <summary>
         /// Investment ID
         /// </summary>
-        public int InvestmentID { get; set; }
+        int InvestmentID { get; set; }
         /// <summary>
         /// Investment
         /// </summary>
+        Investment Investment { get; set; }
+    }
+
+    public abstract class WithAnInvestment : IWithAnInvestment
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        public int InvestmentID { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public Investment Investment { get; set; }
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    public class InvestmentInfluenceFactor_Investment : WithAnInvestment
+    {
+        
         /// <summary>
         /// InvestmentInfluenceFactorID
         /// </summary>
@@ -28,16 +44,9 @@ namespace CoreInvestmentTracker.Models
     /// <summary>
     /// 
     /// </summary>
-    public class Region_Investment
+    public class Region_Investment : WithAnInvestment
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        public int InvestmentID { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public Investment Investment { get; set; }
+        
         /// <summary>
         /// 
         /// </summary>
@@ -51,17 +60,8 @@ namespace CoreInvestmentTracker.Models
     /// <summary>
     /// 
     /// </summary>
-    public class InvestmentRisk_Investment
+    public class InvestmentRisk_Investment : WithAnInvestment
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        public int InvestmentID { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public Investment Investment { get; set; }
-
         /// <summary>
         /// 
         /// </summary>
@@ -74,17 +74,8 @@ namespace CoreInvestmentTracker.Models
     /// <summary>
     /// 
     /// </summary>
-    public class InvestmentGroup_Investment
+    public class InvestmentGroup_Investment : WithAnInvestment
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        public int InvestmentID { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public Investment Investment { get; set; }
-
         /// <summary>
         /// 
         /// </summary>
@@ -117,17 +108,8 @@ namespace CoreInvestmentTracker.Models
     /// <summary>
     /// Custom Entities can link to investments and vice reversa
     /// </summary>
-    public class CustomEntity_Investment
+    public class CustomEntity_Investment : WithAnInvestment
     {
-        /// <summary>
-        /// Investment Id
-        /// </summary>
-        public int InvestmentID { get; set; }
-
-        /// <summary>
-        /// Invstment
-        /// </summary>
-        public Investment Investment { get; set; }
 
         /// <summary>
         /// CustomEntityId

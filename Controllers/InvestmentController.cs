@@ -332,6 +332,7 @@ namespace CoreInvestmentTracker.Controllers
         private IActionResult GenerateGraph<T, T1>(int investmentId, IEnumerable<T> aspects)
             where T : IInvestmentEntity,
                       IDbInvestmentEntityHasInvestments<T1>
+            where T1 : IWithAnInvestment
         {
             /*
                var data = {
