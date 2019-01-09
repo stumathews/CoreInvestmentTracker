@@ -64,7 +64,29 @@ namespace CoreInvestmentTracker.Common
         /// <summary>
         /// Cusotm Entity type
         /// </summary>
-        CustomType
+        CustomType,
+
+        /// <summary>
+        /// Number
+        /// </summary>
+        Number,
+
+        /// <summary>
+        /// String
+        /// </summary>
+        String,
+
+        /// <summary>
+        /// List of strings
+        /// </summary>
+        ListOfStrings,
+
+        /// <summary>
+        /// List of numbers
+        /// </summary>
+        ListOfNumbers,
+
+
 
     }
 
