@@ -48,5 +48,15 @@ namespace CoreInvestmentTracker.Models.DEL
         /// When the entity was last modified
         /// </summary>
         public DateTimeOffset LastModifiedTime { get; set; }
+
+        /// <summary>
+        /// Generic points for this entity
+        /// </summary>
+        public long Points { get; set; }
+
+        /// <summary>
+        /// Generic true/false marker for entity
+        /// </summary>
+        public bool IsFlagged { get; set; }
     }
 }

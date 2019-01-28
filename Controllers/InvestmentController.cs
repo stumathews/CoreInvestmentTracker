@@ -359,15 +359,22 @@ namespace CoreInvestmentTracker.Controllers
             }
              */
 
-            var investment = EntityRepository.Db.Investments.Find(investmentId);
-            var nodes = new List<object> { new { name = investment.Name, value = 1 } };
+            var thisInvestment = EntityRepository.Db.Investments.Find(investmentId);
+            var nodes = new List<object> { new { name = thisInvestment.Name, value = 1 } };
             var links = new List<object>();
-            var index = 1;
+            
             foreach (var aspect in aspects)
             {
+                var lastNode = nodes.Count;
+                var otherInvestments = aspect.Investments.Filter(i => !i.Investment.Name.Equals(thisInvestment.Name));
                 nodes.Add(new { name = aspect.Name, value = aspect.Investments.Count });
-                links.Add(new { source = 0, target = index, value = aspect.Investments.Count });
-                index++;
+                links.Add(new { source = 0, target = lastNode, value = aspect.Investments.Count });
+
+                foreach (var other in otherInvestments)
+                {
+                    nodes.Add(new { name = other.Investment.Name, value = 1 });
+                    links.Add(new { source = lastNode, target = nodes.Count-1, value = aspect.Investments.Count });
+                }
             }
             return new ObjectResult(new { nodes, links });
         }
