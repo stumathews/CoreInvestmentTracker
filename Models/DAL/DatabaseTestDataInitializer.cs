@@ -411,19 +411,7 @@ namespace CoreInvestmentTracker.Models.DAL
                 Groups = new List<InvestmentGroup_Investment>()
 
             };
-            var yoloInvestment = new Investment
-            {
-                Name = "Yolo Leisure and technology",
-                Description ="YOLO Leisure and Technology Plc, formerly Pentagon Protection Plc, is an investment company. The Company focuses on opportunities in the travel, technology and leisure sectors. The Company's primary objective is that of securing for the shareholders the possible value consistent with achieving, over time, both capital growth and income for shareholders through developing profitability coupled with dividend payments on a sustainable basis.",
-                DesirabilityStatement = "",
-                InitialInvestment = 2,
-                Symbol = "$",
-                Value = 2,
-                ValueProposition = "",
-                Factors = new List<InvestmentInfluenceFactor_Investment>(),
-                Groups = new List<InvestmentGroup_Investment>()
-
-            };
+            
             var garminInvestment = new Investment
             {
                 Name = "Garmin Ltd",
@@ -832,6 +820,98 @@ namespace CoreInvestmentTracker.Models.DAL
 
             };
 
+            var axaProperty = new Investment
+            {
+                Name = "AXA Property Trust LTD",
+                Description = "Property",
+                DesirabilityStatement = "",
+                InitialInvestment = 2,
+                Symbol = "$",
+                Value = 2,
+                ValueProposition = "",
+                Factors = new List<InvestmentInfluenceFactor_Investment>(),
+                Groups = new List<InvestmentGroup_Investment>()
+            };
+
+            var advancedMicrosDevices = new Investment
+            {
+                Name = "Advanced Micro Devices",
+                Description = "Chips",
+                DesirabilityStatement = "",
+                InitialInvestment = 2,
+                Symbol = "$",
+                Value = 2,
+                ValueProposition = "",
+                Factors = new List<InvestmentInfluenceFactor_Investment>(),
+                Groups = new List<InvestmentGroup_Investment>()
+            };
+
+            var canadaGoose = new Investment
+            {
+                Name = "Canada Goose Holdings Inc",
+                Description = "Clothing",
+                DesirabilityStatement = "",
+                InitialInvestment = 2,
+                Symbol = "$",
+                Value = 2,
+                ValueProposition = "",
+                Factors = new List<InvestmentInfluenceFactor_Investment>(),
+                Groups = new List<InvestmentGroup_Investment>()
+            };
+
+            var changyou = new Investment
+            {
+                Name = "changyou.com Ltd - ADR",
+                Description = "Online gaming",
+                DesirabilityStatement = "",
+                InitialInvestment = 2,
+                Symbol = "$",
+                Value = 2,
+                ValueProposition = "",
+                Factors = new List<InvestmentInfluenceFactor_Investment>(),
+                Groups = new List<InvestmentGroup_Investment>()
+            };
+
+            var cloudera = new Investment
+            {
+                Name = "Cloudera Inc",
+                Description = "",
+                DesirabilityStatement = "",
+                InitialInvestment = 2,
+                Symbol = "$",
+                Value = 2,
+                ValueProposition = "",
+                Factors = new List<InvestmentInfluenceFactor_Investment>(),
+                Groups = new List<InvestmentGroup_Investment>()
+            };
+
+            var wipro = new Investment
+            {
+                Name = "Wipro Ltd  - ADR",
+                Description = "",
+                DesirabilityStatement = "",
+                InitialInvestment = 2,
+                Symbol = "$",
+                Value = 2,
+                ValueProposition = "",
+                Factors = new List<InvestmentInfluenceFactor_Investment>(),
+                Groups = new List<InvestmentGroup_Investment>()
+            };
+
+            var tencent = new Investment
+            {
+                Name = "Tencent Music Entertainment Group",
+                Description = "",
+                DesirabilityStatement = "",
+                InitialInvestment = 2,
+                Symbol = "$",
+                Value = 2,
+                ValueProposition = "",
+                Factors = new List<InvestmentInfluenceFactor_Investment>(),
+                Groups = new List<InvestmentGroup_Investment>()
+            };
+
+
             
 
 
@@ -846,7 +926,6 @@ namespace CoreInvestmentTracker.Models.DAL
                 glanbiaInvestment,
                 nanocoInvestment,
                 garminInvestment,
-                yoloInvestment,
                 goldInvestment,
                 amakaInvestment,
                 tarenaInvestment,
@@ -884,7 +963,14 @@ namespace CoreInvestmentTracker.Models.DAL
                 warpaintLondonInvestment,
                 westminsterGroupInvestment,
                 zyngaInvestment,
-                iSharesUkPropertyInvestment
+                iSharesUkPropertyInvestment,
+                axaProperty,
+                advancedMicrosDevices,
+                canadaGoose,
+                changyou,
+                cloudera,
+                wipro,
+                tencent
 
             };
             investments.ForEach(i =>
@@ -945,7 +1031,6 @@ namespace CoreInvestmentTracker.Models.DAL
             AddGroupsToInvestment(glanbiaInvestment, new []{ nutrition });
             AddGroupsToInvestment(nanocoInvestment, new []{ ledTechnology });
             AddGroupsToInvestment(garminInvestment, new []{ technologyUtility });
-            AddGroupsToInvestment(yoloInvestment, new []{ stevia });
             AddGroupsToInvestment(goldInvestment, new []{ stevia });
             AddGroupsToInvestment(amakaInvestment, new []{ internetUtiltiy });
             AddGroupsToInvestment(tarenaInvestment, new []{ education });
