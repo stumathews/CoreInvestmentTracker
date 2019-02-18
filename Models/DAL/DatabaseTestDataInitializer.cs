@@ -36,7 +36,7 @@ namespace CoreInvestmentTracker.Models.DAL
             {
                 new InvestmentInitilizer(), // Create test investments
                 new CustomEntitiesInitializer(),   // create test custom types & Entities
-                new AdditionalDbInitializer(),
+               // new AdditionalDbInitializer(),
             });
             inits.ForEach(initializer => initializer.Initialize(db));
 
@@ -132,7 +132,8 @@ namespace CoreInvestmentTracker.Models.DAL
             var socialMedia = new InvestmentGroup { Name="Social Media",Description="Social Media"};
             var sportsClothing = new InvestmentGroup { Name="Sports/Clothing",Description="Sports/Clothing"};
             var security = new InvestmentGroup { Name="Physical Security",Description="Physical Security"};
-            
+            var itServices = new InvestmentGroup { Name = "IT Services", Description = "IT Services" };
+
 
             var groups = new List<InvestmentGroup>
             {
@@ -401,7 +402,7 @@ namespace CoreInvestmentTracker.Models.DAL
             var goldInvestment = new Investment
             {
                 Name = "ETFS Physical Gold",
-                Description ="Gold",
+                Description = "ETFS Physical Gold (1672) is designed to offer security holders a simple and cost-efficient way to access the gold market by providing a return equivalent to the movements in the gold spot price less the applicable management fee. 1672 is backed by physical allocated gold held by HSBC Bank plc (the custodian). Only metal that conforms with the London Bullion Market Association's (LBMA) rules for Good Delivery can be accepted by the custodian. Each physical bar is segregated, individually identified and allocated.",
                 DesirabilityStatement = "",
                 InitialInvestment = 2,
                 Symbol = "$",
@@ -441,7 +442,7 @@ namespace CoreInvestmentTracker.Models.DAL
             var glanbiaInvestment = new Investment
             {
                 Name = "Glanbia PLC",
-                Description ="Nutrition/Dairy",
+                Description = "Glanbia plc is an Irish global nutrition group with operations in 32 countries. It has leading market positions in sports nutrition, cheese, dairy ingredients, speciality non-dairy ingredients and vitamin and mineral premixes. Glanbia products are sold or distributed in over 130 countries.",
                 DesirabilityStatement = "",
                 InitialInvestment = 2,
                 Symbol = "$",
@@ -515,7 +516,6 @@ namespace CoreInvestmentTracker.Models.DAL
                 ValueProposition = "",
                 Factors = new List<InvestmentInfluenceFactor_Investment>(),
                 Groups = new List<InvestmentGroup_Investment>()
-
             };
 
 
@@ -525,7 +525,7 @@ namespace CoreInvestmentTracker.Models.DAL
             var cloudBuyInvestment = new Investment
             {
                 Name = "CloudBuy PLC",
-                Description = "",
+                Description = "cloudBuy plc is a provider of an integrated software platform for e-procurement and e-commerce for the trading of goods and services between purchasers, such as public sector bodies and their suppliers, along with the analysis and coding of spend and product data. The Company's operating segments include Company Formation Services, Web and ecommerce services and Coding International Limited. It also provides services to new businesses, including incorporation, company secretary services and filing annual returns, using its software platform. Its solutions include e-commerce Marketplaces, e-commerce Websites, Purchasing Portals, SpendInsight and Company formations. SpendInsight service provides regular analysis of any company's historical spend data. It offers a range of Website packages from templated solutions to Intranets and global business-to-business (B2B) e-commerce sites. The cloudBuy platform enables rapid extension of its solutions and development of new applications.",
                 DesirabilityStatement = "Cloud",
                 InitialInvestment = 2,
                 Symbol = "$",
@@ -540,7 +540,7 @@ namespace CoreInvestmentTracker.Models.DAL
             var elektronTechnologyInvestment = new Investment
             {
                 Name = "Elektron Technology",
-                Description = "",
+                Description = "Elektron Technology plc is a holding company. The Company is engaged in designing, manufacturing and marketing products that connect, monitor and control. It operates in two segments: Connectivity, and Instrumentation, Monitoring and Control (IMC). Connectivity comprises two complementary product families: Bulgin and Arcolectric. The Company's products are helping its customers to quantify real-world environments, process this data and act on the results. Its products include sealed connectors, Switches, indicators, battery, fuseholders, ophthalmic instruments, nanopositioning and sensing equipment, and vehicle power management systems. The Company's Checkit offers a wireless solution providing work management software and automated monitoring. Its subsidiaries include Elektron Technology Corporation, Elektron Technology PTE Ltd, Elektron Technology UK Ltd and Elektron Technology (Shanghai) Trading Limited.",
                 DesirabilityStatement = "",
                 InitialInvestment = 2,
                 Symbol = "$",
@@ -554,7 +554,7 @@ namespace CoreInvestmentTracker.Models.DAL
             var gluMobileInvestment = new Investment
             {
                 Name = "Glu Mobile Inc",
-                Description = "Mobile",
+                Description = "Glu Mobile Inc. develops, publishes and markets a portfolio of mobile games. The Company develops and publishes a portfolio of mobile games designed to appeal to a cross section of the users of smartphones and tablet devices. Its portfolio of mobile games is spread across various genres, including Fashion and Celebrity, Food, Sports and Action, Social Networking and Home. Its portfolio of games include Contract Killer, Cooking Dash, Covet Fashion, Deer Hunter, Design Home, QuizUp, Racing Rivals and Tap Sports Baseball, as well as games based on third party licensed brands, including Gordon Ramsay DASH, Kendall & Kylie, and Kim Kardashian: Hollywood. The Company works directly with other application developers to include advertising for their applications in its games, and the developers pay them based on either the number of impressions in its games or the number of users downloading the developer's application.",
                 DesirabilityStatement = "",
                 InitialInvestment = 2,
                 Symbol = "$",
@@ -568,7 +568,7 @@ namespace CoreInvestmentTracker.Models.DAL
             var gymGroupInvestment = new Investment
             {
                 Name = "Gym Group PLC/The",
-                Description = "Health",
+                Description = "The Gym Group plc is a United Kingdom-based holding company. The Company provides health and fitness facilities. The Company operates approximately 90 gyms across the United Kingdom that are open around the clock. The Company offers gym memberships. Its subsidiaries include The Gym Group Midco1 Limited, The Gym Group Midco2 Limited, The Gym Group Operations Limited and The Gym Limited.",
                 DesirabilityStatement = "",
                 InitialInvestment = 2,
                 Symbol = "$",
@@ -582,7 +582,7 @@ namespace CoreInvestmentTracker.Models.DAL
             var intercededGroupInvestment = new Investment
             {
                 Name = "Interceded Group PLC",
-                Description = "Idendity/Credential Management",
+                Description = "Intercede Group plc is a United Kingdom-based software and service company. The Company is engaged in developing and supplying of identity and credential management software. The Company provides MyID software, which is an identity and credential management system that enables organizations to create and assign trusted digital identities to employees, citizens and machines. Its MyID software protects the networks, facilities and intellectual property of governments, agencies and other enterprise customers. In addition, it provides MyTAM, which is a cloud-based service that provides Android application developers and service providers to deploy trusted applications to the trusted execution environment (TEE) on mobile devices. It offers its solutions to various sectors, including aerospace and defense, finance and telecommunications; governments and federal agencies, and mobile developers. The Company operates in the United States and the United Kingdom.",
                 DesirabilityStatement = "",
                 InitialInvestment = 2,
                 Symbol = "$",
@@ -596,7 +596,7 @@ namespace CoreInvestmentTracker.Models.DAL
             var mattelInvestment = new Investment
             {
                 Name = "Mattel Group Inc",
-                Description = "Toys",
+                Description = "Mattel, Inc. manufactures and markets a range of toy products around the world. The Company's segments are North America; International, and American Girl. Its portfolio of brands and products are grouped into approximately four major brand categories, including Mattel Girls & Boys Brands, Fisher-Price Brands, American Girl Brands and Construction and Arts & Crafts Brands. The Mattel Girls & Boys Brands category includes Barbie fashion dolls, Monster High, Disney Classics, Ever After High, Little Mommy, and Polly Pocket, Hot Wheels and Matchbox vehicles and play sets, and CARS, Disney Planes, BOOMco, Toy Story, Max Steel, WWE Wrestling and DC Comics. The Fisher-Price Brands category includes Fisher-Price, Little People, BabyGear, Laugh & Learn, Imaginext, Thomas & Friends, Blaze and The Monster Machines, Shimmer and Shine, Mickey Mouse Clubhouse, Minnie Mouse, Octonauts, and Power Wheels. The Construction and Arts & Crafts Brands category includes MEGA BLOKS, RoseArt and Board Dudes.",
                 DesirabilityStatement = "",
                 InitialInvestment = 2,
                 Symbol = "$",
@@ -610,7 +610,7 @@ namespace CoreInvestmentTracker.Models.DAL
             var mobileIronInvestment = new Investment
             {
                 Name = "MobileIron Inc",
-                Description = "Mobile device managment",
+                Description = "MobileIron, Inc. (MobileIron) provides a mobile information technology (IT) platform for enterprises to manage and secure mobile applications, content and devices. The Company's solution provides enterprise security. The MobileIron Platform combines security and enterprise mobility management (EMM) tools, including mobile device management (MDM), mobile application management (MAM), and mobile content management (MCM) capabilities. The Company offers EMM tools, including EMM platform, cloud security with MobileIron Access, Windows security with MobileIron Bridge and applications. MobileIron offers its customers the flexibility to deploy its solution as a cloud service or as on-premises software. Its applications include Apps@Work, Docs@Work, Web@Work, Help@Work, MobileIron Tunnel, MobileIron Rooms, MobileIron AppConnect and AppConnect Ecosystem. The Company serves a range of industries, such as financial services, government, healthcare and legal.",
                 DesirabilityStatement = "",
                 InitialInvestment = 2,
                 Symbol = "$",
@@ -626,7 +626,7 @@ namespace CoreInvestmentTracker.Models.DAL
             var oktaInvestment = new Investment
             {
                 Name = "Okta Inc",
-                Description = "Web/Identity",
+                Description = "Okta, Inc., is an independent provider of identity for the enterprise. The Company's Okta Identity Cloud platform provides identity management solutions that enable customers to secure their users and connect them to technology and applications. It also connects enterprises to their customers, employees, contractors, and partners. It allows users to access a range of cloud applications, Websites, mobile applications and service from various devices. Its platform is used by information technology (IT) organizations to secure their enterprise and by developers to build customer-facing Websites and applications. Okta Identity Cloud consists of a suite of products to manage and secure identities. It offers a range of products, such as Adaptive Multi-Factor Authentication, Universal Directory, Lifecycle Management products, Single Sign-On, application program interface (API) Access Management and Mobility Management.",
                 DesirabilityStatement = "",
                 InitialInvestment = 2,
                 Symbol = "$",
@@ -640,7 +640,7 @@ namespace CoreInvestmentTracker.Models.DAL
             var rm2InternationalInvestment = new Investment
             {
                 Name = "RM2 International SA",
-                Description = "Container technology",
+                Description = "RM2 International S.A. is a pallet development, manufacture, supply and management company. The Company is principally engaged in developing and selling shipping pallets and providing related logistical services. The Company's product for moving goods, BLOCKPal, has impermeability to water and contamination, fire retardancy, and resistance to damage and weight. The Company also offers systems for tracking asset movements and for optimizing the utilization and logistics of those assets. The Company's ERICA system provides real time intelligence to monitor and manage the movement of any transit equipment. The Company also offers a pallet rental program. The Company also offers supply chain auditing and consulting services, including measuring a supply chain's efficiency, determining the viability of a closed loop system, weighing the advantages of an open architecture and monetizing inbound pallet movements.",
                 DesirabilityStatement = "",
                 InitialInvestment = 2,
                 Symbol = "$",
@@ -654,7 +654,7 @@ namespace CoreInvestmentTracker.Models.DAL
             var sitoMobileInvestment = new Investment
             {
                 Name = "SITO Mobile Limited",
-                Description = "Mobile location based Advertising",
+                Description = "SITO Mobile, Ltd. operates a mobile location-based advertising platform serving businesses, advertisers and brands. The Company's offerings include SITO Location-Based Advertising and SITO Mobile Messaging. SITO Location-Based Advertising delivers display advertisements and videos on behalf of advertisers, including various features, such as Geo-fencing, Verified walk-in, Behavioral Targeting, and Analytics and Optimization. Geo-fencing targets customers within a certain radius of location and uses technology to push coupons, advertisements and promotions to mobile applications. Verified Walk-in tracks foot-traffic to locations and which advertisements drive action. Behavioral Targeting tracks past behaviors over 30 to 90 day increments allowing for real-time campaign management. Analytics and Optimization is a culling and building measurement system. SITO Mobile Messaging is a platform for building and controlling programs, including messaging and customer incentive programs.",
                 DesirabilityStatement = "",
                 InitialInvestment = 2,
                 Symbol = "$",
@@ -668,7 +668,7 @@ namespace CoreInvestmentTracker.Models.DAL
             var simiGonInvestment = new Investment
             {
                 Name = "SimiGon Ltd",
-                Description = "Simulation",
+                Description = "SimiGon Ltd is engaged in developing learning, training and simulation technologies and applications for use in professional communities. The Company has developed SIMbox, a personal computer (PC)-based software platform to create, modify, manage and deploy any simulation-based content across a multitude of domains, such as training, research development, operations analysis and entertainment. SIMbox is a three dimensional (3D) simulation engine including software modules that enable users to create new products and content. The Company also provides KnowBook is a training solution for aircrew and organizations. KnowBook includes all types of simulation, knowledge management, mission rehearsal, after action review (AAR), and time management. The Knowbook family consists of AirBook, GroundBook, and MarineBook. In addition, the Company offers AirTrack, which provides passenger inflight entertainment solutions, and D-Brief PC, an offline/real-time debriefing application.",
                 DesirabilityStatement = "",
                 InitialInvestment = 2,
                 Symbol = "$",
@@ -682,7 +682,7 @@ namespace CoreInvestmentTracker.Models.DAL
             var simonPropertyGroupInvestment = new Investment
             {
                 Name = "Simon Property Group Inc",
-                Description = "Property",
+                Description = "Simon Property Group, Inc. is a self-administered and self-managed real estate investment trust (REIT). The Company owns, develops and manages retail real estate properties, which consist primarily of malls, Premium Outlets and The Mills. Simon Property Group, L.P. (Operating Partnership), is the Company's partnership subsidiary that owns all of its real estate properties and other assets. As of December 31, 2016, the Company owned or held an interest in 206 income-producing properties in the United States, which consisted of 108 malls, 67 Premium Outlets, 14 Mills, four lifestyle centers, and 13 other retail properties in 37 states and Puerto Rico. As of December 31, 2016, it had redevelopment and expansion projects, including the addition of anchors, big box tenants, and restaurants, underway at 27 properties in the United States and it had one outlet and one other retail project under development.",
                 DesirabilityStatement = "",
                 InitialInvestment = 2,
                 Symbol = "$",
@@ -696,7 +696,7 @@ namespace CoreInvestmentTracker.Models.DAL
             var spotifyInvestment = new Investment
             {
                 Name = "Spotify Technology SA",
-                Description = "Music/Entertainment",
+                Description = "Spotify Technology SA a Luxembourg-based company, which offers digital music-streaming services. The Company enables users to discover new releases, which includes the latest singles and albums; playlists, which includes ready-made playlists put together by music fans and experts, and over millions of songs so that users can play their favorites, discover new tracks and build a personalized collection. Users can either select Spotify Free, which includes only shuffle play or Spotify Premium, which encompasses a range of features, such as shuffle play, advertisement free, unlimited skips, listen offline, play any track and high quality audio. The Company operates through a number of subsidiaries, including Spotify LTD and is present in over 20 countries.",
                 DesirabilityStatement = "",
                 InitialInvestment = 2,
                 Symbol = "$",
@@ -710,7 +710,7 @@ namespace CoreInvestmentTracker.Models.DAL
             var starcomInvestment = new Investment
             {
                 Name = "Starcom Plc",
-                Description = "Wireless solutions for remote tracking",
+                Description = "Starcom plc is engaged in the development of wireless solutions for the remote tracking, monitoring and protection of various types of assets and people. The Company, along with its subsidiaries, has four operating segments: sets, accessory, Web and other. The Company has two wholly owned subsidiaries: Starcom G.P.S. Systems Ltd. and Starcom Systems Limited. Starcom G.P.S. Systems Ltd. is an Israeli company that engages in the same field. The Company offers systems, including Helios, Triton, WatchLock, Rainbow, Kylos and the Online Application. Helios is an automatic vehicle location and fleet management systems. Triton R container tracking system provides ongoing monitoring of containers. WatchLock is a security padlock. Kylos is a portable tracking solution for locating merchandise assets, people and pets. Starcom Online, an online application, provides online support.",
                 DesirabilityStatement = "",
                 InitialInvestment = 2,
                 Symbol = "$",
@@ -724,7 +724,7 @@ namespace CoreInvestmentTracker.Models.DAL
             var ternInvestment = new Investment
             {
                 Name = "Tern Plc",
-                Description = "Software Venture capitalists",
+                Description = "Tern Plc invests in, develops and sells private software companies with technology, based in the United Kingdom. The principal activity of the Company is investing in unquoted and quoted companies to achieve capital growth. The Company focuses on businesses in the cloud, Internet of Things (IOT) and mobile sectors. The Company focuses on building companies with technologies and services within the IOT market.",
                 DesirabilityStatement = "",
                 InitialInvestment = 2,
                 Symbol = "$",
@@ -738,7 +738,7 @@ namespace CoreInvestmentTracker.Models.DAL
             var usuSoftwareInvestment = new Investment
             {
                 Name = "USU Software AG",
-                Description = "End-to-end software developer that developers Business products and delivers business services",
+                Description = "USU Software AG is a Germany-based company that develops and markets end-to-end software solutions. It operates through two sectors: Product Business and Service Business. The Product Business sector includes products and services in the areas of infrastructure management, software license management, service/change management, finance management, process management and knowledge management. The Service Business sector encompasses consulting services for Information Technology (IT) projects and individual application development. The Company has subsidiaries in Germany, Switzerland, the Czech Republic, Austria and the United States, such as unitB technology GmbH and SecurIntegration GmbH. Its customers operate mainly in the field of financial services, telecommunications, the automotive industry, consumer goods, services and trade, as well as the public sector.",
                 DesirabilityStatement = "",
                 InitialInvestment = 2,
                 Symbol = "$",
@@ -752,7 +752,7 @@ namespace CoreInvestmentTracker.Models.DAL
             var ubisenseInvestment = new Investment
             {
                 Name = "Ubisense Group PLC",
-                Description = "Enterprise location tracking solutions for manufacuring, logistics, transit, communications and utility companies",
+                Description = "Ubisense Group Plc is engaged in providing enterprise location intelligence solutions for manufacturing, logistics, transit, communication and utility companies. The Company operates through Geospatial. The RTLS segment takes real-time location data from its own sensing hardware, or from standards-based integration with third party hardware, and transforms this data into spatial event information, delivering asset identification, real-time location and spatial monitoring. The Geospatial segment delivers software solutions that integrate data from any source, including geographic, real-time asset, global positioning system, location, corporate and external cloud-based sources into a live Geospatial common operating picture. The Company offers various products, such as Smart Factory, myWorld, myWorld Damage Assessment, myWorld Inspection & Survey, myWorld Network Insight, Dimension4 and AngleID.",
                 DesirabilityStatement = "",
                 InitialInvestment = 2,
                 Symbol = "$",
@@ -767,7 +767,7 @@ namespace CoreInvestmentTracker.Models.DAL
             var warpaintLondonInvestment = new Investment
             {
                 Name = "Warpaint London PLC",
-                Description = "Cosmetics",
+                Description = "Warpaint London PLC is a United Kingdom-based company engaged in color cosmetics business. The Company sells color cosmetics in the United Kingdom and overseas, principally under the W7 brand. The Company operates through two divisions: close-out and own-brand. The own-brand division consists primarily of the Company's flagship brand, W7. The W7 brand contains over 500 items, which are sold into high street retailers and independent beauty shops across the United Kingdom, Europe, Australia and the United States. The W7 brand focuses on the 16-30 age range.",
                 DesirabilityStatement = "",
                 InitialInvestment = 2,
                 Symbol = "$",
@@ -781,7 +781,7 @@ namespace CoreInvestmentTracker.Models.DAL
             var westminsterGroupInvestment = new Investment
             {
                 Name = "Westminster Group PLC",
-                Description = "Security",
+                Description = "Westminster Group PLC is a security and services company. The Company's principal activity is the design, supply and ongoing support of technology security solutions and the provision of long term managed services, consultancy and training services. It operates through two divisions, which include Managed Services and Technology. Its Managed Services division is focused on long term recurring revenue managed services contracts, such as the management and running of complete security solutions in airports, ports and other such facilities, together with the provision of ferry services, manpower, consultancy and training services. Its Technology division is focused on providing technology led security solutions encompassing a range of surveillance, detection, tracking, screening and interception technologies to governments and organizations across the world. The Company's subsidiaries include Westminster International Limited and Longmoor Security Limited.",
                 DesirabilityStatement = "",
                 InitialInvestment = 2,
                 Symbol = "$",
@@ -795,7 +795,7 @@ namespace CoreInvestmentTracker.Models.DAL
             var zyngaInvestment = new Investment
             {
                 Name = "Zynga Inc",
-                Description = "Online gaming",
+                Description = "Zynga Inc. is a provider of social game services. The Company develops, markets and operates social games as live services played on mobile platforms, such as iPhone Operating System (iOS) operating system and Android operating system and social networking sites, such as Facebook. The Company has developed a range of social games, including games in its Slots, Words With Friends, Zynga Poker and FarmVille franchises. It operates its games as live services and updates them with new features. It analyzes the data generated by its players' game play and social interactions to guide the creation of new content and features. The Company operates its games as live services that are available anytime and anywhere. The Company invests in game categories, including Social Casino, Casual, Action Strategy and Invest Express. Social Casino includes Zynga Poker and its Slots games, such as Hit It Rich! Slots, Wizard of Oz Slots, Willy Wonka and the Chocolate Factory Slots, and Black Diamond Casino.",
                 DesirabilityStatement = "",
                 InitialInvestment = 2,
                 Symbol = "$",
@@ -809,7 +809,7 @@ namespace CoreInvestmentTracker.Models.DAL
             var iSharesUkPropertyInvestment = new Investment
             {
                 Name = "iShares UK Property UCITS ETF",
-                Description = "Property",
+                Description = "The Fund seeks to track the performance of an index composed of UK listed real estate companies and Real Estate Investment Trusts (REITS).",
                 DesirabilityStatement = "",
                 InitialInvestment = 2,
                 Symbol = "$",
@@ -823,7 +823,7 @@ namespace CoreInvestmentTracker.Models.DAL
             var axaProperty = new Investment
             {
                 Name = "AXA Property Trust LTD",
-                Description = "Property",
+                Description = "AXA Property Trust Limited is a closed-ended investment company. The Company's investment objective is to be managed with the intention of realizing all remaining assets in the Portfolio, in a manner consistent with the principles of prudent investment management and spread of investment risk, with a view to returning capital invested to the shareholders in an orderly manner. The Company invests in commercial properties in Europe, which are held through its subsidiaries. The Company's portfolio includes in geographic locations, such as Germany and Italy. The Company invests in retail, industrial and leisure sectors. AXA Investment Managers UK Limited serves as the investment manager to the Company.",
                 DesirabilityStatement = "",
                 InitialInvestment = 2,
                 Symbol = "$",
@@ -836,7 +836,7 @@ namespace CoreInvestmentTracker.Models.DAL
             var advancedMicrosDevices = new Investment
             {
                 Name = "Advanced Micro Devices",
-                Description = "Chips",
+                Description = "Advanced Micro Devices, Inc. is a global semiconductor company. The Company is engaged in offering x86 microprocessors, as standalone devices or as incorporated into an accelerated processing unit (APU), chipsets, discrete graphics processing units (GPUs) and professional graphics, and server and embedded processors and semi-custom System-on-Chip (SoC) products and technology for game consoles. The Company's segments include the Computing and Graphics segment, and the Enterprise, Embedded and Semi-Custom segment. The Computing and Graphics segment primarily includes desktop and notebook processors and chipsets, discrete GPUs and professional graphics. The Enterprise, Embedded and Semi-Custom segment primarily includes server and embedded processors, semi-custom SoC products, development services, technology for game consoles and licensing portions of its intellectual property portfolio.",
                 DesirabilityStatement = "",
                 InitialInvestment = 2,
                 Symbol = "$",
@@ -849,7 +849,7 @@ namespace CoreInvestmentTracker.Models.DAL
             var canadaGoose = new Investment
             {
                 Name = "Canada Goose Holdings Inc",
-                Description = "Clothing",
+                Description = "Canada Goose Holdings Inc. is a Canadian holding company of winter clothing manufacturers. The company was founded in 1957 by Sam Tick, under the name Metro Sportswear Ltd. Canada Goose maintains a wide range of jackets, parkas, vests, hats, gloves, shells and other apparel.",
                 DesirabilityStatement = "",
                 InitialInvestment = 2,
                 Symbol = "$",
@@ -862,7 +862,7 @@ namespace CoreInvestmentTracker.Models.DAL
             var changyou = new Investment
             {
                 Name = "changyou.com Ltd - ADR",
-                Description = "Online gaming",
+                Description = "Changyou.com Limited is an online game developer and operator. The Company is engaged in the development, operation and licensing of online games for personal computers (PCs) and mobile devices. The Company's segments include Online Game segment, which consists primarily of PC games and mobile games; the Platform Channel segment, which consists primarily of online advertising services offered on the 17173.com Website, Internet value-added services (IVAS) offered on the Dolphin Browser and RaidCall and online card and board games offered by MoboTap, and the Cinema Advertising segment, which consists primarily of the acquisition, from operators of movie theaters, and the sale, to advertisers, of pre-film advertising slots, which are advertisements shown before the screening of a movie in a cinema theater. Its online games include a range of genres, including massively multi-player online role-playing games (MMORPGs), third person shooter games (TPSs) and collectible card games (CCGs).",
                 DesirabilityStatement = "",
                 InitialInvestment = 2,
                 Symbol = "$",
@@ -875,7 +875,7 @@ namespace CoreInvestmentTracker.Models.DAL
             var cloudera = new Investment
             {
                 Name = "Cloudera Inc",
-                Description = "",
+                Description = "Changyou.com Limited is an online game developer and operator. The Company is engaged in the development, operation and licensing of online games for personal computers (PCs) and mobile devices. The Company's segments include Online Game segment, which consists primarily of PC games and mobile games; the Platform Channel segment, which consists primarily of online advertising services offered on the 17173.com Website, Internet value-added services (IVAS) offered on the Dolphin Browser and RaidCall and online card and board games offered by MoboTap, and the Cinema Advertising segment, which consists primarily of the acquisition, from operators of movie theaters, and the sale, to advertisers, of pre-film advertising slots, which are advertisements shown before the screening of a movie in a cinema theater. Its online games include a range of genres, including massively multi-player online role-playing games (MMORPGs), third person shooter games (TPSs) and collectible card games (CCGs).",
                 DesirabilityStatement = "",
                 InitialInvestment = 2,
                 Symbol = "$",
@@ -888,7 +888,7 @@ namespace CoreInvestmentTracker.Models.DAL
             var wipro = new Investment
             {
                 Name = "Wipro Ltd  - ADR",
-                Description = "",
+                Description = "Cloudera, Inc. is a developer of platform for data management, machine learning and advanced analytics. The Company allows enterprises to operate, manage and move workloads across multiple architectures, mixing on premises and cloud environments, including all major public cloud infrastructure providers. It operates through two operating segments: subscription and services. Its products include Cloudera Enterprise Data Hub, Cloudera Analytic BD, Cloudera Operational DB, Cloudera Data Science & Engineering, and Cloud Essentials. The Company offers Cloudera Data Science for programmatic preparation, predictive modeling and machine learning; Cloudera Real Time for online, streaming and rea ltime applications; and Cloudera Analytics for business intelligence and structured query language (SQL) analytics. It has developed the hybrid open source software (HOSS) development model, which helps customers in managing, operating and securing their data and data architectures.",
                 DesirabilityStatement = "",
                 InitialInvestment = 2,
                 Symbol = "$",
@@ -901,7 +901,7 @@ namespace CoreInvestmentTracker.Models.DAL
             var tencent = new Investment
             {
                 Name = "Tencent Music Entertainment Group",
-                Description = "",
+                Description = "TENCENT MUSIC ENTERTAINMENT GROUP operates online music entertainment platform and music applications in China. The Company's platform comprises online music, online karaoke and music-centric live streaming services, supported by content offerings, technology and data. The Company's main platform includes QQ Music, Kugou Music, Kuwo Music, WeSing, Kugou Live, Kuwo Live and others.",
                 DesirabilityStatement = "",
                 InitialInvestment = 2,
                 Symbol = "$",
@@ -910,10 +910,7 @@ namespace CoreInvestmentTracker.Models.DAL
                 Factors = new List<InvestmentInfluenceFactor_Investment>(),
                 Groups = new List<InvestmentGroup_Investment>()
             };
-
-
             
-
 
 
             var investments = new List<Investment>()
@@ -987,6 +984,7 @@ namespace CoreInvestmentTracker.Models.DAL
             
 
             // Create a long company description for this investment
+            int maxLineLength = 160;
             foreach (var dbInvestment in db.Investments)
             {
                 var longCompanyDesc = new InvestmentNote
@@ -996,19 +994,14 @@ namespace CoreInvestmentTracker.Models.DAL
                     OwningEntityType = EntityType.Investment,
                     Name = "Long company description",
                 };    
-                // shorten the description to first paragraph
-                var endOfParagraph = dbInvestment.Description.IndexOf('.');
-                if (endOfParagraph > 0)
-                {
-                    dbInvestment.Description = dbInvestment.Description.Remove(endOfParagraph);
-                }
+                
                 db.Notes.Add(longCompanyDesc);
             }
             db.SaveChanges();
 
             
 
-            void AddGroupsToInvestment(Investment investment, InvestmentGroup[] invGroups)
+            void SetupInvestment(Investment investment, InvestmentGroup[] invGroups)
             {
                 var list = invGroups.Select(group => new InvestmentGroup_Investment
                 {
@@ -1023,51 +1016,59 @@ namespace CoreInvestmentTracker.Models.DAL
             
             // configure investments
             
-            AddGroupsToInvestment(pureCircleInvestment, new []{ stevia });
-            AddGroupsToInvestment(scienceInSportInvestment, new []{ sportsTechnologyHealth });
-            AddGroupsToInvestment(rosslyn, new []{ dataAnalyticsSoftwreDeveloper });
-            AddGroupsToInvestment(twitterInvestment, new []{ socialMedia });
-            AddGroupsToInvestment(SteinhoffInvestment, new []{ furnitureBedsLowCost });
-            AddGroupsToInvestment(glanbiaInvestment, new []{ nutrition });
-            AddGroupsToInvestment(nanocoInvestment, new []{ ledTechnology });
-            AddGroupsToInvestment(garminInvestment, new []{ technologyUtility });
-            AddGroupsToInvestment(goldInvestment, new []{ stevia });
-            AddGroupsToInvestment(amakaInvestment, new []{ internetUtiltiy });
-            AddGroupsToInvestment(tarenaInvestment, new []{ education });
-            AddGroupsToInvestment(matchInvestment, new []{ relationshipsDating });
-            AddGroupsToInvestment(revelonInvestment, new []{ cosmetics });
-            AddGroupsToInvestment(interParfumsInvestment, new []{ cosmetics });
-            AddGroupsToInvestment(creightonInvestment, new []{ consumables });
-            AddGroupsToInvestment(cotyInvestment, new []{ cosmetics });
-            AddGroupsToInvestment(avonInvestment, new []{ cosmetics });
-            AddGroupsToInvestment(gildanInvestment, new []{ sportsClothing });
-            AddGroupsToInvestment(underArmourInvestment, new []{ sportsClothing });
-            AddGroupsToInvestment(ceresInvestment, new []{ batteries });
-            AddGroupsToInvestment(amkorInvestment, new []{ semiconductor });
-            AddGroupsToInvestment(clearChannelInvestment, new []{ outdoorAdvertising });
-            AddGroupsToInvestment(attraqtInvestment, new []{ webAdvertising });
-            AddGroupsToInvestment(liveNationInvestment, new []{ advertisingPromotionLiveEntertainment });
-            AddGroupsToInvestment(cloudBuyInvestment, new []{ cloud });
-            AddGroupsToInvestment(elektronTechnologyInvestment, new []{ productMonitoring });
-            AddGroupsToInvestment(gluMobileInvestment, new []{ mobile });
-            AddGroupsToInvestment(gymGroupInvestment, new []{ health });
-            AddGroupsToInvestment(intercededGroupInvestment, new []{ idendityCredentialManagement });
-            AddGroupsToInvestment(mattelInvestment, new []{ toys });
-            AddGroupsToInvestment(mobileIronInvestment, new []{ mobile });
-            AddGroupsToInvestment(oktaInvestment, new []{ idendityCredentialManagement });
-            AddGroupsToInvestment(rm2InternationalInvestment, new []{ containerTechnology });
-            AddGroupsToInvestment(sitoMobileInvestment, new []{ mobileLocationBasedAdvertising });
-            AddGroupsToInvestment(simiGonInvestment, new []{ simulation });
-            AddGroupsToInvestment(simonPropertyGroupInvestment, new []{ property });
-            AddGroupsToInvestment(spotifyInvestment, new []{ musicEntertainment });
-            AddGroupsToInvestment(starcomInvestment, new []{ stevia });
-            AddGroupsToInvestment(ternInvestment, new []{ softwareVentureCapitalists });
-            AddGroupsToInvestment(usuSoftwareInvestment, new []{ stevia });
-            AddGroupsToInvestment(ubisenseInvestment, new []{ stevia });
-            AddGroupsToInvestment(warpaintLondonInvestment, new []{ cosmetics });
-            AddGroupsToInvestment(westminsterGroupInvestment, new []{ security });
-            AddGroupsToInvestment(zyngaInvestment, new []{ onlineGaming });
-            AddGroupsToInvestment(iSharesUkPropertyInvestment, new []{ property });
+            SetupInvestment(pureCircleInvestment, new []{ stevia });
+            SetupInvestment(scienceInSportInvestment, new []{ sportsTechnologyHealth });
+            SetupInvestment(rosslyn, new []{ dataAnalyticsSoftwreDeveloper });
+            SetupInvestment(twitterInvestment, new []{ socialMedia });
+            SetupInvestment(SteinhoffInvestment, new []{ furnitureBedsLowCost });
+            SetupInvestment(glanbiaInvestment, new []{ nutrition });
+            SetupInvestment(nanocoInvestment, new []{ ledTechnology });
+            SetupInvestment(garminInvestment, new []{ technologyUtility });
+            SetupInvestment(goldInvestment, new []{ commodoties });
+            SetupInvestment(amakaInvestment, new []{ internetUtiltiy });
+            SetupInvestment(tarenaInvestment, new []{ education });
+            SetupInvestment(matchInvestment, new []{ relationshipsDating });
+            SetupInvestment(revelonInvestment, new []{ cosmetics });
+            SetupInvestment(interParfumsInvestment, new []{ cosmetics });
+            SetupInvestment(creightonInvestment, new []{ consumables });
+            SetupInvestment(cotyInvestment, new []{ cosmetics });
+            SetupInvestment(avonInvestment, new []{ cosmetics });
+            SetupInvestment(gildanInvestment, new []{ sportsClothing });
+            SetupInvestment(underArmourInvestment, new []{ sportsClothing });
+            SetupInvestment(ceresInvestment, new []{ batteries });
+            SetupInvestment(amkorInvestment, new []{ semiconductor });
+            SetupInvestment(clearChannelInvestment, new []{ outdoorAdvertising });
+            SetupInvestment(attraqtInvestment, new []{ webAdvertising });
+            SetupInvestment(liveNationInvestment, new []{ advertisingPromotionLiveEntertainment });
+            SetupInvestment(cloudBuyInvestment, new []{ cloud });
+            SetupInvestment(elektronTechnologyInvestment, new []{ productMonitoring });
+            SetupInvestment(gluMobileInvestment, new []{ mobile });
+            SetupInvestment(gymGroupInvestment, new []{ health });
+            SetupInvestment(intercededGroupInvestment, new []{ idendityCredentialManagement });
+            SetupInvestment(mattelInvestment, new []{ toys });
+            SetupInvestment(mobileIronInvestment, new []{ mobile });
+            SetupInvestment(oktaInvestment, new []{ idendityCredentialManagement });
+            SetupInvestment(rm2InternationalInvestment, new []{ containerTechnology });
+            SetupInvestment(sitoMobileInvestment, new []{ mobileLocationBasedAdvertising });
+            SetupInvestment(simiGonInvestment, new []{ simulation });
+            SetupInvestment(simonPropertyGroupInvestment, new []{ property });
+            SetupInvestment(spotifyInvestment, new []{ musicEntertainment });
+            SetupInvestment(starcomInvestment, new []{ stevia });
+            SetupInvestment(ternInvestment, new []{ softwareVentureCapitalists });
+            SetupInvestment(usuSoftwareInvestment, new []{ stevia });
+            SetupInvestment(ubisenseInvestment, new []{ stevia });
+            SetupInvestment(warpaintLondonInvestment, new []{ cosmetics });
+            SetupInvestment(westminsterGroupInvestment, new []{ security });
+            SetupInvestment(zyngaInvestment, new []{ onlineGaming });
+            SetupInvestment(iSharesUkPropertyInvestment, new []{ property });
+            SetupInvestment(axaProperty, new[]{ property } );
+            SetupInvestment(advancedMicrosDevices, new[] { chips });
+            SetupInvestment(canadaGoose, new[] { clothing });
+            SetupInvestment(changyou, new[] { onlineGaming });
+            SetupInvestment(cloudera, new[] { cloud });
+            SetupInvestment(wipro, new[] { itServices });
+            SetupInvestment(tencent, new[] { musicEntertainment });
+            
 
             db.SaveChanges();
             
