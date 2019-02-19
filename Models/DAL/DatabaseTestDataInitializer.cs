@@ -36,7 +36,7 @@ namespace CoreInvestmentTracker.Models.DAL
             {
                 new InvestmentInitilizer(), // Create test investments
                 new CustomEntitiesInitializer(),   // create test custom types & Entities
-                new AdditionalDbInitializer(),
+                // new AdditionalDbInitializer(), // old generic investments are less useful now
             });
             inits.ForEach(initializer => initializer.Initialize(db));
 
@@ -95,7 +95,7 @@ namespace CoreInvestmentTracker.Models.DAL
             var property = new InvestmentGroup { Name="Property",Description="Property"};
             var chips  = new InvestmentGroup { Name="Chips ",Description="Chips "};
             var internetUtiltiy = new InvestmentGroup { Name="Internet/Utiltiy",Description="Internet/Utiltiy"};
-            var aiAdvertising = new InvestmentGroup { Name="AI/Advertising",Description="AI/Advertising"};
+            var aiAdvertising = new InvestmentGroup { Name="AI/Advertising/Marketing",Description="AI/Advertising"};
             var semiconductor = new InvestmentGroup { Name="Semiconductors",Description="Semiconductors"};
             var webAdvertising = new InvestmentGroup { Name="Web/Advertising",Description="Web/Advertising"};
             var cosmetics = new InvestmentGroup { Name="Cosmetics",Description="Cosmetics"};
@@ -106,6 +106,7 @@ namespace CoreInvestmentTracker.Models.DAL
             var cinema = new InvestmentGroup { Name="Cinema",Description="Cinema"};
             var outdoorAdvertising = new InvestmentGroup { Name="Outdoor Advertising",Description="Outdoor Advertising"};
             var cloud = new InvestmentGroup { Name="Cloud",Description="Cloud"};
+            var ITServices = new InvestmentGroup {Name = "IT services", Description = "IT Services"};
             var consumables = new InvestmentGroup { Name="Consumables",Description="Consumables"};
             var commodoties = new InvestmentGroup { Name="Commodoties",Description="Commodoties"};
             var productMonitoring = new InvestmentGroup { Name="Product Monitoring",Description="Product Monitoring"};
@@ -189,7 +190,21 @@ namespace CoreInvestmentTracker.Models.DAL
 
             
 
+
            // Setup a default set of investments
+
+            var albertInvestment = new Investment
+            {
+                Name = "Albert Technologies",
+                Description ="It offers a auotonomous artificial intelligence marketing plaftorm",
+                DesirabilityStatement = "",
+                InitialInvestment = 2,
+                Symbol = "$",
+                Value = 2,
+                ValueProposition = "",
+                Factors = new List<InvestmentInfluenceFactor_Investment>(),
+                Groups = new List<InvestmentGroup_Investment>()
+            };
 
             var liveNationInvestment = new Investment
             {
@@ -477,7 +492,7 @@ namespace CoreInvestmentTracker.Models.DAL
                 Groups = new List<InvestmentGroup_Investment>()
 
             };
-            var rosslyn = new Investment
+            var rosslynInvestment = new Investment
             {
                 Name = "Rosslyn Data Technologies",
                 Description = "Rosslyn Data Technologies plc is a United Kingdom-based company, which is engaged in the development and provision of data analytics software. The Company also offers management services. The Company offers RAPid cloud analytics platform, which is designed for decision-makers. RAPid extracts, combines and synchronizes data from number of sources. Its RAPid cloud analytics platform features a suite of self-service tools business users need to automatically extract, integrate, transform and enrich data. The Company offers a range of platforms, such as technology infrastructure, data factory, application center and security. The Company offers various solutions, including big data solutions; finance solutions; human resource solutions; marketing solutions; procurement solutions; sales solutions; systems, applications, products (SAP) solutions, and Microsoft solutions.",
@@ -525,7 +540,7 @@ namespace CoreInvestmentTracker.Models.DAL
             var cloudBuyInvestment = new Investment
             {
                 Name = "CloudBuy PLC",
-                Description = "",
+                Description = "Cloudbuy is a provider of an integrated software platform for e-procurement and e-commerce for the trading of goods and services between purchasers, such as a public sector body and their suppliers along with analysis and coding of their spend and product data",
                 DesirabilityStatement = "Cloud",
                 InitialInvestment = 2,
                 Symbol = "$",
@@ -540,7 +555,7 @@ namespace CoreInvestmentTracker.Models.DAL
             var elektronTechnologyInvestment = new Investment
             {
                 Name = "Elektron Technology",
-                Description = "",
+                Description = "Elektron is concerned in the designing, manufacturing and marketing products that connect, monitor and control.",
                 DesirabilityStatement = "",
                 InitialInvestment = 2,
                 Symbol = "$",
@@ -767,7 +782,7 @@ namespace CoreInvestmentTracker.Models.DAL
             var warpaintLondonInvestment = new Investment
             {
                 Name = "Warpaint London PLC",
-                Description = "Cosmetics",
+                Description = "UK based company engaged in the colour cosmetics business",
                 DesirabilityStatement = "",
                 InitialInvestment = 2,
                 Symbol = "$",
@@ -795,7 +810,7 @@ namespace CoreInvestmentTracker.Models.DAL
             var zyngaInvestment = new Investment
             {
                 Name = "Zynga Inc",
-                Description = "Online gaming",
+                Description = "Zynga is a provider of social game services",
                 DesirabilityStatement = "",
                 InitialInvestment = 2,
                 Symbol = "$",
@@ -823,7 +838,7 @@ namespace CoreInvestmentTracker.Models.DAL
             var axaProperty = new Investment
             {
                 Name = "AXA Property Trust LTD",
-                Description = "Property",
+                Description = "Invests in commercial property, investing in retail, industrial and leisure sectors",
                 DesirabilityStatement = "",
                 InitialInvestment = 2,
                 Symbol = "$",
@@ -875,7 +890,7 @@ namespace CoreInvestmentTracker.Models.DAL
             var cloudera = new Investment
             {
                 Name = "Cloudera Inc",
-                Description = "",
+                Description = "Cloudera is a developer of a platform for data managment, machine learning and advanced analytics",
                 DesirabilityStatement = "",
                 InitialInvestment = 2,
                 Symbol = "$",
@@ -888,7 +903,7 @@ namespace CoreInvestmentTracker.Models.DAL
             var wipro = new Investment
             {
                 Name = "Wipro Ltd  - ADR",
-                Description = "",
+                Description = "Wipro is a global IT consulting and business service provider",
                 DesirabilityStatement = "",
                 InitialInvestment = 2,
                 Symbol = "$",
@@ -901,7 +916,7 @@ namespace CoreInvestmentTracker.Models.DAL
             var tencent = new Investment
             {
                 Name = "Tencent Music Entertainment Group",
-                Description = "",
+                Description = "Tencent operates a online music entertainment platform and music applications in China",
                 DesirabilityStatement = "",
                 InitialInvestment = 2,
                 Symbol = "$",
@@ -911,16 +926,29 @@ namespace CoreInvestmentTracker.Models.DAL
                 Groups = new List<InvestmentGroup_Investment>()
             };
 
-
+            var adtranInvestment = new Investment
+            {
+                Name = "ADTRAN",
+                Description = "ADTRAN is a provider of networking and communications equipment",
+                DesirabilityStatement = "",
+                InitialInvestment = 2,
+                Symbol = "$",
+                Value = 2,
+                ValueProposition = "",
+                Factors = new List<InvestmentInfluenceFactor_Investment>(),
+                Groups = new List<InvestmentGroup_Investment>()
+            };
             
 
 
 
             var investments = new List<Investment>()
             {
+                albertInvestment,
+                adtranInvestment,
                 pureCircleInvestment,
                 scienceInSportInvestment,
-                rosslyn,
+                rosslynInvestment,
                 twitterInvestment,
                 SteinhoffInvestment,
                 glanbiaInvestment,
@@ -1025,7 +1053,7 @@ namespace CoreInvestmentTracker.Models.DAL
             
             AddGroupsToInvestment(pureCircleInvestment, new []{ stevia });
             AddGroupsToInvestment(scienceInSportInvestment, new []{ sportsTechnologyHealth });
-            AddGroupsToInvestment(rosslyn, new []{ dataAnalyticsSoftwreDeveloper });
+            AddGroupsToInvestment(rosslynInvestment, new []{ dataAnalyticsSoftwreDeveloper });
             AddGroupsToInvestment(twitterInvestment, new []{ socialMedia });
             AddGroupsToInvestment(SteinhoffInvestment, new []{ furnitureBedsLowCost });
             AddGroupsToInvestment(glanbiaInvestment, new []{ nutrition });
@@ -1068,7 +1096,19 @@ namespace CoreInvestmentTracker.Models.DAL
             AddGroupsToInvestment(westminsterGroupInvestment, new []{ security });
             AddGroupsToInvestment(zyngaInvestment, new []{ onlineGaming });
             AddGroupsToInvestment(iSharesUkPropertyInvestment, new []{ property });
+            AddGroupsToInvestment(albertInvestment, new []{ aiAdvertising });
 
+            AddGroupsToInvestment(axaProperty, new []{ property });
+            AddGroupsToInvestment(advancedMicrosDevices, new []{ chips });
+            AddGroupsToInvestment(canadaGoose, new []{ clothing });
+            AddGroupsToInvestment(changyou, new []{ onlineGaming });
+            AddGroupsToInvestment(tencent, new []{ musicEntertainment });
+            AddGroupsToInvestment(cloudera, new []{ cloud });
+            AddGroupsToInvestment(wipro, new []{ ITServices });
+
+            
+            
+            
             db.SaveChanges();
             
         }
