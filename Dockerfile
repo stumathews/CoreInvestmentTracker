@@ -12,9 +12,9 @@ CMD dotnet publish -c Release -o out
 
 # Build runtime image by adding the compiled output above to a runtime image(aspnetcore)
 
-FROM microsoft/aspnetcore:2.0
-WORKDIR /app
-COPY --from=build-env /app/out .
+#FROM microsoft/aspnetcore:2.0
+#WORKDIR /app
+#COPY --from=build-env /app/out .
 
 # Expose port 5000 on container to the world outside (container host)
 EXPOSE $PORT/tcp
