@@ -1,5 +1,5 @@
 #Image(build) that is used to compile/publish ASP.NET Core applications inside the container. 
-FROM microsoft/aspnetcore-build:2.0 AS build-env
+FROM microsoft/dotnet:2.0.0-preview1-runtime
 WORKDIR /app
 
 #Copy BUILD_DIR\*csproj and restore as distinct layers
@@ -7,7 +7,7 @@ WORKDIR /app
 #RUN dotnet restore
 
 # Copy everything else and build
-COPY . ./
+COPY . .
 #CMD dotnet publish -c Release -o out
 CMD ASPNETCORE_URLS=http://*:$PORT dotnet CoreInvestmentTracker.dll
 
