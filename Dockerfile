@@ -8,7 +8,7 @@ RUN dotnet restore
 
 # Copy everything else and build
 COPY . ./
-RUN dotnet publish -c Release -o out
+CMD dotnet publish -c Release -o out
 
 # Build runtime image by adding the compiled output above to a runtime image(aspnetcore)
 
@@ -17,8 +17,8 @@ WORKDIR /app
 COPY --from=build-env /app/out .
 
 # Expose port 5000 on container to the world outside (container host)
-EXPOSE 5000/tcp
+EXPOSE $PORT/tcp
 
 # Ask Kestral to listen on 5000
-ENV ASPNETCORE_URLS http://*:5000
+ENV ASPNETCORE_URLS http://*:$PORT
 ENTRYPOINT ["dotnet", "CoreInvestmentTracker.dll"]
