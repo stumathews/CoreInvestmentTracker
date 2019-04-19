@@ -1,5 +1,6 @@
 #Image(build) that is used to compile/publish ASP.NET Core applications inside the container. 
-FROM microsoft/aspnetcore-build:2.0 AS build-env
+#FROM microsoft/aspnetcore-build:2.0 AS build-env
+FROM microsoft/dotnet:2.1-aspnetcore-runtime as build-env
 WORKDIR /app
 
 #Copy BUILD_DIR\*csproj and restore as distinct layers
