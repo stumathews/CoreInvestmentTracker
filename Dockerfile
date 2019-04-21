@@ -5,7 +5,7 @@ COPY *.csproj ./
 RUN dotnet restore
 
 COPY . ./
-RUN dotnet publish -c Release -r linux-musl-x64 -o out
+RUN dotnet publish -c Release -o out
 
 FROM microsoft/aspnetcore:2.0
 WORKDIR /app
