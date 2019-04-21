@@ -42,11 +42,11 @@
     <Compile Remove="Migrations\20190215085246_InitialCreate.Designer.cs" />
     <Compile Remove="Migrations\20190219193114_InitialCreate.cs" />
     <Compile Remove="Migrations\20190219193114_InitialCreate.Designer.cs" />
-    <Compile Remove="Migrations\ApplicationDbContextModelSnapshot.cs" />
+    <Compile Remove="Migrations\20190421222701_InitialDbCreate.cs" />
+    <Compile Remove="Migrations\20190421222701_InitialDbCreate.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Migrations\" />
     <Folder Include="Models\BSL\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
@@ -57,6 +57,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.1" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="1.1.0" />
   </ItemGroup>
 

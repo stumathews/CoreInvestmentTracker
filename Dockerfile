@@ -19,4 +19,5 @@ COPY --from=build-env /app/out .
 
 # Ask Kestral to listen on 5000
 ENV ASPNETCORE_URLS http://*:$PORT
-ENTRYPOINT ["dotnet", "CoreInvestmentTracker.dll"]
+#ENTRYPOINT ["dotnet", "CoreInvestmentTracker.dll"]
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet CoreInvestmentTracker.dll

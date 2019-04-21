@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -57,12 +58,12 @@ namespace CoreInvestmentTracker
             services.AddDbContext<ApplicationDbContext>(options =>
             {
                 var devConnectionString = Configuration.GetConnectionString("SqlExpress2017LocalHostConnection");
-
-                options.UseSqlServer(!HostingEnvironment.IsDevelopment()
-                    // Connect to amazon RDS database in production
-                    ? GetRdsConnectionString() ?? devConnectionString // fallback to local if cant find rds but not useful really
-                    // Connect to whatever defined database in config file while in development
-                    : devConnectionString);
+                options.UseNpgsql(GetPostgressConnectionString());
+                //options.UseSqlServer(!HostingEnvironment.IsDevelopment()
+                //    // Connect to amazon RDS database in production
+                //    ? GetRdsConnectionString() ?? devConnectionString // fallback to local if cant find rds but not useful really
+                //                                                      // Connect to whatever defined database in config file while in development
+                //    : devConnectionString);
             });
 
             // Add application services for dependency injection
@@ -133,6 +134,23 @@ namespace CoreInvestmentTracker
             if (string.IsNullOrEmpty(dbname)) return null;
             
             return "Data Source=" + appConfig["RDS_HOSTNAME"] + ";Initial Catalog=" + dbname + ";User ID=" + appConfig["RDS_USERNAME"] + ";Password=" + appConfig["RDS_PASSWORD"] + ";";
+        }
+
+        private string GetPostgressConnectionString()
+        {
+            var appConfig = Configuration;
+
+
+            var uri = appConfig["DATABASE_URL"];
+            var r = Regex.Match(uri, @"postgres:\/\/(?<user>.+?):(?<password>.+)@(?<host>[^:]+):5432\/(?<db>.+)");
+            string host = r.Groups["host"].Value;
+            string username = r.Groups["user"].Value;
+            string password = r.Groups["password"].Value;
+            string database = r.Groups["db"].Value;
+            
+            var connectionString = $"Host={host};Port=5432;Username={username};Password={password};Database={database};";
+            System.Console.Write($"Connecting to '{connectionString}'");
+            return connectionString;
         }
 
         /// <summary>
