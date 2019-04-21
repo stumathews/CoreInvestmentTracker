@@ -1,12 +1,20 @@
-FROM microsoft/dotnet:2.1-sdk-alpine AS build-env
-WORKDIR /source
-COPY . ./
-RUN dotnet restore
-RUN dotnet publish -c Release -o /app
-
-FROM microsoft/dotnet:2.1-aspnetcore-runtime-alpine
+#Image(build) that is used to compile/publish ASP.NET Core applications inside the container. 
+FROM microsoft/aspnetcore-build:2.0 AS build-env
 WORKDIR /app
-COPY --from=build-env /app .
+
+#Copy BUILD_DIR\*csproj and restore as distinct layers
+COPY *.csproj ./
+RUN dotnet restore
+
+# Copy everything else and build
+COPY . ./
+RUN dotnet publish -c Release -o out
+
+# Build runtime image by adding the compiled output above to a runtime image(aspnetcore)
+
+FROM microsoft/aspnetcore:2.0
+WORKDIR /app
+COPY --from=build-env /app/out .
 
 
 # Ask Kestral to listen on 5000
