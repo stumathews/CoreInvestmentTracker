@@ -24,9 +24,29 @@
 
   <ItemGroup>
     <Compile Remove="Common\EntityManagedODataController.cs" />
+    <Compile Remove="Migrations\20180526143649_InitialCreate.cs" />
+    <Compile Remove="Migrations\20180526143649_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20180526144444_AddusersAndAudit.cs" />
+    <Compile Remove="Migrations\20180526144444_AddusersAndAudit.Designer.cs" />
+    <Compile Remove="Migrations\20180729165904_CustomEntitiesSupport.cs" />
+    <Compile Remove="Migrations\20180729165904_CustomEntitiesSupport.Designer.cs" />
+    <Compile Remove="Migrations\20180801202203_ExtendInvestmentsToSupportCustomEntities.cs" />
+    <Compile Remove="Migrations\20180801202203_ExtendInvestmentsToSupportCustomEntities.Designer.cs" />
+    <Compile Remove="Migrations\20190103182556_AddCreatedUpdatedTime.cs" />
+    <Compile Remove="Migrations\20190103182556_AddCreatedUpdatedTime.Designer.cs" />
+    <Compile Remove="Migrations\20190108184656_AddCustomEntityTypeDataType.cs" />
+    <Compile Remove="Migrations\20190108184656_AddCustomEntityTypeDataType.Designer.cs" />
+    <Compile Remove="Migrations\20190118183612_AddPointsAndFlaggedColumn.cs" />
+    <Compile Remove="Migrations\20190118183612_AddPointsAndFlaggedColumn.Designer.cs" />
+    <Compile Remove="Migrations\20190215085246_InitialCreate.cs" />
+    <Compile Remove="Migrations\20190215085246_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20190219193114_InitialCreate.cs" />
+    <Compile Remove="Migrations\20190219193114_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\ApplicationDbContextModelSnapshot.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Migrations\" />
     <Folder Include="Models\BSL\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>

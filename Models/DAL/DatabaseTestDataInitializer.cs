@@ -1049,7 +1049,6 @@ namespace CoreInvestmentTracker.Models.DAL
             
             SetupInvestment(pureCircleInvestment, new []{ stevia });
             SetupInvestment(scienceInSportInvestment, new []{ sportsTechnologyHealth });
-            SetupInvestment(rosslyn, new []{ dataAnalyticsSoftwreDeveloper });
             SetupInvestment(twitterInvestment, new []{ socialMedia });
             SetupInvestment(SteinhoffInvestment, new []{ furnitureBedsLowCost });
             SetupInvestment(glanbiaInvestment, new []{ nutrition });
