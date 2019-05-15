@@ -267,6 +267,11 @@ namespace CoreInvestmentTracker.Common
                 return EntityType.Custom;
             }
 
+            if (typeof(T) == typeof(InvestmentTransaction))
+            {
+                return EntityType.InvestmentTransaction;
+            }
+
             return EntityType.None;
         }
 

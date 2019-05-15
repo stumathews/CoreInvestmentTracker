@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using CoreInvestmentTracker.Models.DEL.Interfaces;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace CoreInvestmentTracker.Models.DEL
 {
@@ -60,6 +62,12 @@ namespace CoreInvestmentTracker.Models.DEL
         /// Associated custom entities
         /// </summary>
         public ICollection<CustomEntity_Investment> CustomEntities { get; set; }
+
+        /// <summary>
+        /// List of transactions
+        /// </summary>
+        
+        public ICollection<InvestmentTransaction> Transactions { get;set; }
         
         /// <inheritdoc />
         public int[] InvestmentIds { get; set; }

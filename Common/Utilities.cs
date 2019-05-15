@@ -2,10 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Web;
 using CoreInvestmentTracker.Models.DEL;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.SpaServices.Prerendering;
 
 namespace CoreInvestmentTracker.Common
@@ -86,6 +88,11 @@ namespace CoreInvestmentTracker.Common
         /// </summary>
         ListOfNumbers,
 
+        /// <summary>
+        /// An investment transaction
+        /// </summary>
+        InvestmentTransaction
+
 
 
     }
@@ -139,8 +146,15 @@ namespace CoreInvestmentTracker.Common
         }        
     }
 
+    
+
     public static class StaticUtilities
     {
+        public static void ExtractBodyAsString(HttpRequest request)
+        {
+            var body = new StreamReader(request.Body);
+            var requestBody = body.ReadToEnd();
+        }
         public static string ToStr(this CustomEntity entity)
         {
             return $"Name={entity.Name}, Desc={entity.Description}, Type={entity.GetType()}, OwningEntityId={entity.OwningEntityId}, IsCustomEntity={!NotCustomEntityTheOwningEntity(entity)}";

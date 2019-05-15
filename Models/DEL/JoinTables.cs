@@ -1,4 +1,6 @@
-﻿using CoreInvestmentTracker.Models.DEL;
+﻿using System.Transactions;
+using CoreInvestmentTracker.Models.DEL;
+using Transaction = CoreInvestmentTracker.Models.DEL.InvestmentTransaction;
 
 namespace CoreInvestmentTracker.Models
 {
@@ -85,7 +87,7 @@ namespace CoreInvestmentTracker.Models
         /// </summary>
         public InvestmentGroup InvestmentGroup { get; set; }
     }
-
+    
     public class InvestmentGroup_ChildInvestmentGroup
     {
         /// <summary>

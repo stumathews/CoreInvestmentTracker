@@ -125,6 +125,7 @@ namespace CoreInvestmentTracker.Models.DAL
                         .Include(b => b.Factors)
                         .Include(c => c.Groups)
                         .Include(d => d.Regions)
+                        .Include(e => e.Transactions)
                         .Select(o => Utils.ChangeType<T>(o)).ToList()
                     : Db.Set<Investment>()
                         .Select(o => Utils.ChangeType<T>(o))
@@ -141,6 +142,17 @@ namespace CoreInvestmentTracker.Models.DAL
                     : Db.Set<CustomEntity>()
                         .Select(o=> Utils.ChangeType<T>(o))
                         .ToList());
+            }
+
+            if (typeof(T) == typeof(InvestmentTransaction))
+            {
+                entities.AddRange(withChildren 
+                    ? Db.Set<InvestmentTransaction>()
+                        .Where(OneOrAll<InvestmentTransaction>(specificId))
+                        .Select(o => Utils.ChangeType<T>(o))
+                        .ToList() 
+                    : Db.Set<InvestmentTransaction>().Select(o => Utils.ChangeType<T>(o)).ToList());
+                        
             }
 
             // Return the entity type so no eager loading applied to T
