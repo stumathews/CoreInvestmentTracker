@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Collections.Generic;
+using System.Text;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -98,7 +99,7 @@ namespace CoreInvestmentTracker
                     Contact = new Contact { Name = "Stuart Mathews", Email = "", Url = "https://twitter.com/stumathews" },
                     License = new License { Name = "License information", Url = "https://www.stuartmathews.com" }
                 });
-
+                
                 c.AddSecurityDefinition("Bearer", new ApiKeyScheme
                 {
                     Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
@@ -106,9 +107,13 @@ namespace CoreInvestmentTracker
                     In = "header",
                     Type = "apiKey"
                 });
+                c.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>>
+                {
+                    { "Bearer", new string[] { } }
+                });
 
                 // Set the comments path for the Swagger JSON and UI.
-                //c.IncludeXmlComments(GetXmlCommentsPath());
+                c.IncludeXmlComments(GetXmlCommentsPath());
             });
             
             services.AddCors(options => options.AddPolicy("Cors", 
@@ -138,18 +143,26 @@ namespace CoreInvestmentTracker
 
         private string GetPostgressConnectionString()
         {
+            string GetHerokuPgSqlConnectionString(IConfiguration configuration)
+            {
+                var uri = configuration["DATABASE_URL"];
+                var r = Regex.Match(uri, @"postgres:\/\/(?<user>.+?):(?<password>.+)@(?<host>[^:]+):5432\/(?<db>.+)");
+                string host = r.Groups["host"].Value;
+                string username = r.Groups["user"].Value;
+                string password = r.Groups["password"].Value;
+                string database = r.Groups["db"].Value;
+
+                var s = $"Host={host};Port=5432;Username={username};Password={password};Database={database};";
+                System.Console.Write($"Connecting to '{s}'");
+                return s;
+            }
+
             var appConfig = Configuration;
 
+            var localPgSql = "Host=localhost;Port=5432;Username=postgres;Password=;Database=Investments;";
 
-            var uri = appConfig["DATABASE_URL"];
-            var r = Regex.Match(uri, @"postgres:\/\/(?<user>.+?):(?<password>.+)@(?<host>[^:]+):5432\/(?<db>.+)");
-            string host = r.Groups["host"].Value;
-            string username = r.Groups["user"].Value;
-            string password = r.Groups["password"].Value;
-            string database = r.Groups["db"].Value;
-            
-            var connectionString = $"Host={host};Port=5432;Username={username};Password={password};Database={database};";
-            System.Console.Write($"Connecting to '{connectionString}'");
+
+            var connectionString = localPgSql;//GetHerokuPgSqlConnectionString(appConfig);
             return connectionString;
         }
 
@@ -182,6 +195,7 @@ namespace CoreInvestmentTracker
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Core Investment Tracker API V1");
+                
             });
 
             
