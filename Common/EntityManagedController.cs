@@ -126,7 +126,7 @@ namespace CoreInvestmentTracker.Common
                     value = 1
                 };
                 nodes.Add(investmentNode);
-
+                var lastNodeIndex = nodes.Count - 1;
                 foreach (var child in map.Value)
                 {
                     var entity = entities.Single(x => x.Id == child);
@@ -149,9 +149,9 @@ namespace CoreInvestmentTracker.Common
                         value = 1
                     });
                 }
-
                 // add invisible root
-                //links.Add(new { source = nodes.LastIndexOf(i), target = 0, value = 0 });
+                //links.Add(new { source = lastNodeIndex, target = 0, value = 10 });
+                
             }
 
             return new ObjectResult(new {nodes, links});
