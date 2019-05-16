@@ -122,11 +122,8 @@ namespace CoreInvestmentTracker.Models.DAL
 
             
             modelBuilder.Entity<InvestmentTransaction>()
-                .HasKey(k => new {k.Id, k.Name})
-                .HasName("CompositeKey_Id_Name");
-
-            
-
+                .HasKey(k => new {k.Id})
+                .HasName("PrimaryKey_Id");
 
             modelBuilder.Entity<InvestmentTransaction>()
                 .HasAlternateKey(a => a.Name); // Cant have two transactions identified by the same name - name acts as a client identifier
