@@ -128,6 +128,7 @@ namespace CoreInvestmentTracker.Models.DAL
                         .Include(e => e.Transactions)
                         .Select(o => Utils.ChangeType<T>(o)).ToList()
                     : Db.Set<Investment>()
+                        .Include(e => e.Transactions) // not considered a child
                         .Select(o => Utils.ChangeType<T>(o))
                         .ToList());                        
             }

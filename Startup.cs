@@ -161,8 +161,10 @@ namespace CoreInvestmentTracker
 
             var localPgSql = "Host=localhost;Port=5432;Username=postgres;Password=;Database=Investments;";
 
-
-            var connectionString = localPgSql;//GetHerokuPgSqlConnectionString(appConfig);
+            //var connectionString = localPgSql;
+            var connectionString =  string.IsNullOrEmpty(appConfig["DATABASE_URL"]) 
+            ? localPgSql
+            : GetHerokuPgSqlConnectionString(appConfig);
             return connectionString;
         }
 
