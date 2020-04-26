@@ -1,5 +1,5 @@
 #Image(build) that is used to compile/publish ASP.NET Core applications inside the container. 
-FROM microsoft/dotnet:2.1-aspnetcore-runtime AS build-env
+FROM microsoft/dotnet:2.1-sdk as build-env
 WORKDIR /app
 
 #Copy BUILD_DIR\*csproj and restore as distinct layers
@@ -12,7 +12,7 @@ RUN dotnet publish -c Release -o out
 
 # Build runtime image by adding the compiled output above to a runtime image(aspnetcore)
 
-FROM microsoft/dotnet:2.1-sdk
+FROM microsoft/dotnet:2.1-aspnetcore-runtime
 WORKDIR /app
 COPY --from=build-env /app/out .
 
