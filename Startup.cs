@@ -55,7 +55,7 @@ namespace CoreInvestmentTracker
         public void ConfigureServices(IServiceCollection services)
         {
             
-            var mvc = services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            var mvc = services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.Configure<CookiePolicyOptions>(options =>
             {
