@@ -23,7 +23,7 @@ namespace CoreInvestmentTracker
         /// <param name="args"></param>
         public static void Main(string[] args)
         {
-            var host = BuildWebHost(args);
+            var host = CreateWebHostBuilder(args).Build();
             
             using (var scope = host.Services.CreateScope())
             {
@@ -51,7 +51,7 @@ namespace CoreInvestmentTracker
         /// </summary>
         /// <param name="args"></param>
         /// <returns></returns>
-        public static IWebHost BuildWebHost(string[] args) 
-            => WebHost.CreateDefaultBuilder(args).UseStartup<Startup>().Build();
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) 
+            => WebHost.CreateDefaultBuilder(args).UseStartup<Startup>();
     }
 }

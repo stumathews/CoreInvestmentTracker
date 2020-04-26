@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Builder;
@@ -11,8 +14,9 @@ using CoreInvestmentTracker.Models.DAL;
 using CoreInvestmentTracker.Models.DAL.Interfaces;
 using CoreInvestmentTracker.Common;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Swagger;
-using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.IdentityModel.Tokens;
 
 namespace CoreInvestmentTracker
@@ -49,8 +53,16 @@ namespace CoreInvestmentTracker
         /// </summary>
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
-        {            
-            var mvc = services.AddMvc();
+        {
+            
+            var mvc = services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
             mvc.AddJsonOptions(options => {
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
@@ -112,8 +124,10 @@ namespace CoreInvestmentTracker
                     { "Bearer", new string[] { } }
                 });
 
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 // Set the comments path for the Swagger JSON and UI.
-                c.IncludeXmlComments(GetXmlCommentsPath());
+                c.IncludeXmlComments(xmlPath);
             });
             
             services.AddCors(options => options.AddPolicy("Cors", 
@@ -124,10 +138,9 @@ namespace CoreInvestmentTracker
             ));
 
         }
-        private static string GetXmlCommentsPath()
+        private static string GetXmlCommentsPath(string appPath, string appName)
         {
-            var app = PlatformServices.Default.Application;
-            return System.IO.Path.Combine(app.ApplicationBasePath, System.IO.Path.ChangeExtension(app.ApplicationName, "xml"));
+            return System.IO.Path.Combine(appPath, System.IO.Path.ChangeExtension(appName, "xml"));
         }
 
         private string GetRdsConnectionString()
@@ -180,8 +193,16 @@ namespace CoreInvestmentTracker
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandler("/Error");
+                app.UseHsts();
+            }
+
+            app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseStaticFiles();
+            app.UseCookiePolicy();
             app.UseStatusCodePages("text/plain", "Status code page, status code: {0}");
             app.UseCors("Cors");
             app.UseMvc(routes =>

@@ -4,7 +4,6 @@ using CoreInvestmentTracker.Models.DEL.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.EntityFrameworkCore.Query.ExpressionTranslators.Internal;
 
 namespace CoreInvestmentTracker.Common.ActionFilters
 {
