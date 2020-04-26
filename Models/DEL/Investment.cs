@@ -71,5 +71,11 @@ namespace CoreInvestmentTracker.Models.DEL
         
         /// <inheritdoc />
         public int[] InvestmentIds { get; set; }
+
+        /// <summary>
+        /// Currency of the portfolio
+        /// </summary>
+        [DataType(DataType.Currency)]
+        public float Currency { get; set; }
     }
 }

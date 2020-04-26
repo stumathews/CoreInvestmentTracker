@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
@@ -40,10 +41,16 @@ namespace CoreInvestmentTracker.Models.DEL
         /// </summary>
         public DateTimeOffset TransactionDate { get; set; }
 
-        [NotMapped]
         /// <summary>
         /// Refers to a list of investments
         /// </summary>
+        [NotMapped]
         public int[] InvestmentIds =>  new int[] {  };
+
+        /// <summary>
+        /// Additional cost of this transaction
+        /// </summary>
+        [DataType(DataType.Currency)]
+        public float Commission { get; set; }
     }
 }

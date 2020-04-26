@@ -159,7 +159,7 @@ namespace CoreInvestmentTracker
 
             var appConfig = Configuration;
 
-            var localPgSql = "Host=localhost;Port=5432;Username=postgres;Password=;Database=Investments;";
+            var localPgSql = "Host=localhost;Port=5432;Username=postgres;Password=sa;Database=Investments;";
 
             //var connectionString = localPgSql;
             var connectionString =  string.IsNullOrEmpty(appConfig["DATABASE_URL"]) 
