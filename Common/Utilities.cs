@@ -8,7 +8,6 @@ using System.Reflection;
 using System.Web;
 using CoreInvestmentTracker.Models.DEL;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.SpaServices.Prerendering;
 
 namespace CoreInvestmentTracker.Common
 {

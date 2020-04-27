@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Reflection;
 using System.Text;
@@ -14,10 +15,14 @@ using CoreInvestmentTracker.Models.DAL;
 using CoreInvestmentTracker.Models.DAL.Interfaces;
 using CoreInvestmentTracker.Common;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 
 namespace CoreInvestmentTracker
 {
@@ -30,14 +35,14 @@ namespace CoreInvestmentTracker
         /// <summary>
         /// Provides us with access to the hosting environment details
         /// </summary>
-        private IHostingEnvironment HostingEnvironment { get; set; }
+        private IWebHostEnvironment HostingEnvironment { get; set; }
 
         /// <summary>
         /// Startup configuration
         /// </summary>
         /// <param name="configuration"></param>
         /// <param name="env"></param>
-        public Startup(IConfiguration configuration, IHostingEnvironment env)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
             HostingEnvironment = env;
@@ -54,18 +59,15 @@ namespace CoreInvestmentTracker
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
-            
-            var mvc = services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
             services.Configure<CookiePolicyOptions>(options =>
             {
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            mvc.AddJsonOptions(options => {
-                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-            });
+            
+            
+            services.AddControllers().AddNewtonsoftJson(x=>x.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
             // Which database location to connect to?
             services.AddDbContext<ApplicationDbContext>(options =>
@@ -82,7 +84,12 @@ namespace CoreInvestmentTracker
             // Add application services for dependency injection
             services.AddTransient(typeof(IEntityApplicationDbContext<>), typeof(EntityApplicationDbContext<>));
             services.AddTransient(typeof(IMyLogger), typeof(MyLogger));
-            
+
+            services.AddAuthorizationCore(options =>
+            {
+                options.DefaultPolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+            });
+
             // Configure authentication
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -99,29 +106,43 @@ namespace CoreInvestmentTracker
                     };
                 });
             
+
+            
             
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info
+                c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
                     Title = "Core Investment Tracker API",
                     Description = "Investment tracker is a platform that allows you to track aspects that affect your investments",
-                    TermsOfService = "None",
-                    Contact = new Contact { Name = "Stuart Mathews", Email = "", Url = "https://twitter.com/stumathews" },
-                    License = new License { Name = "License information", Url = "https://www.stuartmathews.com" }
+                    
+                    Contact =  new OpenApiContact { Name = "Stuart Mathews", Email = "", Url = new Uri("https://twitter.com/stumathews") },
+                    License = new OpenApiLicense { Name = "License information", Url = new Uri("https://www.stuartmathews.com") }
                 });
                 
-                c.AddSecurityDefinition("Bearer", new ApiKeyScheme
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
                     Name = "Authorization",
-                    In = "header",
-                    Type = "apiKey"
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey
                 });
-                c.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>>
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
                 {
-                    { "Bearer", new string[] { } }
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        }, new string[]{ }
+                    }
                 });
 
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
@@ -134,7 +155,6 @@ namespace CoreInvestmentTracker
                 builder => builder.AllowAnyOrigin()
                        .AllowAnyMethod()
                        .AllowAnyHeader()
-                       .AllowCredentials()
             ));
 
         }
@@ -187,7 +207,7 @@ namespace CoreInvestmentTracker
         /// <param name="app"></param>
         /// <param name="env"></param>
         /// <param name="loggerFactory"></param>
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             if (HostingEnvironment.IsDevelopment())
             {
@@ -200,16 +220,20 @@ namespace CoreInvestmentTracker
             }
 
             app.UseHttpsRedirection();
-            app.UseAuthentication();
+            
             app.UseStaticFiles();
+            app.UseRouting();
             app.UseCookiePolicy();
             app.UseStatusCodePages("text/plain", "Status code page, status code: {0}");
             app.UseCors("Cors");
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute("default", "{controller=Investment}/{action=Index}/{id?}");
-            });
             
+            app.UseAuthentication();
+            app.UseAuthorization();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute("default", "{controller=Investment}/{action=Index}/{id?}");
+                endpoints.MapDefaultControllerRoute().RequireAuthorization();
+            });
             
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
