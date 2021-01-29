@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
@@ -15,6 +14,7 @@ using CoreInvestmentTracker.Common;
 using CoreInvestmentTracker.Models.DAL.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace CoreInvestmentTracker.Controllers
 {
@@ -58,17 +58,18 @@ namespace CoreInvestmentTracker.Controllers
 
         private string BuildToken(UserModel user)
         {
+
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
             var claims = new[]
             {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Name), 
-                new Claim(JwtRegisteredClaimNames.Email, user.Email), 
+                new Claim(JwtRegisteredClaimNames.Sub, user.Name),
+                new Claim(JwtRegisteredClaimNames.Email, user.Email),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
             var token = new JwtSecurityToken(
-                            _config["Jwt:Issuer"], 
-                            _config["Jwt:Issuer"], 
+                            _config["Jwt:Issuer"],
+                            _config["Jwt:Issuer"],
                             claims,
                             expires: DateTime.Now.AddMinutes(30),
                             signingCredentials: creds);
