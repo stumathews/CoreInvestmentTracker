@@ -13,11 +13,14 @@ using Microsoft.EntityFrameworkCore;
 using CoreInvestmentTracker.Models.DAL;
 using CoreInvestmentTracker.Models.DAL.Interfaces;
 using CoreInvestmentTracker.Common;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Swagger;
+using Swashbuckle.Swagger;
+using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 
 namespace CoreInvestmentTracker
 {
@@ -55,17 +58,27 @@ namespace CoreInvestmentTracker
         public void ConfigureServices(IServiceCollection services)
         {
             
-            var mvc = services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
+            var mvc = services
+                .AddMvc(options => options.EnableEndpointRouting = false )
+          .AddNewtonsoftJson(o => 
+            {
+                o.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
+            
             services.Configure<CookiePolicyOptions>(options =>
             {
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            mvc.AddJsonOptions(options => {
-                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-            });
+            services.AddControllers().AddNewtonsoftJson();
+
+
+            //mvc.AddJsonOptions(options =>
+            //{
+            //    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            //});
+
 
             // Which database location to connect to?
             services.AddDbContext<ApplicationDbContext>(options =>
@@ -82,12 +95,13 @@ namespace CoreInvestmentTracker
             // Add application services for dependency injection
             services.AddTransient(typeof(IEntityApplicationDbContext<>), typeof(EntityApplicationDbContext<>));
             services.AddTransient(typeof(IMyLogger), typeof(MyLogger));
-            
+
             // Configure authentication
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
-                    options.TokenValidationParameters = new TokenValidationParameters
+                    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
                     {
                         ValidateIssuer = true,
                         ValidateAudience = true,
@@ -96,46 +110,69 @@ namespace CoreInvestmentTracker
                         ValidIssuer = Configuration["Jwt:Issuer"],
                         ValidAudience = Configuration["Jwt:Issuer"],
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+                        //                        ValidateIssuer = true,
+                        //                        ValidateAudience = true,
+                        //                        ValidateLifetime = true,
+                        //                        ValidateIssuerSigningKey = true,
+                        //                        ValidIssuer = Configuration[“Jwt:Issuer”],
+                        //                        ValidAudience = Configuration[“Jwt:Audience”],
+                        //                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration[“Jwt:SecretKey”])),
+                        //ClockSkew = TimeSpan.Zero
                     };
                 });
-            
-            
+
+
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
                 {
                     Version = "v1",
                     Title = "Core Investment Tracker API",
                     Description = "Investment tracker is a platform that allows you to track aspects that affect your investments",
-                    TermsOfService = "None",
-                    Contact = new Contact { Name = "Stuart Mathews", Email = "", Url = "https://twitter.com/stumathews" },
-                    License = new License { Name = "License information", Url = "https://www.stuartmathews.com" }
+
+                    //TermsOfService = ,
+                    //Contact = new Contact { Name = "Stuart Mathews", Email = "", Url = "https://twitter.com/stumathews" },
+                    //License = new License { Name = "License information", Url = "https://www.stuartmathews.com" }
                 });
-                
-                c.AddSecurityDefinition("Bearer", new ApiKeyScheme
-                {
-                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
-                    Name = "Authorization",
-                    In = "header",
-                    Type = "apiKey"
+
+                //First we define the security scheme
+                c.AddSecurityDefinition("Bearer", //Name the security scheme
+                    new OpenApiSecurityScheme{
+                    Description = "JWT Authorization header using the Bearer scheme.",
+                    Type = SecuritySchemeType.Http, //We set the scheme type to http since we're using bearer authentication
+                    Scheme = "bearer" //The name of the HTTP Authorization scheme to be used in the Authorization header. In this case "bearer".
                 });
-                c.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>>
-                {
-                    { "Bearer", new string[] { } }
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement{ 
+                    {
+                        new OpenApiSecurityScheme{
+                            Reference = new OpenApiReference{
+                                Id = "Bearer", //The name of the previously defined security scheme.
+                                Type = ReferenceType.SecurityScheme
+                            }
+                        },new List<string>()
+                    }
                 });
+
+                //    new Dictionary<string, IEnumerable<string>>
+                //{
+                //    { "Bearer", new string[] { } }
+                //});
 
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 // Set the comments path for the Swagger JSON and UI.
                 c.IncludeXmlComments(xmlPath);
             });
-            
-            services.AddCors(options => options.AddPolicy("Cors", 
-                builder => builder.AllowAnyOrigin()
-                       .AllowAnyMethod()
-                       .AllowAnyHeader()
-                       .AllowCredentials()
-            ));
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader());
+            });
+
 
         }
         private static string GetXmlCommentsPath(string appPath, string appName)
@@ -204,13 +241,13 @@ namespace CoreInvestmentTracker
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseStatusCodePages("text/plain", "Status code page, status code: {0}");
-            app.UseCors("Cors");
+            app.UseCors("CorsPolicy");
             app.UseMvc(routes =>
             {
                 routes.MapRoute("default", "{controller=Investment}/{action=Index}/{id?}");
             });
-            
-            
+
+
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
 

@@ -76,6 +76,6 @@ namespace CoreInvestmentTracker.Models.DEL
         /// Currency of the portfolio
         /// </summary>
         [DataType(DataType.Currency)]
-        public float Currency { get; set; }
+        public float? Currency { get; set; }
     }
 }
