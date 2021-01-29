@@ -6,6 +6,7 @@ using CoreInvestmentTracker.Models.DAL.Interfaces;
 using CoreInvestmentTracker.Models.DEL;
 using CoreInvestmentTracker.Models.DEL.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -128,7 +129,7 @@ namespace CoreInvestmentTracker.Common
             return CreatedAtAction("Import", entities);
         }
 
-        /* until we can fix patch
+        
 
         /// <summary>
         /// Updates an entity partially
@@ -168,7 +169,7 @@ namespace CoreInvestmentTracker.Common
             return Ok(old);
         }
 
-        */
+        
 
         /// <summary>
         /// Deletes and Entity
