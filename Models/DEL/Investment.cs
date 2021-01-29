@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace CoreInvestmentTracker.Models.DEL
 {
-
     /// <summary>
     /// Represents an investment
     /// </summary>

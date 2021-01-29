@@ -7,17 +7,14 @@ namespace CoreInvestmentTracker.Models.DAL
     /// <summary>
     /// This will manage our interaction with the database
     /// </summary>
-    public class ApplicationDbContext : DbContext
+    public class InvestmentDbContext : DbContext
     {
         /// <inheritdoc />
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="options"></param>
-        public ApplicationDbContext(DbContextOptions options) : base(options)
-        {
-
-        }
+        public InvestmentDbContext(DbContextOptions options) : base(options) { /* Require parameterless constructor */ }
 
         /// <summary>
         /// Investments
@@ -53,7 +50,7 @@ namespace CoreInvestmentTracker.Models.DAL
         /// <summary>
         /// User information
         /// </summary>
-        public DbSet<DEL.User> Users { get; set; }
+        public DbSet<User> Users { get; set; }
 
         /// <summary>
         /// Audit log
@@ -70,6 +67,9 @@ namespace CoreInvestmentTracker.Models.DAL
         /// </summary>
         public DbSet<CustomEntityType> CustomEntityTypes { get; set; }
 
+        /// <summary>
+        /// We have a list of transactions
+        /// </summary>
         public DbSet<InvestmentTransaction> Transactions { get; set; }
 
         /// <inheritdoc />
@@ -79,7 +79,6 @@ namespace CoreInvestmentTracker.Models.DAL
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
             modelBuilder.Entity<Investment>().ToTable("Investment");
             modelBuilder.Entity<Investment>().Ignore(x => x.InvestmentIds);
             modelBuilder.Entity<InvestmentInfluenceFactor>().ToTable("InvestmentInfluenceFactor");
@@ -88,7 +87,6 @@ namespace CoreInvestmentTracker.Models.DAL
             modelBuilder.Entity<Region>().Ignore(x => x.InvestmentIds);
             modelBuilder.Entity<InvestmentNote>().Ignore(x => x.InvestmentIds);
             modelBuilder.Entity<InvestmentRisk>().Ignore(x => x.InvestmentIds);
-            
 
             modelBuilder.Entity<InvestmentInfluenceFactor_Investment>()
                 .HasKey(i => new {i.InvestmentID, i.InvestmentInfluenceFactorID})
@@ -112,21 +110,18 @@ namespace CoreInvestmentTracker.Models.DAL
             modelBuilder.Entity<RecordedActivity>().HasKey(i => new {i.Id, i.OwningEntityId, i.OwningEntityType})
                 .HasName("PrimaryKey_Id_OwningEntityId_OwningEntityType");
 
-
             modelBuilder.Entity<CustomEntity>().HasKey(i => new {i.Id})
                 .HasName("PrimaryKey_Id_CustomEntityTypeId");
 
             modelBuilder.Entity<CustomEntity_Investment>()
                 .HasKey(i => new {i.InvestmentID, i.CustomEntityId})
                 .HasName("PrimaryKey_InvestmentID_CustomEntityID");
-
             
             modelBuilder.Entity<InvestmentTransaction>()
                 .HasKey(k => new {k.Id})
                 .HasName("PrimaryKey_Id");
 
-            modelBuilder.Entity<InvestmentTransaction>()
-                .HasAlternateKey(a => a.Name); // Cant have two transactions identified by the same name - name acts as a client identifier
+            modelBuilder.Entity<InvestmentTransaction>().HasAlternateKey(a => a.Name); // Cant have two transactions identified by the same name - name acts as a client identifier
 
         }
     }

@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace CoreInvestmentTracker.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(InvestmentDbContext))]
     [Migration("20190515204923_AddTransactionTable")]
     partial class AddTransactionTable
     {

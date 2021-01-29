@@ -18,7 +18,7 @@ namespace CoreInvestmentTracker.Models.DAL.Interfaces
             /// <summary>
         /// Expose our application db context
         /// </summary>
-        ApplicationDbContext Db { get; }
+        InvestmentDbContext Db { get; }
 
         /// <summary>
         /// The ability to save <see cref="GetOneOrAllEntities"/> 

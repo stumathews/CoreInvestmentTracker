@@ -11,14 +11,16 @@ namespace CoreInvestmentTracker.Models.DEL
     /// </summary>
     public class InvestmentGroup : DbEntityBase, IInvestmentEntity, IDbInvestmentEntityHasInvestments<InvestmentGroup_Investment>
     {
+        /// <summary>
+        /// List of Investments Ids without fetching all Investments
+        /// </summary>
         [NotMapped]
         public int[] InvestmentIds => Investments?.Select(i => i.InvestmentID).ToArray() ?? new int[] { };
 
         /// <summary>
         /// Type
         /// </summary>
-        public String Type { get; set; }
-        //public ICollection<InvestmentGroup> Groups { get; set; }
+        public string Type { get; set; }
 
         /// <summary>
         /// Investments
@@ -26,12 +28,12 @@ namespace CoreInvestmentTracker.Models.DEL
         public virtual ICollection<InvestmentGroup_Investment> Investments { get; set; }
 
         /// <summary>
-        /// Parent
+        /// Parent Investment Group
         /// </summary>
         public virtual InvestmentGroup Parent { get; set; }
 
         /// <summary>
-        /// Children
+        /// Child Investment Groups
         /// </summary>
         public virtual ICollection<InvestmentGroup> Children { get; set; }
         

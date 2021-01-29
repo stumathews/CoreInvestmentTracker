@@ -6,48 +6,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace CoreInvestmentTracker.Models.DEL.Interfaces
 {
     /// <summary>
-    /// All our investment entities classes have references to other investments that it links to
-    /// A name and a description.
-    /// </summary>
-    public interface IInvestmentEntity : IDbEntity, IHaveInvestments { }
-
-    /// <summary>
-    /// All database entities will be commonly basic
-    /// </summary>
-    public interface ICommonIdEntity
-    {
-        /// <summary>
-        /// The identifier of the entity
-        /// </summary>
-        int Id { get; set; }
-
-        /// <summary>
-        /// the name of the entity
-        /// </summary>
-        string Name { get; set; }
-
-        /// <summary>
-        /// The description of the entity
-        /// </summary>
-        string Description { get; set; }
-
-        /// <summary>
-        /// When the entity was created
-        /// </summary>
-        DateTimeOffset CreatedTime { get; set; }
-
-        /// <summary>
-        /// When the entity was last modified
-        /// </summary>
-        DateTimeOffset LastModifiedTime { get; set; }
-    }
-
-    /// <summary>
-    /// Basic database entity
-    /// </summary>
-    public interface IDbEntity : ICommonIdEntity { }
-
-    /// <summary>
     /// Implementation of common functions that a IDbEntity has.
     /// This class promotes reuse of functionality
     /// </summary>

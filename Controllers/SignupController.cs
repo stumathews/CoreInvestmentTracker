@@ -16,10 +16,10 @@ namespace CoreInvestmentTracker.Controllers
     [Route("api/Signup")]
     public class SignupController : Controller
     {
-        public ApplicationDbContext Db { get; }
+        public InvestmentDbContext Db { get; }
 
         /// <inheritdoc />
-        public SignupController(ApplicationDbContext db)
+        public SignupController(InvestmentDbContext db)
         {
             Db = db;
         }

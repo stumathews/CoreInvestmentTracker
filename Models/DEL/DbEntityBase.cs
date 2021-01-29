@@ -6,13 +6,13 @@ namespace CoreInvestmentTracker.Models.DEL
 {
     /// <inheritdoc />
     /// <summary>
-    /// Common functionality
+    /// Common functionality for entitity classes
     /// </summary>
     public class DbEntityBase : IDbEntity
     {
         /// <inheritdoc />
         /// <summary>
-        /// The identifier of the entity
+        /// The primary key
         /// </summary>
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -25,6 +25,7 @@ namespace CoreInvestmentTracker.Models.DEL
             CreatedTime = DateTimeOffset.UtcNow;
             LastModifiedTime = CreatedTime;
         }
+
         /// <inheritdoc />
         /// <summary>
         /// The name of the entity

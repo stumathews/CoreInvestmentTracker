@@ -6,12 +6,20 @@ using System.Linq.Expressions;
 using System.Web;
 using CoreInvestmentTracker.Common;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Hosting;
 
 namespace CoreInvestmentTracker.Models.DAL
 {
+    /// <summary>
+    /// All database initilizers will have this interface
+    /// </summary>
     public interface IDbInitializer
     {
-        void Initialize(ApplicationDbContext db);
+        /// <summary>
+        /// Initialize the Initializer
+        /// </summary>
+        /// <param name="db"></param>
+        void Initialize(InvestmentDbContext db);
     }
 
     /// <summary>
@@ -20,7 +28,6 @@ namespace CoreInvestmentTracker.Models.DAL
     /// </summary>
     public class DatabaseTestDataInitializer
     {
-        const int MAX = 10;
         /// <summary>
         /// This method(seed) basically creates and adds our entities to our derived DbContext object,
         /// which has a list(DbSet) for each of the entities we want to persist.
@@ -28,8 +35,8 @@ namespace CoreInvestmentTracker.Models.DAL
         /// We then ask the DBContext to SaveChanges() which persists what we've setup to be added to those lists(managed by the DbContext)
         /// </summary>
         /// <param name="db"></param>
-        public static void Initialize(ApplicationDbContext db)
-        {
+        public static void Initialize(InvestmentDbContext db)
+        {            
             db.Database.Migrate(); // apply migration at runtime, replaces db.Database.EnsureCreated();
            
             var inits = new List<IDbInitializer>(new IDbInitializer[]
@@ -38,10 +45,9 @@ namespace CoreInvestmentTracker.Models.DAL
                 new CustomEntitiesInitializer(),   // create test custom types & Entities
                 // new AdditionalDbInitializer(), // old generic investments are less useful now
             });
+
+            // Initialize each initializer
             inits.ForEach(initializer => initializer.Initialize(db));
-
-
-
         }
     }
 
@@ -65,19 +71,23 @@ namespace CoreInvestmentTracker.Models.DAL
         }
     }
 
+    /// <summary>
+    /// Seeder for creating investment sample data
+    /// </summary>
     public class InvestmentInitilizer : IDbInitializer
     {
-        public void Initialize(ApplicationDbContext db)
+        /// <summary>
+        /// Initialize Investment Seeder
+        /// </summary>
+        /// <param name="db"></param>
+        public void Initialize(InvestmentDbContext db)
         {
             if (db.Investments.Any())
             {
                 return;   // DB has been seeded
             }
 
-            // Setup default user
-
-            // make the default system user
-
+            // Setup default user - make the default system user
             User systemUser = new User
             {
                 Id = 0,
@@ -135,7 +145,6 @@ namespace CoreInvestmentTracker.Models.DAL
             var security = new InvestmentGroup { Name="Physical Security",Description="Physical Security"};
             var itServices = new InvestmentGroup { Name = "IT Services", Description = "IT Services" };
 
-
             var groups = new List<InvestmentGroup>
             {
                 chips,
@@ -189,9 +198,6 @@ namespace CoreInvestmentTracker.Models.DAL
                 property,
             };
 
-            
-
-
            // Setup a default set of investments
 
             var albertInvestment = new Investment
@@ -219,6 +225,7 @@ namespace CoreInvestmentTracker.Models.DAL
                 Factors = new List<InvestmentInfluenceFactor_Investment>(),
                 Groups = new List<InvestmentGroup_Investment>()
             };
+
             var attraqtInvestment = new Investment
             {
                 Name = "Attraqt Group Ltd",
@@ -232,6 +239,7 @@ namespace CoreInvestmentTracker.Models.DAL
                 Groups = new List<InvestmentGroup_Investment>()
 
             };
+
             var clearChannelInvestment = new Investment
             {
                 Name = "Clear Channel Outdoor Holdings Inc",
@@ -243,8 +251,8 @@ namespace CoreInvestmentTracker.Models.DAL
                 ValueProposition = "",
                 Factors = new List<InvestmentInfluenceFactor_Investment>(),
                 Groups = new List<InvestmentGroup_Investment>()
-
             };
+
             var amkorInvestment = new Investment
             {
                 Name = "Amkor Technology Inc",
@@ -269,8 +277,8 @@ namespace CoreInvestmentTracker.Models.DAL
                 ValueProposition = "",
                 Factors = new List<InvestmentInfluenceFactor_Investment>(),
                 Groups = new List<InvestmentGroup_Investment>()
-
             };
+
             var underArmourInvestment = new Investment
             {
                 Name = "Under Armour Inc",
@@ -282,8 +290,8 @@ namespace CoreInvestmentTracker.Models.DAL
                 ValueProposition = "",
                 Factors = new List<InvestmentInfluenceFactor_Investment>(),
                 Groups = new List<InvestmentGroup_Investment>()
-
             };
+
             var gildanInvestment = new Investment
             {
                 Name = "Gildan Activewear Inc(US)",
@@ -295,8 +303,8 @@ namespace CoreInvestmentTracker.Models.DAL
                 ValueProposition = "",
                 Factors = new List<InvestmentInfluenceFactor_Investment>(),
                 Groups = new List<InvestmentGroup_Investment>()
-
             };
+
             var avonInvestment = new Investment
             {
                 Name = "Avon Products Inc",
@@ -308,8 +316,8 @@ namespace CoreInvestmentTracker.Models.DAL
                 ValueProposition = "",
                 Factors = new List<InvestmentInfluenceFactor_Investment>(),
                 Groups = new List<InvestmentGroup_Investment>()
-
             };
+
             var cotyInvestment =  new Investment
             {
                 Name = "Coty Inc",
@@ -321,8 +329,8 @@ namespace CoreInvestmentTracker.Models.DAL
                 ValueProposition = "",
                 Factors = new List<InvestmentInfluenceFactor_Investment>(),
                 Groups = new List<InvestmentGroup_Investment>()
-
             };
+
             var creightonInvestment = new Investment
             {
                 Name = "Creighton's PLC",
@@ -334,8 +342,8 @@ namespace CoreInvestmentTracker.Models.DAL
                 ValueProposition = "",
                 Factors = new List<InvestmentInfluenceFactor_Investment>(),
                 Groups = new List<InvestmentGroup_Investment>()
-
             };
+
             var esteeInvestment = new Investment
             {
                 Name = "Estee lauder Cos Inc",
@@ -347,8 +355,8 @@ namespace CoreInvestmentTracker.Models.DAL
                 ValueProposition = "",
                 Factors = new List<InvestmentInfluenceFactor_Investment>(),
                 Groups = new List<InvestmentGroup_Investment>()
-
             };
+
             var interParfumsInvestment = new Investment
             {
                 Name = "Inter parfums Inc",
@@ -360,8 +368,8 @@ namespace CoreInvestmentTracker.Models.DAL
                 ValueProposition = "",
                 Factors = new List<InvestmentInfluenceFactor_Investment>(),
                 Groups = new List<InvestmentGroup_Investment>()
-
             };
+
             var revelonInvestment = new Investment
             {
                 Name = "Revlon Inc",
@@ -1107,7 +1115,7 @@ namespace CoreInvestmentTracker.Models.DAL
 
     public class CustomEntitiesInitializer : IDbInitializer
     {
-        public void Initialize(ApplicationDbContext db)
+        public void Initialize(InvestmentDbContext db)
         {
             if (db.CustomEntityTypes.Any()) return;
 
@@ -1129,7 +1137,7 @@ namespace CoreInvestmentTracker.Models.DAL
 
     public class AdditionalDbInitializer : IDbInitializer
     {
-        public void Initialize(ApplicationDbContext db)
+        public void Initialize(InvestmentDbContext db)
         {
            
 

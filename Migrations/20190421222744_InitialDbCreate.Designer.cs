@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace CoreInvestmentTracker.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(InvestmentDbContext))]
     [Migration("20190421222744_InitialDbCreate")]
     partial class InitialDbCreate
     {

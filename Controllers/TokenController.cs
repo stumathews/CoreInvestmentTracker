@@ -26,12 +26,12 @@ namespace CoreInvestmentTracker.Controllers
     [Route("api/Token")]
     public class TokenController : Controller
     {
-        public ApplicationDbContext Db { get; }
+        public InvestmentDbContext Db { get; }
         private readonly IConfiguration _config;
         
         
         /// <inheritdoc />
-        public TokenController(IConfiguration config, ApplicationDbContext db)
+        public TokenController(IConfiguration config, InvestmentDbContext db)
         {
             Db = db;
             _config = config;

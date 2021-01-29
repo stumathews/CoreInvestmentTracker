@@ -27,10 +27,39 @@ namespace CoreInvestmentTracker.Models.DAL
         /// Constructor
         /// </summary>
         /// <param name="context"></param>
-        public EntityApplicationDbContext(ApplicationDbContext context)
+        public EntityApplicationDbContext(InvestmentDbContext context)
         {
             Db = context;
         }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// DbContext
+        /// </summary>
+        public InvestmentDbContext Db { get; }        
+
+        private static bool IsAnyOfTypes<T1>(IEnumerable<Type> types) => types.Any(type => type == typeof(T1));
+        
+        private static Expression<Func<T1, bool>> OneOrAll<T1>(int? specificId) where T1 : class, IInvestmentEntity => entity => !specificId.HasValue || entity.Id == specificId.Value;
+
+        /// <summary>
+        /// Underlying database
+        /// </summary>
+        public DatabaseFacade Database => Db.Database;
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Get specific type entities other than the current entity type
+        /// </summary>
+        /// <typeparam name="T1"></typeparam>
+        /// <returns></returns>
+        public DbSet<T1> GetEntityByType<T1>() where T1 : class => Db.Set<T1>();
+        
+        /// <inheritdoc />
+        /// <summary>
+        /// Save the db changes
+        /// </summary>
+        public void SaveChanges() => Db.SaveChanges();
 
         /// <summary>
         /// Read only access to the type Entities
@@ -79,6 +108,7 @@ namespace CoreInvestmentTracker.Models.DAL
                         .Select(o => Utils.ChangeType<T>(o))
                         .ToList());
             }
+
             if (typeof(T) == typeof(InvestmentGroup))
             {
                 entities.AddRange(withChildren 
@@ -92,6 +122,7 @@ namespace CoreInvestmentTracker.Models.DAL
                     : Db.Set<InvestmentGroup>().Select(o => Utils.ChangeType<T>(o)).ToList());
                         
             }
+
             if (typeof(T) == typeof(InvestmentInfluenceFactor))
             {
                 entities.AddRange(withChildren 
@@ -104,6 +135,7 @@ namespace CoreInvestmentTracker.Models.DAL
                         .Select(o => Utils.ChangeType<T>(o))
                         .ToList());                        
             }
+
             if (typeof(T) == typeof(Region))
             {
                 entities.AddRange(withChildren 
@@ -116,6 +148,7 @@ namespace CoreInvestmentTracker.Models.DAL
                         .Select(o => Utils.ChangeType<T>(o))
                         .ToList());                        
             }
+
             if (typeof(T) == typeof(Investment))
             {
                 entities.AddRange(withChildren 
@@ -162,34 +195,5 @@ namespace CoreInvestmentTracker.Models.DAL
             return ret;
         }
 
-        /// <inheritdoc />
-        /// <summary>
-        /// ApplicationDbContext
-        /// </summary>
-        public ApplicationDbContext Db { get; }
-
-        private static bool IsAnyOfTypes<T1>(IEnumerable<Type> types) => types.Any(type => type == typeof(T1));
-        
-        private static Expression<Func<T1, bool>> OneOrAll<T1>(int? specificId)
-        where T1 : class, IInvestmentEntity => entity => !specificId.HasValue || entity.Id == specificId.Value;
-
-        /// <summary>
-        /// Underlying database
-        /// </summary>
-        public DatabaseFacade Database => Db.Database;
-
-        /// <inheritdoc />
-        /// <summary>
-        /// Get specific type entities other than the current entity type
-        /// </summary>
-        /// <typeparam name="T1"></typeparam>
-        /// <returns></returns>
-        public DbSet<T1> GetEntityByType<T1>() where T1 : class => Db.Set<T1>();
-        
-        /// <inheritdoc />
-        /// <summary>
-        /// Save the db changes
-        /// </summary>
-        public void SaveChanges() => Db.SaveChanges();
     }
 }
