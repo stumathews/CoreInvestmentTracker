@@ -85,18 +85,18 @@ namespace CoreInvestmentTracker
         /// </summary>
         public void Configure(IApplicationBuilder app, IHostEnvironment env)
         {
-            // Middleware order is important, each middleare calls the next middleare in order
-            
+            // Setup middleware order is important, each middleare calls the next middleare in order            
+           
             Support.Exceptions.ConfigureExceptions(app, env);
+
             app.UseHttpsRedirection();
             app.UseAuthentication();
-            app.UseStaticFiles();
-            app.UseCookiePolicy();
-            app.UseStatusCodePages("text/plain", "Status code page, status code: {0}");
+            app.UseRouting();
             app.UseCors("CorsPolicy");
-            app.UseMvc(routes => routes.MapRoute("default", "{controller=Investment}/{action=Index}/{id?}"));
-            app.UseSwagger(); // Enable middleware to serve generated Swagger as a JSON endpoint.
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Core Investment Tracker API V1"));            
+            app.UseAuthorization();
+            app.UseEndpoints(endpoints => endpoints.MapControllers());
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Investment Tracker API"));            
         }
     }
 }
