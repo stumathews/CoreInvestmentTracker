@@ -35,7 +35,7 @@ namespace CoreInvestmentTracker.Common
         /// </summary>
         /// <param name="logger"></param>
         /// <param name="db"></param>
-        public EntityManagedController( IEntityApplicationDbContext<T> db, IMyLogger logger) : base(db)
+        public EntityManagedController( IEntityApplicationDbContext<T> db, IMyLogger logger) : base(db, logger)
         {
             Logger = logger;
         }
@@ -112,8 +112,10 @@ namespace CoreInvestmentTracker.Common
 
             // a invisible root that all connect to - keeps things together
             //nodes.Add(new {name = "Root", value = 0});
-
-            var investments = EntityRepository.Db.Investments.Where(x => mappings.ContainsKey(x.Id)).ToArray();
+            
+            var investments = from id in mappings.Keys
+                              join investment in EntityRepository.Db.Investments on id equals investment.Id
+                              select investment;
 
             foreach (var map in mappings)
             {
