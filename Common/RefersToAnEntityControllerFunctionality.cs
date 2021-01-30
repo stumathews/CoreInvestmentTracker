@@ -21,7 +21,7 @@ namespace CoreInvestmentTracker.Common
         /// Ctor
         /// </summary>
         /// <param name="entityRepository"></param>
-        public RefersToAnEntityControllerFunctionality(IEntityApplicationDbContext<T> entityRepository) : base(entityRepository)
+        public RefersToAnEntityControllerFunctionality(IEntityApplicationDbContext<T> entityRepository, IMyLogger logger) : base(entityRepository, logger)
         {
         }
 
@@ -58,7 +58,7 @@ namespace CoreInvestmentTracker.Common
             if (entity == null) return NotFound();
             EntityRepository.Db.Remove(entity);
 
-            EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(ActivityOperation.Delete.ToString(), "Deletes an exisitng entity", GetUser(), "", $"Deleted entity with id of '{id}' owning entityId of '{owningEntityId}' and owning type of '{(EntityType)owningEntityType}'", DateTimeOffset.UtcNow, entity.Id, GetUnderlyingEntityType<T>()));
+            EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(ActivityOperation.Delete.ToString(), "Deletes an exisitng entity", GetUser(HttpContext.User), "", $"Deleted entity with id of '{id}' owning entityId of '{owningEntityId}' and owning type of '{(EntityType)owningEntityType}'", DateTimeOffset.UtcNow, entity.Id, GetUnderlyingEntityType<T>()));
             EntityRepository.SaveChanges();
             return new NoContentResult();
 

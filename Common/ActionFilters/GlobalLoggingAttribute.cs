@@ -33,9 +33,9 @@ namespace CoreInvestmentTracker.Common.ActionFilters
         /// <param name="actionExecutedContext"></param>
         public override void OnActionExecuted(ActionExecutedContext actionExecutedContext)
         {
-            var log = (IMyLogger)actionExecutedContext.HttpContext.RequestServices.GetService(typeof(IMyLogger));
+            var logger = (IMyLogger)actionExecutedContext.HttpContext.RequestServices.GetService(typeof(IMyLogger));
             var user = actionExecutedContext.HttpContext.User;
-            log.Debug(string.Format("{0} Response Code: {1}", actionExecutedContext.HttpContext.Request.ToString(), actionExecutedContext.HttpContext.Response.StatusCode.ToString()));
+            logger.Debug(string.Format("{0} Response Code: {1}", actionExecutedContext.HttpContext.Request.ToString(), actionExecutedContext.HttpContext.Response.StatusCode.ToString()));
             base.OnActionExecuted(actionExecutedContext);
         }
     }   

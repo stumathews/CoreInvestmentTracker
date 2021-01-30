@@ -21,7 +21,7 @@ namespace CoreInvestmentTracker.Controllers
         /// Ctor
         /// </summary>
         /// <param name="entityRepository"></param>
-        public ActivityController(IEntityApplicationDbContext<RecordedActivity> entityRepository) : base(entityRepository)
+        public ActivityController(IEntityApplicationDbContext<RecordedActivity> entityRepository, IMyLogger logger) : base(entityRepository, logger)
         {
         }
     }

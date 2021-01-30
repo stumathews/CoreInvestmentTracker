@@ -106,7 +106,7 @@ namespace CoreInvestmentTracker.Controllers
             EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(
                 Name: ActivityOperation.Create.ToString(),
                 description: $"Created a new entity '{entity.GetOwningEntityType()}'", 
-                user:  GetUser(),
+                user:  GetUser(HttpContext.User),
                 tag: entity.ToStr(),
                 details: $"Created new entity {entity.Name}",
                 atTime: DateTimeOffset.UtcNow,
@@ -138,7 +138,7 @@ namespace CoreInvestmentTracker.Controllers
             EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(
                 Name: ActivityOperation.Delete.ToString(),
                 description: $"Deleted a new entity '{entity.GetOwningEntityType()}'", 
-                user:  GetUser(),
+                user:  GetUser(HttpContext.User),
                 tag: entity.ToStr(),
                 details: $"Deleted new entity {entity.Name}",
                 atTime: DateTimeOffset.UtcNow,

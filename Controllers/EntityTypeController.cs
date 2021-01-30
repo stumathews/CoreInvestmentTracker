@@ -20,7 +20,7 @@ namespace CoreInvestmentTracker.Controllers
         /// Ctor
         /// </summary>
         /// <param name="entityRepository"></param>
-        public CustomEntityTypeController(IEntityApplicationDbContext<CustomEntityType> entityRepository) : base(entityRepository)
+        public CustomEntityTypeController(IEntityApplicationDbContext<CustomEntityType> entityRepository, IMyLogger logger) : base(entityRepository, logger)
         {
         }
 

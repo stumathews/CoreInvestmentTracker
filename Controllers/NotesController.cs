@@ -29,10 +29,6 @@ namespace CoreInvestmentTracker.Controllers
         /// </summary>
         /// <param name="db"></param>
         /// <param name="logger"></param>
-        public NotesController(IEntityApplicationDbContext<InvestmentNote> db, IMyLogger logger) 
-            : base(db)
-        {
-            Logger = logger;
-        }
+        public NotesController(IEntityApplicationDbContext<InvestmentNote> db, IMyLogger logger) : base(db, logger) { }
     }
 }

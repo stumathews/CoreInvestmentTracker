@@ -102,7 +102,7 @@ namespace CoreInvestmentTracker.Controllers
             EntityRepository.Db.Remove(riskInvestmentLink);
             EntityRepository.SaveChanges();
 
-            EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(ActivityOperation.Update.ToString(), "Updates an existing entity", GetUser(), "Dissassociated risk", $"Dissassociated risk '{EntityRepository.GetEntityByType<InvestmentRisk>().Single(r => r.Id == riskId).Name}' with investment.", DateTimeOffset.UtcNow,
+            EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(ActivityOperation.Update.ToString(), "Updates an existing entity", GetUser(HttpContext.User), "Dissassociated risk", $"Dissassociated risk '{EntityRepository.GetEntityByType<InvestmentRisk>().Single(r => r.Id == riskId).Name}' with investment.", DateTimeOffset.UtcNow,
                 investmentId, EntityType.Investment));
             EntityRepository.Db.SaveChanges();
 
@@ -123,7 +123,7 @@ namespace CoreInvestmentTracker.Controllers
             EntityRepository.SaveChanges();
 
             EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(ActivityOperation.Update.ToString(),
-                "Updates an existing entity", GetUser(), "Dissassociated custom entity"
+                "Updates an existing entity", GetUser(HttpContext.User), "Dissassociated custom entity"
                 , $"Dissassociated custom entity '{EntityRepository.GetEntityByType<CustomEntity>().Single(r => r.Id == customEntityId).Name}' with investment.",
                 DateTimeOffset.UtcNow,
                 investmentId, EntityType.Investment));
@@ -145,7 +145,7 @@ namespace CoreInvestmentTracker.Controllers
             EntityRepository.Db.Remove(factorInvestmentLink);
             EntityRepository.SaveChanges();
 
-            EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(ActivityOperation.Update.ToString(),"Updates an entity", GetUser(), "Dissassociated factor", $"Dissassociated factor '{EntityRepository.GetEntityByType<InvestmentInfluenceFactor>().Single(f => f.Id == factorId).Name}' with investment.", DateTimeOffset.UtcNow,
+            EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(ActivityOperation.Update.ToString(),"Updates an entity", GetUser(HttpContext.User), "Dissassociated factor", $"Dissassociated factor '{EntityRepository.GetEntityByType<InvestmentInfluenceFactor>().Single(f => f.Id == factorId).Name}' with investment.", DateTimeOffset.UtcNow,
                 investmentId, EntityType.Investment));
             EntityRepository.Db.SaveChanges();
 
@@ -165,7 +165,7 @@ namespace CoreInvestmentTracker.Controllers
             EntityRepository.Db.Remove(groupInvestmentLink);
             EntityRepository.SaveChanges();
 
-            EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(ActivityOperation.Update.ToString(),"Updates an entity",GetUser(), "Dissassociated group", $"Dissassociated group '{EntityRepository.GetEntityByType<InvestmentGroup>().Single(g => g.Id == groupId).Name}' with investment.", DateTimeOffset.UtcNow,
+            EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(ActivityOperation.Update.ToString(),"Updates an entity",GetUser(HttpContext.User), "Dissassociated group", $"Dissassociated group '{EntityRepository.GetEntityByType<InvestmentGroup>().Single(g => g.Id == groupId).Name}' with investment.", DateTimeOffset.UtcNow,
                 investmentId, EntityType.Investment));
 
             return new NoContentResult();
@@ -184,7 +184,7 @@ namespace CoreInvestmentTracker.Controllers
             EntityRepository.Db.Remove(regionInvestmentLink);
             EntityRepository.SaveChanges();
 
-            EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(ActivityOperation.Update.ToString(),"Updates an entity",GetUser(), "Dissassociated region", $"Dissassociated group '{EntityRepository.GetEntityByType<Region>().Single(r => r.Id == regionId).Name}' with investment.", DateTimeOffset.UtcNow,
+            EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(ActivityOperation.Update.ToString(),"Updates an entity",GetUser(HttpContext.User), "Dissassociated region", $"Dissassociated group '{EntityRepository.GetEntityByType<Region>().Single(r => r.Id == regionId).Name}' with investment.", DateTimeOffset.UtcNow,
                 investmentId, EntityType.Investment));
 
             return new NoContentResult();
@@ -208,7 +208,7 @@ namespace CoreInvestmentTracker.Controllers
                     InvestmentRiskID = riskId
                 };
                 EntityRepository.Db.Add(riskInvestmentLink);
-                EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(ActivityOperation.Update.ToString(),"Updates an entity",GetUser(), "Associated risk", $"Associated risk '{EntityRepository.GetEntityByType<InvestmentRisk>().Single(r => r.Id == riskId).Name}' with investment.", DateTimeOffset.UtcNow,
+                EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(ActivityOperation.Update.ToString(),"Updates an entity",GetUser(HttpContext.User), "Associated risk", $"Associated risk '{EntityRepository.GetEntityByType<InvestmentRisk>().Single(r => r.Id == riskId).Name}' with investment.", DateTimeOffset.UtcNow,
                     id, EntityType.Investment));
 
             }
@@ -234,7 +234,7 @@ namespace CoreInvestmentTracker.Controllers
                 };
                 EntityRepository.Db.Add(customEntityInvestmentLink);
                 EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(ActivityOperation.Update.ToString(),
-                    "Update an entity", GetUser(), "Associated custom entity",
+                    "Update an entity", GetUser(HttpContext.User), "Associated custom entity",
                     $"Associated custom entity '{EntityRepository.GetEntityByType<CustomEntity>().Single(e => e.Id == customEntityId).Name}' with investment",
                     DateTimeOffset.UtcNow,
                     id, EntityType.Custom));
@@ -261,7 +261,7 @@ namespace CoreInvestmentTracker.Controllers
                     InvestmentInfluenceFactorID = factorId
                 };
                 EntityRepository.Db.Add(factorInvestmentLink);
-                EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(ActivityOperation.Update.ToString(),"Updates an entity",GetUser(), "Associated factor", $"Associated factor '{EntityRepository.GetEntityByType<InvestmentInfluenceFactor>().Single(f => f.Id == factorId).Name}' with investment.", DateTimeOffset.UtcNow,
+                EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(ActivityOperation.Update.ToString(),"Updates an entity",GetUser(HttpContext.User), "Associated factor", $"Associated factor '{EntityRepository.GetEntityByType<InvestmentInfluenceFactor>().Single(f => f.Id == factorId).Name}' with investment.", DateTimeOffset.UtcNow,
                     id, EntityType.Investment));
             }
             EntityRepository.SaveChanges();
@@ -285,7 +285,7 @@ namespace CoreInvestmentTracker.Controllers
                     InvestmentGroupID = groupId
                 };
                 EntityRepository.Db.Add(groupInvestmentLink);
-                EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(ActivityOperation.Update.ToString(),"Updates an entity",GetUser(), "Associated group",
+                EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(ActivityOperation.Update.ToString(),"Updates an entity",GetUser(HttpContext.User), "Associated group",
                     $"Associated group '{EntityRepository.GetEntityByType<InvestmentGroup>().Single(g => g.Id == groupId).Name}' with investment..",
                     DateTimeOffset.UtcNow, id, EntityType.Investment));
             }
@@ -311,7 +311,7 @@ namespace CoreInvestmentTracker.Controllers
                     RegionID = regionId
                 };
                 EntityRepository.Db.Add(regionInvestmentLink);
-                EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(ActivityOperation.Update.ToString(),"Updates an entity",GetUser(), "Associated region",
+                EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(ActivityOperation.Update.ToString(),"Updates an entity",GetUser(HttpContext.User), "Associated region",
                     $"Associated region '{EntityRepository.GetEntityByType<Region>().Single(r => r.Id == regionId).Name}'  with investment..",
                     DateTimeOffset.UtcNow, id, EntityType.Investment));
             }

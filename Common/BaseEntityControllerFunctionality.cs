@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
+using System.Text.Json;
 using CoreInvestmentTracker.Models;
 using CoreInvestmentTracker.Models.DAL.Interfaces;
 using CoreInvestmentTracker.Models.DEL;
@@ -9,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+
 
 namespace CoreInvestmentTracker.Common
 {
@@ -23,14 +26,21 @@ namespace CoreInvestmentTracker.Common
         /// </summary>
         public IEntityApplicationDbContext<T> EntityRepository { get; }
 
+        /// <summary>
+        /// Our logger
+        /// </summary>
+        public IMyLogger Logger {get;}
+
 
         /// <summary>
         /// Ctor
         /// </summary>
         /// <param name="entityRepository"></param>
-        public BaseEntityControllerFunctionality(IEntityApplicationDbContext<T> entityRepository)
+        /// <param name="logger"></param>
+        public BaseEntityControllerFunctionality(IEntityApplicationDbContext<T> entityRepository, IMyLogger logger)
         {
             EntityRepository = entityRepository;
+            Logger = logger;
         }
 
         /// <summary>
@@ -40,6 +50,7 @@ namespace CoreInvestmentTracker.Common
         [HttpGet,Authorize]
         public IEnumerable<T> GetAll()
         {
+            Logger.Debug("Getting all entities.");
             return EntityRepository.GetOneOrAllEntities(withChildren: true).ToList();
         }
 
@@ -50,6 +61,7 @@ namespace CoreInvestmentTracker.Common
         [HttpGet("WithoutChildren"), Authorize]
         public IEnumerable<T> GetAllWithoutChildren()
         {
+             Logger.Debug("Getting all entities (without children)");
             return EntityRepository.GetOneOrAllEntities(withChildren:false).ToList();
         }
 
@@ -61,6 +73,7 @@ namespace CoreInvestmentTracker.Common
         [HttpGet("{id}"), Authorize]
         public IActionResult GetById(int id)
         {
+            Logger.Debug($"Get entity by Id: {id}");
             var item = EntityRepository.GetOneOrAllEntities().FirstOrDefault(p => p.Id == id);
             return item == null ? (IActionResult) NotFound() : new ObjectResult(item);
         }
@@ -75,6 +88,8 @@ namespace CoreInvestmentTracker.Common
         [HttpPost, Authorize]
         public virtual IActionResult Create([FromBody]T entity)
         {
+            Logger.Debug($"Create entity '{entity.Name}' with id {entity.Id} ");
+
             if (entity == null)
             {
                 return BadRequest();
@@ -90,19 +105,28 @@ namespace CoreInvestmentTracker.Common
                 entity.LastModifiedTime = entity.CreatedTime;
             }
 
+            // Save entity
             EntityRepository.Db.Add(entity);
             EntityRepository.SaveChanges();
+
+            AuditEntityCreated(entity);
+
+            return CreatedAtAction("Create", new { id = entity.Id }, entity);
+        }
+
+        private void AuditEntityCreated(T entity)
+        {
             EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(
                 Name: ActivityOperation.Create.ToString(),
-                description: "Created a new entity", 
-                user:  GetUser(),
+                description: "Created a new entity",
+                user: GetUser(HttpContext.User),
                 tag: entity.ToString(),
                 details: "Created new entity",
                 atTime: DateTimeOffset.UtcNow,
                 owningEntityId: entity.Id,
                 owningEntityType: GetUnderlyingEntityType<T>()));
             EntityRepository.SaveChanges();
-            return CreatedAtAction("Create", new { id = entity.Id }, entity);
+            Logger.Debug($"new entity created: {GetUnderlyingEntityType<T>()} id: {entity.Id} details: { JsonSerializer.Serialize<T>(entity) }");
         }
 
         /// <summary>
@@ -161,7 +185,7 @@ namespace CoreInvestmentTracker.Common
             patchDocument.Operations.ForEach(o =>
             {
                 var entry = $"Modified value '{o.path}' to {o.value}";
-                EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(ActivityOperation.Update.ToString(), "Updates an existing entity", GetUser(), entry.ToString(), entry, DateTimeOffset.UtcNow, id, GetUnderlyingEntityType<T>()));
+                EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(ActivityOperation.Update.ToString(), "Updates an existing entity", GetUser(HttpContext.User), entry.ToString(), entry, DateTimeOffset.UtcNow, id, GetUnderlyingEntityType<T>()));
             });
 
             EntityRepository.Db.SaveChanges();
@@ -188,7 +212,7 @@ namespace CoreInvestmentTracker.Common
             EntityRepository.Db.Remove(entity);
             EntityRepository.SaveChanges();
 
-            EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(ActivityOperation.Delete.ToString(), "Deletes an entity", GetUser(), "", $"Deleted entity with id of {id}", DateTimeOffset.UtcNow, entity.Id, GetUnderlyingEntityType<T>()));
+            EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(ActivityOperation.Delete.ToString(), "Deletes an entity", GetUser(HttpContext.User), "", $"Deleted entity with id of {id}", DateTimeOffset.UtcNow, entity.Id, GetUnderlyingEntityType<T>()));
             EntityRepository.SaveChanges();
             return new NoContentResult();
         }
@@ -234,11 +258,16 @@ namespace CoreInvestmentTracker.Common
 
             EntityRepository.Db.Update(old);
             EntityRepository.SaveChanges();
-            EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(ActivityOperation.Update.ToString(), "Updates an existing entity", GetUser(), old.ToString(), $"Replaced entity with id of {id} with entity of {newItem}", DateTimeOffset.UtcNow, id, GetUnderlyingEntityType<T>()));
+            EntityRepository.Db.RecordedActivities.Add(new RecordedActivity(ActivityOperation.Update.ToString(), "Updates an existing entity", GetUser(HttpContext.User), old.ToString(), $"Replaced entity with id of {id} with entity of {newItem}", DateTimeOffset.UtcNow, id, GetUnderlyingEntityType<T>()));
             EntityRepository.SaveChanges();
             return new NoContentResult();
         }
 
+        /// <summary>
+        /// Map the used T to the actual underlying EntityType
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         protected EntityType GetUnderlyingEntityType<T>()
         {
             if (typeof(T) == typeof(Investment))
@@ -278,9 +307,15 @@ namespace CoreInvestmentTracker.Common
             return EntityType.None;
         }
 
-        protected User GetUser()
+        /// <summary>
+        /// Gets the current user
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        protected User GetUser(ClaimsPrincipal user)
         {
-            return EntityRepository.Db.Users.First(u => u.UserName.Equals(u.UserName));
+            var userName = user.FindFirst(ClaimTypes.NameIdentifier).Value;
+            return EntityRepository.Db.Users.First(u => u.UserName.Equals(userName));
         }
     }
 }
