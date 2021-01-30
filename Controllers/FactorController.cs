@@ -8,7 +8,8 @@ namespace CoreInvestmentTracker.Controllers
 {
     /// <inheritdoc />
     /// <summary>
-    /// Controller for InvestmentInfluenceFactors
+    /// Factors are anything what influences the companies balance sheet(assets and liabilities) or income(profit/loss) statement.
+    /// These factors usually affect the underlying value of the investment either positively and negatively
     /// </summary>
     [Route("api/[controller]")]
     [GlobalControllerLogging]

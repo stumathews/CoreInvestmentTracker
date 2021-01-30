@@ -26,9 +26,15 @@ namespace CoreInvestmentTracker.Controllers
     [Route("api/Token")]
     public class TokenController : Controller
     {
+        /// <summary>
+        /// Data Access
+        /// </summary>
         public InvestmentDbContext Db { get; }
-        private readonly IConfiguration _config;
-        
+
+        /// <summary>
+        /// Configuration
+        /// </summary>
+        private readonly IConfiguration _config;        
         
         /// <inheritdoc />
         public TokenController(IConfiguration config, InvestmentDbContext db)
@@ -67,6 +73,7 @@ namespace CoreInvestmentTracker.Controllers
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
+
             var token = new JwtSecurityToken(
                             _config["Jwt:Issuer"],
                             _config["Jwt:Issuer"],
@@ -87,8 +94,7 @@ namespace CoreInvestmentTracker.Controllers
             user.Email = dbuser.Email;
             return user;
         }
-
-        
+                
         private class UserModel
         {
             public string Name { get; set; }

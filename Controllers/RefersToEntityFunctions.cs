@@ -6,10 +6,18 @@ using System.Linq;
 
 namespace CoreInvestmentTracker.Controllers
 {
+    /// <summary>
+    /// An entity that refers or belongs to another entity
+    /// such as notes for an investment or a custom entities that belong/refer to a investment
+    /// </summary>
     public class RefersToEntityFunctions
     {
         private NotesController _notesController;
 
+        /// <summary>
+        /// ctor
+        /// </summary>
+        /// <param name="notesController"></param>
         public RefersToEntityFunctions(NotesController notesController)
         {
             _notesController = notesController;

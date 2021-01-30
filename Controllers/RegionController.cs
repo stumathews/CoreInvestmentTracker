@@ -20,8 +20,6 @@ namespace CoreInvestmentTracker.Controllers
         /// </summary>
         /// <param name="db"></param>
         /// <param name="logger"></param>
-        public RegionController(IEntityApplicationDbContext<Region> db, IMyLogger logger) : base(db, logger)
-        {
-        }
+        public RegionController(IEntityApplicationDbContext<Region> db, IMyLogger logger) : base(db, logger) { }
     }
 }

@@ -12,10 +12,16 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CoreInvestmentTracker.Controllers
 {
+    /// <summary>
+    /// Add a new user
+    /// </summary>
     [Produces("application/json")]
     [Route("api/Signup")]
     public class SignupController : Controller
     {
+        /// <summary>
+        /// Data Access layer
+        /// </summary>
         public InvestmentDbContext Db { get; }
 
         /// <inheritdoc />
@@ -23,7 +29,6 @@ namespace CoreInvestmentTracker.Controllers
         {
             Db = db;
         }
-
         
         /// <summary>
         /// Creates a new user
@@ -45,8 +50,9 @@ namespace CoreInvestmentTracker.Controllers
 
             Db.Users.Add(user);
             Db.SaveChanges();
+
             var savedUser = Db.Users.FirstOrDefault(u => u.UserName.Equals(user.UserName));
-            var activity = new RecordedActivity(ActivityOperation.Create.ToString(),"Creates an entity",user, "", $"Created new user '{user.UserName}'", DateTimeOffset.UtcNow, savedUser.Id, EntityType.User);
+            var activity = new RecordedActivity(ActivityOperation.Create.ToString(),"Creates an entity", user, "", $"Created new user '{user.UserName}'", DateTimeOffset.UtcNow, savedUser.Id, EntityType.User);
             Db.RecordedActivities.Add(activity);
             Db.SaveChanges();
             return null;

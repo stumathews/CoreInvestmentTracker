@@ -11,12 +11,18 @@ namespace CoreInvestmentTracker.Controllers
 {
     /// <inheritdoc />
     /// <summary>
-    /// Controller for Notes
+    /// Controller for Notes.
+    /// Simple Name/Value idea
     /// </summary>
     [Route("api/[controller]")]
     [GlobalControllerLogging]
     public class NotesController : RefersToAnEntityControllerFunctionality<InvestmentNote>
     {
+        /// <summary>
+        /// Our logger
+        /// </summary>
+        
+        public IMyLogger Logger {get;}
         /// <inheritdoc />
         /// <summary>
         /// Constructor
@@ -26,7 +32,7 @@ namespace CoreInvestmentTracker.Controllers
         public NotesController(IEntityApplicationDbContext<InvestmentNote> db, IMyLogger logger) 
             : base(db)
         {
-
+            Logger = logger;
         }
     }
 }

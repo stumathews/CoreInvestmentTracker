@@ -11,6 +11,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CoreInvestmentTracker.Controllers
 {
+    /// <summary>
+    /// Transactions can apply to an investment
+    /// </summary>
     [GlobalControllerLogging]
     [Route("api/[controller]")]
     public class TransactionController : EntityManagedController<InvestmentTransaction>

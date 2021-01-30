@@ -9,7 +9,8 @@ namespace CoreInvestmentTracker.Controllers
 {
     /// <inheritdoc />
     /// <summary>
-    /// WebAPI Controller for investment groups
+    /// WebAPI Controller for investment groups.
+    /// Investments can be grouped into the same containers to add a relationship between them. Grouped investments share a commonality.
     /// </summary>
     [Route("api/[controller]")]
     [GlobalControllerLogging]

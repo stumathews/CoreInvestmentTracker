@@ -21,9 +21,6 @@ namespace CoreInvestmentTracker.Controllers
         /// </summary>
         /// <param name="db"></param>
         /// <param name="logger"></param>
-        public RiskController(IEntityApplicationDbContext<InvestmentRisk> db, IMyLogger logger) 
-            : base(db, logger)
-        {
-        }
+        public RiskController(IEntityApplicationDbContext<InvestmentRisk> db, IMyLogger logger) : base(db, logger) { }
     }
 }

@@ -14,7 +14,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CoreInvestmentTracker.Controllers
 {
-    /// <inheritdoc />
+    /// <summary>
+    /// Custom Entities are key-value list of name/key entries
+    /// Its a way to create custom lists
+    /// </summary>
     [Route("api/[controller]")]
     [GlobalControllerLogging]
     public class CustomEntityController : EntityManagedController<CustomEntity>

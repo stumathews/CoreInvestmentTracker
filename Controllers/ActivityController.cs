@@ -10,6 +10,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CoreInvestmentTracker.Controllers
 {
+    /// <summary>
+    /// Keep track of activities that occur to investments
+    /// </summary>
     [Produces("application/json")]
     [Route("api/Activity")]
     public class ActivityController : RefersToAnEntityControllerFunctionality<RecordedActivity>

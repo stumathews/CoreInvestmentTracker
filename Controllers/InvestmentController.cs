@@ -15,7 +15,8 @@ namespace CoreInvestmentTracker.Controllers
 {
     /// <inheritdoc />
     /// <summary>
-    /// The Investment controller
+    /// The Investment controller.
+    /// Investments represent the assets that are valuable to you
     /// </summary>
     [GlobalControllerLogging]
     [Route("api/[controller]")]
