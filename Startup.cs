@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
 namespace CoreInvestmentTracker
@@ -47,12 +46,6 @@ namespace CoreInvestmentTracker
                     .AddNewtonsoftJson();
 
             services.AddDbContext<InvestmentDbContext>(options => Support.DatabaseConnections.UseDatabase(options, Configuration));
-
-             services.Configure<CookiePolicyOptions>(options =>
-            {
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
                         
             // Add application services for dependency injection
             services.AddTransient(typeof(IEntityApplicationDbContext<>), typeof(EntityApplicationDbContext<>));
