@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-//using System.Data.Entity;
-//using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
-using System.Web;
 using CoreInvestmentTracker.Models.DAL.Interfaces;
 using CoreInvestmentTracker.Models.DEL;
 using CoreInvestmentTracker.Models.DEL.Interfaces;
