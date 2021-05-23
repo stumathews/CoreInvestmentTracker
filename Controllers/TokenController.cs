@@ -60,7 +60,7 @@ namespace CoreInvestmentTracker.Controllers
             if (user == null) return response;
             var tokenString = BuildToken(user);
 
-            return CreatedAtAction(actionName: nameof(CreateToken), routeValues: new { } , value: new TokenResponse(tokenString));
+            return new TokenResponse(tokenString);
         }
 
         private string BuildToken(UserModel user)
