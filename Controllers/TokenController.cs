@@ -23,7 +23,7 @@ namespace CoreInvestmentTracker.Controllers
     /// Deals with login and authentication 
     /// </summary>
     [Produces("application/json")]
-    [Route("api/Token")]
+    [Route("api/[controller]")]
     public class TokenController : Controller
     {
         /// <summary>
@@ -50,16 +50,17 @@ namespace CoreInvestmentTracker.Controllers
         /// <returns>A token or UnAuthorized</returns>
         [AllowAnonymous]
         [HttpPost]
-        public IActionResult CreateToken([FromBody]UserLoginInfo login)
+        [ApiConventionMethod(typeof(DefaultApiConventions), 
+                     nameof(DefaultApiConventions.Post))]
+        public ActionResult<TokenResponse> CreateToken([FromBody]UserLoginInfo login)
         {
-            IActionResult response = Unauthorized();
+            var response = Unauthorized();
             var user = Authenticate(login);
 
             if (user == null) return response;
             var tokenString = BuildToken(user);
-            response = Ok(new TokenResponse(tokenString));
 
-            return response;
+            return CreatedAtAction(actionName: nameof(CreateToken), routeValues: new { } , value: new TokenResponse(tokenString));
         }
 
         private string BuildToken(UserModel user)
