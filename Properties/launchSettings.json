@@ -23,7 +23,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:49922/"
+      "applicationUrl": "http://localhost:10000/"
     },
     "AWS": {
       "commandName": "Project",
