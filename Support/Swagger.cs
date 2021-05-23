@@ -29,6 +29,8 @@ namespace Support
                     License = new OpenApiLicense { Name = "License information", Url = new Uri("https://www.stuartmathews.com") }
                 });
 
+                swaggerOptions.UseAllOfToExtendReferenceSchemas();
+
                 swaggerOptions.AddSecurityDefinition("Bearer",
                     new OpenApiSecurityScheme{
                     Description = "JWT Authorization header using the Bearer scheme.",
@@ -51,6 +53,7 @@ namespace Support
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 
                 swaggerOptions.IncludeXmlComments(xmlPath); // Set the comments path for the Swagger JSON and UI.
+                
             });
         }
     }
