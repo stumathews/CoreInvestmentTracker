@@ -7,7 +7,10 @@ namespace CoreInvestmentTracker.Models.BOLO
 {
     public class TokenResponse
     {
-        public string Token;
+        /// <summary>
+        /// The actual token string
+        /// </summary>
+        public string Token {get; set; }
 
         /// <summary>Initializes a new instance of the <see cref="T:System.Object"></see> class.</summary>
         public TokenResponse(string token)
