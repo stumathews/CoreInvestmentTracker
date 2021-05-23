@@ -30,14 +30,14 @@ namespace Support
                 string password = r.Groups["password"].Value;
                 string database = r.Groups["db"].Value;
 
-                var s = $"Host={host};Port=5432;Username={username};Password={password};Database={database};";
+                var s = $"Host={host};Port=5432;Username={username};Password={password};Database={database};SslMode=Require";
                 System.Console.Write($"Connecting to '{s}'");
                 return s;
             }
 
             var appConfig = config;
 
-            var localPgSql = "Host=localhost;Port=5432;Username=postgres;Password=sa;Database=Investments;";
+            var localPgSql = "Host=localhost;Port=5432;Username=postgres;Password=sa;Database=Investments";
 
             //var connectionString = localPgSql;
             var connectionString =  string.IsNullOrEmpty(appConfig["DATABASE_URL"]) 
