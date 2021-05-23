@@ -30,7 +30,7 @@ namespace Support
                 string password = r.Groups["password"].Value;
                 string database = r.Groups["db"].Value;
 
-                var s = $"Host={host};Port=5432;Username={username};Password={password};Database={database};SSL Mode=Require;TrustServerCertificate=true";
+                var s = $"Host={host};Port=5432;Username={username};Password={password};Database={database};SSL Mode=Require;TrustServerCertificate=True";
                 System.Console.Write($"Connecting to '{s}'");
                 return s;
             }
